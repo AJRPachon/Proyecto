@@ -1,6 +1,30 @@
 package BasicsClasses;
+import Interfaces.IStock;
 
-public class Stock implements Cloneable {
+/*
+ * Properties:
+ *  - Basics:
+ *      > IDProduct: integer, Consulting
+ *      > amountProduct: integer, Consulting, Modifiable
+ *
+ *  - Derivatives:
+ *      > None
+ *
+ *  - Shared:
+ *      > None
+ *
+ * Methods:
+ *  - Basics:
+ *      > integer getIDProduct()
+ *      > integer getAmountProduct()
+ *      > none setAmountProduct(integer newAmount)
+ *
+ *  - Added:
+ *      > none increaseAmountProduct(integer amountToIncrease)
+ *
+ */
+
+public class Stock implements IStock,Cloneable {
 
     private int IDProduct;
     private int amountProduct;
@@ -24,16 +48,21 @@ public class Stock implements Cloneable {
         return IDProduct;
     }
 
-    public void setIDProduct(int IDProduct) {
-        this.IDProduct = IDProduct;
-    }
-
     public int getAmountProduct() {
         return amountProduct;
     }
 
     public void setAmountProduct(int amountProduct) {
         this.amountProduct = amountProduct;
+    }
+
+    /**
+     * This method increase the total amount stock.
+     * @param amountToIncrease Total to increase
+     */
+
+    public void increaseAmountProduct(int amountToIncrease){
+        amountProduct += amountToIncrease;
     }
 
     @Override
