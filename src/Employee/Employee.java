@@ -11,7 +11,7 @@ package Employee;
         surname String consulting
         dNI String consulting
         nAF String consulting
-        birthdate int consulting
+        birthdate GregorianCalendar consulting
         position enum consulting and modifiable
         category enum consulting and modifiable
         bankAccountN String consulting and modifiable
@@ -65,6 +65,8 @@ package Employee;
  */
 
 
+import java.util.GregorianCalendar;
+
 public class Employee {
 
 
@@ -72,7 +74,7 @@ public class Employee {
     private String surname;
     private String dNI;
     private String nAF;
-    private int birthday;
+    private GregorianCalendar birthday;
     private EnumPosition position;
     private EnumCategory category;
     private String bankAccountN;
@@ -84,14 +86,14 @@ public class Employee {
         this.surname = " ";
         this.dNI = "00000000-X";
         this.nAF = " ";
-        this.birthday = 0;
+        this.birthday = new GregorianCalendar();
         this.position = EnumPosition.Spaguetti;
         this.category = EnumCategory.Spaguetti;
         this.bankAccountN = " ";
 
     }
 
-    public Employee(String name, String surname, String dNI, String nAF, int birthday, EnumPosition position, EnumCategory category, String bankAccountN){ //Constructor con parámetros
+    public Employee(String name, String surname, String dNI, String nAF, GregorianCalendar birthday, EnumPosition position, EnumCategory category, String bankAccountN){ //Constructor con parámetros
 
         this.name = name;
         this.surname = surname;
@@ -122,7 +124,7 @@ public class Employee {
         return this.nAF;
     }
 
-    public int getBirthday() {
+    public GregorianCalendar getBirthday() {
         return this.birthday;
     }
 
