@@ -19,7 +19,7 @@ package Employee;
         setWeekDay(enum);
 
         getTime();
-        setTime(GregorianCalendar hour);
+        setTime(dateType time);
 
         getShift();
 
@@ -30,12 +30,45 @@ package Employee;
  */
 
 
+import java.util.GregorianCalendar;
+
 public class Schedule {
+
+    private EnumWeekDays weekDay;
+    private GregorianCalendar time;
+
+    public Schedule(){ //Constructor sin parámetros
+
+        this.weekDay = EnumWeekDays.Spaguetti;
+        this.time = new GregorianCalendar();
+    }
+
+    public Schedule(EnumWeekDays weekDay, GregorianCalendar time){  //Constructor con parametros
+
+        this.weekDay = weekDay;
+        this.time = time;
+
+    }
 
 
 /////// BASIC METHODS ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    public EnumWeekDays getWeekDay(){
+        return this.weekDay;
+    }
 
+    public void setWeekDay(EnumWeekDays weekDay){
+        this.weekDay = weekDay;
+    }
+
+
+    public GregorianCalendar getTime(){
+        return this.time;
+    }
+
+    public void setTime(GregorianCalendar time){
+        this.time = time;
+    }
 
 
 
