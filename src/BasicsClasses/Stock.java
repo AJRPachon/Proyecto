@@ -1,10 +1,9 @@
 package BasicsClasses;
-import Interfaces.IStock;
 
 /*
  * Properties:
  *  - Basics:
- *      > IDProduct: integer, Consulting
+ *      > IDProduct: integer, Consulting, Modifiable
  *      > amountProduct: integer, Consulting, Modifiable
  *
  *  - Derivatives:
@@ -16,15 +15,22 @@ import Interfaces.IStock;
  * Methods:
  *  - Basics:
  *      > integer getIDProduct()
+ *      > none setIDProduct(integer IDProduct)
+ *
  *      > integer getAmountProduct()
  *      > none setAmountProduct(integer newAmount)
  *
- *  - Added:
  *      > none increaseAmountProduct(integer amountToIncrease)
+ *
+ *  - Added:
+ *      > None
  *
  */
 
-public class Stock implements IStock,Cloneable {
+
+import Interfaces.IStock;
+
+public class Stock implements IStock,Cloneable,Comparable {
 
     private int IDProduct;
     private int amountProduct;
@@ -46,6 +52,10 @@ public class Stock implements IStock,Cloneable {
 
     public int getIDProduct() {
         return IDProduct;
+    }
+
+    public void setIDProduct(int IDProduct) {
+        this.IDProduct = IDProduct;
     }
 
     public int getAmountProduct() {
@@ -71,15 +81,31 @@ public class Stock implements IStock,Cloneable {
     }
 
     @Override
+    public int compareTo(Object ob){
+        int result = -1;
+
+        Stock otherStock = (Stock)ob;
+
+        if (this.IDProduct == otherStock.IDProduct){
+            result = 0;
+        }else{
+            if (this.IDProduct > otherStock.IDProduct){
+                result = 1;
+            }
+        }
+        return result;
+    }
+
+    @Override
     public boolean equals(Object obj) {
         boolean isEquals = false;
         if (this == obj){
             isEquals = true;
         }else{
             if (obj != null && obj instanceof Stock){
-                Stock newBoat = (Stock)obj;
-                if (IDProduct == newBoat.getIDProduct()
-                    && amountProduct == newBoat.getAmountProduct()){
+                Stock newStock = (Stock)obj;
+                if (this.IDProduct == newStock.getIDProduct()
+                    && this.amountProduct == newStock.getAmountProduct()){
                     isEquals = true;
                 }
             }
@@ -88,7 +114,7 @@ public class Stock implements IStock,Cloneable {
     }
 
     @Override
-    public Object clone() {
+    public Stock clone() {
         Stock newStock = null;
 
         try {
