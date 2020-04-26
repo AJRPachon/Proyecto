@@ -19,7 +19,6 @@ package Interfaces;
  *
  *      > integer getAmountProduct()
  *      > none setAmountProduct(integer newAmount)
- *
  *      > none increaseAmountProduct(integer amountToIncrease)
  *
  *  - Added:
@@ -30,13 +29,10 @@ package Interfaces;
 public interface IStock {
 
     public int getIDProduct();
-
     public void setIDProduct(int IDProduct);
 
     public int getAmountProduct();
-
     public void setAmountProduct(int newAmount);
-
     public void increaseAmountProduct(int newAmount);
 
 }
