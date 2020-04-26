@@ -31,7 +31,6 @@ package BasicsClasses.FoodstuffDrinks;
         toString()
 
 
-
  */
 
 public class Consumable {
