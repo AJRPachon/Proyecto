@@ -165,4 +165,58 @@ public class Receipt implements IRecept,Cloneable,Comparable {
         return totalOfReceipt;
     }
 
+    @Override
+    public String toString(){
+        return nameRestaurant+"|"+dateOfReceipt.get(Calendar.DAY_OF_MONTH)+"|"+(dateOfReceipt.get(Calendar.MONTH)+1)+"|"+dateOfReceipt.get(Calendar.YEAR)+"|"+consumables.toString()+"|"+paidFor;   //TODO CHECK toString ArrayList
+    }
+
+    @Override
+    public int compareTo(Object ob){
+        int result = -1;
+
+        Receipt newReceipt = (Receipt)ob;
+
+        if (this.getTotalPrice() == newReceipt.getTotalPrice()){
+            result = 0;
+        }else{
+            if (this.getTotalPrice() > newReceipt.getTotalPrice()){
+                result = 1;
+            }
+        }
+
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        boolean isEquals = false;
+        if (this == obj){
+            isEquals = true;
+        }else{
+            if (obj != null && obj instanceof Receipt){
+                Receipt newReceipt = (Receipt)obj;
+                if (this.nameRestaurant.equals(newReceipt.nameRestaurant)
+                 && this.dateOfReceipt.equals(newReceipt.dateOfReceipt)
+                 && this.consumables.equals(newReceipt.consumables)   //TODO It's worng. This check the reference not the contents
+                 && this.paidFor == newReceipt.paidFor){
+                    isEquals = true;
+                }
+            }
+        }
+        return isEquals;
+    }
+
+    @Override
+    public Receipt clone() {
+        Receipt newReceipt = null;
+
+        try {
+            newReceipt = (Receipt)super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+
+        return newReceipt;
+    }
+
 }
