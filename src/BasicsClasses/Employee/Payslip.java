@@ -30,13 +30,13 @@ public class Payslip {
 
     private double salary;
 
-    public Payslip(){ //Constructor sin parámetros
+    public Payslip(){ //Constructor without parameters
 
         this.salary = 0;
 
     }
 
-    public Payslip(double salary){ //Constructor con parámetros
+    public Payslip(double salary){ //Constructor with parameters
 
         this.salary = salary;
 

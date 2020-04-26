@@ -37,13 +37,13 @@ public class Schedule {
     private EnumWeekDays weekDay;
     private GregorianCalendar time;
 
-    public Schedule(){ //Constructor sin parámetros
+    public Schedule(){ //Constructor without parameters
 
         this.weekDay = EnumWeekDays.Spaguetti;
         this.time = new GregorianCalendar();
     }
 
-    public Schedule(EnumWeekDays weekDay, GregorianCalendar time){  //Constructor con parametros
+    public Schedule(EnumWeekDays weekDay, GregorianCalendar time){  //Constructor with parameters
 
         this.weekDay = weekDay;
         this.time = time;

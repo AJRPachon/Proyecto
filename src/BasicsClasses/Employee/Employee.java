@@ -80,7 +80,7 @@ public class Employee {
     private String bankAccountN;
 
 
-    public Employee(){ //Constructor sin parámetros
+    public Employee(){ //Constructor without parameters
 
         this.name = " ";
         this.surname = " ";
@@ -93,7 +93,7 @@ public class Employee {
 
     }
 
-    public Employee(String name, String surname, String dNI, String nAF, GregorianCalendar birthday, EnumPosition position, EnumCategory category, String bankAccountN){ //Constructor con parámetros
+    public Employee(String name, String surname, String dNI, String nAF, GregorianCalendar birthday, EnumPosition position, EnumCategory category, String bankAccountN){ //Constructor with parameters
 
         this.name = name;
         this.surname = surname;
