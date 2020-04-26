@@ -724,7 +724,7 @@
 											"top": 386,
 											"width": 254,
 											"height": 13,
-											"text": "+Fecha Nacimiento: Entero",
+											"text": "+Fecha Nacimiento: Tipo fecha",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1852,7 +1852,7 @@
 											"top": 148,
 											"width": 159,
 											"height": 13,
-											"text": "+Hora: Formato horario",
+											"text": "+Hora: Tipo fecha",
 											"horizontalAlignment": 0
 										}
 									],
@@ -3720,7 +3720,7 @@
 										"$ref": "AAAAAAFxpnUiFFPa/Wk="
 									},
 									"name": "Fecha Nacimiento",
-									"type": "Entero"
+									"type": "Tipo fecha"
 								},
 								{
 									"_type": "UMLAttribute",
@@ -3778,7 +3778,7 @@
 								"$ref": "AAAAAAFxpqAZb1VAcUw="
 							},
 							"name": "Hora",
-							"type": "Formato horario"
+							"type": "Tipo fecha"
 						}
 					]
 				},
