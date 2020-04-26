@@ -2,6 +2,6 @@ package BasicsClasses.FoodstuffDrinks;
 
 public enum EnumType {
 
-    Cold, Spaguetti;
+    Breakfast, Starters, SeaFood, Meats, Pizza, Salads, Desserts, Spaguetti;
 
 }
