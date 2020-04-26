@@ -410,7 +410,7 @@
 											"top": 286,
 											"width": 238,
 											"height": 13,
-											"text": "+ID.FoodstuffDrinks.Product: Entero",
+											"text": "+ID.Producto: Entero",
 											"horizontalAlignment": 0
 										},
 										{
@@ -724,7 +724,7 @@
 											"top": 386,
 											"width": 254,
 											"height": 13,
-											"text": "+Fecha Nacimiento: Entero",
+											"text": "+Fecha Nacimiento: Tipo fecha",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1852,7 +1852,7 @@
 											"top": 148,
 											"width": 159,
 											"height": 13,
-											"text": "+Hora: Formato horario",
+											"text": "+Hora: Tipo fecha",
 											"horizontalAlignment": 0
 										}
 									],
@@ -2551,7 +2551,7 @@
 											"top": 468,
 											"width": 190,
 											"height": 13,
-											"text": "+FoodstuffDrinks.Consumable: lista",
+											"text": "+Consumible: lista",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2800,7 +2800,7 @@
 											"top": 294,
 											"width": 206,
 											"height": 13,
-											"text": "+DNI Employee.Employee: Cadena",
+											"text": "+DNI Empleado: Cadena",
 											"horizontalAlignment": 0
 										},
 										{
@@ -3006,7 +3006,7 @@
 											"top": 286,
 											"width": 199,
 											"height": 13,
-											"text": "+ID.FoodstuffDrinks.Product: Entero",
+											"text": "+ID.Producto: Entero",
 											"horizontalAlignment": 0
 										},
 										{
@@ -3231,7 +3231,7 @@
 											"top": 454,
 											"width": 191,
 											"height": 13,
-											"text": "+ID.FoodstuffDrinks.Product: Entero",
+											"text": "+ID.Producto: Entero",
 											"horizontalAlignment": 0
 										},
 										{
@@ -3360,7 +3360,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFxpnRq7FOU8ZA="
 							},
-							"name": "ID.FoodstuffDrinks.Product",
+							"name": "ID.Producto",
 							"type": "Entero"
 						},
 						{
@@ -3720,7 +3720,7 @@
 										"$ref": "AAAAAAFxpnUiFFPa/Wk="
 									},
 									"name": "Fecha Nacimiento",
-									"type": "Entero"
+									"type": "Tipo fecha"
 								},
 								{
 									"_type": "UMLAttribute",
@@ -3778,7 +3778,7 @@
 								"$ref": "AAAAAAFxpqAZb1VAcUw="
 							},
 							"name": "Hora",
-							"type": "Formato horario"
+							"type": "Tipo fecha"
 						}
 					]
 				},
@@ -3814,7 +3814,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFxq8wkLWe2/CM="
 							},
-							"name": "FoodstuffDrinks.Consumable",
+							"name": "Consumible",
 							"type": "lista"
 						},
 						{
@@ -3861,7 +3861,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFxq8xMVGgKdSY="
 							},
-							"name": "DNI Employee.Employee",
+							"name": "DNI Empleado",
 							"type": "Cadena"
 						},
 						{
@@ -3889,7 +3889,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFxrHoarnKJTl4="
 							},
-							"name": "ID.FoodstuffDrinks.Product",
+							"name": "ID.Producto",
 							"type": "Entero"
 						},
 						{
@@ -3926,7 +3926,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFxrHsVpXQ5dPI="
 							},
-							"name": "ID.FoodstuffDrinks.Product",
+							"name": "ID.Producto",
 							"type": "Entero"
 						},
 						{
