@@ -1,9 +1,55 @@
 package BasicsClasses;
 
+/*
+ * Properties:
+ *  - Basics:
+ *      > nameRestaurant: string, Consulting, Modifiable
+ *      > dateOfReceipt: date, Consulting, Modifiable
+ *      > consumables: list of Consumables, Consulting, Modifiable
+ *      > paidFor: boolean, Consulting, Modifiable
+ *
+ *  - Derivatives:
+ *      > double totalPrice, Consulting
+ *
+ *  - Shared:
+ *      > None
+ *
+ * Methods:
+ *  - Basics:
+ *      > string getNameRestaurant();
+ *      > none setNameRestaurant(string nameRestaurant);
+ *
+ *      > date getDateOfReceipt();
+ *          > integer getDayOfDateOfReceipt();
+ *          > integer getMonthOfDateOfReceipt();
+ *          > integer getYearOfDateOfReceipt();
+ *      > none setDateOfReceipt(date dateOfReceipt);
+ *          > none setDayOfDateOfReceipt(integer day);
+ *          > none setMonthOfDateOfReceipt(integer month);
+ *          > none setYearOfDateOfReceipt(integer year);
+ *
+ *      > Consumable getConsumable(integer indexOfConsumable);
+ *      > none setConsumable(integer indexOfConsumable, Consumable consumable);
+ *      > none addConsumable(Consumable consumable);
+ *
+ *      > boolean getPaidFor();
+ *      > none setPaidFor(boolean paidFor);
+ *      > none paidFor();
+ *      > none notPaidFor();
+ *
+ *      > double getTotalPrice();
+ *
+ *  - Added:
+ *      > None
+ *
+ */
+
+import Interfaces.IRecept;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-public class Receipt {
+//public class Receipt implements IRecept,Cloneable,Comparable {
+public class Receipt{
 
     private String nameRestaurant;
     private GregorianCalendar dateOfReceipt;
