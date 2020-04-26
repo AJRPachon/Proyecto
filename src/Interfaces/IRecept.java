@@ -44,7 +44,7 @@ package Interfaces;
  *
  */
 
-import BasicsClasses.Consumable;
+import BasicsClasses.FoodstuffDrinks.Consumable;
 
 import java.util.GregorianCalendar;
 
