@@ -44,12 +44,13 @@ package BasicsClasses;
  *
  */
 
+import BasicsClasses.FoodstuffDrinks.Consumable;
 import Interfaces.IRecept;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-//public class Receipt implements IRecept,Cloneable,Comparable {
-public class Receipt{
+public class Receipt implements IRecept,Cloneable,Comparable {
 
     private String nameRestaurant;
     private GregorianCalendar dateOfReceipt;
@@ -96,11 +97,51 @@ public class Receipt{
         return (GregorianCalendar)dateOfReceipt.clone();
     }
 
-    public ArrayList<Consumable> getConsumables() {
-        return (ArrayList<Consumable>)consumables.clone();
+    public int getDayOfDateOfReceipt() {
+        return this.dateOfReceipt.get(Calendar.DAY_OF_MONTH);
     }
 
-    public boolean isPaidFor() {
+    public int getMonthOfDateOfReceipt() {
+        return this.dateOfReceipt.get(Calendar.MONTH);
+    }
+
+    public int getYearOfDateOfReceipt() {
+        return this.dateOfReceipt.get(Calendar.YEAR);
+    }
+
+    public void setDateOfReceipt(GregorianCalendar dateOfReceipt) {
+        this.dateOfReceipt = (GregorianCalendar)dateOfReceipt.clone();
+    }
+
+    public void setDayOfDateOfReceipt(int day) {
+        this.dateOfReceipt.set(Calendar.DAY_OF_MONTH,day);
+    }
+
+    public void setMonthOfDateOfReceipt(int month) {
+        this.dateOfReceipt.set(Calendar.MONTH,month);
+    }
+
+    public void setYearOfDateOfReceipt(int year) {
+        this.dateOfReceipt.set(Calendar.YEAR,year);
+    }
+
+    public Consumable getConsumable(int indexOfConsumable) {
+        return this.consumables.get(indexOfConsumable);
+    }
+
+    public void setConsumable(int indexOfConsumable, Consumable consumable) {
+        this.consumables.set(indexOfConsumable,consumable);
+    }
+
+    public void addConsumable(Consumable consumable) {
+        this.consumables.add(consumable);
+    }
+
+    public ArrayList<Consumable> getConsumables() {
+        return (ArrayList<Consumable>)consumables.clone();  //TODO CHECK THIS
+    }
+
+    public boolean getPaidFor() {
         return paidFor;
     }
 
@@ -108,7 +149,15 @@ public class Receipt{
         this.paidFor = paidFor;
     }
 
-    public double getTotalOfReceipt(){
+    public void paidFor() {
+        this.paidFor = true;
+    }
+
+    public void notPaidFor() {
+        this.paidFor = false;
+    }
+
+    public double getTotalPrice(){
         double totalOfReceipt = 0;
         for (Consumable consumable : consumables){
             totalOfReceipt += consumable.getPrice();
