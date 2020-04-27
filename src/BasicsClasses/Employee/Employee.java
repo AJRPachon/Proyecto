@@ -72,8 +72,6 @@ package BasicsClasses.Employee;
  */
 
 
-import BasicsClasses.Login;
-
 import java.util.GregorianCalendar;
 
 public class Employee {
