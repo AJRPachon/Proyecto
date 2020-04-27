@@ -7,23 +7,27 @@ package BasicsClasses.Employee;
 
 
     BASIC PROPERTIES:
-        name String consulting
-        surname String consulting
-        dNI String consulting
-        nAF String consulting
-        birthdate GregorianCalendar consulting
-        position enum consulting and modifiable
-        category enum consulting and modifiable
-        bankAccountN String consulting and modifiable
+        - name String consulting
+        - surname String consulting
+        - dNI String consulting
+        - nAF String consulting
+        - birthdate GregorianCalendar consulting
+        - position enum consulting and modifiable
+        - category enum consulting and modifiable
+        - bankAccountN String consulting and modifiable
+        - password String consulting and modifiable
 
 
     DERIVATE PROPERTIES:
+        - Not one
 
+    SHARED PROPERTIES:
+        - Not one
 
 
     INTERFACE
     BASIC METHODS:
-        getName()
+        String getName()
         getSurname()
         getDNI()
         getNAF()
@@ -37,6 +41,9 @@ package BasicsClasses.Employee;
 
         getBankAccountN()
         setBankAccountN(String bankAccountN)
+
+        getPassword()
+        setPassword( String password )
 
 
            //Delegation pattern
@@ -65,6 +72,8 @@ package BasicsClasses.Employee;
  */
 
 
+import BasicsClasses.Login;
+
 import java.util.GregorianCalendar;
 
 public class Employee {
@@ -78,22 +87,24 @@ public class Employee {
     private EnumPosition position;
     private EnumCategory category;
     private String bankAccountN;
+    private String password;
 
 
     public Employee(){ //Constructor without parameters
 
-        this.name = " ";
-        this.surname = " ";
+        this.name = "default";
+        this.surname = "default";
         this.dNI = "00000000-X";
-        this.nAF = " ";
+        this.nAF = "default";
         this.birthday = new GregorianCalendar();
         this.position = EnumPosition.Spaguetti;
         this.category = EnumCategory.Spaguetti;
-        this.bankAccountN = " ";
+        this.bankAccountN = "default";
+        this.password = "default";
 
     }
 
-    public Employee(String name, String surname, String dNI, String nAF, GregorianCalendar birthday, EnumPosition position, EnumCategory category, String bankAccountN){ //Constructor with parameters
+    public Employee(String name, String surname, String dNI, String nAF, GregorianCalendar birthday, EnumPosition position, EnumCategory category, String bankAccountN, String password){ //Constructor with parameters
 
         this.name = name;
         this.surname = surname;
@@ -103,6 +114,8 @@ public class Employee {
         this.position = position;
         this.category = category;
         this.bankAccountN = bankAccountN;
+        this.password = password;
+
 
     }
 
@@ -159,25 +172,82 @@ public class Employee {
     }
 
 
+
+    public String getPassword(){
+        return this.password;
+    }
+
+    public void setPassword(String password){
+        this.password = password;
+    }
+
+
 /////// ADDED METHODS ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////// CONSULT SHEDULE ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /*
         SIGNATURE:
+            public void consultSchedule()
 
         COMENTARY:
+            - Displays the employee's schedule on screen
 
         INPUTS:
+            - Not one
 
         OUTPUTS:
+            - Not one (On-screen display)
 
         INTPUT/OUTPUT:
+            - Not one
 
         PRECONDITION:
+            - Not one
 
         POSTCONDITION:
+            - Printed schedule must be displayed
 
      */
+
+    public void consultSchedule(){
+
+        Schedule objSchedule = new Schedule();
+        
+
+    }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @Override
+    public String toString(){
+
+        return name+"|"+surname+"|"+dNI+"|"+nAF+"|"+birthday+"|"+position+"|"+category+"|"+bankAccountN+"|"+password;
+
+    }
+
+/*
+    @Override
+    public int compareTo(Object obj){
+
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+    }
+*/
+    @Override
+    public Employee clone() {
+        Employee objEmployee = null;
+
+        try {
+            objEmployee = (Employee) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+
+        return objEmployee;
+    }
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
