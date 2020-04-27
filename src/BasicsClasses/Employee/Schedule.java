@@ -76,21 +76,40 @@ public class Schedule {
 /////// CONSULT SHEDULE ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /*
-        SIGNATURE: void consultSchedule()
+        SIGNATURE:
+            public void consultSchedule()
 
-        COMENTARY: Shows the time, shift and day of the week
+        COMENTARY:
+            - Displays the employee's schedule on screen
 
-        INPUTS: Not one
+        INPUTS:
+            - Not one
 
-        OUTPUTS: Not one
+        OUTPUTS:
+            - Not one (On-screen display)
 
-        INTPUT/OUTPUT: Not one
+        INTPUT/OUTPUT:
+            - Not one
 
-        PRECONDITION: Attribute values must be !null or >= 0
+        PRECONDITION:
+            - Not one
 
-        POSTCONDITION: Values printed per screen
+        POSTCONDITION:
+            - Printed schedule must be displayed
 
      */
+
+    public void consultSchedule(){
+
+        //Day of the week
+        for (int cont = 0; cont < 7; cont++){
+
+            System.out.print(EnumWeekDays.getWeekDay(cont));
+
+        }
+
+
+    }
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
