@@ -39,11 +39,11 @@ public class OrderLine implements IOrderLine, Cloneable, Comparable {
 
     public OrderLine(){
         this.product = new Product();
-        productQuantity = -1;
+        productQuantity = 0;
     }
 
     public OrderLine(Product product, int productQuantity){
-        this.product = product;
+        this.product = product; //TODO CLONE
         this.productQuantity = productQuantity;
     }
 

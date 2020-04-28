@@ -32,15 +32,11 @@ package Interfaces;
 public interface IOrderLine {
 
     public int getIDProduct();
-
     public String getNameProduct();
-
     public String getCharacteristicsProduct();
-
     public double getPriceProduct();
 
     public int getProductQuantity();
-
     public void setProductQuantity(int productQuantity);
 
     public double getTotalPrice();
