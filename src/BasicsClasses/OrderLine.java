@@ -3,7 +3,7 @@ package BasicsClasses;
 /*
  * Properties:
  *  - Basics:
- *      > IDProduct: integer, Consulting, Modifiable
+ *      > product: Product, Consulting
  *      > productQuantity: integer, Consulting, Modifiable
  *
  *  - Derivatives:
@@ -14,8 +14,10 @@ package BasicsClasses;
  *
  * Methods:
  *  - Basics:
- *      > integer getIDProduct()
- *      > none setIDProduct(integer IDProduct)
+ *      > integer getIDProduct();
+ *      > integer getNameProduct();
+ *      > string getCharacteristicsProduct();
+ *      > realNumber getPriceProduct();
  *
  *      > integer getProductQuantity()
  *      > none setProductQuantity(integer productQuantity)
@@ -25,35 +27,43 @@ package BasicsClasses;
  *
  */
 
-
+import BasicsClasses.FoodstuffDrinks.Product;
 import Interfaces.IOrderLine;
 
 public class OrderLine implements IOrderLine, Cloneable, Comparable {
 
-    private int IDProduct;
+    private final Product product;
     private int productQuantity;
 
     public OrderLine(){
-        IDProduct = -1;
+        this.product = new Product();
         productQuantity = -1;
     }
 
-    public OrderLine(int IDProduct, int productQuantity) {
-        this.IDProduct = IDProduct;
+    public OrderLine(Product product, int productQuantity){
+        this.product = product;
         this.productQuantity = productQuantity;
     }
 
     public OrderLine(OrderLine otherOrderLine) {
-        this.IDProduct = otherOrderLine.IDProduct;
+        this.product = otherOrderLine.product;
         this.productQuantity = otherOrderLine.productQuantity;
     }
 
     public int getIDProduct() {
-        return IDProduct;
+        return product.getProductID();
     }
 
-    public void setIDProduct(int IDProduct) {
-        this.IDProduct = IDProduct;
+    public String getNameProduct() {
+        return product.getName();
+    }
+
+    public String getCharacteristicsProduct(){
+        return product.getCharacteristics();
+    }
+
+    public double getPriceProduct(){
+        return product.getPrice();
     }
 
     public int getProductQuantity() {
@@ -64,19 +74,23 @@ public class OrderLine implements IOrderLine, Cloneable, Comparable {
         this.productQuantity = productQuantity;
     }
 
+    public double getTotalPrice(){
+        return (product.getPrice()*productQuantity);
+    }
+
     @Override
     public String toString(){
-        return IDProduct+"|"+productQuantity;
+        return product.getProductID()+"|"+product.getName()+"|"+product.getCharacteristics()+"|"+product.getPrice()+"|"+productQuantity;
     }
 
     @Override
     public int compareTo(Object ob){
         int result = -1;
         OrderLine otherOrderLine = (OrderLine)ob;
-        if (this.IDProduct == otherOrderLine.IDProduct){
+        if (this.getTotalPrice() == otherOrderLine.getTotalPrice()){
             result = 0;
         }else{
-            if (this.IDProduct > otherOrderLine.IDProduct){
+            if (this.getTotalPrice() > otherOrderLine.getTotalPrice()){
                 result = 1;
             }
         }
@@ -91,7 +105,7 @@ public class OrderLine implements IOrderLine, Cloneable, Comparable {
         }else{
             if (obj != null && obj instanceof OrderLine){
                 OrderLine newOrderLine = (OrderLine)obj;
-                if (this.IDProduct == newOrderLine.IDProduct
+                if (this.product.equals(newOrderLine)
                     && this.productQuantity == newOrderLine.productQuantity){
                     isEquals = true;
                 }
