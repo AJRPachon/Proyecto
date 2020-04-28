@@ -7,7 +7,7 @@ package Interfaces;
  *      > productQuantity: integer, Consulting, Modifiable
  *
  *  - Derivatives:
- *      > None
+ *      > totalPrice: realNumber, Consulting
  *
  *  - Shared:
  *      > None
@@ -19,8 +19,10 @@ package Interfaces;
  *      > string getCharacteristicsProduct();
  *      > realNumber getPriceProduct();
  *
- *      > integer getProductQuantity()
- *      > none setProductQuantity(integer productQuantity)
+ *      > integer getProductQuantity();
+ *      > none setProductQuantity(integer productQuantity);
+ *
+ *      > realNumber getTotalPrice();
  *
  *  - Added:
  *      > None
@@ -40,5 +42,7 @@ public interface IOrderLine {
     public int getProductQuantity();
 
     public void setProductQuantity(int productQuantity);
+
+    public double getTotalPrice();
 
 }

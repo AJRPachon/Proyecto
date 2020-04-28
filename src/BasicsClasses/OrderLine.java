@@ -7,7 +7,7 @@ package BasicsClasses;
  *      > productQuantity: integer, Consulting, Modifiable
  *
  *  - Derivatives:
- *      > None
+ *      > totalPrice: realNumber, Consulting
  *
  *  - Shared:
  *      > None
@@ -19,8 +19,10 @@ package BasicsClasses;
  *      > string getCharacteristicsProduct();
  *      > realNumber getPriceProduct();
  *
- *      > integer getProductQuantity()
- *      > none setProductQuantity(integer productQuantity)
+ *      > integer getProductQuantity();
+ *      > none setProductQuantity(integer productQuantity);
+ *
+ *      > realNumber getTotalPrice();
  *
  *  - Added:
  *      > None
