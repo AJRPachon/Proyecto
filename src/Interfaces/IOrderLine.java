@@ -3,7 +3,7 @@ package Interfaces;
 /*
  * Properties:
  *  - Basics:
- *      > IDProduct: integer, Consulting, Modifiable
+ *      > product: Product, Consulting
  *      > productQuantity: integer, Consulting, Modifiable
  *
  *  - Derivatives:
@@ -14,8 +14,10 @@ package Interfaces;
  *
  * Methods:
  *  - Basics:
- *      > integer getIDProduct()
- *      > none setIDProduct(integer IDProduct)
+ *      > integer getIDProduct();
+ *      > integer getNameProduct();
+ *      > string getCharacteristicsProduct();
+ *      > realNumber getPriceProduct();
  *
  *      > integer getProductQuantity()
  *      > none setProductQuantity(integer productQuantity)
@@ -28,10 +30,15 @@ package Interfaces;
 public interface IOrderLine {
 
     public int getIDProduct();
-    public void setIDProduct(int IDProduct);
+
+    public String getNameProduct();
+
+    public String getCharacteristicsProduct();
+
+    public double getPriceProduct();
 
     public int getProductQuantity();
-    public void setProductQuantity(int productQuantity);
 
+    public void setProductQuantity(int productQuantity);
 
 }
