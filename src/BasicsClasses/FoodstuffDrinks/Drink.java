@@ -25,6 +25,8 @@ package BasicsClasses.FoodstuffDrinks;
 
  */
 
+import BasicsClasses.FoodstuffDrinks.Enums.EnumAllergies;
+
 public class Drink extends Consumable {
 
     private double proof;

@@ -33,6 +33,8 @@ package BasicsClasses.FoodstuffDrinks;
 
  */
 
+import BasicsClasses.FoodstuffDrinks.Enums.EnumAllergies;
+
 public class Consumable {
 
     private String name;

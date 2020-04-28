@@ -72,6 +72,9 @@ package BasicsClasses.Employee;
  */
 
 
+import BasicsClasses.Employee.Enums.EnumCategory;
+import BasicsClasses.Employee.Enums.EnumPosition;
+
 import java.util.GregorianCalendar;
 
 public class Employee {

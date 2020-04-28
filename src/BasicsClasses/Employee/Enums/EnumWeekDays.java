@@ -1,4 +1,4 @@
-package BasicsClasses.Employee;
+package BasicsClasses.Employee.Enums;
 
 public enum EnumWeekDays {
     Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, Spaguetti;

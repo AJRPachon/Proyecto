@@ -27,6 +27,9 @@ package BasicsClasses.FoodstuffDrinks;
 
  */
 
+import BasicsClasses.FoodstuffDrinks.Enums.EnumAllergies;
+import BasicsClasses.FoodstuffDrinks.Enums.EnumType;
+
 public class Food extends Consumable {
 
     private EnumType type;

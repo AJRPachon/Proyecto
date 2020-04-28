@@ -30,6 +30,8 @@ package BasicsClasses.Employee;
  */
 
 
+import BasicsClasses.Employee.Enums.EnumWeekDays;
+
 import java.util.GregorianCalendar;
 
 public class Schedule {

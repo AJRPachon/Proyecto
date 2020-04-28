@@ -28,9 +28,9 @@ package BasicsClasses;
  *          > none setMonthOfDateOfReceipt(integer month);
  *          > none setYearOfDateOfReceipt(integer year);
  *
- *      > Consumable getConsumable(integer indexOfConsumable);
- *      > none setConsumable(integer indexOfConsumable, Consumable consumable);
- *      > none addConsumable(Consumable consumable);
+ *      > Consumables getConsumable(integer indexOfConsumable);
+ *      > none setConsumable(integer indexOfConsumable, Consumables consumable);
+ *      > none addConsumable(Consumables consumable);
  *
  *      > boolean getPaidFor();
  *      > none setPaidFor(boolean paidFor);
