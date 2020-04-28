@@ -48,7 +48,7 @@ import BasicsClasses.FoodstuffDrinks.Consumable;
 
 import java.util.GregorianCalendar;
 
-public interface IRecept {
+public interface IReceipt {
 
     public String getNameRestaurant();
     public void setNameRestaurant(String nameRestaurant);

@@ -45,12 +45,12 @@ package BasicsClasses;
  */
 
 import BasicsClasses.FoodstuffDrinks.Consumable;
-import Interfaces.IRecept;
+import Interfaces.IReceipt;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Receipt implements IRecept,Cloneable,Comparable {
+public class Receipt implements IReceipt,Cloneable,Comparable {
 
     private String nameRestaurant;
     private GregorianCalendar dateOfReceipt;
