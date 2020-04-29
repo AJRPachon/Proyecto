@@ -117,19 +117,22 @@ public class Order implements IOrder,Cloneable,Comparable {
 
     @Override
     public String toString(){
-        return IDProduct+"|"+amountProduct+"|"+dateOrder.get(Calendar.DAY_OF_MONTH)+"|"+(dateOrder.get(Calendar.MONTH)+1)+"|"+dateOrder.get(Calendar.YEAR);
+        String string = "";
+        for (OrderLine orderLine : this.ordersLines){
+            string+=orderLine.toString()+",";
+        }
+        string+="|"+dateOrder.get(Calendar.DAY_OF_MONTH)+"|"+(dateOrder.get(Calendar.MONTH)+1)+"|"+dateOrder.get(Calendar.YEAR);
+        return string;
     }
 
     @Override
     public int compareTo(Object ob){
         int result = -1;
-
         Order otherOrder = (Order)ob;
-
-        if (this.IDProduct == otherOrder.IDProduct){
+        if (this.dateOrder.compareTo(otherOrder.dateOrder) == 0){
             result = 0;
         }else{
-            if (this.IDProduct > otherOrder.IDProduct){
+            if (this.dateOrder.compareTo(otherOrder.dateOrder) > 0){
                 result = 1;
             }
         }
@@ -144,8 +147,7 @@ public class Order implements IOrder,Cloneable,Comparable {
         }else{
             if (obj != null && obj instanceof Order){
                 Order newOrder = (Order)obj;
-                if (this.IDProduct == newOrder.getIDProduct()
-                    && this.amountProduct == newOrder.getAmountProduct()
+                if (this.ordersLines.equals(newOrder.ordersLines)
                     && this.dateOrder.equals(newOrder.dateOrder)){
                     isEquals = true;
                 }
