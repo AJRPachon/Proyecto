@@ -35,40 +35,35 @@ package BasicsClasses;
  *
  */
 
-
 import Interfaces.IOrder;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Order implements IOrder,Cloneable,Comparable {
 
-    private int IDProduct;
-    private int amountProduct;
+    private ArrayList<OrderLine> ordersLines;
     private GregorianCalendar dateOrder;
 
     public Order(){
-        IDProduct = -1;
-        amountProduct = -1;
+        ordersLines = new ArrayList<>();
         dateOrder = new GregorianCalendar();
     }
 
-    public Order(int IDProduct, int amountProduct) {
-        this.IDProduct = IDProduct;
-        this.amountProduct = amountProduct;
-        this.dateOrder = new GregorianCalendar();
+    public Order(ArrayList<OrderLine> ordersLines, GregorianCalendar dateOrder) {
+        this.ordersLines = (ArrayList<OrderLine>)ordersLines.clone();
+        this.dateOrder = (GregorianCalendar)dateOrder.clone();
     }
 
-    public Order(int IDProduct, int amountProduct, GregorianCalendar dateOrder) {
-        this.IDProduct = IDProduct;
-        this.amountProduct = amountProduct;
-        this.dateOrder = dateOrder;
+    public Order(GregorianCalendar dateOrder) {
+        ordersLines = new ArrayList<>();
+        this.dateOrder = (GregorianCalendar)dateOrder.clone();
     }
 
     public Order(Order other) {
-        this.IDProduct = other.IDProduct;
-        this.amountProduct = other.amountProduct;
-        this.dateOrder = other.dateOrder;
+        ordersLines = (ArrayList<OrderLine>)other.ordersLines.clone();
+        this.dateOrder = (GregorianCalendar)other.dateOrder.clone();
     }
 
 
@@ -91,6 +86,7 @@ public class Order implements IOrder,Cloneable,Comparable {
     public GregorianCalendar getDateOrder() {
         return new GregorianCalendar(dateOrder.get(Calendar.DAY_OF_MONTH),dateOrder.get(Calendar.MONTH),dateOrder.get(Calendar.YEAR));
     }
+
     public int getDayOfDateOrder(){
         return dateOrder.get(Calendar.DAY_OF_MONTH);
     }
