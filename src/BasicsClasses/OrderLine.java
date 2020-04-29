@@ -21,6 +21,8 @@ package BasicsClasses;
  *
  *      > integer getProductQuantity();
  *      > none setProductQuantity(integer productQuantity);
+ *      > none increaseQuantity(int quantityToIncrease);
+ *      > none decreaseQuantity(int quantityToDecrease);
  *
  *      > realNumber getTotalPrice();
  *
