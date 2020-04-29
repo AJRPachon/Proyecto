@@ -158,14 +158,9 @@ public class Order implements IOrder,Cloneable,Comparable {
 
     @Override
     public Order clone() {
-        Order newOrder = null;
-
-        try {
-            newOrder = (Order)super.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
-
+        Order newOrder = new Order();
+        newOrder.ordersLines= (ArrayList<OrderLine>)ordersLines.clone();
+        newOrder.dateOrder = (GregorianCalendar) dateOrder.clone();
         return newOrder;
     }
 
