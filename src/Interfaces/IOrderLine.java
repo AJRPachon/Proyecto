@@ -38,6 +38,8 @@ public interface IOrderLine {
 
     public int getProductQuantity();
     public void setProductQuantity(int productQuantity);
+    public void increaseQuantity(int quantityToIncrease);
+    public void decreaseQuantity(int quantityToDecrease);
 
     public double getTotalPrice();
 

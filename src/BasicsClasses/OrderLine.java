@@ -34,7 +34,7 @@ import Interfaces.IOrderLine;
 
 public class OrderLine implements IOrderLine, Cloneable, Comparable {
 
-    private final Product product;
+    private Product product;
     private int productQuantity;
 
     public OrderLine(){
@@ -43,7 +43,7 @@ public class OrderLine implements IOrderLine, Cloneable, Comparable {
     }
 
     public OrderLine(Product product, int productQuantity){
-        this.product = product; //TODO CLONE
+        this.product = product.clone();
         this.productQuantity = productQuantity;
     }
 
@@ -74,6 +74,14 @@ public class OrderLine implements IOrderLine, Cloneable, Comparable {
 
     public void setProductQuantity(int productQuantity) {
         this.productQuantity = productQuantity;
+    }
+
+    public void increaseQuantity(int quantityToIncrease) {
+        productQuantity+=quantityToIncrease;
+    }
+
+    public void decreaseQuantity(int quantityToDecrease) {
+        productQuantity-=quantityToDecrease;
     }
 
     public double getTotalPrice(){
@@ -117,10 +125,11 @@ public class OrderLine implements IOrderLine, Cloneable, Comparable {
     }
 
     @Override
-    protected Object clone(){
+    public OrderLine clone(){
         OrderLine newOrderLine = null;
         try {
             newOrderLine = (OrderLine)super.clone();
+            newOrderLine.product = this.product.clone();
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
