@@ -66,21 +66,48 @@ public class Order implements IOrder,Cloneable,Comparable {
         this.dateOrder = (GregorianCalendar)other.dateOrder.clone();
     }
 
-
-    public int getIDProduct() {
-        return IDProduct;
+    public ArrayList<OrderLine> getOrdersLines() {
+        return (ArrayList<OrderLine>)ordersLines.clone();
     }
 
-    public void setIDProduct(int IDProduct) {
-        this.IDProduct = IDProduct;
+    public OrderLine getOrderLine(int IDProduct) {
+        OrderLine orderLine = null;
+
+        for (int i = 0; i<ordersLines.size();i++){
+            if (ordersLines.get(i).getIDProduct() == IDProduct){
+                orderLine = ordersLines.get(i);
+            }
+        }
+
+        return orderLine;
     }
 
-    public int getAmountProduct() {
-        return amountProduct;
+    public OrderLine getOrderLineIndex(int index) {
+        return ordersLines.get(index).clone();
     }
 
-    public void setAmountProduct(int amountProduct) {
-        this.amountProduct = amountProduct;
+    public void setOrderLineIndex(int index, OrderLine orderLine) {
+        ordersLines.set(index, orderLine.clone());
+    }
+
+    public void addOrderLine(OrderLine orderLine) {
+        ordersLines.add(orderLine.clone());
+    }
+
+    public void increaseAmountProduct(int IDProduct, int amountToIncrease) {
+        for (int i = 0; i<ordersLines.size();i++){
+            if (ordersLines.get(i).getIDProduct() == IDProduct){
+                ordersLines.get(i).increaseQuantity(amountToIncrease);
+            }
+        }
+    }
+
+    public void decreaseAmountProduct(int IDProduct, int amountToDecrease) {
+        for (int i = 0; i<ordersLines.size();i++){
+            if (ordersLines.get(i).getIDProduct() == IDProduct){
+                ordersLines.get(i).decreaseQuantity(amountToDecrease);
+            }
+        }
     }
 
     public GregorianCalendar getDateOrder() {
