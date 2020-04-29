@@ -48,7 +48,6 @@ public interface IOrder {
     public OrderLine getOrderLine(int IDProduct);
 
     public OrderLine getOrderLineIndex(int index);
-    public void setOrdersLines(ArrayList<OrderLine> OrdersLines);
     public void setOrderLineIndex(int index, OrderLine orderLine);
     public void addOrderLine(OrderLine orderLine);
     public void increaseAmountProduct(int IDProduct, int amountToIncrease);
