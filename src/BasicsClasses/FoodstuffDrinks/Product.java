@@ -37,15 +37,16 @@ package BasicsClasses.FoodstuffDrinks;
 
 public class Product {
 
-    private int productID;
-    private String name;
-    private String characteristics;
+    private final int IDProduct;
+    private static int increaseID = 0;
+    private final String name;
+    private final String characteristics;
     private double price;
 
 
     public Product(){ //Constructor without parameters
 
-        this.productID = 0;
+        this.IDProduct = ++increaseID;
         this.name = " ";
         this.characteristics = " ";
         this.price = 0.0;
@@ -53,9 +54,9 @@ public class Product {
     }
 
 
-    public Product(int productID, String name, String characteristics, double price){  //Constructor with parameters
+    public Product(String name, String characteristics, double price){  //Constructor with parameters
 
-        this.productID = productID;
+        this.IDProduct = ++increaseID;
         this.name = name;
         this.characteristics = characteristics;
         this.price = price;
@@ -65,8 +66,8 @@ public class Product {
 
 ///////// BASICS METHODS ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public int getProductID(){
-        return this.productID;
+    public int getIDProduct(){
+        return this.IDProduct;
     }
 
     public String getName(){
@@ -92,9 +93,50 @@ public class Product {
     @Override
     public String toString(){
 
-        return productID+"|"+name+"|"+characteristics+"|"+price;
+        return IDProduct +"|"+name+"|"+characteristics+"|"+price;
 
     }
+
+
+    @Override
+    public Product clone() {
+        Product newProduct = null;
+
+        try {
+            newProduct = (Product)super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+
+        return newProduct;
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+
+        boolean isEquals = false;
+
+        if (this == obj){
+            isEquals = true;
+
+        }else{
+
+            if (obj != null && obj instanceof Product){
+                Product objProduct = (Product)obj;
+
+                if (this.IDProduct == objProduct.getIDProduct()
+                        && this.price == objProduct.getPrice()
+                        && this.name.equals(objProduct.getName())
+                        && this.characteristics.equals(objProduct.characteristics)){
+                    isEquals = true;
+                }
+            }
+        }
+
+        return isEquals;
+    }
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
