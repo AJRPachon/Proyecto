@@ -25,10 +25,14 @@ package BasicsClasses.FoodstuffDrinks;
 
  */
 
+import BasicsClasses.FoodstuffDrinks.Enums.EnumAllergies;
+
+import java.util.ArrayList;
+
 public class Drink extends Consumable {
 
-    private double proof;
-    private boolean sparkling;
+    private final double proof;
+    private final boolean sparkling;
 
     public Drink(){  //Constructor without parameters
 
@@ -39,7 +43,7 @@ public class Drink extends Consumable {
     }
 
 
-    public Drink(String name, String description, double price, EnumAllergies allergies, double proof, boolean sparkling){  //Constructor with parameters
+    public Drink(String name, String description, double price, ArrayList<EnumAllergies> allergies, double proof, boolean sparkling){  //Constructor with parameters
 
         super(name,description,price,allergies);
         this.proof = proof;

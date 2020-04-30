@@ -28,9 +28,9 @@ package BasicsClasses;
  *          > none setMonthOfDateOfReceipt(integer month);
  *          > none setYearOfDateOfReceipt(integer year);
  *
- *      > Consumable getConsumable(integer indexOfConsumable);
- *      > none setConsumable(integer indexOfConsumable, Consumable consumable);
- *      > none addConsumable(Consumable consumable);
+ *      > Consumables getConsumable(integer indexOfConsumable);
+ *      > none setConsumable(integer indexOfConsumable, Consumables consumable);
+ *      > none addConsumable(Consumables consumable);
  *
  *      > boolean getPaidFor();
  *      > none setPaidFor(boolean paidFor);
@@ -45,12 +45,12 @@ package BasicsClasses;
  */
 
 import BasicsClasses.FoodstuffDrinks.Consumable;
-import Interfaces.IRecept;
+import Interfaces.IReceipt;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Receipt implements IRecept,Cloneable,Comparable {
+public class Receipt implements IReceipt,Cloneable,Comparable {
 
     private String nameRestaurant;
     private GregorianCalendar dateOfReceipt;

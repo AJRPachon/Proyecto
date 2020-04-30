@@ -1,52 +1,61 @@
 package BasicsClasses.Employee;
 
 /*
-
-    ANALYSIS:
-        Collect the schedule of each employee ( shift, day of the week and time at which the service must be performed )
-
-    BASIC PROPERTIES:
-        weekDay enum consulting and modifiable
-        time GregorianCalendar consulting and modifiable
-
-    DERIVATE PROPERTIES:
-        shift String consulting ( Depends on the time )
-
-
-    INTERFACE
-    BASIC METHODS:
-        getWeekDay();
-        setWeekDay(enum);
-
-        getTime();
-        setTime(dateType time);
-
-        getShift();
-
-
-    ADDED METHODS:
-        consultShedule() ( Displays the time, day and shift on the screen )
-
+ *
+ *   ANALYSIS:
+ *       - Collect the schedule of each employee ( shift, day of the week and time at which the service must be performed )
+ *
+ *   BASIC PROPERTIES:
+ *       - weekDay: enum, Consulting, Modifiable
+ *       - time: GregorianCalendar, Consulting, Modifiable
+ *
+ *   DERIVATE PROPERTIES:
+ *       - shift: String, Consulting ( Depends on the time )
+ *
+ *
+ *   INTERFACE
+ *   BASIC METHODS:
+ *       - EnumWeekDays getWeekDay();
+ *       - none setWeekDay(enum);
+ *
+ *       - date getDate();
+ *           * integer getDayOfSchedule()
+ *           * integer getMonthOfSchedule()
+ *           * integer getYearOfSchedule()
+ *       - none setDate(dateType date);
+ *           * none setDayOfSchedule(integer day)
+ *           * none setMonthOfSchedule(integer month)
+ *           * none setYearOfSchedule(integer year)
+ *
+ *       - getShift();
+ *
+ *
+ *   ADDED METHODS:
+ *       - consultShedule() ( Displays the time, day and shift on the screen )
+ *
  */
 
 
+import BasicsClasses.Employee.Enums.EnumWeekDays;
+
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Schedule {
 
     private EnumWeekDays weekDay;
-    private GregorianCalendar time;
+    private GregorianCalendar date;
 
     public Schedule(){ //Constructor without parameters
 
         this.weekDay = EnumWeekDays.Spaguetti;
-        this.time = new GregorianCalendar();
+        this.date = new GregorianCalendar();
     }
 
-    public Schedule(EnumWeekDays weekDay, GregorianCalendar time){  //Constructor with parameters
+    public Schedule(EnumWeekDays weekDay, GregorianCalendar date){  //Constructor with parameters
 
         this.weekDay = weekDay;
-        this.time = time;
+        this.date = date;
 
     }
 
@@ -62,15 +71,52 @@ public class Schedule {
     }
 
 
-    public GregorianCalendar getTime(){
-        return this.time;
+    public GregorianCalendar getDate(){
+        return this.date;
     }
 
-    public void setTime(GregorianCalendar time){
-        this.time = time;
+    public void setDate(GregorianCalendar date){
+        this.date = date;
     }
 
 
+    /*      - date getDate();
+ *           * integer getDayOfSchedule()
+ *           * integer getMonthOfSchedule()
+ *           * integer getYearOfSchedule()
+ *       - none setDate(dateType date);
+ *           * none setDayOfSchedule(integer day)
+ *           * none setMonthOfSchedule(integer month)
+ *           * none setYearOfSchedule(integer year)*/
+
+    public int getDayOfSchedule(){
+        return this.date.get(Calendar.DAY_OF_MONTH);
+    }
+
+    public void setDayOfSchedule(int day){
+        this.date.set(Calendar.DAY_OF_MONTH, day);
+    }
+
+
+
+    public int getMonthOfSchedule(){
+        return this.date.get(Calendar.MONTH);
+    }
+
+    public void setMonthOfSchedule(int month){
+        this.date.set(Calendar.MONTH, month);
+    }
+
+
+
+    public int getYearOfSchedule(){
+        return this.date.get(Calendar.YEAR);
+    }
+
+    public void setYearOfSchedule(int year){
+        this.date.set(Calendar.YEAR, year);
+    }
+    
 
 /////// ADDED METHODS ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////// CONSULT SHEDULE ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

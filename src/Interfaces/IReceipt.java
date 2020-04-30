@@ -28,9 +28,9 @@ package Interfaces;
  *          > none setMonthOfDateOfReceipt(integer month);
  *          > none setYearOfDateOfReceipt(integer year);
  *
- *      > Consumable getConsumable(integer indexOfConsumable);
- *      > none setConsumable(integer indexOfConsumable, Consumable consumable);
- *      > none addConsumable(Consumable consumable);
+ *      > Consumables getConsumable(integer indexOfConsumable);
+ *      > none setConsumable(integer indexOfConsumable, Consumables consumable);
+ *      > none addConsumable(Consumables consumable);
  *
  *      > boolean getPaidFor();
  *      > none setPaidFor(boolean paidFor);
@@ -48,7 +48,7 @@ import BasicsClasses.FoodstuffDrinks.Consumable;
 
 import java.util.GregorianCalendar;
 
-public interface IRecept {
+public interface IReceipt {
 
     public String getNameRestaurant();
     public void setNameRestaurant(String nameRestaurant);

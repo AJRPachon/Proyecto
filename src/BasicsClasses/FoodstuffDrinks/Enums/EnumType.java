@@ -1,4 +1,4 @@
-package BasicsClasses.FoodstuffDrinks;
+package BasicsClasses.FoodstuffDrinks.Enums;
 
 public enum EnumType {
 

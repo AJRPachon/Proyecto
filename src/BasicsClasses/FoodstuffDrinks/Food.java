@@ -27,9 +27,14 @@ package BasicsClasses.FoodstuffDrinks;
 
  */
 
+import BasicsClasses.FoodstuffDrinks.Enums.EnumAllergies;
+import BasicsClasses.FoodstuffDrinks.Enums.EnumType;
+
+import java.util.ArrayList;
+
 public class Food extends Consumable {
 
-    private EnumType type;
+    private final EnumType type;
 
 
     public Food(){  //Constructor without parameters
@@ -40,7 +45,7 @@ public class Food extends Consumable {
     }
 
 
-    public Food(String name, String description, double price, EnumAllergies allergies, double proof, EnumType type){
+    public Food(String name, String description, double price, ArrayList<EnumAllergies> allergies, double proof, EnumType type){
 
         super(name,description,price,allergies);
         this.type = type;
