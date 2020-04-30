@@ -35,62 +35,85 @@ package BasicsClasses;
  *
  */
 
-
 import Interfaces.IOrder;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Order implements IOrder,Cloneable,Comparable {
 
-    private int IDProduct;
-    private int amountProduct;
+    private ArrayList<OrderLine> ordersLines;
     private GregorianCalendar dateOrder;
 
     public Order(){
-        IDProduct = -1;
-        amountProduct = -1;
+        ordersLines = new ArrayList<>();
         dateOrder = new GregorianCalendar();
     }
 
-    public Order(int IDProduct, int amountProduct) {
-        this.IDProduct = IDProduct;
-        this.amountProduct = amountProduct;
-        this.dateOrder = new GregorianCalendar();
+    public Order(ArrayList<OrderLine> ordersLines, GregorianCalendar dateOrder) {
+        this.ordersLines = (ArrayList<OrderLine>)ordersLines.clone();
+        this.dateOrder = (GregorianCalendar)dateOrder.clone();
     }
 
-    public Order(int IDProduct, int amountProduct, GregorianCalendar dateOrder) {
-        this.IDProduct = IDProduct;
-        this.amountProduct = amountProduct;
-        this.dateOrder = dateOrder;
+    public Order(GregorianCalendar dateOrder) {
+        ordersLines = new ArrayList<>();
+        this.dateOrder = (GregorianCalendar)dateOrder.clone();
     }
 
     public Order(Order other) {
-        this.IDProduct = other.IDProduct;
-        this.amountProduct = other.amountProduct;
-        this.dateOrder = other.dateOrder;
+        ordersLines = (ArrayList<OrderLine>)other.ordersLines.clone();
+        this.dateOrder = (GregorianCalendar)other.dateOrder.clone();
     }
 
-
-    public int getIDProduct() {
-        return IDProduct;
+    public ArrayList<OrderLine> getOrdersLines() {
+        return (ArrayList<OrderLine>)ordersLines.clone();
     }
 
-    public void setIDProduct(int IDProduct) {
-        this.IDProduct = IDProduct;
+    public OrderLine getOrderLine(int IDProduct) {
+        OrderLine orderLine = null;
+
+        for (int i = 0; i<ordersLines.size();i++){
+            if (ordersLines.get(i).getIDProduct() == IDProduct){
+                orderLine = ordersLines.get(i);
+            }
+        }
+
+        return orderLine;
     }
 
-    public int getAmountProduct() {
-        return amountProduct;
+    public OrderLine getOrderLineIndex(int index) {
+        return ordersLines.get(index).clone();
     }
 
-    public void setAmountProduct(int amountProduct) {
-        this.amountProduct = amountProduct;
+    public void setOrderLineIndex(int index, OrderLine orderLine) {
+        ordersLines.set(index, orderLine.clone());
+    }
+
+    public void addOrderLine(OrderLine orderLine) {
+        ordersLines.add(orderLine.clone());
+    }
+
+    public void increaseAmountProduct(int IDProduct, int amountToIncrease) {
+        for (int i = 0; i<ordersLines.size();i++){
+            if (ordersLines.get(i).getIDProduct() == IDProduct){
+                ordersLines.get(i).increaseQuantity(amountToIncrease);
+            }
+        }
+    }
+
+    public void decreaseAmountProduct(int IDProduct, int amountToDecrease) {
+        for (int i = 0; i<ordersLines.size();i++){
+            if (ordersLines.get(i).getIDProduct() == IDProduct){
+                ordersLines.get(i).decreaseQuantity(amountToDecrease);
+            }
+        }
     }
 
     public GregorianCalendar getDateOrder() {
         return new GregorianCalendar(dateOrder.get(Calendar.DAY_OF_MONTH),dateOrder.get(Calendar.MONTH),dateOrder.get(Calendar.YEAR));
     }
+
     public int getDayOfDateOrder(){
         return dateOrder.get(Calendar.DAY_OF_MONTH);
     }
@@ -121,19 +144,22 @@ public class Order implements IOrder,Cloneable,Comparable {
 
     @Override
     public String toString(){
-        return IDProduct+"|"+amountProduct+"|"+dateOrder.get(Calendar.DAY_OF_MONTH)+"|"+(dateOrder.get(Calendar.MONTH)+1)+"|"+dateOrder.get(Calendar.YEAR);
+        String string = "";
+        for (OrderLine orderLine : this.ordersLines){
+            string+=orderLine.toString()+",";
+        }
+        string+="|"+dateOrder.get(Calendar.DAY_OF_MONTH)+"|"+(dateOrder.get(Calendar.MONTH)+1)+"|"+dateOrder.get(Calendar.YEAR);
+        return string;
     }
 
     @Override
     public int compareTo(Object ob){
         int result = -1;
-
         Order otherOrder = (Order)ob;
-
-        if (this.IDProduct == otherOrder.IDProduct){
+        if (this.dateOrder.compareTo(otherOrder.dateOrder) == 0){
             result = 0;
         }else{
-            if (this.IDProduct > otherOrder.IDProduct){
+            if (this.dateOrder.compareTo(otherOrder.dateOrder) > 0){
                 result = 1;
             }
         }
@@ -148,8 +174,7 @@ public class Order implements IOrder,Cloneable,Comparable {
         }else{
             if (obj != null && obj instanceof Order){
                 Order newOrder = (Order)obj;
-                if (this.IDProduct == newOrder.getIDProduct()
-                    && this.amountProduct == newOrder.getAmountProduct()
+                if (this.ordersLines.equals(newOrder.ordersLines)
                     && this.dateOrder.equals(newOrder.dateOrder)){
                     isEquals = true;
                 }
@@ -160,14 +185,9 @@ public class Order implements IOrder,Cloneable,Comparable {
 
     @Override
     public Order clone() {
-        Order newOrder = null;
-
-        try {
-            newOrder = (Order)super.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
-
+        Order newOrder = new Order();
+        newOrder.ordersLines= (ArrayList<OrderLine>)ordersLines.clone();
+        newOrder.dateOrder = (GregorianCalendar) dateOrder.clone();
         return newOrder;
     }
 

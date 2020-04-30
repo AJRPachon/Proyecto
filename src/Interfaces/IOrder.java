@@ -3,8 +3,7 @@ package Interfaces;
 /*
  * Properties:
  *  - Basics:
- *      > IDProduct: integer, Consulting, Modifiable
- *      > amountProduct: integer, Consulting, Modifiable
+ *      > OrdersLines: listOfOrdersLines, Consulting, Modifiable
  *      > dateOrder: date, Consulting, Modifiable
  *
  *  - Derivatives:
@@ -15,11 +14,14 @@ package Interfaces;
  *
  * Methods:
  *  - Basics:
- *      > integer getIDProduct()
- *      > none setIDProduct(integer IDProduct)
- *
- *      > integer getAmountProduct()
- *      > none setAmountProduct(integer amountProduct)
+ *      > listOfOrdersLines getOrdersLines();
+ *          > OrderLine getOrderLine(int IDProduct);
+ *          > OrderLine getOrderLineIndex(int index);
+ *      > void setOrdersLines(listOfOrdersLines OrdersLines);
+ *          > void setOrderLineIndex(int index, OrderLine orderLine);
+ *          > void addOrderLine(OrderLine orderLine);
+ *          > void increaseAmountProduct(int IDProduct, int amountToIncrease);
+ *          > void decreaseAmountProduct(int IDProduct, int amountToDecrease);
  *
  *      > date getDateOrder();
  *          > integer getDayOfDateOrder();
@@ -35,15 +37,21 @@ package Interfaces;
  *
  */
 
+import BasicsClasses.OrderLine;
+
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public interface IOrder {
 
-    public int getIDProduct();
-    public void setIDProduct(int IDProduct);
+    public ArrayList<OrderLine> getOrdersLines();
+    public OrderLine getOrderLine(int IDProduct);
 
-    public int getAmountProduct();
-    public void setAmountProduct(int amountProduct);
+    public OrderLine getOrderLineIndex(int index);
+    public void setOrderLineIndex(int index, OrderLine orderLine);
+    public void addOrderLine(OrderLine orderLine);
+    public void increaseAmountProduct(int IDProduct, int amountToIncrease);
+    public void decreaseAmountProduct(int IDProduct, int amountToDecrease);
 
     public GregorianCalendar getDateOrder();
         public int getDayOfDateOrder();
