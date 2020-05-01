@@ -55,7 +55,7 @@ public class OrderLine implements IOrderLine, Cloneable, Comparable {
     }
 
     public int getIDProduct() {
-        return product.getProductID();
+        return product.getIDProduct();
     }
 
     public String getNameProduct() {
@@ -92,7 +92,7 @@ public class OrderLine implements IOrderLine, Cloneable, Comparable {
 
     @Override
     public String toString(){
-        return product.getProductID()+"|"+product.getName()+"|"+product.getCharacteristics()+"|"+product.getPrice()+"|"+productQuantity;
+        return product.getIDProduct()+"|"+product.getName()+"|"+product.getCharacteristics()+"|"+product.getPrice()+"|"+productQuantity;
     }
 
     @Override
