@@ -46,7 +46,7 @@ public class Consumable {
     private double price;
     private final ArrayList<EnumAllergies> allergies;
 
-    public Consumable(){  //Constructor withour parameters
+    public Consumable(){  //Constructor without parameters
 
         this.IDConsumable = ++increaseID;
         this.name = " ";
