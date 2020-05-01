@@ -74,17 +74,18 @@ package BasicsClasses.Employee;
 
 import BasicsClasses.Employee.Enums.EnumCategory;
 import BasicsClasses.Employee.Enums.EnumPosition;
+import BasicsClasses.FoodstuffDrinks.Consumable;
 
 import java.util.GregorianCalendar;
 
 public class Employee {
 
 
-    private String name;
-    private String surname;
-    private String dNI;
-    private String nAF;
-    private GregorianCalendar birthday;
+    private final String name;
+    private final String surname;
+    private final String dNI;
+    private final String nAF;
+    private final GregorianCalendar birthday;
     private EnumPosition position;
     private EnumCategory category;
     private String bankAccountN;
@@ -130,7 +131,7 @@ public class Employee {
         return this.surname;
     }
 
-    public String getdNI() {
+    public String getDNI() {
         return this.dNI;
     }
 
@@ -183,7 +184,7 @@ public class Employee {
     }
 
 
-/////// ADDED METHODS ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////// ADDED METHODS ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -195,17 +196,7 @@ public class Employee {
 
     }
 
-/*
-    @Override
-    public int compareTo(Object obj){
 
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-
-    }
-*/
     @Override
     public Employee clone() {
         Employee objEmployee = null;
@@ -217,6 +208,37 @@ public class Employee {
         }
 
         return objEmployee;
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+
+        boolean isEquals = false;
+
+        if (this == obj){
+            isEquals = true;
+
+        }else{
+
+            if (obj != null && obj instanceof Employee){
+                Employee objEmployee = (Employee)obj;
+
+                if (this.dNI.equals(objEmployee.getDNI())
+                        && this.nAF.equals(objEmployee.getnAF())
+                        && this.name.equals(objEmployee.getName())
+                        && this.surname.equals(objEmployee.getSurname())
+                        && this.birthday == objEmployee.getBirthday()
+                        && this.position == objEmployee.getPosition()
+                        && this.category == objEmployee.getCategory()
+                        && this.bankAccountN.equals(objEmployee.getBankAccountN())
+                        && this.password.equals(objEmployee.getPassword())){
+                    isEquals = true;
+                }
+            }
+        }
+
+        return isEquals;
     }
 
 
