@@ -1,4 +1,4 @@
-package BasicsClasses.Orders;
+package BasicsClasses;
 
 /*
  * Properties:
@@ -32,7 +32,7 @@ package BasicsClasses.Orders;
  */
 
 import BasicsClasses.FoodstuffDrinks.Product;
-import BasicsClasses.Interfaces.IOrderLine;
+import Interfaces.IOrderLine;
 
 public class OrderLine implements IOrderLine, Cloneable, Comparable {
 
