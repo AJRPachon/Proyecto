@@ -31,7 +31,7 @@ package BasicsClasses.ReceiptLine;
  */
 
 import BasicsClasses.FoodstuffDrinks.Consumable;
-import BasicsClasses.FoodstuffDrinks.EnumAllergies;
+import BasicsClasses.FoodstuffDrinks.Enums.EnumAllergies;
 import BasicsClasses.Interfaces.IReceiptLine;
 
 import java.util.ArrayList;
