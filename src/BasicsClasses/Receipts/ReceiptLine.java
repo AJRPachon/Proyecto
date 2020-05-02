@@ -1,4 +1,4 @@
-package BasicsClasses;
+package BasicsClasses.Receipts;
 
 /*
  * Properties:
