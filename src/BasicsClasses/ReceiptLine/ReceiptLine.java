@@ -51,6 +51,11 @@ public class ReceiptLine implements IReceiptLine, Comparable, Cloneable {
         this.consumableQuantity = consumableQuantity;
     }
 
+    public ReceiptLine(Consumable consumable) {
+        this.consumable = consumable.clone();
+        this.consumableQuantity = 1;
+    }
+
     public ReceiptLine(ReceiptLine other) {
         this.consumable = other.consumable.clone();
         this.consumableQuantity = other.consumableQuantity;
