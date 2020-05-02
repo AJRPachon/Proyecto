@@ -45,8 +45,7 @@ package BasicsClasses;
  */
 
 import BasicsClasses.FoodstuffDrinks.Consumable;
-import BasicsClasses.FoodstuffDrinks.Enums.EnumAllergies;
-import BasicsClasses.Interfaces.IReceipt;
+import Interfaces.IReceipt;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -55,34 +54,34 @@ public class Receipt implements IReceipt,Cloneable,Comparable {
 
     private String nameRestaurant;
     private GregorianCalendar dateOfReceipt;
-    private ArrayList<ReceiptLine> receiptLines;
+    private ArrayList<Consumable> consumables;
     private boolean paidFor;
 
     public Receipt() {
         this.nameRestaurant = "Default";
         this.dateOfReceipt = new GregorianCalendar();
-        this.receiptLines = new ArrayList<>();
+        this.consumables = new ArrayList<>();
         this.paidFor = true;
     }
 
     public Receipt(String nameRestaurant) {
         this.nameRestaurant = nameRestaurant;
         this.dateOfReceipt = new GregorianCalendar();
-        this.receiptLines = new ArrayList<>();
+        this.consumables = new ArrayList<>();
         this.paidFor = false;
     }
 
-    public Receipt(String nameRestaurant, GregorianCalendar dateOfReceipt, ArrayList<ReceiptLine> receiptLine, boolean paidFor) {
+    public Receipt(String nameRestaurant, GregorianCalendar dateOfReceipt, ArrayList<Consumable> consumables, boolean paidFor) {
         this.nameRestaurant = nameRestaurant;
         this.dateOfReceipt = (GregorianCalendar)dateOfReceipt.clone();
-        this.receiptLines = (ArrayList<ReceiptLine>) receiptLine.clone();
+        this.consumables = (ArrayList<Consumable>)consumables.clone();
         this.paidFor = paidFor;
     }
 
     public Receipt(Receipt other) {
         this.nameRestaurant = other.nameRestaurant;
         this.dateOfReceipt = (GregorianCalendar)other.dateOfReceipt.clone();
-        this.receiptLines = (ArrayList<ReceiptLine>)other.receiptLines.clone();
+        this.consumables = (ArrayList<Consumable>)other.consumables.clone();
         this.paidFor = other.paidFor;
     }
 
@@ -126,40 +125,20 @@ public class Receipt implements IReceipt,Cloneable,Comparable {
         this.dateOfReceipt.set(Calendar.YEAR,year);
     }
 
-    public ReceiptLine getLineReceipt(int index) {
-        return receiptLines.get(index).clone();
+    public Consumable getConsumable(int indexOfConsumable) {
+        return this.consumables.get(indexOfConsumable);
     }
 
-    public int getIDConsumable(int index) {
-        return receiptLines.get(index).getIDConsumable();
-    }
-
-    public String getNameConsumable(int index) {
-        return receiptLines.get(index).getNameConsumable();
-    }
-
-    public String getDescriptionConsumable(int index) {
-        return receiptLines.get(index).getDescriptionConsumable();
-    }
-
-    public double getPriceConsumable(int index) {
-        return receiptLines.get(index).getPriceConsumable();
-    }
-
-    public ArrayList<EnumAllergies> getAllergiesConsumable(int index) {
-        return (ArrayList<EnumAllergies>)receiptLines.get(index).getAllergiesConsumable().clone();
-    }
-
-    public int getQuantityConsumable(int index) {
-        return receiptLines.get(index).getConsumableQuantity();
+    public void setConsumable(int indexOfConsumable, Consumable consumable) {
+        this.consumables.set(indexOfConsumable,consumable);
     }
 
     public void addConsumable(Consumable consumable) {
-        receiptLines.add(new ReceiptLine(consumable.clone()));
+        this.consumables.add(consumable);
     }
 
-    public void addConsumable(Consumable consumable, int quantity) {
-        receiptLines.add(new ReceiptLine(consumable.clone(),quantity));
+    public ArrayList<Consumable> getConsumables() {
+        return (ArrayList<Consumable>)consumables.clone();  //TODO CHECK THIS
     }
 
     public boolean getPaidFor() {
@@ -180,15 +159,15 @@ public class Receipt implements IReceipt,Cloneable,Comparable {
 
     public double getTotalPrice(){
         double totalOfReceipt = 0;
-        for (ReceiptLine receiptLine : receiptLines){
-            totalOfReceipt += receiptLine.getTotalPrice();
+        for (Consumable consumable : consumables){
+            totalOfReceipt += consumable.getPrice();
         }
         return totalOfReceipt;
     }
 
     @Override
     public String toString(){
-        return nameRestaurant+"|"+dateOfReceipt.get(Calendar.DAY_OF_MONTH)+"|"+(dateOfReceipt.get(Calendar.MONTH)+1)+"|"+dateOfReceipt.get(Calendar.YEAR)+"|"+ receiptLines.toString()+"|"+paidFor;   //TODO CHECK toString ArrayList
+        return nameRestaurant+"|"+dateOfReceipt.get(Calendar.DAY_OF_MONTH)+"|"+(dateOfReceipt.get(Calendar.MONTH)+1)+"|"+dateOfReceipt.get(Calendar.YEAR)+"|"+consumables.toString()+"|"+paidFor;   //TODO CHECK toString ArrayList
     }
 
     @Override
@@ -218,7 +197,7 @@ public class Receipt implements IReceipt,Cloneable,Comparable {
                 Receipt newReceipt = (Receipt)obj;
                 if (this.nameRestaurant.equals(newReceipt.nameRestaurant)
                  && this.dateOfReceipt.equals(newReceipt.dateOfReceipt)
-                 && this.receiptLines.equals(newReceipt.receiptLines)   //TODO It's worng. This check the reference not the contents
+                 && this.consumables.equals(newReceipt.consumables)   //TODO It's worng. This check the reference not the contents
                  && this.paidFor == newReceipt.paidFor){
                     isEquals = true;
                 }
