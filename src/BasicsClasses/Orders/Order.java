@@ -1,4 +1,4 @@
-package BasicsClasses;
+package BasicsClasses.Orders;
 
 /*
  * Properties:
@@ -35,7 +35,7 @@ package BasicsClasses;
  *
  */
 
-import Interfaces.IOrder;
+import BasicsClasses.Interfaces.IOrder;
 
 import java.util.ArrayList;
 import java.util.Calendar;

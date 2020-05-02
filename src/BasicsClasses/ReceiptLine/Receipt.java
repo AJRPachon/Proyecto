@@ -1,4 +1,4 @@
-package BasicsClasses;
+package BasicsClasses.ReceiptLine;
 
 /*
  * Properties:
@@ -45,7 +45,7 @@ package BasicsClasses;
  */
 
 import BasicsClasses.FoodstuffDrinks.Consumable;
-import Interfaces.IReceipt;
+import BasicsClasses.Interfaces.IReceipt;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
