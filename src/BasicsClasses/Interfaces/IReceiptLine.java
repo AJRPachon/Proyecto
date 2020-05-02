@@ -30,7 +30,7 @@ package BasicsClasses.Interfaces;
  *
  */
 
-import BasicsClasses.FoodstuffDrinks.Enums.EnumAllergies;
+import BasicsClasses.FoodstuffDrinks.EnumAllergies;
 
 import java.util.ArrayList;
 

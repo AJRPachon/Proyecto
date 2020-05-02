@@ -76,7 +76,6 @@ import BasicsClasses.Employee.Enums.EnumCategory;
 import BasicsClasses.Employee.Enums.EnumPosition;
 import BasicsClasses.FoodstuffDrinks.Consumable;
 
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Employee {
@@ -193,7 +192,7 @@ public class Employee {
     @Override
     public String toString(){
 
-        return name+"|"+surname+"|"+dNI+"|"+nAF+"|"+birthday.get(Calendar.DAY_OF_MONTH)+"/"+birthday.get(Calendar.MONTH)+"/"+birthday.get(Calendar.YEAR)+"|"+position+"|"+category+"|"+bankAccountN+"|"+password;
+        return name+"|"+surname+"|"+dNI+"|"+nAF+"|"+birthday+"|"+position+"|"+category+"|"+bankAccountN+"|"+password;
 
     }
 
