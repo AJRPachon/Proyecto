@@ -1,4 +1,4 @@
-package BasicsClasses.ReceiptLine;
+package BasicsClasses;
 
 /*
  * Properties:
