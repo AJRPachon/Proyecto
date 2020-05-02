@@ -1,4 +1,4 @@
-package BasicsClasses.Interfaces;
+package Interfaces;
 
 /*
  * Properties:

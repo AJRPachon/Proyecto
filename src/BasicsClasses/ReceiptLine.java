@@ -1,4 +1,4 @@
-package BasicsClasses.ReceiptLine;
+package BasicsClasses;
 
 /*
  * Properties:
@@ -32,7 +32,7 @@ package BasicsClasses.ReceiptLine;
 
 import BasicsClasses.FoodstuffDrinks.Consumable;
 import BasicsClasses.FoodstuffDrinks.EnumAllergies;
-import BasicsClasses.Interfaces.IReceiptLine;
+import Interfaces.IReceiptLine;
 
 import java.util.ArrayList;
 

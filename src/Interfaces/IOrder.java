@@ -1,4 +1,4 @@
-package BasicsClasses.Interfaces;
+package Interfaces;
 
 /*
  * Properties:
@@ -37,7 +37,7 @@ package BasicsClasses.Interfaces;
  *
  */
 
-import BasicsClasses.Orders.OrderLine;
+import BasicsClasses.OrderLine;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
