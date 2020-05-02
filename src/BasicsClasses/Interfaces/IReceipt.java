@@ -1,4 +1,4 @@
-package Interfaces;
+package BasicsClasses.Interfaces;
 
 /*
  * Properties:
@@ -45,6 +45,11 @@ package Interfaces;
  */
 
 import BasicsClasses.FoodstuffDrinks.Consumable;
+<<<<<<< HEAD:src/BasicsClasses/Interfaces/IReceipt.java
+import BasicsClasses.FoodstuffDrinks.Enums.EnumAllergies;
+import BasicsClasses.Receipts.ReceiptLine.ReceiptLine;
+=======
+>>>>>>> master:src/Interfaces/IReceipt.java
 
 import java.util.GregorianCalendar;
 
