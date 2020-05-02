@@ -45,7 +45,10 @@ package Interfaces;
  */
 
 import BasicsClasses.FoodstuffDrinks.Consumable;
+import BasicsClasses.FoodstuffDrinks.Enums.EnumAllergies;
+import BasicsClasses.ReceiptLine.ReceiptLine;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public interface IReceipt {
@@ -62,9 +65,17 @@ public interface IReceipt {
         public void setMonthOfDateOfReceipt(int month);
         public void setYearOfDateOfReceipt(int year);
 
-    public Consumable getConsumable(int indexOfConsumable);
-    public void setConsumable(int indexOfConsumable, Consumable consumable);
+
+    public ReceiptLine getLineReceipt(int index);
+        public int getIDConsumable(int IDConsumable);
+        public String getNameConsumable(int IDConsumable);
+        public String getDescriptionConsumable(int IDConsumable);
+        public double getPriceConsumable(int IDConsumable);
+        public ArrayList<EnumAllergies> getAllergiesConsumable(int IDConsumable);
+    public int getQuantityConsumable(int index);
+
     public void addConsumable(Consumable consumable);
+    public void addConsumable(Consumable consumable, int quantity);
 
     public boolean getPaidFor();
     public void setPaidFor(boolean paidFor);
