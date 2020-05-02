@@ -31,14 +31,14 @@ package BasicsClasses.ReceiptLine;
  */
 
 import BasicsClasses.FoodstuffDrinks.Consumable;
-import BasicsClasses.FoodstuffDrinks.EnumAllergies;
+import BasicsClasses.FoodstuffDrinks.Enums.EnumAllergies;
 import BasicsClasses.Interfaces.IReceiptLine;
 
 import java.util.ArrayList;
 
 public class ReceiptLine implements IReceiptLine, Comparable, Cloneable {
 
-    private Consumable consumable;
+    private final Consumable consumable;
     private int consumableQuantity;
 
     public ReceiptLine() {
