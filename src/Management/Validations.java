@@ -19,4 +19,18 @@ public class Validations {
         return wantContinue == 'S';
     }
 
+
+    /**
+     * @param username
+     * @return
+     */
+
+    public boolean checkUsername(String username){
+        boolean userValid = false;
+        String numbers = username.substring(0,8);
+        char character = username.charAt(8);
+
+        return userValid;
+    }
+
 }
