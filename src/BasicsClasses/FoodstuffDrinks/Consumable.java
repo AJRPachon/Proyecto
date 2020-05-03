@@ -101,7 +101,7 @@ public class Consumable {
     @Override
     public String toString(){
 
-        return name+"|"+description+"|"+price+"|"+allergies;
+        return name+"#"+description+"#"+price+"#"+allergies;
 
     }
 

@@ -188,7 +188,7 @@ public class Receipt implements IReceipt,Cloneable,Comparable {
 
     @Override
     public String toString(){
-        return nameRestaurant+"|"+dateOfReceipt.get(Calendar.DAY_OF_MONTH)+"|"+(dateOfReceipt.get(Calendar.MONTH)+1)+"|"+dateOfReceipt.get(Calendar.YEAR)+"|"+ receiptLines.toString()+"|"+paidFor;   //TODO CHECK toString ArrayList
+        return nameRestaurant+"#"+dateOfReceipt.get(Calendar.DAY_OF_MONTH)+"/"+(dateOfReceipt.get(Calendar.MONTH)+1)+"/"+dateOfReceipt.get(Calendar.YEAR)+"#"+ receiptLines.toString()+"#"+paidFor;   //TODO CHECK toString ArrayList
     }
 
     @Override

@@ -64,7 +64,7 @@ public class Food extends Consumable {
 
     @Override
     public String toString(){
-        return type+"|";
+        return type+"#";
     }
 
 

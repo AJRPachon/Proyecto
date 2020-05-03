@@ -92,7 +92,7 @@ public class OrderLine implements IOrderLine, Cloneable, Comparable {
 
     @Override
     public String toString(){
-        return product.getIDProduct()+"|"+product.getName()+"|"+product.getCharacteristics()+"|"+product.getPrice()+"|"+productQuantity;
+        return product.getIDProduct()+"#"+product.getName()+"#"+product.getCharacteristics()+"#"+product.getPrice()+"#"+productQuantity;
     }
 
     @Override

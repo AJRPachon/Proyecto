@@ -94,7 +94,7 @@ public class ReceiptLine implements IReceiptLine, Comparable, Cloneable {
     }
 
     public String toString(){
-        return consumable.toString()+"|"+consumableQuantity;
+        return consumable.toString()+"#"+consumableQuantity;
     }
 
     @Override
