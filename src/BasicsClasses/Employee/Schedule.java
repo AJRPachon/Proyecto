@@ -19,6 +19,8 @@ package BasicsClasses.Employee;
  *       - none setWeekDay(enum);
  *
  *       - date getDate();
+ *           * integer getHour()
+ *           * integer getMinute()
  *           * integer getDayOfSchedule()
  *           * integer getMonthOfSchedule()
  *           * integer getYearOfSchedule()
@@ -26,8 +28,10 @@ package BasicsClasses.Employee;
  *           * none setDayOfSchedule(integer day)
  *           * none setMonthOfSchedule(integer month)
  *           * none setYearOfSchedule(integer year)
+ *           * none setHour(integer hour)
+ *           * none setMinute(integer minute)
  *
- *       - getShift();
+ *       - getShift(); TODO
  *
  *
  *   ADDED METHODS:
@@ -71,6 +75,7 @@ public class Schedule {
     }
 
 
+
     public GregorianCalendar getDate(){
         return this.date;
     }
@@ -80,14 +85,18 @@ public class Schedule {
     }
 
 
-    /*      - date getDate();
- *           * integer getDayOfSchedule()
- *           * integer getMonthOfSchedule()
- *           * integer getYearOfSchedule()
- *       - none setDate(dateType date);
- *           * none setDayOfSchedule(integer day)
- *           * none setMonthOfSchedule(integer month)
- *           * none setYearOfSchedule(integer year)*/
+
+    public int getHour(){ return this.date.get(Calendar.HOUR_OF_DAY); }
+
+    public void setHour(int hour){ this.date.set(Calendar.HOUR_OF_DAY, hour); }
+
+
+
+    public int getMinutes(){ return this.date.get(Calendar.MINUTE); }
+
+    public void setMinutes(int minute){ this.date.set(Calendar.MINUTE, minute); }
+
+
 
     public int getDayOfSchedule(){
         return this.date.get(Calendar.DAY_OF_MONTH);
@@ -145,7 +154,7 @@ public class Schedule {
 
      */
 
-    public void consultSchedule(){
+    public void consultSchedule(){ //TODO
 
         //Day of the week
         for (int cont = 0; cont < 7; cont++){

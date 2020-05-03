@@ -1,5 +1,5 @@
 package BasicsClasses.Employee.Enums;
 
 public enum EnumCategory {
-    Administrator, Floor_Manager, Staff, Spaguetti
+    Administrator, FloorManager, Staff, Spaguetti
 }
