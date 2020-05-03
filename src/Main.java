@@ -3,11 +3,12 @@
  *
  * PG0
  * INIT
- *  checkFiles*
+ * checkFiles*
+ * do
  *  readUser
  *  readPassword
- *  do
- *      switch()
+ *  getPermisons*
+ *      switch(permisons)
  *          case Administrator
  *              //optionOfAdministrator
  *          endCase
@@ -20,21 +21,66 @@
  *              //optionOfStaff
  *          endCase
  *      EndSwitch
- *  while(checkLogIn fail and user want continue)
- *  checkLogIn*
+ *      askWantContinue*
+ * while(checkLogIn fail and user want continue)
  * END
  *
  */
 
+import Management.EmployeeManagement;
 import Management.FilesManagement;
+import Management.Validations;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
 
         FilesManagement FM = new FilesManagement();
+        EmployeeManagement EM = new EmployeeManagement();
+        Validations VD = new Validations();
 
         FM.checkFiles();
+        String username, password;
+        Scanner sc = new Scanner(System.in);
+        String permisons;
+
+        do {
+
+            System.out.print("Insert the username: ");
+            //TODO Validate username
+            username = sc.next();
+            System.out.print("Insert the password: ");
+            password = EM.encriptPassword(sc.next());
+
+            permisons = EM.getPermisons(username, password);
+
+            if (permisons != null){
+                switch (permisons) {
+                    case "Administrator":
+                        //optionOfAdministrator
+                        break;
+
+                    case "FloorManager":
+                        //optionOfFloorManager
+                        break;
+
+                    case "Staff":
+
+                        //optionOfStaff
+                        break;
+                }
+            }else{
+                System.out.println("Error to Log In, please retry");
+            }
+
+        }while (permisons == null && VD.wantContinue());
+
+
+
 
     }
 
