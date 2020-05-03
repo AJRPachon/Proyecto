@@ -66,7 +66,7 @@ public class Drink extends Consumable {
 
     @Override
     public String toString(){
-        return proof+"|"+sparkling;
+        return proof+"|"+sparkling+"|"+super.toString();
     }
 
 
