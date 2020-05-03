@@ -31,8 +31,6 @@ import Management.EmployeeManagement;
 import Management.FilesManagement;
 import Management.Validations;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
 public class Main {
@@ -69,18 +67,14 @@ public class Main {
                         break;
 
                     case "Staff":
-
                         //optionOfStaff
                         break;
                 }
             }else{
-                System.out.println("Error to Log In, please retry");
+                System.out.println("Error to LogIn, please retry");
             }
 
         }while (permisons == null && VD.wantContinue());
-
-
-
 
     }
 
