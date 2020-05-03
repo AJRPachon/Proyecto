@@ -91,6 +91,7 @@ public class Employee {
     private EnumCategory category;
     private String bankAccountN;
     private String password;
+    private final Schedule[] schedule;
 
 
     public Employee(){ //Constructor without parameters
@@ -104,6 +105,7 @@ public class Employee {
         this.category = EnumCategory.Spaguetti;
         this.bankAccountN = "default";
         this.password = "default";
+        this.schedule = new Schedule[0];
 
     }
 
@@ -118,6 +120,7 @@ public class Employee {
         this.category = category;
         this.bankAccountN = bankAccountN;
         this.password = password;
+        this.schedule = new Schedule[7];
 
 
     }

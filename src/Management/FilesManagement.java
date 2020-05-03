@@ -1,8 +1,11 @@
 package Management;
 
+import BasicsClasses.Employee.Employee;
 import BasicsClasses.Employee.Enums.EnumWeekDays;
+import BasicsClasses.Employee.Schedule;
 
 import java.util.GregorianCalendar;
+import java.util.Scanner;
 
 public class FilesManagement {
 
@@ -33,9 +36,9 @@ public class FilesManagement {
 *
  */
 
-    public void assignSchedule(int IDEmployee, GregorianCalendar day, GregorianCalendar hour, GregorianCalendar minute, EnumWeekDays weekDay){
+    public void assignSchedule(Employee employee, GregorianCalendar startDate, GregorianCalendar endDate, EnumWeekDays weekDay){
 
-
+        
 
 
     }
