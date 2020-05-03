@@ -148,7 +148,7 @@ public class Order implements IOrder,Cloneable,Comparable {
         for (OrderLine orderLine : this.ordersLines){
             string+=orderLine.toString()+",";
         }
-        string+="|"+dateOrder.get(Calendar.DAY_OF_MONTH)+"|"+(dateOrder.get(Calendar.MONTH)+1)+"|"+dateOrder.get(Calendar.YEAR);
+        string+="#"+dateOrder.get(Calendar.DAY_OF_MONTH)+"/"+(dateOrder.get(Calendar.MONTH)+1)+"/"+dateOrder.get(Calendar.YEAR);
         return string;
     }
 
