@@ -193,7 +193,7 @@ public class Employee {
     @Override
     public String toString(){
 
-        return name+"|"+surname+"|"+dNI+"|"+nAF+"|"+birthday.get(Calendar.DAY_OF_MONTH)+"/"+birthday.get(Calendar.MONTH)+"/"+birthday.get(Calendar.YEAR)+"|"+position+"|"+category+"|"+bankAccountN+"|"+password;
+        return name+"#"+surname+"#"+dNI+"#"+nAF+"#"+birthday.get(Calendar.DAY_OF_MONTH)+"/"+birthday.get(Calendar.MONTH)+"/"+birthday.get(Calendar.YEAR)+"#"+position+"#"+category+"#"+bankAccountN+"#"+password;
 
     }
 

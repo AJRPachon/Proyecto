@@ -93,7 +93,7 @@ public class Product {
     @Override
     public String toString(){
 
-        return IDProduct +"|"+name+"|"+characteristics+"|"+price;
+        return IDProduct +"#"+name+"#"+characteristics+"#"+price;
 
     }
 
