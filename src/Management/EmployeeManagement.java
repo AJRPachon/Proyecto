@@ -48,4 +48,27 @@ public class EmployeeManagement {
         return category;
     }
 
+    /**
+     * @param password
+     * @return
+     */
+
+
+    public String encriptPassword(String password){
+        String passEncripted = null;
+
+        try {
+            byte[] bytesOfMessage = password.getBytes(StandardCharsets.UTF_8);
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] thedigest = md.digest(bytesOfMessage);
+            BigInteger bigInt = new BigInteger(1,thedigest);
+            passEncripted = bigInt.toString(16);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        return passEncripted;
+    }
+
+
 }
