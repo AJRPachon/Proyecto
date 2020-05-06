@@ -19,16 +19,30 @@ public class Validations {
         return wantContinue == 'S';
     }
 
-
     /**
      * @param username
      * @return
      */
 
     public boolean checkUsername(String username){
-        boolean userValid = false;
-        String numbers = username.substring(0,8);
-        char character = username.charAt(8);
+        boolean userValid = false, checkIntPart = true;
+
+        if (username.length() == 9){
+            String[] numbersToEvaluate = username.substring(0,8).split("");
+            String numbers = "";
+            char character = Character.toUpperCase(username.charAt(8));
+
+            for (int i = 0; i < numbersToEvaluate.length; i++){
+                if (numbersToEvaluate[i].charAt(0) >= 48 && numbersToEvaluate[i].charAt(0) <= 57){
+                    numbers +=numbersToEvaluate[i];
+                }
+            }
+
+            if (numbers.length() == 8){
+                userValid = (character == calculateCharUser(Integer.parseInt(numbers)));
+            }
+
+        }
 
         return userValid;
     }
