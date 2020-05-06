@@ -44,15 +44,12 @@ public class Main {
         FM.checkFiles();
         String username, password;
         Scanner sc = new Scanner(System.in);
-        String permisons;
+        String permisons = null;
 
         do {
 
-            System.out.print("Insert the username: ");
-            //TODO Validate username
-            username = sc.next();
-            System.out.print("Insert the password: ");
-            password = EM.encriptPassword(sc.next());
+            username = VD.readAndValidateUsername();
+            password = VD.readAndValidatePassword();
 
             permisons = EM.getPermisons(username, password);
 
