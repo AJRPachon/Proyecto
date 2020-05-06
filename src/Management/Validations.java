@@ -33,6 +33,40 @@ public class Validations {
         return userValid;
     }
 
+    private char calculateCharUser(int cadena){
+        char character = ' ';
+        int resultado;
+
+        resultado = cadena % 23;
+
+        switch (resultado) {
+            case 0 -> character = 'T';
+            case 1 -> character = 'R';
+            case 2 -> character = 'W';
+            case 3 -> character = 'A';
+            case 4 -> character = 'G';
+            case 5 -> character = 'M';
+            case 6 -> character = 'Y';
+            case 7 -> character = 'F';
+            case 8 -> character = 'P';
+            case 9 -> character = 'D';
+            case 10 -> character = 'X';
+            case 11 -> character = 'B';
+            case 12 -> character = 'N';
+            case 13 -> character = 'J';
+            case 14 -> character = 'Z';
+            case 15 -> character = 'S';
+            case 16 -> character = 'Q';
+            case 17 -> character = 'V';
+            case 18 -> character = 'H';
+            case 19 -> character = 'L';
+            case 20 -> character = 'C';
+            case 21 -> character = 'K';
+            case 22 -> character = 'E';
+        }
+
+        return character;
+    }
     /**
      * @return
      */
