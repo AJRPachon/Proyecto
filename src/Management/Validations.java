@@ -67,6 +67,26 @@ public class Validations {
 
         return character;
     }
+
+    /**
+     * @return
+     */
+
+    public String readAndValidateUsername(){
+        Scanner sc = new Scanner(System.in);
+        boolean userNotValid;
+        String username;
+
+        do {
+            System.out.print("Insert the username: ");
+            if (!(userNotValid = checkUsername(username = sc.next()))){
+                System.out.println("The username aren`t correct. The syntax is: 00000000T");
+            }
+        }while (!userNotValid);
+
+        return username;
+    }
+
     /**
      * @return
      */
