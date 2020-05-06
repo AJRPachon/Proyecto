@@ -64,7 +64,7 @@ public class FilesManagement {
             try {
                 file.createNewFile();
                 BW = new BufferedWriter(new FileWriter(file));  //TODO Encript password
-                BW.write(new Employee("Administrator","Administrator","00000000T","281234567840",new GregorianCalendar(),EnumPosition.Manager,EnumCategory.Administrator,"ES3231906288456991923866","ddd5eb54dadbb801a09aa5170937f46b").toString());
+                BW.write(new Employee("Administrator","Administrator","00000000T","281234567840",new GregorianCalendar(),EnumPosition.Manager,EnumCategory.Administrator,"ES3231906288456991923866","2a2e9a58102784ca18e2605a4e727b5f").toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }
