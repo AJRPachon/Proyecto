@@ -33,4 +33,24 @@ public class Validations {
         return userValid;
     }
 
+    /**
+     * @return
+     */
+
+    public String readAndValidatePassword(){
+        Scanner sc = new Scanner(System.in);
+        EmployeeManagement EM = new EmployeeManagement();
+        String password;
+
+        do {
+            System.out.print("Insert the password: ");
+            if ((password = sc.next()).length() < 8){
+                System.out.println("The password must be longer than 7 characters");
+            }
+        }while (password.length() < 8);
+
+        password = EM.encriptPassword(password);
+        return password;
+    }
+
 }
