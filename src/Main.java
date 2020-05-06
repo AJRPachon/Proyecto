@@ -43,7 +43,6 @@ public class Main {
 
         FM.checkFiles();
         String username, password;
-        Scanner sc = new Scanner(System.in);
         String permisons = null;
 
         do {
@@ -71,7 +70,7 @@ public class Main {
                 System.out.println("Error to LogIn, please retry");
             }
 
-        }while (permisons == null && VD.wantContinue());
+        }while (permisons == null || VD.wantContinue());
 
     }
 
