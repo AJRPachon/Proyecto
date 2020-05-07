@@ -36,6 +36,7 @@ package BasicsClasses.Employee;
  *
  *   ADDED METHODS:
  *       - consultShedule() ( Displays the time, day and shift on the screen )
+ *       - assignShedule() TODO
  *
  */
 
@@ -44,6 +45,7 @@ import BasicsClasses.Employee.Enums.EnumWeekDays;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Scanner;
 
 public class Schedule {
 
@@ -187,7 +189,7 @@ public class Schedule {
 
 
 /////// ADDED METHODS ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////// CONSULT SHEDULE ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////// CONSULT SHEDULE //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /*
         SIGNATURE:
@@ -225,6 +227,62 @@ public class Schedule {
         }
 
     }
+
+
+////// ASSIGN SCHEDULE ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+   /*
+    *   SIGNATURE:
+    *       public void assignSchedule()
+    *
+    *   COMENTARY:
+    *       This method assigns a schedule to an employee
+    *
+    *   INPUTS:
+    *       Not one
+    *
+    *   OUTPUTS:
+    *       Not one
+    *
+    *   INPUT/OUTPUTS:
+    *       Not one
+    *
+    *   PRECONDITION:
+    *       Not one
+    *
+    *   POSTCONDITION:
+    *       The schedule must have been assigned
+    *
+    */
+
+    public void assignSchedule(){
+
+        Scanner kb = new Scanner(System.in);
+
+        int SDHour;  //SD = START DATE
+        int SDMinute;
+        int EDHour;  //ED = END DATE
+        int EDMinute;
+
+        System.out.println("SD Hour");
+        SDHour = kb.nextInt();
+        setSDHour(SDHour);
+
+        System.out.println("SD minute");
+        SDMinute = kb.nextInt();
+        setSDMinutes(SDMinute);
+
+        System.out.println("ED Hour");
+        EDHour = kb.nextInt();
+        setEDHour(EDHour);
+
+        System.out.println("ED minute");
+        EDMinute = kb.nextInt();
+        setEDMinutes(EDMinute);
+
+    }
+
+
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
