@@ -33,7 +33,7 @@ public class ScheduleManagement {
      *
      */
 
-    public void assignSchedule(Schedule schedule){
+    public void assignSchedule(Schedule schedule) {
 
         Scanner kb = new Scanner(System.in);
 
@@ -48,7 +48,7 @@ public class ScheduleManagement {
         SDHour = kb.nextInt();
 
         //Validation
-        while( SDHour < 0 || SDHour > 24 ){
+        while (SDHour < 0 || SDHour > 24) {
             System.out.println("The time must be between 0 and 24");
             SDHour = kb.nextInt();
         }
@@ -60,7 +60,7 @@ public class ScheduleManagement {
         SDMinute = kb.nextInt();
 
         //Validation
-        while( SDMinute < 0 || SDMinute > 59 ){
+        while (SDMinute < 0 || SDMinute > 59) {
             System.out.println("The minutes must be between 0 and 59");
             SDMinute = kb.nextInt();
         }
@@ -72,7 +72,7 @@ public class ScheduleManagement {
         EDHour = kb.nextInt();
 
         //Validation
-        while( EDHour < 0 || EDHour > 24 ){
+        while (EDHour < 0 || EDHour > 24) {
             System.out.println("The time must be between 0 and 24");
             EDHour = kb.nextInt();
         }
@@ -84,21 +84,11 @@ public class ScheduleManagement {
         EDMinute = kb.nextInt();
 
         //Validation
-        while( EDMinute < 0 || EDMinute > 59 ){
+        while (EDMinute < 0 || EDMinute > 59) {
             System.out.println("The minutes must be between 0 and 59");
             EDMinute = kb.nextInt();
         }
         schedule.setEDMinutes(EDMinute);
-
-    }
-
-
-///// SHOW SCHEDULE //////////////////////
-
-    public void showSchedule(Schedule schedule){
-
-        System.out.println("Hora de inicio: "+schedule.getSDHour()+":"+schedule.getSDMinutes());
-        System.out.println("Hora de fin: "+schedule.getEDHour()+":"+schedule.getEDMinutes());
 
     }
 
