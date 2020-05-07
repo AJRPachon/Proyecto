@@ -1,6 +1,10 @@
 package Management;
 
 import BasicsClasses.Employee.Schedule;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.Scanner;
 
 
@@ -89,6 +93,29 @@ public class ScheduleManagement {
             EDMinute = kb.nextInt();
         }
         schedule.setEDMinutes(EDMinute);
+
+
+
+        //IMPLEMENT IN THE FILE
+
+        try {
+
+            File fileSchedule = new File(".\\src\\Files\\Schedule");
+
+            //If the file does not exist it is created
+            if (!fileSchedule.exists()) {
+                fileSchedule.createNewFile();
+            }
+
+            FileWriter fw = new FileWriter(fileSchedule);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(schedule.toString());
+            bw.close();
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
 
     }
 
