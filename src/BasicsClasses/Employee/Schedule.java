@@ -264,20 +264,52 @@ public class Schedule {
         int EDHour;  //ED = END DATE
         int EDMinute;
 
-        System.out.println("SD Hour");
+
+    //SD HOUR
+        System.out.println("Enter the start time of the day");
         SDHour = kb.nextInt();
+
+        //Validation
+        while( SDHour < 0 || SDHour > 24 ){
+            System.out.println("The time must be between 0 and 24");
+            SDHour = kb.nextInt();
+        }
         setSDHour(SDHour);
 
-        System.out.println("SD minute");
+
+    //SD MINUTE
+        System.out.println("Enter minute of start of the day");
         SDMinute = kb.nextInt();
+
+        //Validation
+        while( SDMinute < 0 || SDMinute > 59 ){
+            System.out.println("The minutes must be between 0 and 59");
+            SDMinute = kb.nextInt();
+        }
         setSDMinutes(SDMinute);
 
-        System.out.println("ED Hour");
+
+     //ED HOUR
+        System.out.println("Enter end-of-day hour");
         EDHour = kb.nextInt();
+
+        //Validation
+        while( EDHour < 0 || EDHour > 24 ){
+            System.out.println("The time must be between 0 and 24");
+            EDHour = kb.nextInt();
+        }
         setEDHour(EDHour);
 
-        System.out.println("ED minute");
+
+    //ED MINUTE
+        System.out.println("Enter end-of-day minute");
         EDMinute = kb.nextInt();
+
+        //Validation
+        while( EDMinute < 0 || EDMinute > 59 ){
+            System.out.println("The minutes must be between 0 and 59");
+            EDMinute = kb.nextInt();
+        }
         setEDMinutes(EDMinute);
 
     }
