@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class ScheduleManagement {
 
-    ///// ASSIGN SCHEDULE //////////////////////
+///// ASSIGN SCHEDULE //////////////////////
 
 
     /*
