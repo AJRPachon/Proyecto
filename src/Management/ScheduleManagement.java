@@ -96,6 +96,9 @@ public class ScheduleManagement {
 
 
 
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+
         //IMPLEMENT IN THE FILE
 
         try {
@@ -107,15 +110,25 @@ public class ScheduleManagement {
                 fileSchedule.createNewFile();
             }
 
-            FileWriter fw = new FileWriter(fileSchedule);
-            BufferedWriter bw = new BufferedWriter(fw);
+            fw = new FileWriter(fileSchedule);
+            bw = new BufferedWriter(fw);
             bw.write(schedule.toString());
-            bw.close();
 
         } catch (Exception e){
             e.printStackTrace();
         }
 
+
+        finally {
+            try {
+
+                bw.close();
+                fw.close();
+
+            }catch (Exception ebwfw){
+                ebwfw.printStackTrace();
+            }
+        }
 
     }
 
