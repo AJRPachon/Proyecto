@@ -12,40 +12,18 @@ public class ScheduleManagement {
 
 ///// ASSIGN SCHEDULE //////////////////////
 
-
-    /*
-     *   SIGNATURE:
-     *       public void assignSchedule()
+    /**
      *
-     *   COMENTARY:
-     *       This method assigns a schedule to an employee
-     *
-     *   INPUTS:
-     *       Not one
-     *
-     *   OUTPUTS:
-     *       Not one
-     *
-     *   INPUT/OUTPUTS:
-     *       Not one
-     *
-     *   PRECONDITION:
-     *       Not one
-     *
-     *   POSTCONDITION:
-     *       The schedule must have been assigned
-     *
+     * @return
      */
 
-    public void assignSchedule(Schedule schedule) {
+    public int readSDHour() {
 
         Scanner kb = new Scanner(System.in);
 
         int SDHour;  //SD = START DATE
-        int SDMinute;
-        int EDHour;  //ED = END DATE
-        int EDMinute;
 
+        Schedule schedule = new Schedule();
 
         //SD HOUR
         System.out.println("Enter the start time of the day");
@@ -56,8 +34,24 @@ public class ScheduleManagement {
             System.out.println("The time must be between 0 and 24");
             SDHour = kb.nextInt();
         }
-        schedule.setSDHour(SDHour);
 
+        return SDHour;
+
+    }
+
+
+    /**
+     *
+     * @return
+     */
+
+    public int readSDMinute(){
+
+        Scanner kb = new Scanner(System.in);
+
+        int SDMinute;  //SD = START DATE
+
+        Schedule schedule = new Schedule();
 
         //SD MINUTE
         System.out.println("Enter minute of start of the day");
@@ -68,8 +62,26 @@ public class ScheduleManagement {
             System.out.println("The minutes must be between 0 and 59");
             SDMinute = kb.nextInt();
         }
-        schedule.setSDMinutes(SDMinute);
 
+        return SDMinute;
+
+    }
+
+
+
+    /**
+     *
+     * @return
+     */
+
+
+    public int readEDHour(){
+
+        Scanner kb = new Scanner(System.in);
+
+        int EDHour;  //SD = START DATE
+
+        Schedule schedule = new Schedule();
 
         //ED HOUR
         System.out.println("Enter end-of-day hour");
@@ -80,8 +92,24 @@ public class ScheduleManagement {
             System.out.println("The time must be between 0 and 24");
             EDHour = kb.nextInt();
         }
-        schedule.setEDHour(EDHour);
 
+        return EDHour;
+
+    }
+
+
+    /**
+     *
+     * @return
+     */
+
+    public int readEDMinute(){
+
+        Scanner kb = new Scanner(System.in);
+
+        int EDMinute;  //SD = START DATE
+
+        Schedule schedule = new Schedule();
 
         //ED MINUTE
         System.out.println("Enter end-of-day minute");
@@ -92,11 +120,34 @@ public class ScheduleManagement {
             System.out.println("The minutes must be between 0 and 59");
             EDMinute = kb.nextInt();
         }
+
+        return EDMinute;
+
+    }
+
+
+    /**
+     *
+     * @param SDHour
+     * @param SDMinute
+     * @param EDHour
+     * @param EDMinute
+     */
+    
+    public void assignSchedule(int SDHour, int SDMinute, int EDHour, int EDMinute){
+
+        Schedule schedule = new Schedule();
+
+        schedule.setSDHour(SDHour);
+        schedule.setSDMinutes(SDMinute);
+        schedule.setEDHour(EDHour);
         schedule.setEDMinutes(EDMinute);
 
+    }
 
 
-        FileWriter fw = null;
+
+    FileWriter fw = null;
         BufferedWriter bw = null;
 
         //IMPLEMENT IN THE FILE
@@ -130,7 +181,7 @@ public class ScheduleManagement {
             }
         }
 
-    }
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
