@@ -10,11 +10,11 @@ import java.util.Scanner;
 
 public class ScheduleManagement {
 
-///// ASSIGN SCHEDULE //////////////////////
 
     /**
+     * This method reads and validates the entry time
      *
-     * @return
+     * @return SDHour
      */
 
     public int readSDHour() {
@@ -41,8 +41,9 @@ public class ScheduleManagement {
 
 
     /**
+     * This method reads and validates the minutes of the entry time
      *
-     * @return
+     * @return SDMinute
      */
 
     public int readSDMinute(){
@@ -70,6 +71,7 @@ public class ScheduleManagement {
 
 
     /**
+     * This method reads and validates the end of the day time
      *
      * @return
      */
@@ -99,6 +101,7 @@ public class ScheduleManagement {
 
 
     /**
+     * This method reads and validates the minutes of the end of the day
      *
      * @return
      */
