@@ -133,7 +133,7 @@ public class ScheduleManagement {
      * @param EDHour
      * @param EDMinute
      */
-    
+
     public void assignSchedule(int SDHour, int SDMinute, int EDHour, int EDMinute){
 
         Schedule schedule = new Schedule();
@@ -147,7 +147,15 @@ public class ScheduleManagement {
 
 
 
-    FileWriter fw = null;
+    /**
+     *
+     */
+
+    public void scheduleFileIn() {
+
+        Schedule schedule = new Schedule();
+
+        FileWriter fw = null;
         BufferedWriter bw = null;
 
         //IMPLEMENT IN THE FILE
@@ -165,22 +173,21 @@ public class ScheduleManagement {
             bw = new BufferedWriter(fw);
             bw.write(schedule.toString());
 
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }
 
-
-        finally {
+        } finally {
             try {
 
                 bw.close();
                 fw.close();
 
-            }catch (Exception ebwfw){
+            } catch (Exception ebwfw) {
                 ebwfw.printStackTrace();
             }
         }
 
+    }
 
 
 
