@@ -39,12 +39,12 @@ import java.util.ArrayList;
 
 public class Consumable {
 
-    private final int IDConsumable;
+    private int IDConsumable;
     private static int increaseID = 0;
-    private final String name;
-    private final String description;
+    private String name;
+    private String description;
     private double price;
-    private final ArrayList<EnumAllergies> allergies;
+    private ArrayList<EnumAllergies> allergies;
 
     public Consumable(){  //Constructor without parameters
 
