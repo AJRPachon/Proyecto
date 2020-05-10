@@ -35,6 +35,23 @@ public class FilesManagement {
         file = new File(".\\src\\Files\\Employees");
         checkFileEmployee(file);
 
+        file = new File(".\\src\\Files\\tmp\\Consumables");
+        checkFile(file);
+        file = new File(".\\src\\Files\\tmp\\Drinks");
+        checkFile(file);
+        file = new File(".\\src\\Files\\tmp\\Foods");
+        checkFile(file);
+        file = new File(".\\src\\Files\\tmp\\Orders");
+        checkFile(file);
+        file = new File(".\\src\\Files\\tmp\\Payslips");
+        checkFile(file);
+        file = new File(".\\src\\Files\\tmp\\Receipts");
+        checkFile(file);
+        file = new File(".\\src\\Files\\tmp\\Schedules");
+        checkFile(file);
+        file = new File(".\\src\\Files\\tmp\\Employees");
+        checkFile(file);
+
     }
 
     /**
