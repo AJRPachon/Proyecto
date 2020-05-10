@@ -61,51 +61,56 @@ public class Main {
                 switch (permisons) {
                     case "Administrator":
                         //optionOfAdministrator
-                        optionPermisons = VD.readAndValidateOptionsAdministrator();
-                        switch (optionPermisons){
-                            case 0:
-                                System.out.println("Session closed.");
-                            break;
-                            case 1:
-                                System.out.println("Dar de alta a empleado");
-                            break;
-                            case 2:
-                                System.out.println("Dar de baja a empleado");
-                            break;
-                            case 3:
-                                System.out.println("Asignar horario a empleado");
-                            break;
-                            case 4:
-                                System.out.println("Modificar horario de empleado");
-                            break;
-                            case 5:
-                                System.out.println("Modificar sueldo empleado");
-                            break;
-                            case 6:
-                                System.out.println("Ver datos personales del empleado");
-                            break;
-                            case 7:
-                                System.out.println("Ver datos personales del floor manager");
-                            break;
-                            case 8:
-                                newOrder= OM.readAndValidateNewOrder();
-                                if (!OM.insertOrder(newOrder)){
-                                    System.out.println("The new order wasn't added");
-                                }
-                            break;
-                            case 9:
-                                System.out.println("Modificar pedido");
-                            break;
-                            case 10:
-                                System.out.println("Cancelar pedido");
-                            break;
-                            case 11:
-                                System.out.println("Ver datos personales administrador");
-                            break;
-                            case 12:
-                                System.out.println("Consultar sus horarios");
-                            break;
-                        }
+
+                        do {
+                            optionPermisons = VD.readAndValidateOptionsAdministrator();
+
+                            switch (optionPermisons) {
+                                case 0:
+                                    System.out.println("Closed session.");
+                                    break;
+                                case 1:
+                                    System.out.println("Dar de alta a empleado");
+                                    break;
+                                case 2:
+                                    System.out.println("Dar de baja a empleado");
+                                    break;
+                                case 3:
+                                    System.out.println("Asignar horario a empleado");
+                                    break;
+                                case 4:
+                                    System.out.println("Modificar horario de empleado");
+                                    break;
+                                case 5:
+                                    System.out.println("Modificar sueldo empleado");
+                                    break;
+                                case 6:
+                                    System.out.println("Ver datos personales del empleado");
+                                    break;
+                                case 7:
+                                    System.out.println("Ver datos personales del floor manager");
+                                    break;
+                                case 8:
+                                    newOrder = OM.readAndValidateNewOrder();
+                                    if (!OM.insertOrder(newOrder)) {
+                                        System.out.println("The new order wasn't added");
+                                    }
+                                    break;
+                                case 9:
+                                    System.out.println("Modificar pedido");
+                                    break;
+                                case 10:
+                                    System.out.println("Cancelar pedido");
+                                    break;
+                                case 11:
+                                    System.out.println("Ver datos personales administrador");
+                                    break;
+                                case 12:
+                                    System.out.println("Consultar sus horarios");
+                                    break;
+                            }
+
+                        }while (optionPermisons != 0) ;
 
                     break;
 
