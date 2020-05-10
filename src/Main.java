@@ -56,15 +56,37 @@ public class Main {
                 switch (permisons) {
                     case "Administrator":
                         //optionOfAdministrator
-                        break;
+                        System.out.println("Dar de alta a empleado");
+                        System.out.println("Dar de baja a empleado");
+                        System.out.println("Asignar horario a empleado");
+                        System.out.println("Modificar horario de empleado");
+                        System.out.println("Modificar sueldo empleado");
+                        System.out.println("Ver datos personales del empleado");
+                        System.out.println("Ver datos personales del floor manager");
+                        System.out.println("Realizar pedidos");
+                        System.out.println("Modificar pedido");
+                        System.out.println("Cancelar pedido");
+                        System.out.println("Ver datos personales administrador");
+                        System.out.println("Consultar sus horarios");
+                        System.out.println("Cerrar sesion");
+                    break;
 
                     case "FloorManager":
                         //optionOfFloorManager
-                        break;
+                        System.out.println("Ver datos personales del empleado");
+                        System.out.println("Asignar horario a empleado");
+                        System.out.println("Modificar horario de empleado");
+                        System.out.println("Ver datos personales floor manager");
+                        System.out.println("Consultar sus horarios");
+                        System.out.println("Cerrar sesion");
+                    break;
 
                     case "Staff":
                         //optionOfStaff
-                        break;
+                        System.out.println("Ver datos personales del empleado");
+                        System.out.println("Consultar sus horarios");
+                        System.out.println("Cerrar sesion");
+                    break;
                 }
             }else{
                 System.out.println("Error to LogIn, please retry");
