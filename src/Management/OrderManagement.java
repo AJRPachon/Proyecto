@@ -34,4 +34,10 @@ public class OrderManagement {
     }
 
 
+    public Order readAndValidateNewOrder(){
+        Order newOrder = null;
+        return newOrder;
+    }
+
+
 }
