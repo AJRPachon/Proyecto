@@ -121,4 +121,18 @@ public class Validations {
         return password;
     }
 
+    /**
+     * @return
+     */
+
+    public int readAndValidateOptionsAdministrator(){
+        int option = 0;
+        return option;
+    }
+
+    public int readAndValidateOptionsFloorManager(){
+        int option = 0;
+        return option;
+    }
+
 }
