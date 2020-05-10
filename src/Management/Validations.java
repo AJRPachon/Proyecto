@@ -126,7 +126,28 @@ public class Validations {
      */
 
     public int readAndValidateOptionsAdministrator(){
-        int option = 0;
+        int option;
+        Scanner sc = new Scanner(System.in);
+        do {
+            System.out.println("0.- Sign off");
+            System.out.println("1.- Register employee");
+            System.out.println("2.- Dismiss an employee");
+            System.out.println("3.- Assign schedule to employee");
+            System.out.println("4.- Modify employee schedule");
+            System.out.println("5.- Modify employee salary");
+            System.out.println("6.- See personal data of the employee");
+            System.out.println("7.- See personal data of the floor manager");
+            System.out.println("8.- Add new order");
+            System.out.println("9.- Modify order");
+            System.out.println("10.- Cancel order");
+            System.out.println("11.- View personal data administrator");
+            System.out.println("12.- Check your hours");
+            System.out.print("Insert option: ");
+            option = sc.nextInt();
+            if (option < 0 || option > 12){
+                System.out.println("Insert a valid option");
+            }
+        }while (option < 0 || option > 12);
         return option;
     }
 
