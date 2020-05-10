@@ -27,8 +27,10 @@
  *
  */
 
+import BasicsClasses.Orders.Order;
 import Management.EmployeeManagement;
 import Management.FilesManagement;
+import Management.OrderManagement;
 import Management.Validations;
 
 import java.util.Scanner;
@@ -40,10 +42,13 @@ public class Main {
         FilesManagement FM = new FilesManagement();
         EmployeeManagement EM = new EmployeeManagement();
         Validations VD = new Validations();
+        OrderManagement OM = new OrderManagement();
 
         FM.checkFiles();
         String username, password;
-        String permisons = null;
+        String permisons;
+        Order newOrder;
+        int optionPermisons;
 
         do {
 
@@ -56,36 +61,97 @@ public class Main {
                 switch (permisons) {
                     case "Administrator":
                         //optionOfAdministrator
-                        System.out.println("Dar de alta a empleado");
-                        System.out.println("Dar de baja a empleado");
-                        System.out.println("Asignar horario a empleado");
-                        System.out.println("Modificar horario de empleado");
-                        System.out.println("Modificar sueldo empleado");
-                        System.out.println("Ver datos personales del empleado");
-                        System.out.println("Ver datos personales del floor manager");
-                        System.out.println("Realizar pedidos");
-                        System.out.println("Modificar pedido");
-                        System.out.println("Cancelar pedido");
-                        System.out.println("Ver datos personales administrador");
-                        System.out.println("Consultar sus horarios");
-                        System.out.println("Cerrar sesion");
+                        optionPermisons = VD.readAndValidateOptionsAdministrator();
+                        switch (optionPermisons){
+                            case 0:
+                                System.out.println("Session closed.");
+                            break;
+                            case 1:
+                                System.out.println("Dar de alta a empleado");
+                            break;
+                            case 2:
+                                System.out.println("Dar de baja a empleado");
+                            break;
+                            case 3:
+                                System.out.println("Asignar horario a empleado");
+                            break;
+                            case 4:
+                                System.out.println("Modificar horario de empleado");
+                            break;
+                            case 5:
+                                System.out.println("Modificar sueldo empleado");
+                            break;
+                            case 6:
+                                System.out.println("Ver datos personales del empleado");
+                            break;
+                            case 7:
+                                System.out.println("Ver datos personales del floor manager");
+                            break;
+                            case 8:
+                                newOrder= OM.readAndValidateNewOrder();
+                                if (!OM.insertOrder(newOrder)){
+                                    System.out.println("The new order wasn't added");
+                                }
+                            break;
+                            case 9:
+                                System.out.println("Modificar pedido");
+                            break;
+                            case 10:
+                                System.out.println("Cancelar pedido");
+                            break;
+                            case 11:
+                                System.out.println("Ver datos personales administrador");
+                            break;
+                            case 12:
+                                System.out.println("Consultar sus horarios");
+                            break;
+                        }
+
                     break;
 
                     case "FloorManager":
                         //optionOfFloorManager
-                        System.out.println("Ver datos personales del empleado");
-                        System.out.println("Asignar horario a empleado");
-                        System.out.println("Modificar horario de empleado");
-                        System.out.println("Ver datos personales floor manager");
-                        System.out.println("Consultar sus horarios");
-                        System.out.println("Cerrar sesion");
+
+                        optionPermisons = VD.readAndValidateOptionsFloorManager();
+                        switch (optionPermisons){
+                            case 0:
+                                System.out.println("Session closed.");
+                            break;
+                            case 1:
+                                System.out.println("Ver datos personales del empleado");
+                            break;
+                            case 2:
+                                System.out.println("Asignar horario a empleado");
+                            break;
+                            case 3:
+                                System.out.println("Modificar horario de empleado");
+                            break;
+                            case 4:
+                                System.out.println("Ver datos personales floor manager");
+                            break;
+                            case 5:
+                                System.out.println("Consultar sus horarios");
+                            break;
+                        }
+
                     break;
 
                     case "Staff":
                         //optionOfStaff
-                        System.out.println("Ver datos personales del empleado");
-                        System.out.println("Consultar sus horarios");
-                        System.out.println("Cerrar sesion");
+
+                        optionPermisons = VD.readAndValidateOptionsFloorManager();
+                        switch (optionPermisons){
+                            case 0:
+                                System.out.println("Session closed.");
+                            break;
+                            case 1:
+                                System.out.println("Ver datos personales del empleado");
+                            break;
+                            case 2:
+                                System.out.println("Consultar sus horarios");
+                            break;
+                        }
+
                     break;
                 }
             }else{
