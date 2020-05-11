@@ -35,6 +35,23 @@ public class FilesManagement {
         file = new File(".\\src\\Files\\Employees");
         checkFileEmployee(file);
 
+        file = new File(".\\src\\Files\\tmp\\Consumables");
+        checkFile(file);
+        file = new File(".\\src\\Files\\tmp\\Drinks");
+        checkFile(file);
+        file = new File(".\\src\\Files\\tmp\\Foods");
+        checkFile(file);
+        file = new File(".\\src\\Files\\tmp\\Orders");
+        checkFile(file);
+        file = new File(".\\src\\Files\\tmp\\Payslips");
+        checkFile(file);
+        file = new File(".\\src\\Files\\tmp\\Receipts");
+        checkFile(file);
+        file = new File(".\\src\\Files\\tmp\\Schedules");
+        checkFile(file);
+        file = new File(".\\src\\Files\\tmp\\Employees");
+        checkFile(file);
+
     }
 
     /**
@@ -64,7 +81,7 @@ public class FilesManagement {
             try {
                 file.createNewFile();
                 BW = new BufferedWriter(new FileWriter(file));  //TODO Encript password
-                BW.write(new Employee("Administrator","Administrator","00000000T","281234567840",new GregorianCalendar(),EnumPosition.Manager,EnumCategory.Administrator,"ES3231906288456991923866","ddd5eb54dadbb801a09aa5170937f46b").toString());
+                BW.write(new Employee("Administrator","Administrator","00000000T","281234567840",new GregorianCalendar(),EnumPosition.Manager,EnumCategory.Administrator,"ES3231906288456991923866","e807f1fcf82d132f9bb018ca6738a19f").toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }

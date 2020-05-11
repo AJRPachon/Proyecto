@@ -30,7 +30,7 @@ public class EmployeeManagement {
             BR = new BufferedReader(new FileReader(".\\src\\Files\\Employees"));
             line = BR.readLine();
             while (line != null && category == null){
-                lineDivide = line.split("&");
+                lineDivide = line.split("#");
                 if (lineDivide[2].equals(username) && lineDivide[8].equals(password)){
                     category = lineDivide[6];
                 }
