@@ -52,7 +52,7 @@ public class Schedule {
     private EnumWeekDays weekDay;
     private GregorianCalendar startDate;
     private GregorianCalendar endDate;
-    private final Employee employee;
+    private Employee employee;
 
     public Schedule(){ //Constructor without parameters
 

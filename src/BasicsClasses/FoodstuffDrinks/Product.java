@@ -37,10 +37,10 @@ package BasicsClasses.FoodstuffDrinks;
 
 public class Product {
 
-    private final int IDProduct;
+    private int IDProduct;
     private static int increaseID = 0;
-    private final String name;
-    private final String characteristics;
+    private String name;
+    private String characteristics;
     private double price;
 
 

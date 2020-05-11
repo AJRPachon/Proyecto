@@ -82,16 +82,16 @@ import java.util.GregorianCalendar;
 public class Employee {
 
 
-    private final String name;
-    private final String surname;
-    private final String dNI;
-    private final String nAF;
-    private final GregorianCalendar birthday;
+    private String name;
+    private String surname;
+    private String dNI;
+    private String nAF;
+    private GregorianCalendar birthday;
     private EnumPosition position;
     private EnumCategory category;
     private String bankAccountN;
     private String password;
-    private final Schedule[] schedule;
+    private Schedule[] schedule;
 
 
     public Employee(){ //Constructor without parameters
