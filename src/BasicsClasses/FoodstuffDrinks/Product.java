@@ -35,7 +35,7 @@ package BasicsClasses.FoodstuffDrinks;
 
  */
 
-public class Product {
+public class Product implements Cloneable{
 
     private int IDProduct;
     private static int increaseID = 0;
@@ -53,10 +53,18 @@ public class Product {
 
     }
 
-
     public Product(String name, String characteristics, double price){  //Constructor with parameters
 
         this.IDProduct = ++increaseID;
+        this.name = name;
+        this.characteristics = characteristics;
+        this.price = price;
+
+    }
+
+    public Product(int ID, String name, String characteristics, double price){  //Constructor with parameters
+
+        this.IDProduct = ID;
         this.name = name;
         this.characteristics = characteristics;
         this.price = price;
