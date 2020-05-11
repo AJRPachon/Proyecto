@@ -144,11 +144,18 @@ public class Order implements IOrder,Cloneable,Comparable {
 
     @Override
     public String toString(){
-        String string = "";
-        for (OrderLine orderLine : this.ordersLines){
-            string+=orderLine.toString()+",";
+        String string = "%";
+
+        for (int i = 0;i < this.ordersLines.size();i++){
+
+            if (i+1 == this.ordersLines.size()){
+                string+=this.ordersLines.get(i).toString();
+            }else{
+                string+=this.ordersLines.get(i).toString()+"$";
+            }
+
         }
-        string+="#"+dateOrder.get(Calendar.DAY_OF_MONTH)+"/"+(dateOrder.get(Calendar.MONTH)+1)+"/"+dateOrder.get(Calendar.YEAR);
+        string+="%#"+dateOrder.get(Calendar.DAY_OF_MONTH)+"/"+(dateOrder.get(Calendar.MONTH)+1)+"/"+dateOrder.get(Calendar.YEAR);
         return string;
     }
 
