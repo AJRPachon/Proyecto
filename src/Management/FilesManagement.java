@@ -97,7 +97,33 @@ public class FilesManagement {
     }
 
 
+
     /**
+     * @return
+     */
+
+    public Product readAndSearchProduct(){
+        Scanner sc = new Scanner(System.in);
+        ProductsManagement PM = new ProductsManagement();
+
+        int ID;
+        String pathProductFile = ".\\src\\Files\\Products";
+        Product productGet;
+
+        //Validate Product
+        do {
+            System.out.print("Insert IDProduct: ");
+            ID = sc.nextInt();
+            productGet = getProductFromFile(ID,pathProductFile);
+            if (productGet == null){
+                System.out.println("This product don't exist. Please insert a product existing");
+            }
+        }while (productGet == null);
+
+        return productGet;
+
+    }
+
 
     /**
      * @param ID
