@@ -135,13 +135,13 @@ public class Validations {
             System.out.println("3.- Assign schedule to employee");
             System.out.println("4.- Modify employee schedule");
             System.out.println("5.- Modify employee salary");
-            System.out.println("6.- See personal data of the employee");
+            System.out.println("6.- See personal data of the one employee");
             System.out.println("7.- See personal data of the floor manager");
             System.out.println("8.- Add new order");
             System.out.println("9.- Modify order");
             System.out.println("10.- Cancel order");
-            System.out.println("11.- View personal data administrator");
-            System.out.println("12.- Check your hours");
+            System.out.println("11.- See my personal data");
+            System.out.println("12.- Check your schedule");
             System.out.print("Insert option: ");
             option = sc.nextInt();
             if (option < 0 || option > 12){
@@ -151,8 +151,46 @@ public class Validations {
         return option;
     }
 
+    /**
+     * @return
+     */
+
     public int readAndValidateOptionsFloorManager(){
-        int option = 0;
+        int option;
+        Scanner sc = new Scanner(System.in);
+        do {
+            System.out.println("0.- Sign off");
+            System.out.println("1.- See personal data of the one employee");
+            System.out.println("2.- Assign schedule to employee");
+            System.out.println("3.- Modify employee schedule");
+            System.out.println("4.- See my personal data");
+            System.out.println("5.- Check your schedule");
+            System.out.print("Insert option: ");
+            option = sc.nextInt();
+            if (option < 0 || option > 5){
+                System.out.println("Insert a valid option");
+            }
+        }while (option < 0 || option > 5);
+        return option;
+    }
+
+    /**
+     * @return
+     */
+
+    public int readAndValidateOptionsStaff(){
+        int option;
+        Scanner sc = new Scanner(System.in);
+        do {
+            System.out.println("0.- Sign off");
+            System.out.println("1.- See my personal data");
+            System.out.println("2.- Check your schedule");
+            System.out.print("Insert option: ");
+            option = sc.nextInt();
+            if (option < 0 || option > 2){
+                System.out.println("Insert a valid option");
+            }
+        }while (option < 0 || option > 2);
         return option;
     }
 
