@@ -16,7 +16,7 @@ public class OrderManagement {
         boolean orderInserted = false;
         FileWriter FW = null;
         try {
-            FW = new FileWriter(".\\src\\Files\\tmp\\Orders",true);
+            FW = new FileWriter(".\\src\\Files\\tmp\\OrdersTemp",true);
             FW.write(order.toString());
             FW.flush();
             orderInserted = true;

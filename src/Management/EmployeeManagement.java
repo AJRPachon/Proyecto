@@ -24,7 +24,7 @@ public class EmployeeManagement {
         String[] lineDivide;
 
         try {
-            BR = new BufferedReader(new FileReader(".\\src\\Files\\Employees"));
+            BR = new BufferedReader(new FileReader(".\\src\\Files\\EmployeesTemp"));
             line = BR.readLine();
             while (line != null && category == null){
                 lineDivide = line.split("#");

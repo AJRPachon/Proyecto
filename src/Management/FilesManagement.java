@@ -17,39 +17,39 @@ public class FilesManagement {
 
         File file;
 
-        file = new File(".\\src\\Files\\Consumables");
+        file = new File(".\\src\\Files\\ConsumablesTemp");
         checkFile(file);
-        file = new File(".\\src\\Files\\Drinks");
+        file = new File(".\\src\\Files\\DrinksTemp");
         checkFile(file);
-        file = new File(".\\src\\Files\\Foods");
+        file = new File(".\\src\\Files\\FoodsTemp");
         checkFile(file);
-        file = new File(".\\src\\Files\\Orders");
+        file = new File(".\\src\\Files\\OrdersTemp");
         checkFile(file);
-        file = new File(".\\src\\Files\\Payslips");
+        file = new File(".\\src\\Files\\PayslipsTemp");
         checkFile(file);
-        file = new File(".\\src\\Files\\Receipts");
+        file = new File(".\\src\\Files\\ReceiptsTemp");
         checkFile(file);
-        file = new File(".\\src\\Files\\Schedules");
+        file = new File(".\\src\\Files\\SchedulesTemp");
         checkFile(file);
 
-        file = new File(".\\src\\Files\\Employees");
+        file = new File(".\\src\\Files\\EmployeesTemp");
         checkFileEmployee(file);
 
-        file = new File(".\\src\\Files\\tmp\\Consumables");
+        file = new File(".\\src\\Files\\tmp\\ConsumablesTemp");
         checkFile(file);
-        file = new File(".\\src\\Files\\tmp\\Drinks");
+        file = new File(".\\src\\Files\\tmp\\DrinksTemp");
         checkFile(file);
-        file = new File(".\\src\\Files\\tmp\\Foods");
+        file = new File(".\\src\\Files\\tmp\\FoodsTemp");
         checkFile(file);
-        file = new File(".\\src\\Files\\tmp\\Orders");
+        file = new File(".\\src\\Files\\tmp\\OrdersTemp");
         checkFile(file);
-        file = new File(".\\src\\Files\\tmp\\Payslips");
+        file = new File(".\\src\\Files\\tmp\\PayslipsTemp");
         checkFile(file);
-        file = new File(".\\src\\Files\\tmp\\Receipts");
+        file = new File(".\\src\\Files\\tmp\\ReceiptsTemp");
         checkFile(file);
-        file = new File(".\\src\\Files\\tmp\\Schedules");
+        file = new File(".\\src\\Files\\tmp\\SchedulesTemp");
         checkFile(file);
-        file = new File(".\\src\\Files\\tmp\\Employees");
+        file = new File(".\\src\\Files\\tmp\\EmployeesTemp");
         checkFile(file);
 
     }
