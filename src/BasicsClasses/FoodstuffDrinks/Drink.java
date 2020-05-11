@@ -31,8 +31,8 @@ import java.util.ArrayList;
 
 public class Drink extends Consumable {
 
-    private final double proof;
-    private final boolean sparkling;
+    private double proof;
+    private boolean sparkling;
 
     public Drink(){  //Constructor without parameters
 

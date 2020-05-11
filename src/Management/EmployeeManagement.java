@@ -1,5 +1,8 @@
 package Management;
 
+import BasicsClasses.Employee.Employee;
+import BasicsClasses.Employee.Payslip;
+
 import java.io.*;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
@@ -48,6 +51,8 @@ public class EmployeeManagement {
         return category;
     }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     /**
      * @param password
      * @return
@@ -68,6 +73,31 @@ public class EmployeeManagement {
         }
 
         return passEncripted;
+    }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * This method modifies the employee's salary
+     *
+     * @param salary
+     */
+
+    public void modifySalary(double salary){
+
+        Payslip payslip = new Payslip();
+
+        payslip.setSalary(salary);
+
+    }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void CollectEmployeeData(){
+
+
+
+
     }
 
 
