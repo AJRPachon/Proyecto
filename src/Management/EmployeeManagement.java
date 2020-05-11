@@ -19,7 +19,7 @@ public class EmployeeManagement {
      * @return Return the permisons of this employee. If the username not exist or the password are wrong, return null.
      */
 
-    public String getPermisons(String username, String password){
+    public String getPermisons(String username, String password, String path){
 
         String category = null;
         BufferedReader BR = null;
@@ -27,7 +27,7 @@ public class EmployeeManagement {
         String[] lineDivide;
 
         try {
-            BR = new BufferedReader(new FileReader(".\\src\\Files\\EmployeesTemp"));
+            BR = new BufferedReader(new FileReader(path));
             line = BR.readLine();
             while (line != null && category == null){
                 lineDivide = line.split("#");
