@@ -5,7 +5,11 @@ import BasicsClasses.Employee.Enums.EnumCategory;
 import BasicsClasses.Employee.Enums.EnumPosition;
 import java.io.*;
 import BasicsClasses.Employee.Enums.EnumWeekDays;
+import BasicsClasses.FoodstuffDrinks.Product;
+import BasicsClasses.Orders.Order;
+
 import java.util.GregorianCalendar;
+import java.util.Scanner;
 
 public class FilesManagement {
 
@@ -17,22 +21,24 @@ public class FilesManagement {
 
         File file;
 
-        file = new File(".\\src\\Files\\ConsumablesTemp");
+        file = new File(".\\src\\Files\\Consumables");
         checkFile(file);
-        file = new File(".\\src\\Files\\DrinksTemp");
+        file = new File(".\\src\\Files\\Drinks");
         checkFile(file);
-        file = new File(".\\src\\Files\\FoodsTemp");
+        file = new File(".\\src\\Files\\Foods");
         checkFile(file);
-        file = new File(".\\src\\Files\\OrdersTemp");
+        file = new File(".\\src\\Files\\Orders");
         checkFile(file);
-        file = new File(".\\src\\Files\\PayslipsTemp");
+        file = new File(".\\src\\Files\\Payslips");
         checkFile(file);
-        file = new File(".\\src\\Files\\ReceiptsTemp");
+        file = new File(".\\src\\Files\\Receipts");
         checkFile(file);
-        file = new File(".\\src\\Files\\SchedulesTemp");
+        file = new File(".\\src\\Files\\Schedules");
+        checkFile(file);
+        file = new File(".\\src\\Files\\Products");
         checkFile(file);
 
-        file = new File(".\\src\\Files\\EmployeesTemp");
+        file = new File(".\\src\\Files\\Employees");
         checkFileEmployee(file);
 
         file = new File(".\\src\\Files\\tmp\\ConsumablesTemp");
@@ -50,6 +56,8 @@ public class FilesManagement {
         file = new File(".\\src\\Files\\tmp\\SchedulesTemp");
         checkFile(file);
         file = new File(".\\src\\Files\\tmp\\EmployeesTemp");
+        checkFile(file);
+        file = new File(".\\src\\Files\\tmp\\ProductsTemp");
         checkFile(file);
 
     }
@@ -97,6 +105,33 @@ public class FilesManagement {
     }
 
 
+    /**
+     * @param object
+     * @param path
+     * @param <T>
+     * @return
+     */
+
+    public <T> boolean insertObjectInFile(T object, String path){
+        boolean orderInserted = false;
+        FileWriter FW = null;
+        try {
+            FW = new FileWriter(path,true);
+            FW.write(object.toString()+"\n");
+            FW.flush();
+            orderInserted = true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                FW.close();
+            }catch (IOException|NullPointerException error){
+                error.printStackTrace();
+            }
+        }
+        return orderInserted;
+    }
 
     /**
      * @return
