@@ -97,5 +97,39 @@ public class FilesManagement {
     }
 
 
+    /**
+
+    /**
+     * @param ID
+     * @param path
+     * @return
+     */
+
+
+    public Product getProductFromFile(int ID, String path){
+        Product newProduct = null;
+        BufferedReader BR;
+        String[] lineParted;
+        String line;
+
+        try {
+            BR = new BufferedReader(new FileReader(path));
+            line = BR.readLine();
+            while (line != null && newProduct == null){
+                lineParted = line.split("#");
+                if (Integer.parseInt(lineParted[0]) == ID){
+                    newProduct = new Product(Integer.parseInt(lineParted[0]),lineParted[1],lineParted[2],Double.parseDouble(lineParted[3]));
+                }
+                line = BR.readLine();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return newProduct;
+    }
+
+
 
 }
