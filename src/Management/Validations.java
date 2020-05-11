@@ -156,4 +156,25 @@ public class Validations {
         return option;
     }
 
+
+    /**
+     * @return
+     */
+
+    public int readAndValidateQuantityOfProduct(){
+        int quantity;
+        Scanner sc = new Scanner(System.in);
+
+        //Validate quantity product
+        do {
+            System.out.print("Insert quantity of product: ");
+            quantity = sc.nextInt();
+        }while (quantity < 1);
+        System.out.println();
+
+        return quantity;
+    }
+
+
+
 }
