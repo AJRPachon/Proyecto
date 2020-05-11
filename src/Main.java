@@ -33,7 +33,6 @@ import Management.FilesManagement;
 import Management.OrderManagement;
 import Management.Validations;
 
-import java.util.Scanner;
 
 public class Main {
 
@@ -45,17 +44,20 @@ public class Main {
         OrderManagement OM = new OrderManagement();
 
         FM.checkFiles();
-        String username, password;
-        String permisons;
+        String username, password, permisons;
+        String pathFileEmployee = ".\\src\\Files\\Employees", pathFileOrdersTemp = ".\\src\\Files\\tmp\\OrdersTemp";
         Order newOrder;
         int optionPermisons;
 
         do {
 
-            username = VD.readAndValidateUsername();
-            password = VD.readAndValidatePassword();
+            //username = VD.readAndValidateUsername();
+            //password = VD.readAndValidatePassword();
 
-            permisons = EM.getPermisons(username, password);
+            username = "00000000T";
+            password = "e807f1fcf82d132f9bb018ca6738a19f";
+
+            permisons = EM.getPermisons(username, password, pathFileEmployee);
 
             if (permisons != null){
                 switch (permisons) {
@@ -92,7 +94,7 @@ public class Main {
                                     break;
                                 case 8:
                                     newOrder = OM.readAndValidateNewOrder();
-                                    if (!OM.insertOrder(newOrder)) {
+                                    if (!FM.insertObjectInFile(newOrder,pathFileOrdersTemp)) {
                                         System.out.println("The new order wasn't added");
                                     }
                                     break;
@@ -144,7 +146,7 @@ public class Main {
                     case "Staff":
                         //optionOfStaff
 
-                        optionPermisons = VD.readAndValidateOptionsFloorManager();
+                        optionPermisons = VD.readAndValidateOptionsStaff();
                         switch (optionPermisons){
                             case 0:
                                 System.out.println("Session closed.");
