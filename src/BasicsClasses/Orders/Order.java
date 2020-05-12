@@ -3,23 +3,30 @@ package BasicsClasses.Orders;
 /*
  * Properties:
  *  - Basics:
- *      > IDProduct: integer, Consulting, Modifiable
- *      > amountProduct: integer, Consulting, Modifiable
+ *      > orderID: integer, Consultable
+ *      > OrdersLines: listOfOrdersLines, Consulting, Modifiable
  *      > dateOrder: date, Consulting, Modifiable
+ *      > sent: boolean, Consulting, Modifiable
+ *      > cancel: boolean, Consulting, Modifiable
  *
  *  - Derivatives:
- *      > None
+ *      > totalIDOrders: integer
  *
  *  - Shared:
  *      > None
  *
  * Methods:
  *  - Basics:
- *      > integer getIDProduct()
- *      > none setIDProduct(integer IDProduct)
+ *      > integer getOrderID();
  *
- *      > integer getAmountProduct()
- *      > none setAmountProduct(integer amountProduct)
+ *      > listOfOrdersLines getOrdersLines();
+ *          > OrderLine getOrderLine(int IDProduct);
+ *          > OrderLine getOrderLineIndex(int index);
+ *      > void setOrdersLines(listOfOrdersLines OrdersLines);
+ *          > none setOrderLineIndex(int index, OrderLine orderLine);
+ *          > none addOrderLine(OrderLine orderLine);
+ *          > none increaseAmountProduct(int IDProduct, int amountToIncrease);
+ *          > none decreaseAmountProduct(int IDProduct, int amountToDecrease);
  *
  *      > date getDateOrder();
  *          > integer getDayOfDateOrder();
@@ -30,40 +37,66 @@ package BasicsClasses.Orders;
  *          > none setMonthOfDateOrder(integer month);
  *          > none setYearOfDateOrder(integer year);
  *
+ *      > none markSent();
+ *      > none markNotSent();
+ *
+ *      > boolean getSent();
+ *
+ *      > none markCancel();
+ *      > none markNotCancel();
+ *
+ *      > boolean getCancel();
+ *
  *  - Added:
- *      > None
+ *      > boolean insertInitID(String pathFile);
  *
  */
 
 import BasicsClasses.Interfaces.IOrder;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Order implements IOrder,Cloneable,Comparable {
 
+    private static int totalIDOrders = 0;
+    private final int orderID;
     private ArrayList<OrderLine> ordersLines;
     private GregorianCalendar dateOrder;
+    private boolean sent;
+    private boolean cancel;
 
     public Order(){
+        this.orderID = ++totalIDOrders;
         ordersLines = new ArrayList<>();
         dateOrder = new GregorianCalendar();
     }
 
     public Order(ArrayList<OrderLine> ordersLines, GregorianCalendar dateOrder) {
+        this.orderID = ++totalIDOrders;
         this.ordersLines = (ArrayList<OrderLine>)ordersLines.clone();
         this.dateOrder = (GregorianCalendar)dateOrder.clone();
     }
 
     public Order(GregorianCalendar dateOrder) {
+        this.orderID = ++totalIDOrders;
         ordersLines = new ArrayList<>();
         this.dateOrder = (GregorianCalendar)dateOrder.clone();
     }
 
     public Order(Order other) {
+        this.orderID = ++totalIDOrders;
         ordersLines = (ArrayList<OrderLine>)other.ordersLines.clone();
         this.dateOrder = (GregorianCalendar)other.dateOrder.clone();
+    }
+
+    public int getID(){
+        return this.orderID;
     }
 
     public ArrayList<OrderLine> getOrdersLines() {
@@ -142,6 +175,29 @@ public class Order implements IOrder,Cloneable,Comparable {
         dateOrder.set(Calendar.YEAR,year);
     }
 
+    public void markSent(){
+        this.sent = true;
+    }
+
+    public void markNotSent(){
+        this.sent = false;
+    }
+
+    public boolean getSent() {
+        return this.sent;
+    }
+
+    public void markCancel(){
+        this.cancel = true;
+    }
+
+    public void markNotCancel(){
+        this.cancel = false;
+    }
+
+    public boolean getCancel() {
+        return this.cancel;
+    }
     @Override
     public String toString(){
         String string = "%";
