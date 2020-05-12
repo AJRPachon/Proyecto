@@ -100,6 +100,28 @@ public class Main {
                                     break;
                                 case 9:
                                     System.out.println("Modificar pedido");
+                                    //mostrar pedidos sin enviar
+                                    //leer y validar el ID del pedido introducido
+                                    //Mostrar opciones modificar pedido
+                                    //Repetir
+                                        //segun (opcion del pedido)
+                                            //caso 1 (añadir producto)
+                                                //leer y validar linea de pedido
+                                                //añadir linea
+                                            //caso 2 (eliminar producto)
+                                                //mostrar productos en la lista
+                                                //eliminar linea de pedido
+                                            //caso 3 (disminuir cantidad producto)
+                                                //mostrar productos en la lista
+                                                //leer y validar cantidad a disminuir
+                                                //dismiuir cantidad
+                                            //caso 4 (disminuir cantidad producto)
+                                                //mostrar productos en la lista
+                                                //leer y validar cantidad a aumentar
+                                                //aumentar cantidad
+                                        //finSegun
+                                        //Mostrar opciones modificar pedido
+                                    //mientras (opcion modificar distinta de 0)
                                     break;
                                 case 10:
                                     System.out.println("Cancelar pedido");
