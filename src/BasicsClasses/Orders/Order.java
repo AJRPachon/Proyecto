@@ -123,8 +123,8 @@ public class Order implements IOrder,Cloneable,Comparable {
         ordersLines.set(index, orderLine.clone());
     }
 
-    public void addOrderLine(OrderLine orderLine) {
-        ordersLines.add(orderLine.clone());
+    public void addOrderLine(OrderLine orderLine) {     //TODO Comprobar que no exista ningun producto añadido del tipo de la linea a añadir
+        ordersLines.add(orderLine.clone());             //TODO Si hubiera un producto añadido de ese tipo, aumentar la cantidad de esa linea
     }
 
     public void increaseAmountProduct(int IDProduct, int amountToIncrease) {
