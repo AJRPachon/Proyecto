@@ -198,6 +198,31 @@ public class Order implements IOrder,Cloneable,Comparable {
     public boolean getCancel() {
         return this.cancel;
     }
+
+    public static boolean insertInitID(String pathFile){
+        boolean valueChanged = false;
+        int oldID;
+        if (totalIDOrders == 0){
+            BufferedReader BR = null;
+            try {
+                BR = new BufferedReader(new FileReader(pathFile));
+                oldID = Integer.parseInt(BR.readLine());
+                totalIDOrders = oldID;
+                valueChanged = true;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            finally {
+                try {
+                    BR.close();
+                }catch (IOException|NullPointerException error){
+                    error.printStackTrace();
+                }
+            }
+        }
+        return valueChanged;
+    }
+
     @Override
     public String toString(){
         String string = "%";
