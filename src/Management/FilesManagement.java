@@ -139,7 +139,6 @@ public class FilesManagement {
 
     public Product readAndSearchProduct(){
         Scanner sc = new Scanner(System.in);
-        ProductsManagement PM = new ProductsManagement();
 
         int ID;
         String pathProductFile = ".\\src\\Files\\Products";
