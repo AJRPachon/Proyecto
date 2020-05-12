@@ -4,9 +4,7 @@ import BasicsClasses.Employee.Employee;
 import BasicsClasses.Employee.Enums.EnumCategory;
 import BasicsClasses.Employee.Enums.EnumPosition;
 import java.io.*;
-import BasicsClasses.Employee.Enums.EnumWeekDays;
 import BasicsClasses.FoodstuffDrinks.Product;
-import BasicsClasses.Orders.Order;
 
 import java.util.GregorianCalendar;
 import java.util.Scanner;
@@ -88,7 +86,7 @@ public class FilesManagement {
             BufferedWriter BW = null;
             try {
                 file.createNewFile();
-                BW = new BufferedWriter(new FileWriter(file));  //TODO Encript password
+                BW = new BufferedWriter(new FileWriter(file));
                 BW.write(new Employee("Administrator","Administrator","00000000T","281234567840",new GregorianCalendar(),EnumPosition.Manager,EnumCategory.Administrator,"ES3231906288456991923866","e807f1fcf82d132f9bb018ca6738a19f").toString());
             } catch (IOException e) {
                 e.printStackTrace();
@@ -103,7 +101,6 @@ public class FilesManagement {
 
         }
     }
-
 
     /**
      * @param object
