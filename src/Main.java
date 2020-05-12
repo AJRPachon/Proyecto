@@ -125,6 +125,9 @@ public class Main {
                                     break;
                                 case 10:
                                     System.out.println("Cancelar pedido");
+                                    //mostrar pedidos sin enviar
+                                    //leer y validar el ID del pedido introducido
+                                    //cancelar pedido
                                     break;
                                 case 11:
                                     System.out.println("Ver datos personales administrador");
