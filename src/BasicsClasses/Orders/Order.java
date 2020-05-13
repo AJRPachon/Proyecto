@@ -77,6 +77,13 @@ public class Order implements IOrder,Cloneable,Comparable {
         dateOrder = new GregorianCalendar();
     }
 
+    public Order(String pathFile){
+        insertInitID(pathFile);
+        this.orderID = ++totalIDOrders;
+        ordersLines = new ArrayList<>();
+        dateOrder = new GregorianCalendar();
+    }
+
     public Order(ArrayList<OrderLine> ordersLines, GregorianCalendar dateOrder) {
         this.orderID = ++totalIDOrders;
         this.ordersLines = (ArrayList<OrderLine>)ordersLines.clone();
@@ -199,7 +206,7 @@ public class Order implements IOrder,Cloneable,Comparable {
         return this.cancel;
     }
 
-    public static boolean insertInitID(String pathFile){
+    private static boolean insertInitID(String pathFile){
         boolean valueChanged = false;
         int oldID;
         if (totalIDOrders == 0){
