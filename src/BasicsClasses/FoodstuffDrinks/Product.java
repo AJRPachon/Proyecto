@@ -35,6 +35,8 @@ package BasicsClasses.FoodstuffDrinks;
 
  */
 
+import BasicsClasses.Orders.Order;
+
 public class Product implements Cloneable{
 
     private int IDProduct;
@@ -93,6 +95,17 @@ public class Product implements Cloneable{
 
     public void setPrice(double price){
         this.price = price;
+    }
+
+    public static Product stringToProduct(String line){
+        Product newProduct = null;
+        String[] partsOfProduct = line.split("#");
+        newProduct = new Product();
+        newProduct.IDProduct = Integer.parseInt(partsOfProduct[0]);
+        newProduct.name = partsOfProduct[1];
+        newProduct.characteristics = partsOfProduct[2];
+        newProduct.price = Double.parseDouble(partsOfProduct[3]);
+        return newProduct;
     }
 
 
