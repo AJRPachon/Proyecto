@@ -5,7 +5,9 @@ import BasicsClasses.Employee.Enums.EnumCategory;
 import BasicsClasses.Employee.Enums.EnumPosition;
 import java.io.*;
 import BasicsClasses.FoodstuffDrinks.Product;
+import BasicsClasses.Orders.Order;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
@@ -128,6 +130,35 @@ public class FilesManagement {
             }
         }
         return orderInserted;
+    }
+
+
+    public ArrayList<Order> getOrdersNotShipped(String path){
+        ArrayList<Order> ordersNotShipped = new ArrayList<>();
+        BufferedReader BR = null;
+        String line;
+        try {
+            BR = new BufferedReader(new FileReader(path));
+            line = BR.readLine();
+            while (line != null){
+                if (line.split("#")[2].equals("false")){
+                    ordersNotShipped.add(Order.stringToOrder(line));
+                }
+                line = BR.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                BR.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return ordersNotShipped;
     }
 
     /**
