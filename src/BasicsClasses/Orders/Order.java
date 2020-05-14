@@ -52,6 +52,7 @@ package BasicsClasses.Orders;
  *
  */
 
+import BasicsClasses.FoodstuffDrinks.Product;
 import BasicsClasses.Interfaces.IOrder;
 
 import java.io.BufferedReader;
@@ -65,7 +66,7 @@ import java.util.GregorianCalendar;
 public class Order implements IOrder,Cloneable,Comparable {
 
     private static int totalIDOrders = 0;
-    private final int orderID;
+    private int orderID;
     private ArrayList<OrderLine> ordersLines;
     private GregorianCalendar dateOrder;
     private boolean sent;
@@ -230,9 +231,45 @@ public class Order implements IOrder,Cloneable,Comparable {
         return valueChanged;
     }
 
+    /**
+     * @param line
+     * @return
+     */
+
+    public static Order stringToOrder(String line){
+        Order newOrder = null;
+        String IDOrder = line.split("%")[0];
+        String[] ordersLines = line.split("%")[1].split("\\$");
+        String[] partsOfOrder = line.split("%")[2].split("#");
+
+        if (partsOfOrder.length == 3 && ordersLines.length > 0){
+
+            newOrder = new Order();
+
+            try {
+                newOrder.orderID = Integer.parseInt(IDOrder);
+
+                for (String s : ordersLines) {
+                    newOrder.addOrderLine(new OrderLine(Product.stringToProduct(s), Integer.parseInt(s.split("#")[4])));
+                }
+
+            }catch (NumberFormatException e){
+                e.printStackTrace();
+            }
+
+            newOrder.sent = Boolean.parseBoolean(partsOfOrder[partsOfOrder.length-2]);
+            newOrder.cancel = Boolean.parseBoolean(partsOfOrder[partsOfOrder.length-1]);
+
+        }
+
+
+        return newOrder;
+    }
+
+
     @Override
     public String toString(){
-        String string = "%";
+        String string = orderID+"%";
 
         for (int i = 0;i < this.ordersLines.size();i++){
 
@@ -243,7 +280,7 @@ public class Order implements IOrder,Cloneable,Comparable {
             }
 
         }
-        string+="%#"+dateOrder.get(Calendar.DAY_OF_MONTH)+"/"+(dateOrder.get(Calendar.MONTH)+1)+"/"+dateOrder.get(Calendar.YEAR);
+        string+="%"+dateOrder.get(Calendar.DAY_OF_MONTH)+"/"+(dateOrder.get(Calendar.MONTH)+1)+"/"+dateOrder.get(Calendar.YEAR)+"#"+sent+"#"+cancel;
         return string;
     }
 
