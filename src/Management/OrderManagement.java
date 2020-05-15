@@ -4,6 +4,7 @@ import BasicsClasses.FoodstuffDrinks.Product;
 import BasicsClasses.Orders.Order;
 import BasicsClasses.Orders.OrderLine;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
@@ -41,6 +42,13 @@ public class OrderManagement {
         }while (character == 'S');
 
         return newOrder;
+    }
+
+
+    public void printArrayListOrders(ArrayList<Order> orders){
+        for (Order o : orders){
+            System.out.println("ID: "+o.getID()+"  Date of order: "+o.getStringDateOrder()+"  Sent: "+o.getSent()+"  Cancel: "+o.getCancel());
+        }
     }
 
 
