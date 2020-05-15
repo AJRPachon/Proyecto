@@ -33,6 +33,9 @@ import Management.FilesManagement;
 import Management.OrderManagement;
 import Management.Validations;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 
 public class Main {
 
@@ -47,6 +50,7 @@ public class Main {
         String username, password, permisons;
         String pathFileEmployee = ".\\src\\Files\\Employees", pathFileOrdersTemp = ".\\src\\Files\\tmp\\OrdersTemp";
         Order newOrder;
+        ArrayList<Order> ordersNotShipped;
         int optionPermisons;
 
         do {
@@ -99,9 +103,10 @@ public class Main {
                                     }
                                     break;
                                 case 9:
-                                    System.out.println("Modificar pedido");
                                     //mostrar pedidos sin enviar
+                                    OM.printArrayListOrders(ordersNotShipped = FM.getOrdersNotShipped(".\\src\\Files\\Orders"));
                                     //leer y validar el ID del pedido introducido
+                                    
                                     //Mostrar opciones modificar pedido
                                     //Repetir
                                         //segun (opcion del pedido)
