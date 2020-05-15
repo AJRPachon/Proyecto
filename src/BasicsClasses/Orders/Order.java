@@ -167,6 +167,10 @@ public class Order implements IOrder,Cloneable,Comparable {
         return dateOrder.get(Calendar.YEAR);
     }
 
+    public String getStringDateOrder(){
+        return dateOrder.get(Calendar.DAY_OF_MONTH)+"/"+dateOrder.get(Calendar.MONTH)+"/"+dateOrder.get(Calendar.YEAR);
+    }
+
     public void setDateOrder(GregorianCalendar dateOrder){
         this.dateOrder = new GregorianCalendar(dateOrder.get(Calendar.DAY_OF_MONTH),dateOrder.get(Calendar.MONTH),dateOrder.get(Calendar.YEAR));
     }
@@ -261,7 +265,6 @@ public class Order implements IOrder,Cloneable,Comparable {
             newOrder.cancel = Boolean.parseBoolean(partsOfOrder[partsOfOrder.length-1]);
 
         }
-
 
         return newOrder;
     }
