@@ -6,6 +6,7 @@ import BasicsClasses.Employee.Enums.EnumPosition;
 import java.io.*;
 import BasicsClasses.FoodstuffDrinks.Product;
 import BasicsClasses.Orders.Order;
+import BasicsClasses.Orders.OrderLine;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -137,11 +138,13 @@ public class FilesManagement {
         ArrayList<Order> ordersNotShipped = new ArrayList<>();
         BufferedReader BR = null;
         String line;
+        Order orderRead;
         try {
             BR = new BufferedReader(new FileReader(path));
             line = BR.readLine();
             while (line != null){
-                if (line.split("#")[2].equals("false")){
+                orderRead = Order.stringToOrder(line);
+                if (!orderRead.getSent() && !orderRead.getCancel()){
                     ordersNotShipped.add(Order.stringToOrder(line));
                 }
                 line = BR.readLine();
