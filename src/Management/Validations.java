@@ -1,5 +1,10 @@
 package Management;
 
+import BasicsClasses.Orders.Order;
+import BasicsClasses.Orders.OrderLine;
+
+import java.awt.font.FontRenderContext;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Validations {
@@ -211,6 +216,115 @@ public class Validations {
         return quantity;
     }
 
+    /**
+     * @param ordersNotShipped
+     * @return
+     */
 
+    public Order chooseOrderByID(ArrayList<Order> ordersNotShipped){
+        Order orderChoosed = null;
+        Scanner SC = new Scanner(System.in);
+        int IDInsert;
+        boolean find = false;
+
+        do {
+            for (Order o : ordersNotShipped){
+                System.out.println("ID: "+o.getID()+"  Date of order: "+o.getStringDateOrder()+"  Sent: "+o.getSent()+"  Cancel: "+o.getCancel());
+            }
+
+            System.out.print("Insert ID of the Order to want choose: ");
+            IDInsert = SC.nextInt();
+            for (int i = 0; i < ordersNotShipped.size() && !find; i++){
+                if (ordersNotShipped.get(i).getID() == IDInsert){
+                    find = true;
+                    orderChoosed = ordersNotShipped.get(i).clone();
+                }
+
+            }
+        }while (!find);
+        return orderChoosed;
+    }
+
+    /**
+     * @return
+     */
+
+    public int readAndValidateOptionsOrder(){
+        int option;
+        Scanner SC = new Scanner(System.in);
+            do {
+                System.out.println("Options to modify the order:");
+                System.out.println("0.- Exit");
+                System.out.println("1.- Add order line");
+                System.out.println("2.- Remove order line");
+                System.out.println("3.- Decrease quantity of one product");
+                System.out.println("4.- Increase quantity of one product");
+                System.out.println("5.- Show all orders lines");
+                System.out.println("6.- Cancel order");
+                System.out.print("Insert the option want execute: ");
+                option = SC.nextInt();
+            }while (option < 0 || option > 5);
+        return option;
+    }
+
+    /**
+     * @return
+     */
+
+    public OrderLine readAndValidateNewOrderLine(){
+        FilesManagement FM = new FilesManagement();
+        return new OrderLine(FM.readAndSearchProduct(),readAndValidateQuantityOfProduct());
+    }
+
+    /**
+     * @param validIDs
+     * @return
+     */
+
+    public int readAndValidateIDProductOfOrder(ArrayList<Integer> validIDs){
+        int IDChoosed = 0;
+        boolean chooseCorrect = false;
+        Scanner SC = new Scanner(System.in);
+        do {
+            System.out.print("Insert ID of the product: ");
+            IDChoosed = SC.nextInt();
+            for (int i = 0; i < validIDs.size() && !chooseCorrect; i++){
+                chooseCorrect = (validIDs.get(i).equals(IDChoosed));
+            }
+        }while (!chooseCorrect);
+        return IDChoosed;
+    }
+
+
+    /**
+     * @param maxDecrease
+     * @return
+     */
+
+    public int readAndValidateQuantityToDecrease(int maxDecrease){
+        Scanner SC = new Scanner(System.in);
+        int quantityToDecrease;
+        do {
+            System.out.println("Max quantity is "+maxDecrease);
+            System.out.print("Insert total quantity to decrease: ");
+            quantityToDecrease = SC.nextInt();
+        }while (quantityToDecrease < 0 || quantityToDecrease > maxDecrease);
+        return quantityToDecrease;
+    }
+
+
+    /**
+     * @return
+     */
+
+    public int readAndValidateQuantityToIncrease(){
+        Scanner SC = new Scanner(System.in);
+        int quantityToDecrease;
+        do {
+            System.out.print("Insert total quantity to increase: ");
+            quantityToDecrease = SC.nextInt();
+        }while (quantityToDecrease < 0);
+        return quantityToDecrease;
+    }
 
 }
