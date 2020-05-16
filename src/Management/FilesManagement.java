@@ -133,6 +133,66 @@ public class FilesManagement {
         return orderInserted;
     }
 
+    /**
+     * @param object
+     * @param path
+     * @param <T>
+     * @return
+     */
+
+    public <T> boolean insertObjectDeletedInFile(T object, String path){
+        boolean orderInserted = false;
+        FileWriter FW = null;
+        try {
+            FW = new FileWriter(path,true);
+            FW.write(object.toString()+"#D"+"\n");
+            FW.flush();
+            orderInserted = true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                FW.close();
+            }catch (IOException|NullPointerException error){
+                error.printStackTrace();
+            }
+        }
+        return orderInserted;
+    }
+
+    /**
+     * @param object
+     * @param path
+     * @param <T>
+     * @return
+     */
+
+    public <T> boolean insertObjectModifiedInFile(T object, String path){
+        boolean orderInserted = false;
+        FileWriter FW = null;
+        try {
+            FW = new FileWriter(path,true);
+            FW.write(object.toString()+"#M"+"\n");
+            FW.flush();
+            orderInserted = true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                FW.close();
+            }catch (IOException|NullPointerException error){
+                error.printStackTrace();
+            }
+        }
+        return orderInserted;
+    }
+
+    /**
+     * @param path
+     * @return
+     */
 
     public ArrayList<Order> getOrdersNotShipped(String path){
         ArrayList<Order> ordersNotShipped = new ArrayList<>();
