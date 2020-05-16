@@ -35,7 +35,7 @@ public class OrderManagement {
 
             //Read to want insert more line product
             do {
-                System.out.print("Insert S or N: ");
+                System.out.print("Insert more products S or N: ");
                 character = Character.toUpperCase(sc.next().charAt(0));
             }while (character != 'N' && character != 'S');
 
