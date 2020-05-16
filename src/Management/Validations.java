@@ -136,18 +136,16 @@ public class Validations {
             System.out.println("4.- Modify employee schedule");
             System.out.println("5.- Modify employee salary");
             System.out.println("6.- See personal data of the one employee");
-            System.out.println("7.- See personal data of the floor manager");
-            System.out.println("8.- Add new order");
-            System.out.println("9.- Modify order");
-            System.out.println("10.- Cancel order");
-            System.out.println("11.- See my personal data");
-            System.out.println("12.- Check your schedule");
+            System.out.println("7.- Add new order");
+            System.out.println("8.- Modify order");
+            System.out.println("9.- See my personal data");
+            System.out.println("10.- Check your schedule");
             System.out.print("Insert option: ");
             option = sc.nextInt();
-            if (option < 0 || option > 12){
+            if (option < 0 || option > 10){
                 System.out.println("Insert a valid option");
             }
-        }while (option < 0 || option > 12);
+        }while (option < 0 || option > 10);
         return option;
     }
 
