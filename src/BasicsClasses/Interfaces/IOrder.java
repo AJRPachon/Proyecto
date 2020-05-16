@@ -50,8 +50,8 @@ public interface IOrder {
     public OrderLine getOrderLineIndex(int index);
     public void setOrderLineIndex(int index, OrderLine orderLine);
     public void addOrderLine(OrderLine orderLine);
-    public void increaseAmountProduct(int IDProduct, int amountToIncrease);
-    public void decreaseAmountProduct(int IDProduct, int amountToDecrease);
+    public boolean increaseAmountProduct(int IDProduct, int amountToIncrease);
+    public boolean decreaseAmountProduct(int IDProduct, int amountToDecrease);
 
     public GregorianCalendar getDateOrder();
         public int getDayOfDateOrder();
