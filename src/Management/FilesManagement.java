@@ -282,5 +282,45 @@ public class FilesManagement {
     }
 
 
+    /**
+     * @param DNIEmployee
+     * @param path
+     */
+
+
+    public void printPersonalData(String DNIEmployee, String path){
+        BufferedReader BR;
+        String[] lineParted = null;
+        String line;
+        boolean employeeFind = false;
+
+        try {
+            BR = new BufferedReader(new FileReader(path));
+            line = BR.readLine();
+            while (line != null && !employeeFind){
+                lineParted = line.split("#");
+                employeeFind = (lineParted[2].equals(DNIEmployee));
+                line = BR.readLine();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (employeeFind){
+            System.out.println("Name of employee: "+lineParted[0]);
+            System.out.println("Suname of employee: "+lineParted[1]);
+            System.out.println("DNI of employee: "+lineParted[2]);
+            System.out.println("Number of SS of employee: "+lineParted[3]);
+            System.out.println("Birthday of employee: "+lineParted[4]);
+            System.out.println("Position of employee: "+lineParted[5]);
+            System.out.println("Category of employee: "+lineParted[6]);
+            System.out.println("Number of bank account of employee: "+lineParted[7]);
+        }else{
+            System.out.println("This employee wasn`t found");
+        }
+
+    }
+
 
 }
