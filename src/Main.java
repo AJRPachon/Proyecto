@@ -33,7 +33,6 @@ import Management.FilesManagement;
 import Management.OrderManagement;
 import Management.Validations;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -47,11 +46,11 @@ public class Main {
         OrderManagement OM = new OrderManagement();
 
         FM.checkFiles();
-        String username, password, permisons;
-        String pathFileEmployee = ".\\src\\Files\\Employees", pathFileOrdersTemp = ".\\src\\Files\\tmp\\OrdersTemp";
-        Order newOrder;
+        String username, password, permisons, DNIToConsultData;
+        String pathFileEmployee = ".\\src\\Files\\Employees", pathFileOrdersTemp = ".\\src\\Files\\tmp\\OrdersTemp", pathFileOrders = ".\\src\\Files\\Orders";
+        Order newOrder, orderChoosed;
         ArrayList<Order> ordersNotShipped;
-        int optionPermisons;
+        int optionPermisons, optionModifyOrder, IDProductToDelete, IDProductToDecrease, amountToDecrease, IDProductToIncrease, amountToIncrease;
 
         do {
 
@@ -91,53 +90,91 @@ public class Main {
                                     System.out.println("Modificar sueldo empleado");
                                     break;
                                 case 6:
-                                    System.out.println("Ver datos personales del empleado");
+                                    System.out.println();
+                                    DNIToConsultData = VD.readAndValidateUsername();
+                                    FM.printPersonalData(DNIToConsultData,pathFileEmployee);
+                                    System.out.println();
                                     break;
                                 case 7:
-                                    System.out.println("Ver datos personales del floor manager");
-                                    break;
-                                case 8:
                                     newOrder = OM.readAndValidateNewOrder();
                                     if (!FM.insertObjectInFile(newOrder,pathFileOrdersTemp)) {
                                         System.out.println("The new order wasn't added");
                                     }
                                     break;
-                                case 9:
-                                    //mostrar pedidos sin enviar
-                                    OM.printArrayListOrders(ordersNotShipped = FM.getOrdersNotShipped(".\\src\\Files\\Orders"));
-                                    //leer y validar el ID del pedido introducido
-                                    
-                                    //Mostrar opciones modificar pedido
+                                case 8:
+                                    //mostrar y elegir order por ID
+                                    orderChoosed = VD.chooseOrderByID(FM.getOrdersNotShipped(pathFileOrders));
                                     //Repetir
+                                    do {
+                                        //leer y mostrar opciones modificar pedido
+                                        optionModifyOrder = VD.readAndValidateOptionsOrder();
                                         //segun (opcion del pedido)
+                                        switch (optionModifyOrder){
                                             //caso 1 (añadir producto)
-                                                //leer y validar linea de pedido
-                                                //añadir linea
+                                            case 1:
+                                                orderChoosed.addOrderLine(VD.readAndValidateNewOrderLine());
+                                                break;
+
                                             //caso 2 (eliminar producto)
+                                            case 2:
                                                 //mostrar productos en la lista
+                                                orderChoosed.printOrdersLines();
+                                                //elegir ID del pedido a eliminar
+                                                IDProductToDelete = VD.readAndValidateIDProductOfOrder(orderChoosed.getIDProducts());
                                                 //eliminar linea de pedido
+                                                orderChoosed.removeOrderLine(IDProductToDelete);
+                                                break;
+
                                             //caso 3 (disminuir cantidad producto)
+                                            case 3:
                                                 //mostrar productos en la lista
+                                                orderChoosed.printOrdersLines();
+                                                //elegir ID del pedido a disminuir cantidas
+                                                IDProductToDecrease = VD.readAndValidateIDProductOfOrder(orderChoosed.getIDProducts());
                                                 //leer y validar cantidad a disminuir
+                                                amountToDecrease = VD.readAndValidateQuantityToDecrease(orderChoosed.quantityOfAProduct(IDProductToDecrease));
                                                 //dismiuir cantidad
+                                                orderChoosed.decreaseAmountProduct(IDProductToDecrease,amountToDecrease);
+                                                //mostrar resultado final
+                                                orderChoosed.printOrderLine(IDProductToDecrease);
+                                                break;
+
                                             //caso 4 (disminuir cantidad producto)
+                                            case 4:
                                                 //mostrar productos en la lista
+                                                orderChoosed.printOrdersLines();
+                                                //elegir ID del pedido a aumentar cantidad
+                                                IDProductToIncrease = VD.readAndValidateIDProductOfOrder(orderChoosed.getIDProducts());
                                                 //leer y validar cantidad a aumentar
+                                                amountToIncrease = VD.readAndValidateQuantityToIncrease();
                                                 //aumentar cantidad
-                                        //finSegun
-                                        //Mostrar opciones modificar pedido
-                                    //mientras (opcion modificar distinta de 0)
+                                                orderChoosed.increaseAmountProduct(IDProductToIncrease,amountToIncrease);
+                                                //mostrar resultado final
+                                                orderChoosed.printOrderLine(IDProductToIncrease);
+                                                break;
+
+                                            //caso 5 (mostrar todas las orders lines)
+                                            case 5:
+                                                orderChoosed.printOrdersLines();
+                                                break;
+                                            //finSegun
+
+                                            //caso 6 (cancelar pedido)
+                                            case 6:
+                                                orderChoosed.markCancel();
+                                                System.out.println("El pedido con ID: "+orderChoosed.getID()+" fue cancelado.");
+                                                //cancelar pedido
+                                                break;
+                                            //finSegun
+                                        }
+                                    }while (optionModifyOrder != 0 && !orderChoosed.getCancel());
+                                    FM.insertObjectModifiedInFile(orderChoosed,pathFileOrdersTemp);
+                                    //Añadir al fichero las modificaciones del pedido
                                     break;
-                                case 10:
-                                    System.out.println("Cancelar pedido");
-                                    //mostrar pedidos sin enviar
-                                    //leer y validar el ID del pedido introducido
-                                    //cancelar pedido
-                                    break;
-                                case 11:
+                                case 9:
                                     System.out.println("Ver datos personales administrador");
                                     break;
-                                case 12:
+                                case 10:
                                     System.out.println("Consultar sus horarios");
                                     break;
                             }
