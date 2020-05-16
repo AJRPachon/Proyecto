@@ -57,7 +57,6 @@ import BasicsClasses.Interfaces.IOrder;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -114,7 +113,7 @@ public class Order implements IOrder,Cloneable,Comparable {
     public OrderLine getOrderLine(int IDProduct) {
         OrderLine orderLine = null;
 
-        for (int i = 0; i<ordersLines.size();i++){
+        for (int i = 0; i<ordersLines.size() && orderLine == null;i++){
             if (ordersLines.get(i).getIDProduct() == IDProduct){
                 orderLine = ordersLines.get(i);
             }
@@ -131,24 +130,73 @@ public class Order implements IOrder,Cloneable,Comparable {
         ordersLines.set(index, orderLine.clone());
     }
 
-    public void addOrderLine(OrderLine orderLine) {     //TODO Comprobar que no exista ningun producto añadido del tipo de la linea a añadir
-        ordersLines.add(orderLine.clone());             //TODO Si hubiera un producto añadido de ese tipo, aumentar la cantidad de esa linea
+    public void addOrderLine(OrderLine orderLine) {
+        boolean existThisProduct = false;
+        for (int i = 0; i < ordersLines.size() && !existThisProduct; i++){
+            if (ordersLines.get(i).getIDProduct() == orderLine.getIDProduct()){
+                increaseAmountProduct(orderLine.getIDProduct(),orderLine.getProductQuantity());
+                existThisProduct = true;
+            }
+        }
+        if (!existThisProduct){
+            ordersLines.add(orderLine.clone());
+        }
     }
 
-    public void increaseAmountProduct(int IDProduct, int amountToIncrease) {
-        for (int i = 0; i<ordersLines.size();i++){
+    public boolean removeOrderLine(int productID){
+        boolean orderLineRemoved = false;
+        for (int i = 0; i < ordersLines.size() && !orderLineRemoved; i++){
+            if (ordersLines.get(i).getIDProduct() == productID){
+                ordersLines.remove(ordersLines.get(i));
+                orderLineRemoved = true;
+            }
+        }
+        return orderLineRemoved;
+    }
+
+    public boolean increaseAmountProduct(int IDProduct, int amountToIncrease) {
+        boolean increaseAmountProduct = false;
+        for (int i = 0; i<ordersLines.size() && !increaseAmountProduct;i++){
             if (ordersLines.get(i).getIDProduct() == IDProduct){
                 ordersLines.get(i).increaseQuantity(amountToIncrease);
+                increaseAmountProduct = true;
             }
         }
+        return increaseAmountProduct;
     }
 
-    public void decreaseAmountProduct(int IDProduct, int amountToDecrease) {
-        for (int i = 0; i<ordersLines.size();i++){
+    public boolean decreaseAmountProduct(int IDProduct, int amountToDecrease) {
+        boolean decreaseAmountProduct = false;
+        for (int i = 0; i<ordersLines.size() && !decreaseAmountProduct;i++){
             if (ordersLines.get(i).getIDProduct() == IDProduct){
-                ordersLines.get(i).decreaseQuantity(amountToDecrease);
+                if (ordersLines.get(i).getProductQuantity() == amountToDecrease){
+                    ordersLines.remove(i);
+                }else{
+                    ordersLines.get(i).decreaseQuantity(amountToDecrease);
+                }
+                decreaseAmountProduct = true;
+
             }
         }
+        return decreaseAmountProduct;
+    }
+
+    public ArrayList<Integer> getIDProducts(){
+        ArrayList<Integer> IDProducts = new ArrayList<>();
+        for (OrderLine OL : ordersLines){
+            IDProducts.add(OL.getIDProduct());
+        }
+        return IDProducts;
+    }
+
+    public int quantityOfAProduct(int IDProduct){
+        int quantity = 0;
+        for (OrderLine OL : ordersLines){
+            if (OL.getIDProduct() == IDProduct){
+                quantity = OL.getProductQuantity();
+            }
+        }
+        return quantity;
     }
 
     public GregorianCalendar getDateOrder() {
@@ -233,6 +281,30 @@ public class Order implements IOrder,Cloneable,Comparable {
             }
         }
         return valueChanged;
+    }
+
+    /**
+     *
+     */
+
+    public void printOrdersLines(){
+        for (OrderLine orderLine : ordersLines) {
+            System.out.println("Products ID: "+orderLine.getIDProduct()+", Quantity: "+orderLine.getProductQuantity());
+        }
+    }
+
+    /**
+     *
+     */
+
+    public void printOrderLine(int IDProduct){
+        boolean productFind = false;
+        for (int i = 0; i<ordersLines.size() && !productFind;i++){
+            if (ordersLines.get(i).getIDProduct() == IDProduct){
+                System.out.println("Products ID: "+ordersLines.get(i).getIDProduct()+", Quantity: "+ordersLines.get(i).getProductQuantity());
+                productFind = true;
+            }
+        }
     }
 
     /**
@@ -321,10 +393,12 @@ public class Order implements IOrder,Cloneable,Comparable {
     @Override
     public Order clone() {
         Order newOrder = new Order();
+        newOrder.orderID = this.orderID;
         newOrder.ordersLines= (ArrayList<OrderLine>)ordersLines.clone();
         newOrder.dateOrder = (GregorianCalendar) dateOrder.clone();
+        newOrder.sent = this.sent;
+        newOrder.cancel = this.cancel;
         return newOrder;
     }
-
 
 }
