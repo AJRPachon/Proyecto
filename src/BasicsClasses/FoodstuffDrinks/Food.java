@@ -34,7 +34,7 @@ import java.util.ArrayList;
 
 public class Food extends Consumable {
 
-    private final EnumType type;
+    private EnumType type;
 
 
     public Food(){  //Constructor without parameters
@@ -64,7 +64,7 @@ public class Food extends Consumable {
 
     @Override
     public String toString(){
-        return type+"|";
+        return type+"#";
     }
 
 

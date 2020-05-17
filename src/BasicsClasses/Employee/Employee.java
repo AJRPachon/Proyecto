@@ -74,7 +74,6 @@ package BasicsClasses.Employee;
  
 import BasicsClasses.Employee.Enums.EnumCategory;
 import BasicsClasses.Employee.Enums.EnumPosition;
-import BasicsClasses.FoodstuffDrinks.Consumable;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -82,15 +81,16 @@ import java.util.GregorianCalendar;
 public class Employee {
 
 
-    private final String name;
-    private final String surname;
-    private final String dNI;
-    private final String nAF;
-    private final GregorianCalendar birthday;
+    private String name;
+    private String surname;
+    private String dNI;
+    private String nAF;
+    private GregorianCalendar birthday;
     private EnumPosition position;
     private EnumCategory category;
     private String bankAccountN;
     private String password;
+    private Schedule[] schedule;
 
 
     public Employee(){ //Constructor without parameters
@@ -104,6 +104,7 @@ public class Employee {
         this.category = EnumCategory.Spaguetti;
         this.bankAccountN = "default";
         this.password = "default";
+        this.schedule = new Schedule[0];
 
     }
 
@@ -118,6 +119,7 @@ public class Employee {
         this.category = category;
         this.bankAccountN = bankAccountN;
         this.password = password;
+        this.schedule = new Schedule[7];
 
 
     }
@@ -193,7 +195,7 @@ public class Employee {
     @Override
     public String toString(){
 
-        return name+"|"+surname+"|"+dNI+"|"+nAF+"|"+birthday.get(Calendar.DAY_OF_MONTH)+"/"+birthday.get(Calendar.MONTH)+"/"+birthday.get(Calendar.YEAR)+"|"+position+"|"+category+"|"+bankAccountN+"|"+password;
+        return name+"#"+surname+"#"+dNI+"#"+nAF+"#"+birthday.get(Calendar.DAY_OF_MONTH)+"/"+birthday.get(Calendar.MONTH)+"/"+birthday.get(Calendar.YEAR)+"#"+position+"#"+category+"#"+bankAccountN+"#"+password;
 
     }
 

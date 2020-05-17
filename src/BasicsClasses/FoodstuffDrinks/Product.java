@@ -35,12 +35,14 @@ package BasicsClasses.FoodstuffDrinks;
 
  */
 
-public class Product {
+import BasicsClasses.Orders.Order;
 
-    private final int IDProduct;
+public class Product implements Cloneable{
+
+    private int IDProduct;
     private static int increaseID = 0;
-    private final String name;
-    private final String characteristics;
+    private String name;
+    private String characteristics;
     private double price;
 
 
@@ -53,10 +55,18 @@ public class Product {
 
     }
 
-
     public Product(String name, String characteristics, double price){  //Constructor with parameters
 
         this.IDProduct = ++increaseID;
+        this.name = name;
+        this.characteristics = characteristics;
+        this.price = price;
+
+    }
+
+    public Product(int ID, String name, String characteristics, double price){  //Constructor with parameters
+
+        this.IDProduct = ID;
         this.name = name;
         this.characteristics = characteristics;
         this.price = price;
@@ -87,13 +97,24 @@ public class Product {
         this.price = price;
     }
 
+    public static Product stringToProduct(String line){
+        Product newProduct = null;
+        String[] partsOfProduct = line.split("#");
+        newProduct = new Product();
+        newProduct.IDProduct = Integer.parseInt(partsOfProduct[0]);
+        newProduct.name = partsOfProduct[1];
+        newProduct.characteristics = partsOfProduct[2];
+        newProduct.price = Double.parseDouble(partsOfProduct[3]);
+        return newProduct;
+    }
+
 
 ///////// ADDED METHODS ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
     public String toString(){
 
-        return IDProduct +"|"+name+"|"+characteristics+"|"+price;
+        return IDProduct +"#"+name+"#"+characteristics+"#"+price;
 
     }
 
