@@ -5,7 +5,7 @@ package BasicsClasses.ReceiptLine;
  *  - Basics:
  *      > nameRestaurant: string, Consulting, Modifiable
  *      > dateOfReceipt: date, Consulting, Modifiable
- *      > consumables: list of ConsumablesTemp, Consulting, Modifiable
+ *      > consumables: list of Consumables, Consulting, Modifiable
  *      > paidFor: boolean, Consulting, Modifiable
  *
  *  - Derivatives:
@@ -28,9 +28,9 @@ package BasicsClasses.ReceiptLine;
  *          > none setMonthOfDateOfReceipt(integer month);
  *          > none setYearOfDateOfReceipt(integer year);
  *
- *      > ConsumablesTemp getConsumable(integer indexOfConsumable);
- *      > none setConsumable(integer indexOfConsumable, ConsumablesTemp consumable);
- *      > none addConsumable(ConsumablesTemp consumable);
+ *      > Consumables getConsumable(integer indexOfConsumable);
+ *      > none setConsumable(integer indexOfConsumable, Consumables consumable);
+ *      > none addConsumable(Consumables consumable);
  *
  *      > boolean getPaidFor();
  *      > none setPaidFor(boolean paidFor);
