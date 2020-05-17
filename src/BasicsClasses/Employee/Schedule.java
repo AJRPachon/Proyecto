@@ -45,21 +45,18 @@ import BasicsClasses.Employee.Enums.EnumWeekDays;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Scanner;
 
 public class Schedule {
 
     private EnumWeekDays weekDay;
     private GregorianCalendar startDate;
     private GregorianCalendar endDate;
-    private Employee employee;
 
     public Schedule(){ //Constructor without parameters
 
         this.weekDay = EnumWeekDays.Spaguetti;
         this.startDate = new GregorianCalendar();
         this.endDate = new GregorianCalendar();
-        this.employee = new Employee();
     }
 
     public Schedule(EnumWeekDays weekDay, GregorianCalendar startDate, GregorianCalendar endDate, Employee employee){  //Constructor with parameters
@@ -67,8 +64,6 @@ public class Schedule {
         this.weekDay = weekDay;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.employee = employee;
-
     }
 
 
