@@ -33,8 +33,6 @@ import Management.FilesManagement;
 import Management.OrderManagement;
 import Management.Validations;
 
-import java.util.ArrayList;
-
 
 public class Main {
 
@@ -49,7 +47,6 @@ public class Main {
         String username, password, permisons, DNIToConsultData;
         String pathFileEmployee = ".\\src\\Files\\Employees", pathFileOrdersTemp = ".\\src\\Files\\tmp\\OrdersTemp", pathFileOrders = ".\\src\\Files\\Orders";
         Order newOrder, orderChoosed;
-        ArrayList<Order> ordersNotShipped;
         int optionPermisons, optionModifyOrder, IDProductToDelete, IDProductToDecrease, amountToDecrease, IDProductToIncrease, amountToIncrease;
 
         do {
@@ -172,7 +169,10 @@ public class Main {
                                     //Añadir al fichero las modificaciones del pedido
                                     break;
                                 case 9:
-                                    System.out.println("Ver datos personales administrador");
+                                    System.out.println();
+                                    DNIToConsultData = username;
+                                    FM.printPersonalData(DNIToConsultData,pathFileEmployee);
+                                    System.out.println();
                                     break;
                                 case 10:
                                     System.out.println("Consultar sus horarios");
