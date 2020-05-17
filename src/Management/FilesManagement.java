@@ -4,6 +4,8 @@ import BasicsClasses.Employee.Employee;
 import BasicsClasses.Employee.Enums.EnumCategory;
 import BasicsClasses.Employee.Enums.EnumPosition;
 import java.io.*;
+
+import BasicsClasses.Employee.Schedule;
 import BasicsClasses.FoodstuffDrinks.Product;
 import BasicsClasses.Orders.Order;
 import BasicsClasses.Orders.OrderLine;
@@ -320,6 +322,13 @@ public class FilesManagement {
             System.out.println("This employee wasn`t found");
         }
 
+    }
+
+
+    public ArrayList<Schedule> getSchedulesEmployee(String DNI, String path){
+        ArrayList<Schedule> schedules = new ArrayList<>();
+
+        return schedules;
     }
 
 
