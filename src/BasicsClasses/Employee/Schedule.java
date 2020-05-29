@@ -220,9 +220,15 @@ public class Schedule {
         //Day of the week
         for (int cont = 0; cont < 7; cont++){
 
-            System.out.println(EnumWeekDays.getWeekDay(cont)+"  |  ");
+            System.out.print(EnumWeekDays.getWeekDay(cont)+"  |  ");
 
-            System.out.println(getSDHour()+":"+getSDMinutes()+ "\n"+getEDHour()+":"+getEDMinutes());
+        }
+
+        System.out.println();
+
+        for (int cont = 0; cont < 7; cont++){
+
+            System.out.print(getSDHour()+":"+getSDMinutes()+ "\n"+getEDHour()+":"+getEDMinutes());
 
         }
 
