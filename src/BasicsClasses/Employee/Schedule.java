@@ -189,6 +189,74 @@ public class Schedule {
 
 
 /////// ADDED METHODS ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////// ASSIGN SCHEDULE //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+   /*
+        SIGNATURE:
+            public void assignSchedule(GregorianCalendar startDate, GregorianCalendar endDate)
+
+        COMENTARY:
+            - Assign a schedule to an employee
+
+        INPUTS:
+            - Not one
+
+        OUTPUTS:
+            - Not one
+
+        INTPUT/OUTPUT:
+            - Not one
+
+        PRECONDITION:
+            - Not one
+
+        POSTCONDITION:
+            - The schedule must be assigned to the employee after the method is executed
+
+    */
+
+    //TODO PONER LOS COMENTARIOS EN INGLÉS Y VALIDAR
+    //TODO PREGUNTAR ENUMS
+/*
+    public void assignSchedule(){
+
+        Scanner sc = new Scanner(System.in);
+
+        int SDHour, SDMinute, EDHour, EDMinute;
+        String SDWeekDay, EDWeekDay;
+
+        //START DATE
+        System.out.println("Introduzca hora de inicio de jornada");
+        SDHour = sc.nextInt();
+        setSDHour(SDHour);
+
+        System.out.println("Introduzca minutos de inicio de jornada");
+        SDMinute = sc.nextInt();
+        setSDMinutes(SDMinute);
+
+        System.out.println("Introduzca dia de inicio de jornada");
+        SDWeekDay = sc.nextLine();
+        setWeekDay(SDWeekDay);
+
+
+        //END DATE
+        System.out.println("Introduzca hora de fin de jornada");
+        EDHour = sc.nextInt();
+        setEDHour(EDHour);
+
+        System.out.println("Introduzca minutos de fin de jornada");
+        EDMinute = sc.nextInt();
+        setEDMinutes(EDMinute);
+
+        System.out.println("Introduzca dia de fin de jornada");
+        EDWeekDay = sc.nextInt();
+        setEDDayOfSchedule(EDWeekDay);
+
+
+    }
+
+*/
+
 /////// CONSULT SHEDULE //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /*
