@@ -56,7 +56,7 @@ public class Payslip {
 
     @Override
     public String toString() {
-        return "El salario es: "+this.salary+"€";
+        return this.salary+"#";
     }
 
 

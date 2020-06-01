@@ -140,6 +140,7 @@ public class ScheduleManagement {
      * @param EDMinute
      */
 
+    //TODO De verdad que esto está bien?
     public void assignSchedule(int SDHour, int SDMinute, int EDHour, int EDMinute){
 
         Schedule schedule = new Schedule();

@@ -83,6 +83,7 @@ public class EmployeeManagement {
      * @param salary
      */
 
+    //TODO Ver si es correcto
     public void modifySalary(double salary){
 
         Payslip payslip = new Payslip();
@@ -93,9 +94,11 @@ public class EmployeeManagement {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void CollectEmployeeData(){
 
+    //TODO preguntar a Fran
+    public void collectEmployeeData(){
 
+        //Leer todos los datos y crear el empleado
 
 
     }

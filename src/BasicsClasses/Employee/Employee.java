@@ -193,7 +193,11 @@ public class Employee {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+<<<<<<< Updated upstream
     //TODO toString de schedule?
+=======
+    //TODO Incluir horario en el toString
+>>>>>>> Stashed changes
     @Override
     public String toString(){
 
