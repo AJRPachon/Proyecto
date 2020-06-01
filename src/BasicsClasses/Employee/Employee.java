@@ -193,15 +193,11 @@ public class Employee {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-<<<<<<< Updated upstream
-    //TODO toString de schedule?
-=======
-    //TODO Incluir horario en el toString
->>>>>>> Stashed changes
+
     @Override
     public String toString(){
 
-        return name+"#"+surname+"#"+dNI+"#"+nAF+"#"+birthday.get(Calendar.DAY_OF_MONTH)+"/"+birthday.get(Calendar.MONTH)+"/"+birthday.get(Calendar.YEAR)+"#"+position+"#"+category+"#"+bankAccountN+"#"+password+"#"+schedule[0].toString();
+        return name+"#"+surname+"#"+dNI+"#"+nAF+"#"+birthday.get(Calendar.DAY_OF_MONTH)+"/"+birthday.get(Calendar.MONTH)+"/"+birthday.get(Calendar.YEAR)+"#"+position+"#"+category+"#"+bankAccountN+"#"+password;
 
     }
 

@@ -75,27 +75,11 @@ public class EmployeeManagement {
         return passEncripted;
     }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * This method modifies the employee's salary
-     *
-     * @param salary
-     */
-
-    //TODO Ver si es correcto
-    public void modifySalary(double salary){
-
-        Payslip payslip = new Payslip();
-
-        payslip.setSalary(salary);
-
-    }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    //TODO preguntar a Fran
+    //TODO preguntar a Fran devolver obj empleado
     public void collectEmployeeData(){
 
         //Leer todos los datos y crear el empleado

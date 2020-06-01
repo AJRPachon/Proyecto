@@ -130,27 +130,6 @@ public class ScheduleManagement {
 
     }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /**
-     *
-     * @param SDHour
-     * @param SDMinute
-     * @param EDHour
-     * @param EDMinute
-     */
-
-    //TODO De verdad que esto está bien?
-    public void assignSchedule(int SDHour, int SDMinute, int EDHour, int EDMinute){
-
-        Schedule schedule = new Schedule();
-
-        schedule.setSDHour(SDHour);
-        schedule.setSDMinutes(SDMinute);
-        schedule.setEDHour(EDHour);
-        schedule.setEDMinutes(EDMinute);
-
-    }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

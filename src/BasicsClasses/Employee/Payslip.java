@@ -29,6 +29,7 @@ package BasicsClasses.Employee;
 public class Payslip {
 
     private double salary;
+    //TODO obj empleado
 
     public Payslip(){ //Constructor without parameters
 
