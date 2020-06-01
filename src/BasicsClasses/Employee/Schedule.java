@@ -83,28 +83,17 @@ public class Schedule {
     }
 
 
+
     public GregorianCalendar getStartDate(){
         return this.startDate;
     }
-  
-    public GregorianCalendar getDate(){
-        return this.date;
-    }
+
 
     public void setStartDate(GregorianCalendar startDate){
         this.startDate = startDate;
     }
 
 
-    public int getHour(){ return this.date.get(Calendar.HOUR_OF_DAY); }
-
-    public void setHour(int hour){ this.date.set(Calendar.HOUR_OF_DAY, hour); }
-
-
-
-    public int getMinutes(){ return this.date.get(Calendar.MINUTE); }
-
-    public void setMinutes(int minute){ this.date.set(Calendar.MINUTE, minute); }
 
 
     public GregorianCalendar getEndDate(){
@@ -249,6 +238,7 @@ public class Schedule {
         }
 
     }
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

@@ -91,11 +91,9 @@ public class EmployeeManagement {
 
         Scanner sc = new Scanner(System.in);
 
-        String name, surname, dNI, nAF, bankAccountN, password, positionE, categoryC;
+        String name, surname, dNI, nAF, bankAccountN, password, position, category;
         GregorianCalendar birthday = new GregorianCalendar();
         int day, month, year;
-        EnumPosition position = EnumPosition.Spaguetti;
-        EnumCategory category = EnumCategory.Spaguetti;
 
         System.out.println("Employee Name");
         name = sc.nextLine();
@@ -135,12 +133,12 @@ public class EmployeeManagement {
 
         //TODO EnumPosition is correct?
         System.out.println("Employee position");
-        positionE = sc.nextLine();
-        EnumPosition.valueOf(positionE);
+        position = sc.nextLine();
+        EnumPosition.valueOf(position);
 
         System.out.println("Employee category");
-        categoryC = sc.nextLine();
-        EnumCategory.valueOf(categoryC);
+        category = sc.nextLine();
+        EnumCategory.valueOf(category);
 
         System.out.println("Employee bankAccoutN");
         bankAccountN = sc.nextLine();
@@ -149,7 +147,7 @@ public class EmployeeManagement {
         password = sc.nextLine();
 
 
-        return new Employee(name, surname,dNI,nAF,birthday, EnumPosition.valueOf(positionE), EnumCategory.valueOf(categoryC),bankAccountN,password);
+        return new Employee(name, surname,dNI,nAF,birthday, EnumPosition.valueOf(position), EnumCategory.valueOf(category),bankAccountN,password);
 
     }
 
