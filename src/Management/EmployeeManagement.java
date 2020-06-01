@@ -90,6 +90,8 @@ public class EmployeeManagement {
     public Employee collectEmployeeData(){
 
         Scanner sc = new Scanner(System.in);
+        Validations VA = new Validations();
+
 
         String name, surname, dNI, nAF, bankAccountN, password, position, category;
         GregorianCalendar birthday = new GregorianCalendar();
@@ -144,12 +146,14 @@ public class EmployeeManagement {
         bankAccountN = sc.nextLine();
 
         System.out.println("Employee password");
-        password = sc.nextLine();
+        password = VA.readAndValidatePassword(); //Validamos la contraseña
 
 
         return new Employee(name, surname,dNI,nAF,birthday, EnumPosition.valueOf(position), EnumCategory.valueOf(category),bankAccountN,password);
 
     }
+
+
 
 
 }

@@ -1,5 +1,6 @@
 package Management;
 
+import BasicsClasses.Employee.Employee;
 import BasicsClasses.Employee.Schedule;
 
 import java.io.BufferedWriter;
@@ -131,14 +132,15 @@ public class ScheduleManagement {
     }
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////// SCHEDULE FILE IN ///////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      * This method implements in the file the toString corresponding to the schedule
      *
+     * @param path
      */
 
-    public void scheduleFileIn() {
+    public void scheduleFileIn(String path) {
 
         Schedule schedule = new Schedule();
 
@@ -149,7 +151,7 @@ public class ScheduleManagement {
 
         try {
 
-            File fileSchedule = new File(".\\src\\Files\\Schedule");
+            File fileSchedule = new File(path);
 
             //If the file does not exist it is created
             if (!fileSchedule.exists()) {
@@ -176,6 +178,12 @@ public class ScheduleManagement {
 
     }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////// ASSIGN SCHEDULE //////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void assignSchedule(Employee employee){
+
+        employee.
+
+    }
 
 }

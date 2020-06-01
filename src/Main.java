@@ -27,6 +27,7 @@
  *
  */
 
+import BasicsClasses.FoodstuffDrinks.Drink;
 import BasicsClasses.Orders.Order;
 import Management.EmployeeManagement;
 import Management.FilesManagement;
@@ -74,23 +75,31 @@ public class Main {
                                 case 0:
                                     System.out.println("Closed session.");
                                     break;
-                                case 1:
-                                    System.out.println("Dar de alta a empleado");
-                                    String path = " ";
-                                    FM.insertObjectInFile(EM.collectEmployeeData(), path);
+
+                                case 1: //Dar de alta a un empleado
+                                    String path = ".\\src\\files\\EmployeesTemp";
+                                    FM.insertObjectInFile(EM.collectEmployeeData(), path); //Pedimos datos y registramos nuevo empleado en el fichero
 
                                     break;
                                 case 2:
                                     System.out.println("Dar de baja a empleado");
                                     break;
+
                                 case 3:
                                     System.out.println("Asignar horario a empleado");
+                                    //TODO asignar horario (No sé bien cómo hacerlo)
+
                                     break;
                                 case 4:
                                     System.out.println("Modificar horario de empleado");
+                                    //TODO Se hace igual que asignar horario a empleado
                                     break;
-                                case 5:
-                                    System.out.println("Modificar sueldo empleado");
+
+
+                                case 5: //Modificar sueldo a empleado
+
+
+
                                     break;
                                 case 6:
                                     System.out.println();

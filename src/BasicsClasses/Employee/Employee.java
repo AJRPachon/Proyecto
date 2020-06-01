@@ -187,6 +187,22 @@ public class Employee {
     }
 
 
+
+    public Schedule[] getSchedule() {
+        return this.schedule;
+    }
+
+    public void getScheduleSDHour(int hour, int weekDay){
+        schedule[weekDay].setSDHour(hour);
+    }
+
+    public void getScheduleSDMinutes(int minute, int weekDay){
+        schedule[weekDay].setSDMinutes(minute);
+    }
+
+
+
+
 /////////// ADDED METHODS ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
