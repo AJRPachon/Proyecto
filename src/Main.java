@@ -71,7 +71,8 @@ public class Main {
                                     break;
                                 case 1:
                                     System.out.println("Dar de alta a empleado");
-                                    EM.collectEmployeeData();
+                                    String path = " ";
+                                    FM.insertObjectInFile(EM.collectEmployeeData(), path);
 
                                     break;
                                 case 2:
