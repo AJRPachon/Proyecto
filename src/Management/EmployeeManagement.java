@@ -88,7 +88,6 @@ public class EmployeeManagement {
 
 
     public Employee collectEmployeeData(){
-        //TODO VALIDATE
 
         Scanner sc = new Scanner(System.in);
 
@@ -112,12 +111,24 @@ public class EmployeeManagement {
 
         System.out.println("Employee birthday-day");
         day = sc.nextInt();
+        while (day < 1 || day > 31){
+            System.out.println("Employee birthday-day wasn´t correct, insert it again");
+            day = sc.nextInt();
+        }
 
         System.out.println("Employee birthday-month");
         month = sc.nextInt();
+        while(month < 1 || month > 12){
+            System.out.println("Employee birthday-month wasn´t correct, insert it again");
+            month = sc.nextInt();
+        }
 
         System.out.println("Employee birthday-year");
         year = sc.nextInt();
+        while (year < 1900 || year > 2002){
+            System.out.println("Employee birthday-year wasn´t correct, insert it again");
+            year = sc.nextInt();
+        }
 
         //TODO Create enum with all months?
         birthday.set(day, month,year);

@@ -71,6 +71,8 @@ public class Main {
                                     break;
                                 case 1:
                                     System.out.println("Dar de alta a empleado");
+                                    EM.collectEmployeeData();
+
                                     break;
                                 case 2:
                                     System.out.println("Dar de baja a empleado");
