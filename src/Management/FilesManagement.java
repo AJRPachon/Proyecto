@@ -118,13 +118,16 @@ public class FilesManagement {
      */
 
     public <T> boolean insertObjectInFile(T object, String path){
-        boolean orderInserted = false;
+
+        boolean objectInserted = false;
         FileWriter FW = null;
+
         try {
             FW = new FileWriter(path,true);
             FW.write(object.toString()+"\n");
             FW.flush();
-            orderInserted = true;
+            objectInserted = true;
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -135,7 +138,7 @@ public class FilesManagement {
                 error.printStackTrace();
             }
         }
-        return orderInserted;
+        return objectInserted;
     }
 
     /**
@@ -146,13 +149,13 @@ public class FilesManagement {
      */
 
     public <T> boolean insertObjectDeletedInFile(T object, String path){
-        boolean orderInserted = false;
+        boolean objectInserted = false;
         FileWriter FW = null;
         try {
             FW = new FileWriter(path,true);
             FW.write(object.toString()+"#D"+"\n");
             FW.flush();
-            orderInserted = true;
+            objectInserted = true;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -163,7 +166,7 @@ public class FilesManagement {
                 error.printStackTrace();
             }
         }
-        return orderInserted;
+        return objectInserted;
     }
 
     /**
@@ -174,13 +177,13 @@ public class FilesManagement {
      */
 
     public <T> boolean insertObjectModifiedInFile(T object, String path){
-        boolean orderInserted = false;
+        boolean objectInserted = false;
         FileWriter FW = null;
         try {
             FW = new FileWriter(path,true);
             FW.write(object.toString()+"#M"+"\n");
             FW.flush();
-            orderInserted = true;
+            objectInserted = true;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -191,7 +194,7 @@ public class FilesManagement {
                 error.printStackTrace();
             }
         }
-        return orderInserted;
+        return objectInserted;
     }
 
     /**
@@ -293,7 +296,7 @@ public class FilesManagement {
      */
 
 
-    public void printPersonalData(String DNIEmployee, String path){
+    public void printPersonalData(String DNIEmployee, String path) {
         BufferedReader BR;
         String[] lineParted = null;
         String line;
@@ -302,7 +305,7 @@ public class FilesManagement {
         try {
             BR = new BufferedReader(new FileReader(path));
             line = BR.readLine();
-            while (line != null && !employeeFind){
+            while (line != null && !employeeFind) {
                 lineParted = line.split("#");
                 employeeFind = (lineParted[2].equals(DNIEmployee));
                 line = BR.readLine();
@@ -312,49 +315,20 @@ public class FilesManagement {
             e.printStackTrace();
         }
 
-        if (employeeFind){
-            System.out.println("Name of employee: "+lineParted[0]);
-            System.out.println("Suname of employee: "+lineParted[1]);
-            System.out.println("DNI of employee: "+lineParted[2]);
-            System.out.println("Number of SS of employee: "+lineParted[3]);
-            System.out.println("Birthday of employee: "+lineParted[4]);
-            System.out.println("Position of employee: "+lineParted[5]);
-            System.out.println("Category of employee: "+lineParted[6]);
-            System.out.println("Number of bank account of employee: "+lineParted[7]);
-        }else{
+        if (employeeFind) {
+            System.out.println("Name of employee: " + lineParted[0]);
+            System.out.println("Suname of employee: " + lineParted[1]);
+            System.out.println("DNI of employee: " + lineParted[2]);
+            System.out.println("Number of SS of employee: " + lineParted[3]);
+            System.out.println("Birthday of employee: " + lineParted[4]);
+            System.out.println("Position of employee: " + lineParted[5]);
+            System.out.println("Category of employee: " + lineParted[6]);
+            System.out.println("Number of bank account of employee: " + lineParted[7]);
+        } else {
             System.out.println("This employee wasn`t found");
         }
-
-
-///// ASSIGN SCHEDULE //////////////////////
-
-/*
-* SIGNATURE:
-*   public void assignSchedule(int IDEmployee, GregorianCalendar day, GregorianCalendar hour, GregorianCalendar minute, EnumWeekDays weekDay)
-*
-* COMENTARY:
-*   This method must be able to assign a specific employee a schedule
-*
-* INPUT:
-*   integer IDEmployee, GregorianCalendar day, GregorianCalendar hour, GregorianCalendar minute, EnumWeekDays weekDay
-*
-* OUTPUT:
-*   Not one
-*
-* INPUT/OUTPUT:
-*   Not one
-*
-* PRECONDITION:
-*
-*
-* POSTCONDITION:
-*
-*
- */
-
-    public void assignSchedule(int IDEmployee, GregorianCalendar day, GregorianCalendar hour, GregorianCalendar minute, EnumWeekDays weekDay){
-
     }
+
 
 
 }
