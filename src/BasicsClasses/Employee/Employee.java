@@ -192,12 +192,10 @@ public class Employee {
         return this.schedule;
     }
 
-    public void getScheduleSDHour(int hour, int weekDay){
-        schedule[weekDay].setSDHour(hour);
-    }
+    public void setSchedule(Schedule schedule, int day){
 
-    public void getScheduleSDMinutes(int minute, int weekDay){
-        schedule[weekDay].setSDMinutes(minute);
+        this.schedule[day] = schedule;
+
     }
 
 
