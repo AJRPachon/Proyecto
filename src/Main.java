@@ -85,6 +85,7 @@ public class Main {
 
                                 case 2:
                                     System.out.println("Dar de baja a empleado");
+                                    EM.terminateAnEmployee();
                                     break;
 
                                 case 3:

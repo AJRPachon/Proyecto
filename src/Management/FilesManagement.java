@@ -10,6 +10,7 @@ import BasicsClasses.FoodstuffDrinks.Product;
 import BasicsClasses.Orders.Order;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
@@ -371,7 +372,7 @@ public class FilesManagement {
         Employee employee;
         Payslip payslip;
         String[] separaciones;
-
+        GregorianCalendar birthday;
 
         FileReader fr;
         BufferedReader br;
@@ -391,7 +392,9 @@ public class FilesManagement {
                 //Si contenido es igual a nuestro DNI, creamos un objeto empleado con los valores recogidos
                 if( contenido.equals(dNI) ){
 
-                    employee = new Employee(separaciones[0],separaciones[1],separaciones[2],separaciones[3],new GregorianCalendar(),EnumPosition.valueOf(separaciones[5]),EnumCategory.valueOf(separaciones[6]),separaciones[7],separaciones[8]);
+                    birthday = assignBirthday(separaciones);
+
+                    employee = new Employee(separaciones[0],separaciones[1],separaciones[2],separaciones[3],birthday,EnumPosition.valueOf(separaciones[5]),EnumCategory.valueOf(separaciones[6]),separaciones[7],separaciones[8]);
 
                     //Creamos un objeto payslip y le pasamos nuestro empleado y el salary que deseamos asignarle
                     payslip = new Payslip(salary, employee);
@@ -429,6 +432,7 @@ public class FilesManagement {
         String contenido;
         Employee employee;
         String[] separaciones;
+        GregorianCalendar birthday;
 
         FileReader fr;
         BufferedReader br;
@@ -447,7 +451,10 @@ public class FilesManagement {
                 //Si contenido es igual a nuestro DNI, creamos un objeto empleado con los valores recogidos
                 if( contenido.equals(dNI) ){
 
-                    employee = new Employee(separaciones[0],separaciones[1],separaciones[2],separaciones[3],new GregorianCalendar(),EnumPosition.valueOf(separaciones[5]),EnumCategory.valueOf(separaciones[6]),separaciones[7],separaciones[8]);
+                    //Separamos el String de la fecha en sus distintos numeros
+                    birthday = assignBirthday(separaciones);
+
+                    employee = new Employee(separaciones[0],separaciones[1],separaciones[2],separaciones[3],birthday,EnumPosition.valueOf(separaciones[5]),EnumCategory.valueOf(separaciones[6]),separaciones[7],separaciones[8]);
 
                     //Insertamos el empleado que deseamos dar de baja en nuestro archivo temporal con nuestra marca de borrado
                     insertObjectDeletedInFile(employee, tempPath);
@@ -492,6 +499,39 @@ public class FilesManagement {
         }catch (IOException e){
             e.printStackTrace();
         }
+
+    }
+
+
+/////////// ASSIGN BIRTHDAY //////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Convertimos una fecha String a enteros y se la asignamos a una variable de tipo GregorianCalendar
+     *
+     * @param separaciones
+     * @return
+     */
+
+    public GregorianCalendar assignBirthday(String[] separaciones){
+
+        String[] fechaString;
+        GregorianCalendar birthday = new GregorianCalendar();
+        int[] fecha = new int[3];
+
+        //Separamos el String de la fecha en sus distintos numeros
+        fechaString = separaciones[4].split("/");
+
+        //Recorremos el array y hacemos un parseInt para obtener los enteros
+        for(int cont = 0; cont < fechaString.length; cont++){
+            fecha[cont] = Integer.parseInt(fechaString[cont]);
+        }
+
+        //Metemos la fecha de cumpleaños en nuestra variable tipo fecha y ya la podemos usar en nuestro constructor
+        birthday.set(Calendar.DAY_OF_MONTH, fecha[0]);
+        birthday.set(Calendar.MONTH, fecha[1]);
+        birthday.set(Calendar.YEAR, fecha[2]);
+
+        return birthday;
 
     }
 
