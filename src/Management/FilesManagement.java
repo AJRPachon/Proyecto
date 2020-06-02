@@ -411,6 +411,58 @@ public class FilesManagement {
     }
 
 
+
+
+////////// TERMINATE AN EMPLOYEE ///////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Introduce en nuestro archivo temporal el empleado pasado por parametros que será dado de baja
+     *
+     * @param path
+     * @param dNI
+     * @param tempPath
+     */
+
+    public void terminateAnEmployee(String path, String dNI, String tempPath){
+
+        String line;
+        String contenido;
+        Employee employee;
+        String[] separaciones;
+
+        FileReader fr;
+        BufferedReader br;
+
+        try{
+
+            fr = new FileReader(path);
+            br = new BufferedReader(fr);
+
+            line = br.readLine();
+
+            while (line != null) {
+                separaciones = line.split("#");
+                contenido = separaciones[3];  //DNI se encuentra en la posición 3
+
+                //Si contenido es igual a nuestro DNI, creamos un objeto empleado con los valores recogidos
+                if( contenido.equals(dNI) ){
+
+                    employee = new Employee(separaciones[0],separaciones[1],separaciones[2],separaciones[3],new GregorianCalendar(),EnumPosition.valueOf(separaciones[5]),EnumCategory.valueOf(separaciones[6]),separaciones[7],separaciones[8]);
+
+                    //Insertamos el empleado que deseamos dar de baja en nuestro archivo temporal con nuestra marca de borrado
+                    insertObjectDeletedInFile(employee, tempPath);
+
+                }
+
+                line = br.readLine();
+            }
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+    }
+
 /////////// SHOW FILE DATA //////////////////////////////////////////////////////////////////////////////////////////////
 
     /**

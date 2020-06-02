@@ -61,7 +61,7 @@ public class EmployeeManagement {
     }
 
 
-///////// ENCRIPT PASSWORD ////////////////////////////////////////////////////////////////////////////////////////////
+///////// ENCRIPT PASSWORD /////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      * @param password
@@ -86,7 +86,7 @@ public class EmployeeManagement {
     }
 
 
-////////// COLLECT EMPLOYEE DATA /////////////////////////////////////////////////////////////////////////////////////
+////////// COLLECT EMPLOYEE DATA ///////////////////////////////////////////////////////////////////////////////////////
 
 
     public Employee collectEmployeeData(){
@@ -157,6 +157,41 @@ public class EmployeeManagement {
 
 
 
+//////////// TERMINATE AN EMPLOYEE /////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Seleccionamos el empleado que deseamos dar de baja
+     */
+
+    public void terminateAnEmployee() {
+
+        Scanner sc = new Scanner(System.in);
+
+        FilesManagement fm = new FilesManagement();
+        String path = ".\\src\\files\\Employee";
+        String tempPath = ".\\src\\files\\temp\\EmployeeTemp";
+        String employeeDNI;
+
+        //Mostrar todos los empleados registrados
+        fm.showFileData(path);
+
+        //Elegir empleado al que deseamos dar de baja
+        System.out.println("Indique el empleado al que quiera dar de baja (DNI)");
+        employeeDNI = sc.nextLine();
+        fm.terminateAnEmployee(path, employeeDNI,tempPath);
+
+
+
+    }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
 
 }
