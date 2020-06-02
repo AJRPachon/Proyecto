@@ -27,6 +27,7 @@
  *
  */
 
+import BasicsClasses.Employee.Employee;
 import BasicsClasses.FoodstuffDrinks.Drink;
 import BasicsClasses.Orders.Order;
 import Management.EmployeeManagement;
@@ -88,6 +89,7 @@ public class Main {
                                 case 3:
                                     System.out.println("Asignar horario a empleado");
                                     //TODO asignar horario (No sé bien cómo hacerlo)
+                                    Employee emp = new Employee();
 
                                     break;
                                 case 4:
