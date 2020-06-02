@@ -153,6 +153,64 @@ public class ScheduleManagement {
 
     }
 
+///////// ASSIGN SCHEDULE //////////////////////////////////////////////////////////////////////////////////////////////
 
+
+    //TODO Verificar esto
+    /**
+     * Este metodo asigna a un empleado un horario
+     * @param employee
+     */
+
+    public void assignSchedule(Employee employee){
+
+        Schedule[] schedule;
+
+        schedule = employee.getSchedule();
+
+        int sDHour, sDMinute, eDHour, eDMinute;
+        int sDDay, sDMonth, eDDay, eDMonth;
+
+        for(int cont = 0; cont < schedule.length; cont++) {
+
+            System.out.println("Introduzca día de entrada");
+            sDDay = readDay();
+            schedule[cont].setSDDayOfSchedule(sDDay);
+
+            System.out.println("Introduzca mes de entrada");
+            sDMonth = readMonth();
+            schedule[cont].setSDMonthOfSchedule(sDMonth);
+
+            System.out.println("Introduzca hora de entrada");
+            sDHour = readHour();
+            schedule[cont].setSDHour(sDHour);
+
+            System.out.println("Introduzca minutos de entrada");
+            sDMinute = readMinute();
+            schedule[cont].setSDMinutes(sDMinute);
+
+            System.out.println("Introduzca día de salida");
+            eDDay = readDay();
+            schedule[cont].setEDDayOfSchedule(eDDay);
+
+            System.out.println("Introduzca mes de salida");
+            eDMonth = readMonth();
+            schedule[cont].setEDMonthOfSchedule(eDMonth);
+
+            System.out.println("Introduzca hora de salida");
+            eDHour = readHour();
+            schedule[cont].setEDHour(eDHour);
+
+            System.out.println("Introduzca minutos de salida");
+            eDMinute = readMinute();
+            schedule[cont].setEDMinutes(eDMinute);
+
+
+            schedule[cont].setWeekDay(EnumWeekDays.values()[cont]); //Introduce Lunes, Martes... en la posicion del contador
+
+            employee.setSchedule(schedule[cont], cont);
+
+        }
+    }
 
 }

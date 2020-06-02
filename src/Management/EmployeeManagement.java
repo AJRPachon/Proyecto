@@ -5,6 +5,7 @@ import BasicsClasses.Employee.Enums.EnumCategory;
 import BasicsClasses.Employee.Enums.EnumPosition;
 import BasicsClasses.Employee.Payslip;
 import BasicsClasses.Employee.Schedule;
+import BasicsClasses.Orders.Order;
 
 import javax.sound.midi.Soundbank;
 import java.io.*;
@@ -59,7 +60,8 @@ public class EmployeeManagement {
         return category;
     }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+///////// ENCRIPT PASSWORD ////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      * @param password
@@ -84,7 +86,7 @@ public class EmployeeManagement {
     }
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////// COLLECT EMPLOYEE DATA /////////////////////////////////////////////////////////////////////////////////////
 
 
     public Employee collectEmployeeData(){
@@ -104,7 +106,7 @@ public class EmployeeManagement {
         surname = sc.nextLine();
 
         System.out.println("Employee DNI");
-        dNI = sc.nextLine();
+        dNI = VA.readAndValidateUsername();
 
         System.out.println("Employee NAF");
         nAF = sc.nextLine();
@@ -133,7 +135,6 @@ public class EmployeeManagement {
         //TODO Create enum with all months?
         birthday.set(day, month,year);
 
-        //TODO EnumPosition is correct?
         System.out.println("Employee position");
         position = sc.nextLine();
         EnumPosition.valueOf(position);
@@ -153,9 +154,9 @@ public class EmployeeManagement {
 
     }
 
+
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
 
 }

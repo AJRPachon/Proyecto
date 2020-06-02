@@ -4,15 +4,15 @@ import BasicsClasses.Employee.Employee;
 import BasicsClasses.Employee.Enums.EnumCategory;
 import BasicsClasses.Employee.Enums.EnumPosition;
 import java.io.*;
+
+import BasicsClasses.Employee.Payslip;
 import BasicsClasses.FoodstuffDrinks.Product;
 import BasicsClasses.Orders.Order;
-import BasicsClasses.Orders.OrderLine;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
-import BasicsClasses.Employee.Enums.EnumWeekDays;
-import java.util.GregorianCalendar;
+
 
 
 public class FilesManagement {
@@ -66,6 +66,9 @@ public class FilesManagement {
 
     }
 
+
+/////////// CHECK FILE //////////////////////////////////////////////////////////////////////////////////////////////
+
     /**
      * This method check if the file passed by parameter exist. If not exist this file, this method create it.
      * @param file File to check
@@ -80,6 +83,9 @@ public class FilesManagement {
             }
         }
     }
+
+
+/////////// CHECK FILE EMPLOYEE //////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      * This method checks if an employee file exists and it contains at least one employee so that the program can start
@@ -109,6 +115,8 @@ public class FilesManagement {
         }
     }
 
+
+/////////// INSERT OBJETCT IN FILE //////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      * @param object
@@ -141,6 +149,9 @@ public class FilesManagement {
         return objectInserted;
     }
 
+
+/////////// INSERT OBJECT DELETED IN FILE //////////////////////////////////////////////////////////////////////////////////////////////
+
     /**
      * @param object
      * @param path
@@ -169,6 +180,9 @@ public class FilesManagement {
         return objectInserted;
     }
 
+
+/////////// INSERT OBJECT MODIFIED IN FILE //////////////////////////////////////////////////////////////////////////////////////////////
+
     /**
      * @param object
      * @param path
@@ -196,6 +210,9 @@ public class FilesManagement {
         }
         return objectInserted;
     }
+
+
+/////////// GET ORDERS NOT SHIPPED //////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      * @param path
@@ -232,6 +249,9 @@ public class FilesManagement {
         return ordersNotShipped;
     }
 
+
+/////////// READ AND SEARCH PRODUCT //////////////////////////////////////////////////////////////////////////////////////////////
+
     /**
      * @return
      */
@@ -257,6 +277,8 @@ public class FilesManagement {
 
     }
 
+
+/////////// GET PRODUCT FROM FILE //////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      * @param ID
@@ -290,6 +312,7 @@ public class FilesManagement {
     }
 
 
+/////////// PRINT PERSONAL DATA //////////////////////////////////////////////////////////////////////////////////////////////
     /**
      * @param DNIEmployee
      * @param path
@@ -329,6 +352,96 @@ public class FilesManagement {
         }
     }
 
+
+/////////// MODIFY SALARY //////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Este metodo crea el nuevo objeto modificado y lo inserta en el archivo temporal
+     *
+     * @param path
+     * @param dNI
+     * @param salary
+     * @param tempPath
+     */
+
+    public void insertSalary(String path, String dNI, double salary, String tempPath){
+
+        String line;
+        String contenido;
+        Employee employee;
+        Payslip payslip;
+        String[] separaciones;
+
+
+        FileReader fr;
+        BufferedReader br;
+
+
+        try{
+
+            fr = new FileReader(path);
+            br = new BufferedReader(fr);
+
+            line = br.readLine();
+
+            while (line != null) {
+                separaciones = line.split("#");
+                contenido = separaciones[3];  //DNI se encuentra en la posición 3
+
+                //Si contenido es igual a nuestro DNI, creamos un objeto empleado con los valores recogidos
+                if( contenido.equals(dNI) ){
+
+                    employee = new Employee(separaciones[0],separaciones[1],separaciones[2],separaciones[3],new GregorianCalendar(),EnumPosition.valueOf(separaciones[5]),EnumCategory.valueOf(separaciones[6]),separaciones[7],separaciones[8]);
+
+                    //Creamos un objeto payslip y le pasamos nuestro empleado y el salary que deseamos asignarle
+                    payslip = new Payslip(salary, employee);
+
+                    //Una vez hecho esto, metemos nuestro objeto payslip en el archivo temporal
+                    insertObjectModifiedInFile(payslip, tempPath);
+
+                }
+
+                line = br.readLine();
+            }
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+    }
+
+
+/////////// SHOW FILE DATA //////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Muestra el contenido de un archivo
+     *
+     * @param path
+     */
+
+    public void showFileData(String path){
+
+        String line;
+
+        FileReader fr;
+        BufferedReader br;
+
+        try{
+
+            fr = new FileReader(path);
+            br = new BufferedReader(fr);
+
+            line = br.readLine();
+
+            while (line != null) {
+                System.out.println(line);
+            }
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+    }
 
 
 }

@@ -28,12 +28,10 @@
  */
 
 import BasicsClasses.Employee.Employee;
+import BasicsClasses.Employee.Payslip;
 import BasicsClasses.FoodstuffDrinks.Drink;
 import BasicsClasses.Orders.Order;
-import Management.EmployeeManagement;
-import Management.FilesManagement;
-import Management.OrderManagement;
-import Management.Validations;
+import Management.*;
 
 import java.util.ArrayList;
 
@@ -46,6 +44,7 @@ public class Main {
         EmployeeManagement EM = new EmployeeManagement();
         Validations VD = new Validations();
         OrderManagement OM = new OrderManagement();
+        PaySlipManagement PM = new PaySlipManagement();
 
         FM.checkFiles();
         String username, password, permisons, DNIToConsultData;
@@ -82,6 +81,8 @@ public class Main {
                                     FM.insertObjectInFile(EM.collectEmployeeData(), path); //Pedimos datos y registramos nuevo empleado en el fichero
 
                                     break;
+
+
                                 case 2:
                                     System.out.println("Dar de baja a empleado");
                                     break;
@@ -89,9 +90,11 @@ public class Main {
                                 case 3:
                                     System.out.println("Asignar horario a empleado");
                                     //TODO asignar horario (No sé bien cómo hacerlo)
-                                    Employee emp = new Employee();
+
 
                                     break;
+
+
                                 case 4:
                                     System.out.println("Modificar horario de empleado");
                                     //TODO Se hace igual que asignar horario a empleado
@@ -99,10 +102,11 @@ public class Main {
 
 
                                 case 5: //Modificar sueldo a empleado
-
-
+                                    PM.modifySalary();
 
                                     break;
+
+
                                 case 6:
                                     System.out.println();
                                     DNIToConsultData = VD.readAndValidateUsername();
