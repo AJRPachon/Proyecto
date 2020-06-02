@@ -241,16 +241,13 @@ public class Schedule {
     }
 
 
-
-
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
     public String toString(){
 
-        return weekDay.toString()+"#"+getSDDayOfSchedule()+"/"+getSDMonthOfSchedule()+"/"+getSDYearOfSchedule()+" "+getSDHour()+":"+getSDMinutes()+"#"+
-                getEDDayOfSchedule()+"/"+getEDMonthOfSchedule()+"/"+getEDYearOfSchedule()+" "+getEDHour()+":"+getEDMinutes();
+        return employee.toString()+"#"+weekDay.toString()+"#"+getSDDayOfSchedule()+"/"+getSDMonthOfSchedule()+"/"+getSDYearOfSchedule()+"#"+getSDHour()+":"+getSDMinutes()+"#"+
+                getEDDayOfSchedule()+"/"+getEDMonthOfSchedule()+"/"+getEDYearOfSchedule()+"#"+getEDHour()+":"+getEDMinutes();
 
     }
 

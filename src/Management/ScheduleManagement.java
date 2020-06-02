@@ -4,9 +4,6 @@ import BasicsClasses.Employee.Employee;
 import BasicsClasses.Employee.Enums.EnumWeekDays;
 import BasicsClasses.Employee.Schedule;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
@@ -107,66 +104,18 @@ public class ScheduleManagement {
     }
 
 
-/////////// SCHEDULE FILE IN ///////////////////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * This method implements in the file the toString corresponding to the schedule
-     *
-     * @param path
-     */
-
-    public void scheduleFileIn(String path) {
-
-        Schedule schedule = new Schedule();
-
-        FileWriter fw = null;
-        BufferedWriter bw = null;
-
-        //IMPLEMENT IN THE FILE
-
-        try {
-
-            File fileSchedule = new File(path);
-
-            //If the file does not exist it is created
-            if (!fileSchedule.exists()) {
-                fileSchedule.createNewFile();
-            }
-
-            fw = new FileWriter(fileSchedule);
-            bw = new BufferedWriter(fw);
-            bw.write(schedule.toString());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        } finally {
-            try {
-
-                bw.close();
-                fw.close();
-
-            } catch (Exception ebwfw) {
-                ebwfw.printStackTrace();
-            }
-        }
-
-    }
-
 ///////// ASSIGN SCHEDULE //////////////////////////////////////////////////////////////////////////////////////////////
 
 
     //TODO Verificar esto
     /**
      * Este metodo asigna a un empleado un horario
-     * @param employee
+     *
      */
 
-    public void assignSchedule(Employee employee){
+    public Schedule[] assignSchedule(){
 
-        Schedule[] schedule;
-
-        schedule = employee.getSchedule();
+        Schedule[] schedule = new Schedule[7];
 
         int sDHour, sDMinute, eDHour, eDMinute;
         int sDDay, sDMonth, eDDay, eDMonth;
@@ -207,10 +156,31 @@ public class ScheduleManagement {
 
 
             schedule[cont].setWeekDay(EnumWeekDays.values()[cont]); //Introduce Lunes, Martes... en la posicion del contador
-
-            employee.setSchedule(schedule[cont], cont);
+            schedule[cont].setSDYearOfSchedule(GregorianCalendar.YEAR);
+            schedule[cont].setEDYearOfSchedule(GregorianCalendar.YEAR);
 
         }
+
+        return schedule;
+    }
+
+
+///////// MOSTRAR HORARIO EMPLEADOS //////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void showEmployeeSchedule(){
+
+        Scanner sc = new Scanner(System.in);
+
+        FilesManagement fm = new FilesManagement();
+        String path = ".\\src\\files\\Schedules";
+        String tempPath = ".\\src\\files\\temp\\SchedulesTemp";
+        String employeeDNI;
+
+        fm.showFileData(path);
+        System.out.println("Introduzca el dni del empleado al que desea asignar un horario");
+        employeeDNI = sc.nextLine();
+        fm.insertNewSchedule(path,employeeDNI,tempPath);
+
     }
 
 }

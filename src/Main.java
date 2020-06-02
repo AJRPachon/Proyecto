@@ -29,6 +29,7 @@
 
 import BasicsClasses.Employee.Employee;
 import BasicsClasses.Employee.Payslip;
+import BasicsClasses.Employee.Schedule;
 import BasicsClasses.FoodstuffDrinks.Drink;
 import BasicsClasses.Orders.Order;
 import Management.*;
@@ -45,6 +46,7 @@ public class Main {
         Validations VD = new Validations();
         OrderManagement OM = new OrderManagement();
         PaySlipManagement PM = new PaySlipManagement();
+        ScheduleManagement SM = new ScheduleManagement();
 
         FM.checkFiles();
         String username, password, permisons, DNIToConsultData;
@@ -88,9 +90,11 @@ public class Main {
                                     EM.terminateAnEmployee();
                                     break;
 
+
                                 case 3:
                                     System.out.println("Asignar horario a empleado");
                                     //TODO asignar horario (No sé bien cómo hacerlo)
+                                    SM.showEmployeeSchedule();
 
 
                                     break;

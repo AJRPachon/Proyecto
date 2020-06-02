@@ -3,18 +3,13 @@ package Management;
 import BasicsClasses.Employee.Employee;
 import BasicsClasses.Employee.Enums.EnumCategory;
 import BasicsClasses.Employee.Enums.EnumPosition;
-import BasicsClasses.Employee.Payslip;
 import BasicsClasses.Employee.Schedule;
-import BasicsClasses.Orders.Order;
 
-import javax.sound.midi.Soundbank;
 import java.io.*;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.SQLOutput;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
@@ -150,7 +145,7 @@ public class EmployeeManagement {
         password = VA.readAndValidatePassword(); //Validamos la contraseña
 
 
-        return new Employee(name, surname,dNI,nAF,birthday, EnumPosition.valueOf(position), EnumCategory.valueOf(category),bankAccountN,password);
+        return new Employee(name, surname,dNI,nAF,birthday, EnumPosition.valueOf(position), EnumCategory.valueOf(category),bankAccountN,password, new Schedule[7]);
 
     }
 
@@ -178,7 +173,7 @@ public class EmployeeManagement {
         //Elegir empleado al que deseamos dar de baja
         System.out.println("Indique el empleado al que quiera dar de baja (DNI)");
         employeeDNI = sc.nextLine();
-        fm.terminateAnEmployee(path, employeeDNI,tempPath);
+        fm.selectEmployeeToTerminate(path, employeeDNI,tempPath);
 
     }
 

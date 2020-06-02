@@ -5,7 +5,9 @@ import BasicsClasses.Employee.Enums.EnumCategory;
 import BasicsClasses.Employee.Enums.EnumPosition;
 import java.io.*;
 
+import BasicsClasses.Employee.Enums.EnumWeekDays;
 import BasicsClasses.Employee.Payslip;
+import BasicsClasses.Employee.Schedule;
 import BasicsClasses.FoodstuffDrinks.Product;
 import BasicsClasses.Orders.Order;
 
@@ -101,7 +103,7 @@ public class FilesManagement {
                 file.createNewFile();
 
                 BW = new BufferedWriter(new FileWriter(file));
-                BW.write(new Employee("Administrator","Administrator","00000000T","281234567840",new GregorianCalendar(),EnumPosition.Manager,EnumCategory.Administrator,"ES3231906288456991923866","e807f1fcf82d132f9bb018ca6738a19f").toString());
+                BW.write(new Employee("Administrator","Administrator","00000000T","281234567840",new GregorianCalendar(),EnumPosition.Manager,EnumCategory.Administrator,"ES3231906288456991923866","e807f1fcf82d132f9bb018ca6738a19f", new Schedule[7]).toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -394,7 +396,7 @@ public class FilesManagement {
 
                     birthday = assignBirthday(separaciones);
 
-                    employee = new Employee(separaciones[0],separaciones[1],separaciones[2],separaciones[3],birthday,EnumPosition.valueOf(separaciones[5]),EnumCategory.valueOf(separaciones[6]),separaciones[7],separaciones[8]);
+                    employee = new Employee(separaciones[0],separaciones[1],separaciones[2],separaciones[3],birthday,EnumPosition.valueOf(separaciones[5]),EnumCategory.valueOf(separaciones[6]),separaciones[7],separaciones[8], new Schedule[7]);
 
                     //Creamos un objeto payslip y le pasamos nuestro empleado y el salary que deseamos asignarle
                     payslip = new Payslip(salary, employee);
@@ -426,7 +428,7 @@ public class FilesManagement {
      * @param tempPath
      */
 
-    public void terminateAnEmployee(String path, String dNI, String tempPath){
+    public void selectEmployeeToTerminate(String path, String dNI, String tempPath){
 
         String line;
         String contenido;
@@ -454,10 +456,77 @@ public class FilesManagement {
                     //Separamos el String de la fecha en sus distintos numeros
                     birthday = assignBirthday(separaciones);
 
-                    employee = new Employee(separaciones[0],separaciones[1],separaciones[2],separaciones[3],birthday,EnumPosition.valueOf(separaciones[5]),EnumCategory.valueOf(separaciones[6]),separaciones[7],separaciones[8]);
+                    employee = new Employee(separaciones[0],separaciones[1],separaciones[2],separaciones[3],birthday,EnumPosition.valueOf(separaciones[5]),EnumCategory.valueOf(separaciones[6]),separaciones[7],separaciones[8], new Schedule[7]);
 
                     //Insertamos el empleado que deseamos dar de baja en nuestro archivo temporal con nuestra marca de borrado
                     insertObjectDeletedInFile(employee, tempPath);
+
+                }
+
+                line = br.readLine();
+            }
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+    }
+
+
+/////////// INSERT NEW SCHEDULE ////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Este metodo crea el nuevo objeto modificado y lo inserta en el archivo temporal
+     *
+     * @param path
+     * @param dNI
+     * @param tempPath
+     */
+
+    public void insertNewSchedule(String path, String dNI, String tempPath){
+
+        String line;
+        String contenido;
+        Employee employee;
+        Schedule[] schedule;
+        String[] separaciones;
+        GregorianCalendar birthday;
+
+        ScheduleManagement sm =  new ScheduleManagement();
+
+        FileReader fr;
+        BufferedReader br;
+
+
+        try{
+
+            fr = new FileReader(path);
+            br = new BufferedReader(fr);
+
+            line = br.readLine();
+
+            while (line != null) {
+                separaciones = line.split("#");
+                contenido = separaciones[3];  //DNI se encuentra en la posición 3
+
+                //Si contenido es igual a nuestro DNI, creamos un objeto empleado con los valores recogidos
+                if( contenido.equals(dNI) ){
+
+                    birthday = assignBirthday(separaciones);
+
+                    schedule = sm.assignSchedule();
+                    employee = new Employee(separaciones[0],separaciones[1],separaciones[2],separaciones[3],birthday,EnumPosition.valueOf(separaciones[5]),EnumCategory.valueOf(separaciones[6]),separaciones[7],separaciones[8],schedule);
+
+                    //Creamos un objeto schedule y le pasamos nuestro empleado
+                    schedule = sm.assignSchedule();
+
+                    for(int cont = 0; cont < schedule.length; cont++) {
+
+                        schedule[cont] = new Schedule(schedule[cont].getWeekDay(), schedule[cont].getStartDate(), schedule[cont].getEndDate(), employee);
+
+                        //Una vez hecho esto, metemos nuestro objeto schedule en el archivo temporal
+                        insertObjectModifiedInFile(schedule[cont], tempPath);
+                    }
 
                 }
 
@@ -536,4 +605,25 @@ public class FilesManagement {
     }
 
 
+/////////// DEVOLVER HORARIO //////////////////////////////////////////////////////////////////////////////////////////////
+    /*
+    public Schedule[] devolverHorario(String[] separaciones){
+
+        String[] calendarioString;
+        Schedule[] schedule = new Schedule[7];
+        int[] enteros = new int[3];
+
+        calendarioString = separaciones[9].split("/");
+
+        for(int cont = 0; cont < calendarioString.length; cont++){
+            enteros[cont] = Integer.parseInt(calendarioString[cont]);
+            schedule[cont].set
+        }
+
+
+
+        return schedule;
+    }
+
+*/
 }

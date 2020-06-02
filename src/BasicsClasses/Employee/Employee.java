@@ -104,11 +104,11 @@ public class Employee {
         this.category = EnumCategory.Spaguetti;
         this.bankAccountN = "default";
         this.password = "default";
-        this.schedule = new Schedule[0];
+        this.schedule = new Schedule[7];
 
     }
 
-    public Employee(String name, String surname, String dNI, String nAF, GregorianCalendar birthday, EnumPosition position, EnumCategory category, String bankAccountN, String password){ //Constructor with parameters
+    public Employee(String name, String surname, String dNI, String nAF, GregorianCalendar birthday, EnumPosition position, EnumCategory category, String bankAccountN, String password, Schedule[] schedule){ //Constructor with parameters
 
         this.name = name;
         this.surname = surname;
@@ -119,7 +119,7 @@ public class Employee {
         this.category = category;
         this.bankAccountN = bankAccountN;
         this.password = password;
-        this.schedule = new Schedule[7];
+        this.schedule = schedule;
 
 
     }
