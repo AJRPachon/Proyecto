@@ -216,6 +216,7 @@ public class Main {
                                     break;
                                 case 9:
                                     System.out.println("Ver datos personales administrador");
+                                    FM.showPersonalData(pathFileEmployee,username);
                                     break;
                                 case 10:
                                     System.out.println("Consultar sus horarios");
