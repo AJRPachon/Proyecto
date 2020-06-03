@@ -118,6 +118,12 @@ public class Main {
                                 case 4:
                                     System.out.println("Modificar horario de empleado");
                                     //TODO Se hace igual que asignar horario a empleado pero tendría que poderse cambiar sólo X días seleccionados
+                                    FM.showFileData(pathFileEmployee); //Mostramos todos los empleados
+                                    System.out.println("Introduzca el DNI del empleado al que desea asignar un horario");
+                                    employeeDNI = VD.readAndValidateUsername(); //Seleccionamos el dni del empleado al cual queremos cambiarle el horario
+                                    schedule = SM.getScheduleData(); //Creamos un nuevo horario
+                                    FM.insertEmployeeOnSchedule(pathSchedule, employeeDNI, parthScheduleTemp, schedule); //Insertamos los nuevos datos modificados en el fichero temporal
+
                                     break;
 
 
@@ -258,6 +264,12 @@ public class Main {
 
                             case 3:
                                 System.out.println("Modificar horario de empleado");
+                                //TODO Se hace igual que asignar horario a empleado pero tendría que poderse cambiar sólo X días seleccionados
+                                FM.showFileData(pathFileEmployee); //Mostramos todos los empleados
+                                System.out.println("Introduzca el DNI del empleado al que desea asignar un horario");
+                                employeeDNI = VD.readAndValidateUsername(); //Seleccionamos el dni del empleado al cual queremos cambiarle el horario
+                                schedule = SM.getScheduleData(); //Creamos un nuevo horario
+                                FM.insertEmployeeOnSchedule(pathSchedule, employeeDNI, parthScheduleTemp, schedule); //Insertamos los nuevos datos modificados en el fichero temporal
 
 
                             break;
