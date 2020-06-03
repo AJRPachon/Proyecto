@@ -92,7 +92,8 @@ public class Main {
 
                                 case 2:
                                     System.out.println("Dar de baja a empleado");
-                                    employeeDNI = EM.selectDNI(pathFileEmployee); //Seleccionamos el dni del empleado que deseamos dar de baja
+                                    FM.showFileData(pathFileEmployee);
+                                    employeeDNI = VD.readAndValidateUsername(); //Seleccionamos el dni del empleado que deseamos dar de baja
                                     employee = FM.getSelectedEmployee(pathFileEmployee, employeeDNI); //Obtenemos el objeto empleado
                                     FM.insertObjectDeletedInFile(employee, pathFileEmployeeTemp); //Marcamos el objeto como borrado y lo insertamos en el fichero temporal
 
@@ -102,6 +103,8 @@ public class Main {
                                 case 3:
                                     System.out.println("Asignar horario a empleado");
                                     //TODO asignar horario (No sé bien cómo hacerlo)
+                                    FM.showFileData(pathFileEmployee);
+                                    employeeDNI = VD.readAndValidateUsername();
                                     SM.showEmployeeSchedule();
 
 
@@ -115,7 +118,8 @@ public class Main {
 
 
                                 case 5: //Modificar sueldo a empleado
-                                    employeeDNI = EM.selectDNI(pathPaySlips); //Lee el dni del empleado
+                                    FM.showFileData(pathPaySlips);
+                                    employeeDNI = VD.readAndValidateUsername(); //Lee el dni del empleado
                                     salary = PM.assignSalary();  //Asignamos el nuevo salario
                                     payslip = FM.insertSalary(pathPaySlips, employeeDNI, salary); //Creamos un objeto payslip con el nuevo salario
                                     FM.insertObjectModifiedInFile(payslip, pathPaySlipsTemp ); //Añadimos al fichero temporal el nuevo objeto modificado para luego añadirlo al fichero maestro

@@ -151,34 +151,6 @@ public class EmployeeManagement {
 
 
 
-
-/////////// SELECT DNI /////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * Selecciona un DNI de un empleado
-     * @param path
-     * @return
-     */
-
-    public String selectDNI(String path){
-
-        Scanner sc = new Scanner(System.in);
-
-        FilesManagement fm = new FilesManagement();
-        String employeeDNI;
-
-
-        //Mostrar todos los empleados registrados
-        fm.showFileData(path);
-
-        //Elegir empleado al que deseamos modificar el salario
-        employeeDNI = sc.nextLine();
-
-        return employeeDNI;
-
-    }
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
