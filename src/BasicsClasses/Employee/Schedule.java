@@ -35,14 +35,12 @@ package BasicsClasses.Employee;
  *
  *
  *   ADDED METHODS:
- *       - consultShedule() ( Displays the time, day and shift on the screen )
- *       - assignShedule() TODO
+ *
  *
  */
 
 
 import BasicsClasses.Employee.Enums.EnumWeekDays;
-import Management.ScheduleManagement;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -203,7 +201,7 @@ public class Schedule {
     @Override
     public String toString(){
 
-        return employee.toString()+"#"+weekDay.toString()+"#"+getSDDayOfSchedule()+"/"+getSDMonthOfSchedule()+"/"+getSDYearOfSchedule()+"#"+getSDHour()+":"+getSDMinutes()+"#"+
+        return employee.getDNI()+"#"+weekDay.toString()+"#"+getSDDayOfSchedule()+"/"+getSDMonthOfSchedule()+"/"+getSDYearOfSchedule()+"#"+getSDHour()+":"+getSDMinutes()+"#"+
                 getEDDayOfSchedule()+"/"+getEDMonthOfSchedule()+"/"+getEDYearOfSchedule()+"#"+getEDHour()+":"+getEDMinutes();
 
     }

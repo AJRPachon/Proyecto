@@ -488,17 +488,15 @@ public class FilesManagement {
      * @param tempPath
      */
 
-    public void insertNewSchedule(String path, String dNI, String tempPath){
+    public void insertEmployeeOnSchedule(String path, String dNI, String tempPath, Schedule[] schedule){
 
         String line;
         String contenido;
         Employee employee;
-        Schedule[] schedule;
-        Schedule newSchedule;
+        Schedule[] newSchedule = new Schedule[schedule.length];
         String[] separaciones;
         GregorianCalendar birthday;
-
-        ScheduleManagement sm =  new ScheduleManagement();
+        boolean salir = false;
 
         FileReader fr;
         BufferedReader br;
@@ -516,22 +514,24 @@ public class FilesManagement {
                 contenido = separaciones[3];  //DNI se encuentra en la posición 3
 
                 //Si contenido es igual a nuestro DNI, creamos un objeto empleado con los valores recogidos
-                if( contenido.equals(dNI) ){
+                if( contenido.equals(dNI) && !salir ){
 
                     birthday = assignBirthday(separaciones);
 
                     employee = new Employee(separaciones[0],separaciones[1],separaciones[2],separaciones[3],birthday,EnumPosition.valueOf(separaciones[5]),EnumCategory.valueOf(separaciones[6]),separaciones[7],separaciones[8]);
 
-                    //Creamos un objeto schedule y le pasamos nuestro empleado
-                    schedule = sm.obtenerDatosHorario();
 
                     for(int cont = 0; cont < schedule.length; cont++) {
 
-                        newSchedule = new Schedule(schedule[cont].getWeekDay(), schedule[cont].getStartDate(), schedule[cont].getEndDate(), employee);
+                        newSchedule[cont] = new Schedule(schedule[cont].getWeekDay(), schedule[cont].getStartDate(), schedule[cont].getEndDate(), employee);
 
                         //Una vez hecho esto, metemos nuestro objeto schedule en el archivo temporal
-                        insertObjectModifiedInFile(newSchedule, tempPath);
+                        //En este caso, como hay que recorrer el array, lo insertamos directamente desde este método
+                        insertObjectModifiedInFile(newSchedule[cont], tempPath);
+
                     }
+
+                    salir = true;
 
                 }
 

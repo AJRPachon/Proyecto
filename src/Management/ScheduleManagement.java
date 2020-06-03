@@ -113,7 +113,7 @@ public class ScheduleManagement {
      *
      */
 
-    public Schedule[] obtenerDatosHorario(){
+    public Schedule[] getScheduleData(){
 
         Schedule[] schedule = new Schedule[7];
 
@@ -163,7 +163,7 @@ public class ScheduleManagement {
 
         return schedule;
     }
-    
+
 
 
 /////// CONSULT SHEDULE //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
