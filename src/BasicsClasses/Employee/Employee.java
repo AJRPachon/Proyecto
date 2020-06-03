@@ -124,6 +124,21 @@ public class Employee {
 
     }
 
+    public Employee(String name, String surname, String dNI, String nAF, GregorianCalendar birthday, EnumPosition position, EnumCategory category, String bankAccountN, String password){ //Constructor with parameters
+
+        this.name = name;
+        this.surname = surname;
+        this.dNI = dNI;
+        this.nAF = nAF;
+        this.birthday = birthday;
+        this.position = position;
+        this.category = category;
+        this.bankAccountN = bankAccountN;
+        this.password = password;
+        this.schedule = new Schedule[7];
+
+    }
+
 /////// BASIC METHODS ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public String getName() {

@@ -4,26 +4,26 @@ import java.util.Scanner;
 
 public class PaySlipManagement {
 
-    public void modifySalary(){
+    /**
+     * Asigna un salario y lo devulve como parametro
+     * @return
+     */
 
-        Scanner sc = new Scanner(System.in);
+    public double assignSalary(){
 
-        FilesManagement fm = new FilesManagement();
-        String path = ".\\src\\files\\Payslips";
-        String tempPath = ".\\src\\files\\temp\\PayslipsTemp";
-        String employeeDNI;
+        Scanner sc =  new Scanner(System.in);
+
         double salary;
 
-        //Mostrar todos los empleados registrados
-        fm.showFileData(path);
-
-        //Elegir empleado al que deseamos modificar el salario
-        employeeDNI = sc.nextLine();
-
-        System.out.println("Introduzca la cantidad para el nuevo salario (mensual)");
+        System.out.println("Inserte salario para el empleado seleccionado");
         salary = sc.nextDouble();
 
-        fm.insertSalary(path,employeeDNI,salary,tempPath);
+        while(salary <= 0){
+            System.out.println("El salario tiene que ser mayor que 0");
+            salary = sc.nextDouble();
+        }
+
+        return salary;
 
     }
 

@@ -145,43 +145,41 @@ public class EmployeeManagement {
         password = VA.readAndValidatePassword(); //Validamos la contraseña
 
 
-        return new Employee(name, surname,dNI,nAF,birthday, EnumPosition.valueOf(position), EnumCategory.valueOf(category),bankAccountN,password, new Schedule[7]);
+        return new Employee(name, surname,dNI,nAF,birthday, EnumPosition.valueOf(position), EnumCategory.valueOf(category),bankAccountN,password);
 
     }
 
 
 
 
-//////////// TERMINATE AN EMPLOYEE /////////////////////////////////////////////////////////////////////////////////////
+/////////// SELECT DNI /////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
-     * Seleccionamos el empleado que deseamos dar de baja
+     * Selecciona un DNI de un empleado
+     * @param path
+     * @return
      */
 
-    public void terminateAnEmployee() {
+    public String selectDNI(String path){
 
         Scanner sc = new Scanner(System.in);
 
         FilesManagement fm = new FilesManagement();
-        String path = ".\\src\\files\\Employee";
-        String tempPath = ".\\src\\files\\temp\\EmployeeTemp";
         String employeeDNI;
+
 
         //Mostrar todos los empleados registrados
         fm.showFileData(path);
 
-        //Elegir empleado al que deseamos dar de baja
-        System.out.println("Indique el empleado al que quiera dar de baja (DNI)");
+        //Elegir empleado al que deseamos modificar el salario
         employeeDNI = sc.nextLine();
-        fm.selectEmployeeToTerminate(path, employeeDNI,tempPath);
+
+        return employeeDNI;
 
     }
 
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
 
 
 

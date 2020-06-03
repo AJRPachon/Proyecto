@@ -29,8 +29,6 @@
 
 import BasicsClasses.Employee.Employee;
 import BasicsClasses.Employee.Payslip;
-import BasicsClasses.Employee.Schedule;
-import BasicsClasses.FoodstuffDrinks.Drink;
 import BasicsClasses.Orders.Order;
 import Management.*;
 
@@ -50,10 +48,16 @@ public class Main {
 
         FM.checkFiles();
         String username, password, permisons, DNIToConsultData;
-        String pathFileEmployee = ".\\src\\Files\\Employees", pathFileOrdersTemp = ".\\src\\Files\\tmp\\OrdersTemp", pathFileOrders = ".\\src\\Files\\Orders";
+        String pathFileEmployee = ".\\src\\Files\\Employees", pathFileEmployeeTemp = ".\\src\\files\\temp\\EmployeesTemp", pathFileOrdersTemp = ".\\src\\Files\\tmp\\OrdersTemp", pathFileOrders = ".\\src\\Files\\Orders";
+        String pathPaySlips = ".\\src\\files\\Payslips", pathPaySlipsTemp = ".\\src\\files\\temp\\PayslipsTemp";
         Order newOrder, orderChoosed;
         ArrayList<Order> ordersNotShipped;
         int optionPermisons, optionModifyOrder, IDProductToDelete, IDProductToDecrease, amountToDecrease, IDProductToIncrease, amountToIncrease;
+        String employeeDNI;
+        double salary;
+
+        Payslip payslip;
+        Employee employee;
 
         do {
 
@@ -80,14 +84,18 @@ public class Main {
 
                                 case 1: //Dar de alta a un empleado
                                     String path = ".\\src\\files\\EmployeesTemp";
-                                    FM.insertObjectInFile(EM.collectEmployeeData(), path); //Pedimos datos y registramos nuevo empleado en el fichero
+                                    employee = EM.collectEmployeeData(); //Pedimos datos del nuevo empleado
+                                    FM.insertObjectInFile(employee, path); //Registramos nuevo empleado en el fichero
 
                                     break;
 
 
                                 case 2:
                                     System.out.println("Dar de baja a empleado");
-                                    EM.terminateAnEmployee();
+                                    employeeDNI = EM.selectDNI(pathFileEmployee); //Seleccionamos el dni del empleado que deseamos dar de baja
+                                    employee = FM.getSelectedEmployee(pathFileEmployee, employeeDNI); //Obtenemos el objeto empleado
+                                    FM.insertObjectDeletedInFile(employee, pathFileEmployeeTemp); //Marcamos el objeto como borrado y lo insertamos en el fichero temporal
+
                                     break;
 
 
@@ -107,7 +115,10 @@ public class Main {
 
 
                                 case 5: //Modificar sueldo a empleado
-                                    PM.modifySalary();
+                                    employeeDNI = EM.selectDNI(pathPaySlips); //Lee el dni del empleado
+                                    salary = PM.assignSalary();  //Asignamos el nuevo salario
+                                    payslip = FM.insertSalary(pathPaySlips, employeeDNI, salary); //Creamos un objeto payslip con el nuevo salario
+                                    FM.insertObjectModifiedInFile(payslip, pathPaySlipsTemp ); //Añadimos al fichero temporal el nuevo objeto modificado para luego añadirlo al fichero maestro
 
                                     break;
 

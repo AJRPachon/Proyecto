@@ -195,50 +195,7 @@ public class Schedule {
 
 
 /////// ADDED METHODS ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////// CONSULT SHEDULE //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /*
-        SIGNATURE:
-            public void consultSchedule()
-
-        COMENTARY:
-            - Displays the employee's schedule on screen
-
-        INPUTS:
-            - Not one
-
-        OUTPUTS:
-            - Not one (On-screen display)
-
-        INTPUT/OUTPUT:
-            - Not one
-
-        PRECONDITION:
-            - Not one
-
-        POSTCONDITION:
-            - Printed schedule must be displayed
-
-     */
-
-    public void consultSchedule(){ //TODO
-
-        //Day of the week
-        for (int cont = 0; cont < 7; cont++){
-
-            System.out.print(EnumWeekDays.getWeekDay(cont)+"  |  ");
-
-        }
-
-        System.out.println();
-
-        for (int cont = 0; cont < 7; cont++){
-
-            System.out.print(getSDHour()+":"+getSDMinutes()+ "\n"+getEDHour()+":"+getEDMinutes());
-
-        }
-
-    }
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
