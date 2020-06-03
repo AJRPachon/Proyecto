@@ -244,17 +244,34 @@ public class Main {
                             case 1:
                                 System.out.println("Ver datos personales del empleado");
                             break;
+
+
                             case 2:
                                 System.out.println("Asignar horario a empleado");
+                                FM.showFileData(pathFileEmployee); //Mostramos todos los empleados
+                                System.out.println("Introduzca el DNI del empleado al que desea asignar un horario");
+                                employeeDNI = VD.readAndValidateUsername(); //Seleccionamos el dni del empleado al cual queremos cambiarle el horario
+                                schedule = SM.getScheduleData(); //Creamos un nuevo horario
+                                FM.insertEmployeeOnSchedule(pathSchedule, employeeDNI, parthScheduleTemp, schedule); //Insertamos los nuevos datos modificados en el fichero temporal
                             break;
+
+
                             case 3:
                                 System.out.println("Modificar horario de empleado");
+
+
                             break;
+
+
                             case 4:
                                 System.out.println("Ver datos personales floor manager");
+                                FM.showPersonalData(pathFileEmployee,username);
                             break;
+
+
                             case 5:
                                 System.out.println("Consultar sus horarios");
+                                FM.getScheduleFromFile(pathSchedule,username);
                             break;
                         }
 
@@ -268,11 +285,17 @@ public class Main {
                             case 0:
                                 System.out.println("Session closed.");
                             break;
+
                             case 1:
                                 System.out.println("Ver datos personales del empleado");
+                                FM.showPersonalData(pathFileEmployee,username);
+
                             break;
+
+
                             case 2:
                                 System.out.println("Consultar sus horarios");
+                                FM.getScheduleFromFile(pathSchedule,username);
                             break;
                         }
 
