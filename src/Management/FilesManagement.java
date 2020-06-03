@@ -611,60 +611,16 @@ public class FilesManagement {
     }
 
 
-/////////// SHOW PERSONAL DATA /////////////////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * Muestra los datos personales del empleado seleccionado
-     * @param dNI
-     */
-
-    public void showPersonalData(String path, String dNI){
-
-        String line;
-        String contenido;
-        String[] separaciones;
-
-        FileReader fr;
-        BufferedReader br;
-
-
-        try{
-
-            fr = new FileReader(path);
-            br = new BufferedReader(fr);
-
-            line = br.readLine();
-
-            while (line != null) {
-                separaciones = line.split("#");
-                contenido = separaciones[2];  //DNI se encuentra en la posición 2
-
-                //Si contenido es igual a nuestro DNI
-                if( contenido.equals(dNI)){
-
-                    System.out.println(line);
-
-                }
-
-                line = br.readLine();
-
-            }
-
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-
-    }
-
 
 /////////// GET SCHEDULE FROM FILE /////////////////////////////////////////////////////////////////////////////////////
 
 
-    public void getScheduleFromFile(String path, String dNI){
+    public void printScheduleFromFile(String path, String dNI){
 
         String line;
         String contenido;
         String[] separaciones;
+        boolean impreso = false;
 
         FileReader fr;
         BufferedReader br;
@@ -684,7 +640,15 @@ public class FilesManagement {
                 //Si contenido es igual a nuestro DNI
                 if( contenido.equals(dNI)){
 
-                    System.out.println(line);
+                    System.out.println("Employee DNI: "+separaciones[0]);
+                    System.out.println("WeekDay: "+separaciones[1]);
+                    System.out.println("Start date: "+separaciones[2]);
+                    System.out.println("SD Time: "+separaciones[3]);
+                    System.out.println("End date "+separaciones[4]);
+                    System.out.println("ED Time: "+separaciones[5]);
+                    System.out.println();
+
+                    impreso = true;
 
                 }
 
@@ -692,10 +656,15 @@ public class FilesManagement {
 
             }
 
+            if (!impreso){
+                System.out.println("Employee was not found");
+            }
+
         }catch (IOException e){
             e.printStackTrace();
         }
 
     }
+
 
 }

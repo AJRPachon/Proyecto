@@ -62,7 +62,6 @@ public class Main {
         Payslip payslip;
         Employee employee;
         Schedule[] schedule;
-        Schedule[] newSchedule;
 
         do {
 
@@ -138,6 +137,7 @@ public class Main {
                                     FM.printPersonalData(DNIToConsultData,pathFileEmployee);
                                     System.out.println();
                                     break;
+
                                 case 7:
                                     newOrder = OM.readAndValidateNewOrder();
                                     if (!FM.insertObjectInFile(newOrder,pathFileOrdersTemp)) {
@@ -218,14 +218,14 @@ public class Main {
 
                                 case 9:
                                     System.out.println("Ver datos personales administrador");
-                                    FM.showPersonalData(pathFileEmployee,username);
+                                    FM.printPersonalData(username,pathFileEmployee);
 
                                     break;
 
 
                                 case 10:
                                     System.out.println("Consultar sus horarios");
-                                    FM.getScheduleFromFile(pathSchedule,username);
+                                    FM.printScheduleFromFile(pathSchedule,username);
                                     break;
                             }
 
@@ -265,13 +265,13 @@ public class Main {
 
                             case 4:
                                 System.out.println("Ver datos personales floor manager");
-                                FM.showPersonalData(pathFileEmployee,username);
+                                FM.printPersonalData(username, pathFileEmployee);
                             break;
 
 
                             case 5:
                                 System.out.println("Consultar sus horarios");
-                                FM.getScheduleFromFile(pathSchedule,username);
+                                FM.printScheduleFromFile(pathSchedule,username);
                             break;
                         }
 
@@ -288,14 +288,14 @@ public class Main {
 
                             case 1:
                                 System.out.println("Ver datos personales del empleado");
-                                FM.showPersonalData(pathFileEmployee,username);
+                                FM.printPersonalData(username,pathFileEmployee);
 
                             break;
 
 
                             case 2:
                                 System.out.println("Consultar sus horarios");
-                                FM.getScheduleFromFile(pathSchedule,username);
+                                FM.printScheduleFromFile(pathSchedule,username);
                             break;
                         }
 
