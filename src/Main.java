@@ -214,12 +214,18 @@ public class Main {
                                     FM.insertObjectModifiedInFile(orderChoosed,pathFileOrdersTemp);
                                     //Añadir al fichero las modificaciones del pedido
                                     break;
+
+
                                 case 9:
                                     System.out.println("Ver datos personales administrador");
                                     FM.showPersonalData(pathFileEmployee,username);
+
                                     break;
+
+
                                 case 10:
                                     System.out.println("Consultar sus horarios");
+                                    FM.getScheduleFromFile(pathSchedule,username);
                                     break;
                             }
 

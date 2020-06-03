@@ -637,7 +637,49 @@ public class FilesManagement {
 
             while (line != null) {
                 separaciones = line.split("#");
-                contenido = separaciones[2];  //DNI se encuentra en la posición 3
+                contenido = separaciones[2];  //DNI se encuentra en la posición 2
+
+                //Si contenido es igual a nuestro DNI
+                if( contenido.equals(dNI)){
+
+                    System.out.println(line);
+
+                }
+
+                line = br.readLine();
+
+            }
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+    }
+
+
+/////////// GET SCHEDULE FROM FILE /////////////////////////////////////////////////////////////////////////////////////
+
+
+    public void getScheduleFromFile(String path, String dNI){
+
+        String line;
+        String contenido;
+        String[] separaciones;
+
+        FileReader fr;
+        BufferedReader br;
+
+
+        try{
+
+            fr = new FileReader(path);
+            br = new BufferedReader(fr);
+
+            line = br.readLine();
+
+            while (line != null) {
+                separaciones = line.split("#");
+                contenido = separaciones[0];  //DNI se encuentra en la posición 0
 
                 //Si contenido es igual a nuestro DNI
                 if( contenido.equals(dNI)){
