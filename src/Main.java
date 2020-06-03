@@ -104,6 +104,7 @@ public class Main {
                                     System.out.println("Asignar horario a empleado");
                                     //TODO asignar horario (No sé bien cómo hacerlo)
                                     FM.showFileData(pathFileEmployee);
+                                    System.out.println("Introduzca el DNI del empleado al que desea asignar un horario");
                                     employeeDNI = VD.readAndValidateUsername();
                                     SM.showEmployeeSchedule();
 

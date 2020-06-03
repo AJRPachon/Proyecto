@@ -163,25 +163,7 @@ public class ScheduleManagement {
 
         return schedule;
     }
-
-
-///////// MOSTRAR HORARIO EMPLEADOS //////////////////////////////////////////////////////////////////////////////////////////////
-
-    public void showEmployeeSchedule(){
-
-        Scanner sc = new Scanner(System.in);
-
-        FilesManagement fm = new FilesManagement();
-        String path = ".\\src\\files\\Schedules";
-        String tempPath = ".\\src\\files\\temp\\SchedulesTemp";
-        String employeeDNI;
-
-        fm.showFileData(path);
-        System.out.println("Introduzca el dni del empleado al que desea asignar un horario");
-        employeeDNI = sc.nextLine();
-        fm.insertNewSchedule(path,employeeDNI,tempPath);
-
-    }
+    
 
 
 /////// CONSULT SHEDULE //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
