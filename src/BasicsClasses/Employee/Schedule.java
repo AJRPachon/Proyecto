@@ -35,8 +35,7 @@ package BasicsClasses.Employee;
  *
  *
  *   ADDED METHODS:
- *       - consultShedule() ( Displays the time, day and shift on the screen )
- *       - assignShedule() TODO
+ *
  *
  */
 
@@ -83,28 +82,17 @@ public class Schedule {
     }
 
 
+
     public GregorianCalendar getStartDate(){
         return this.startDate;
     }
-  
-    public GregorianCalendar getDate(){
-        return this.date;
-    }
+
 
     public void setStartDate(GregorianCalendar startDate){
         this.startDate = startDate;
     }
 
 
-    public int getHour(){ return this.date.get(Calendar.HOUR_OF_DAY); }
-
-    public void setHour(int hour){ this.date.set(Calendar.HOUR_OF_DAY, hour); }
-
-
-
-    public int getMinutes(){ return this.date.get(Calendar.MINUTE); }
-
-    public void setMinutes(int minute){ this.date.set(Calendar.MINUTE, minute); }
 
 
     public GregorianCalendar getEndDate(){
@@ -202,44 +190,6 @@ public class Schedule {
 
 
 /////// ADDED METHODS ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////// CONSULT SHEDULE //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /*
-        SIGNATURE:
-            public void consultSchedule()
-
-        COMENTARY:
-            - Displays the employee's schedule on screen
-
-        INPUTS:
-            - Not one
-
-        OUTPUTS:
-            - Not one (On-screen display)
-
-        INTPUT/OUTPUT:
-            - Not one
-
-        PRECONDITION:
-            - Not one
-
-        POSTCONDITION:
-            - Printed schedule must be displayed
-
-     */
-
-    public void consultSchedule(){ //TODO
-
-        //Day of the week
-        for (int cont = 0; cont < 7; cont++){
-
-            System.out.println(EnumWeekDays.getWeekDay(cont)+"  |  ");
-
-            System.out.println(getSDHour()+":"+getSDMinutes()+ "\n"+getEDHour()+":"+getEDMinutes());
-
-        }
-
-    }
 
 
 
@@ -248,8 +198,8 @@ public class Schedule {
     @Override
     public String toString(){
 
-        return weekDay.toString()+"#"+getSDDayOfSchedule()+"/"+getSDMonthOfSchedule()+"/"+getSDYearOfSchedule()+" "+getSDHour()+":"+getSDMinutes()+"#"+
-                getEDDayOfSchedule()+"/"+getEDMonthOfSchedule()+"/"+getEDYearOfSchedule()+" "+getEDHour()+":"+getEDMinutes();
+        return employee.getDNI()+"#"+weekDay.toString()+"#"+getSDDayOfSchedule()+"/"+getSDMonthOfSchedule()+"/"+getSDYearOfSchedule()+"#"+getSDHour()+":"+getSDMinutes()+"#"+
+                getEDDayOfSchedule()+"/"+getEDMonthOfSchedule()+"/"+getEDYearOfSchedule()+"#"+getEDHour()+":"+getEDMinutes();
 
     }
 

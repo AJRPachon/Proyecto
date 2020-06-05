@@ -27,11 +27,11 @@
  *
  */
 
+import BasicsClasses.Employee.Employee;
+import BasicsClasses.Employee.Payslip;
+import BasicsClasses.Employee.Schedule;
 import BasicsClasses.Orders.Order;
-import Management.EmployeeManagement;
-import Management.FilesManagement;
-import Management.OrderManagement;
-import Management.Validations;
+import Management.*;
 
 import java.util.ArrayList;
 
@@ -44,13 +44,24 @@ public class Main {
         EmployeeManagement EM = new EmployeeManagement();
         Validations VD = new Validations();
         OrderManagement OM = new OrderManagement();
+        PaySlipManagement PM = new PaySlipManagement();
+        ScheduleManagement SM = new ScheduleManagement();
 
         FM.checkFiles();
         String username, password, permisons, DNIToConsultData;
-        String pathFileEmployee = ".\\src\\Files\\Employees", pathFileOrdersTemp = ".\\src\\Files\\tmp\\OrdersTemp", pathFileOrders = ".\\src\\Files\\Orders";
+        String pathFileEmployee = ".\\src\\Files\\Employees", pathFileEmployeeTemp = ".\\src\\files\\temp\\EmployeesTemp";
+        String pathFileOrdersTemp = ".\\src\\Files\\tmp\\OrdersTemp", pathFileOrders = ".\\src\\Files\\Orders";
+        String pathPaySlips = ".\\src\\files\\Payslips", pathPaySlipsTemp = ".\\src\\files\\temp\\PayslipsTemp";
+        String pathSchedule = ".\\src\\files\\Schedule", parthScheduleTemp = ".\\src\\files\\temp\\ScheduleTemp";
         Order newOrder, orderChoosed;
         ArrayList<Order> ordersNotShipped;
         int optionPermisons, optionModifyOrder, IDProductToDelete, IDProductToDecrease, amountToDecrease, IDProductToIncrease, amountToIncrease;
+        String employeeDNI;
+        double salary;
+
+        Payslip payslip;
+        Employee employee;
+        Schedule[] schedule;
 
         do {
 
@@ -74,27 +85,67 @@ public class Main {
                                 case 0:
                                     System.out.println("Closed session.");
                                     break;
-                                case 1:
-                                    System.out.println("Dar de alta a empleado");
+
+
+                                case 1: //Dar de alta a un empleado
+                                    String path = ".\\src\\files\\EmployeesTemp";
+                                    employee = EM.collectEmployeeData(); //Pedimos datos del nuevo empleado
+                                    FM.insertObjectInFile(employee, path); //Registramos nuevo empleado en el fichero
+
+
                                     break;
+
+
                                 case 2:
                                     System.out.println("Dar de baja a empleado");
+                                    FM.showFileData(pathFileEmployee);
+                                    employeeDNI = VD.readAndValidateUsername(); //Seleccionamos el dni del empleado que deseamos dar de baja
+                                    employee = FM.getSelectedEmployee(pathFileEmployee, employeeDNI); //Obtenemos el objeto empleado
+                                    FM.insertObjectDeletedInFile(employee, pathFileEmployeeTemp); //Marcamos el objeto como borrado y lo insertamos en el fichero temporal
+
                                     break;
+
+
                                 case 3:
                                     System.out.println("Asignar horario a empleado");
+                                    FM.showFileData(pathFileEmployee); //Mostramos todos los empleados
+                                    System.out.println("Introduzca el DNI del empleado al que desea asignar un horario");
+                                    employeeDNI = VD.readAndValidateUsername(); //Seleccionamos el dni del empleado al cual queremos cambiarle el horario
+                                    schedule = SM.getScheduleData(); //Creamos un nuevo horario
+                                    FM.insertEmployeeOnSchedule(pathSchedule, employeeDNI, parthScheduleTemp, schedule); //Insertamos los nuevos datos modificados en el fichero temporal
+                                    
                                     break;
+
+
                                 case 4:
                                     System.out.println("Modificar horario de empleado");
+                                    //TODO Se hace igual que asignar horario a empleado pero tendría que poderse cambiar sólo X días seleccionados
+                                    FM.showFileData(pathFileEmployee); //Mostramos todos los empleados
+                                    System.out.println("Introduzca el DNI del empleado al que desea asignar un horario");
+                                    employeeDNI = VD.readAndValidateUsername(); //Seleccionamos el dni del empleado al cual queremos cambiarle el horario
+                                    schedule = SM.getScheduleData(); //Creamos un nuevo horario
+                                    FM.insertEmployeeOnSchedule(pathSchedule, employeeDNI, parthScheduleTemp, schedule); //Insertamos los nuevos datos modificados en el fichero temporal
+
                                     break;
-                                case 5:
-                                    System.out.println("Modificar sueldo empleado");
+
+
+                                case 5: //Modificar sueldo a empleado
+                                    FM.showFileData(pathPaySlips);
+                                    employeeDNI = VD.readAndValidateUsername(); //Lee el dni del empleado
+                                    salary = PM.assignSalary();  //Asignamos el nuevo salario
+                                    payslip = FM.insertSalary(pathPaySlips, employeeDNI, salary); //Creamos un objeto payslip con el nuevo salario
+                                    FM.insertObjectModifiedInFile(payslip, pathPaySlipsTemp ); //Añadimos al fichero temporal el nuevo objeto modificado para luego añadirlo al fichero maestro
+
                                     break;
+
+
                                 case 6:
                                     System.out.println();
                                     DNIToConsultData = VD.readAndValidateUsername();
                                     FM.printPersonalData(DNIToConsultData,pathFileEmployee);
                                     System.out.println();
                                     break;
+
                                 case 7:
                                     newOrder = OM.readAndValidateNewOrder();
                                     if (!FM.insertObjectInFile(newOrder,pathFileOrdersTemp)) {
@@ -171,11 +222,18 @@ public class Main {
                                     FM.insertObjectModifiedInFile(orderChoosed,pathFileOrdersTemp);
                                     //Añadir al fichero las modificaciones del pedido
                                     break;
+
+
                                 case 9:
                                     System.out.println("Ver datos personales administrador");
+                                    FM.printPersonalData(username,pathFileEmployee);
+
                                     break;
+
+
                                 case 10:
                                     System.out.println("Consultar sus horarios");
+                                    FM.printScheduleFromFile(pathSchedule,username);
                                     break;
                             }
 
@@ -194,17 +252,40 @@ public class Main {
                             case 1:
                                 System.out.println("Ver datos personales del empleado");
                             break;
+
+
                             case 2:
                                 System.out.println("Asignar horario a empleado");
+                                FM.showFileData(pathFileEmployee); //Mostramos todos los empleados
+                                System.out.println("Introduzca el DNI del empleado al que desea asignar un horario");
+                                employeeDNI = VD.readAndValidateUsername(); //Seleccionamos el dni del empleado al cual queremos cambiarle el horario
+                                schedule = SM.getScheduleData(); //Creamos un nuevo horario
+                                FM.insertEmployeeOnSchedule(pathSchedule, employeeDNI, parthScheduleTemp, schedule); //Insertamos los nuevos datos modificados en el fichero temporal
                             break;
+
+
                             case 3:
                                 System.out.println("Modificar horario de empleado");
+                                //TODO Se hace igual que asignar horario a empleado pero tendría que poderse cambiar sólo X días seleccionados
+                                FM.showFileData(pathFileEmployee); //Mostramos todos los empleados
+                                System.out.println("Introduzca el DNI del empleado al que desea asignar un horario");
+                                employeeDNI = VD.readAndValidateUsername(); //Seleccionamos el dni del empleado al cual queremos cambiarle el horario
+                                schedule = SM.getScheduleData(); //Creamos un nuevo horario
+                                FM.insertEmployeeOnSchedule(pathSchedule, employeeDNI, parthScheduleTemp, schedule); //Insertamos los nuevos datos modificados en el fichero temporal
+
+
                             break;
+
+
                             case 4:
                                 System.out.println("Ver datos personales floor manager");
+                                FM.printPersonalData(username, pathFileEmployee);
                             break;
+
+
                             case 5:
                                 System.out.println("Consultar sus horarios");
+                                FM.printScheduleFromFile(pathSchedule,username);
                             break;
                         }
 
@@ -218,11 +299,17 @@ public class Main {
                             case 0:
                                 System.out.println("Session closed.");
                             break;
+
                             case 1:
                                 System.out.println("Ver datos personales del empleado");
+                                FM.printPersonalData(username,pathFileEmployee);
+
                             break;
+
+
                             case 2:
                                 System.out.println("Consultar sus horarios");
+                                FM.printScheduleFromFile(pathSchedule,username);
                             break;
                         }
 

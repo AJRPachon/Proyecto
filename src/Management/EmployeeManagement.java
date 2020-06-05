@@ -1,13 +1,20 @@
 package Management;
 
 import BasicsClasses.Employee.Employee;
-import BasicsClasses.Employee.Payslip;
+
+import BasicsClasses.Employee.Enums.EnumCategory;
+import BasicsClasses.Employee.Enums.EnumPosition;
+
 
 import java.io.*;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import java.util.GregorianCalendar;
+import java.util.Scanner;
+
 
 public class EmployeeManagement {
 
@@ -51,7 +58,8 @@ public class EmployeeManagement {
         return category;
     }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+///////// ENCRIPT PASSWORD /////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      * @param password
@@ -75,30 +83,81 @@ public class EmployeeManagement {
         return passEncripted;
     }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /**
-     * This method modifies the employee's salary
-     *
-     * @param salary
-     */
+////////// COLLECT EMPLOYEE DATA ///////////////////////////////////////////////////////////////////////////////////////
 
-    public void modifySalary(double salary){
 
-        Payslip payslip = new Payslip();
+    public Employee collectEmployeeData(){
 
-        payslip.setSalary(salary);
+        Scanner sc = new Scanner(System.in);
+        Validations VA = new Validations();
+
+
+        String name, surname, dNI, nAF, bankAccountN, password, position, category;
+        GregorianCalendar birthday = new GregorianCalendar();
+        int day, month, year;
+
+        System.out.println("Employee Name");
+        name = sc.nextLine();
+
+        System.out.println("Employee Surname");
+        surname = sc.nextLine();
+
+        System.out.println("Employee DNI");
+        dNI = VA.readAndValidateUsername();
+
+        System.out.println("Employee NAF");
+        nAF = sc.nextLine();
+
+        System.out.println("Employee birthday-day");
+        day = sc.nextInt();
+        while (day < 1 || day > 31){
+            System.out.println("Employee birthday-day wasn´t correct, insert it again");
+            day = sc.nextInt();
+        }
+
+        System.out.println("Employee birthday-month");
+        month = sc.nextInt();
+        while(month < 1 || month > 12){
+            System.out.println("Employee birthday-month wasn´t correct, insert it again");
+            month = sc.nextInt();
+        }
+
+        System.out.println("Employee birthday-year");
+        year = sc.nextInt();
+        while (year < 1900 || year > 2002){
+            System.out.println("Employee birthday-year wasn´t correct, insert it again");
+            year = sc.nextInt();
+        }
+
+        //TODO Create enum with all months?
+        birthday.set(day, month,year);
+
+        System.out.println("Employee position");
+        position = sc.nextLine();
+        EnumPosition.valueOf(position);
+
+        System.out.println("Employee category");
+        category = sc.nextLine();
+        EnumCategory.valueOf(category);
+
+        System.out.println("Employee bankAccoutN");
+        bankAccountN = sc.nextLine();
+
+        System.out.println("Employee password");
+        password = VA.readAndValidatePassword(); //Validamos la contraseña
+
+
+        return new Employee(name, surname,dNI,nAF,birthday, EnumPosition.valueOf(position), EnumCategory.valueOf(category),bankAccountN,password);
 
     }
 
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void CollectEmployeeData(){
 
 
-
-
-    }
 
 
 }

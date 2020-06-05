@@ -52,11 +52,27 @@ public class Payslip {
         this.salary = salary;
     }
 
+
+    public Employee getEmployee() {
+        return this.employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+
+/////// ADDED METHODS /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 /////// TO STRING ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
     public String toString() {
-        return "El salario es: "+this.salary+"€";
+  
+        return employee.getDNI()+"#"+this.salary+"#";
+
+
     }
 
 
