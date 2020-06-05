@@ -35,8 +35,6 @@ package BasicsClasses.FoodstuffDrinks;
 
  */
 
-import BasicsClasses.Orders.Order;
-
 public class Product implements Cloneable{
 
     private int IDProduct;
