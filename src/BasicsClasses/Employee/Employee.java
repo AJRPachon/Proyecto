@@ -104,7 +104,23 @@ public class Employee {
         this.category = EnumCategory.Spaguetti;
         this.bankAccountN = "default";
         this.password = "default";
-        this.schedule = new Schedule[0];
+        this.schedule = new Schedule[7];
+
+    }
+
+    public Employee(String name, String surname, String dNI, String nAF, GregorianCalendar birthday, EnumPosition position, EnumCategory category, String bankAccountN, String password, Schedule[] schedule){ //Constructor with parameters
+
+        this.name = name;
+        this.surname = surname;
+        this.dNI = dNI;
+        this.nAF = nAF;
+        this.birthday = birthday;
+        this.position = position;
+        this.category = category;
+        this.bankAccountN = bankAccountN;
+        this.password = password;
+        this.schedule = schedule;
+
 
     }
 
@@ -120,7 +136,6 @@ public class Employee {
         this.bankAccountN = bankAccountN;
         this.password = password;
         this.schedule = new Schedule[7];
-
 
     }
 
@@ -187,11 +202,25 @@ public class Employee {
     }
 
 
-/////////// ADDED METHODS ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public Schedule[] getSchedule() {
+        return this.schedule;
+    }
+
+    public void setSchedule(Schedule schedule, int day){
+
+        this.schedule[day] = schedule;
+
+    }
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+/////////// ADDED METHODS //////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
     public String toString(){

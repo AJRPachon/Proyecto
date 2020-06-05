@@ -4,15 +4,17 @@ import BasicsClasses.Employee.Employee;
 import BasicsClasses.Employee.Enums.EnumCategory;
 import BasicsClasses.Employee.Enums.EnumPosition;
 import java.io.*;
+
+import BasicsClasses.Employee.Payslip;
+import BasicsClasses.Employee.Schedule;
 import BasicsClasses.FoodstuffDrinks.Product;
 import BasicsClasses.Orders.Order;
-import BasicsClasses.Orders.OrderLine;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
-import BasicsClasses.Employee.Enums.EnumWeekDays;
-import java.util.GregorianCalendar;
+
 
 
 public class FilesManagement {
@@ -66,6 +68,9 @@ public class FilesManagement {
 
     }
 
+
+/////////// CHECK FILE //////////////////////////////////////////////////////////////////////////////////////////////
+
     /**
      * This method check if the file passed by parameter exist. If not exist this file, this method create it.
      * @param file File to check
@@ -80,6 +85,9 @@ public class FilesManagement {
             }
         }
     }
+
+
+/////////// CHECK FILE EMPLOYEE //////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      * This method checks if an employee file exists and it contains at least one employee so that the program can start
@@ -109,6 +117,8 @@ public class FilesManagement {
         }
     }
 
+
+/////////// INSERT OBJETCT IN FILE //////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      * @param object
@@ -141,6 +151,9 @@ public class FilesManagement {
         return objectInserted;
     }
 
+
+/////////// INSERT OBJECT DELETED IN FILE //////////////////////////////////////////////////////////////////////////////////////////////
+
     /**
      * @param object
      * @param path
@@ -169,6 +182,9 @@ public class FilesManagement {
         return objectInserted;
     }
 
+
+/////////// INSERT OBJECT MODIFIED IN FILE //////////////////////////////////////////////////////////////////////////////////////////////
+
     /**
      * @param object
      * @param path
@@ -196,6 +212,9 @@ public class FilesManagement {
         }
         return objectInserted;
     }
+
+
+/////////// GET ORDERS NOT SHIPPED //////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      * @param path
@@ -232,6 +251,9 @@ public class FilesManagement {
         return ordersNotShipped;
     }
 
+
+/////////// READ AND SEARCH PRODUCT //////////////////////////////////////////////////////////////////////////////////////////////
+
     /**
      * @return
      */
@@ -257,6 +279,8 @@ public class FilesManagement {
 
     }
 
+
+/////////// GET PRODUCT FROM FILE //////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      * @param ID
@@ -290,6 +314,7 @@ public class FilesManagement {
     }
 
 
+/////////// PRINT PERSONAL DATA //////////////////////////////////////////////////////////////////////////////////////////////
     /**
      * @param DNIEmployee
      * @param path
@@ -329,6 +354,317 @@ public class FilesManagement {
         }
     }
 
+
+/////////// MODIFY SALARY //////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Este metodo crea el nuevo objeto modificado y lo inserta en el archivo temporal
+     *
+     * @param path
+     * @param dNI
+     * @param salary
+     */
+
+    public Payslip insertSalary(String path, String dNI, double salary){
+
+        String line;
+        String contenido;
+        Employee employee;
+        Payslip payslip = null;
+        String[] separaciones;
+        GregorianCalendar birthday;
+        boolean salir = false;
+
+        FileReader fr;
+        BufferedReader br;
+
+
+        try{
+
+            fr = new FileReader(path);
+            br = new BufferedReader(fr);
+
+            line = br.readLine();
+
+            while (line != null && !salir) {
+                separaciones = line.split("#");
+                contenido = separaciones[2];  //DNI se encuentra en la posición 2
+
+                //Si contenido es igual a nuestro DNI, creamos un objeto empleado con los valores recogidos
+                if( contenido.equals(dNI) ){
+
+                    birthday = assignBirthday(separaciones);
+
+                    employee = new Employee(separaciones[0],separaciones[1],separaciones[2],separaciones[3],birthday,EnumPosition.valueOf(separaciones[5]),EnumCategory.valueOf(separaciones[6]),separaciones[7],separaciones[8]);
+
+                    //Creamos un objeto payslip y hacemos setters para el salario y para nuestro empleado
+                    payslip = new Payslip();
+                    payslip.setSalary(salary);
+                    payslip.setEmployee(employee);
+
+                    salir = true;
+
+                }
+
+                line = br.readLine();
+            }
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        return payslip;
+
+    }
+
+
+
+
+////////// TERMINATE AN EMPLOYEE ///////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Introduce en nuestro archivo temporal el empleado pasado por parametros que será dado de baja
+     *
+     * @param path
+     * @param dNI
+     */
+
+    public Employee getSelectedEmployee(String path, String dNI){
+
+        String line;
+        String contenido;
+        Employee employee = null;
+        String[] separaciones;
+        GregorianCalendar birthday;
+        boolean salir = false;
+
+        FileReader fr;
+        BufferedReader br;
+
+        try{
+
+            fr = new FileReader(path);
+            br = new BufferedReader(fr);
+
+            line = br.readLine();
+
+
+            while (line != null && !salir) {
+
+                separaciones = line.split("#");
+                contenido = separaciones[2];  //DNI se encuentra en la posición 2
+
+                //Si contenido es igual a nuestro DNI, creamos un objeto empleado con los valores recogidos
+                if( contenido.equals(dNI) ){
+
+                    //Separamos el String de la fecha en sus distintos numeros
+                    birthday = assignBirthday(separaciones);
+
+                    employee = new Employee(separaciones[0],separaciones[1],separaciones[2],separaciones[3],birthday,EnumPosition.valueOf(separaciones[5]),EnumCategory.valueOf(separaciones[6]),separaciones[7],separaciones[8]);
+
+                    salir = true;
+                }
+
+                line = br.readLine();
+            }
+
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        return employee;
+
+    }
+
+
+/////////// INSERT NEW SCHEDULE ////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Este metodo crea el nuevo objeto modificado y lo inserta en el archivo temporal
+     *
+     * @param path
+     * @param dNI
+     * @param tempPath
+     */
+
+    public void insertEmployeeOnSchedule(String path, String dNI, String tempPath, Schedule[] schedule){
+
+        String line;
+        String contenido;
+        Employee employee;
+        Schedule[] newSchedule = new Schedule[schedule.length];
+        String[] separaciones;
+        GregorianCalendar birthday;
+        boolean salir = false;
+
+        FileReader fr;
+        BufferedReader br;
+
+
+        try{
+
+            fr = new FileReader(path);
+            br = new BufferedReader(fr);
+
+            line = br.readLine();
+
+            while (line != null) {
+                separaciones = line.split("#");
+                contenido = separaciones[3];  //DNI se encuentra en la posición 3
+
+                //Si contenido es igual a nuestro DNI, creamos un objeto empleado con los valores recogidos
+                if( contenido.equals(dNI) && !salir ){
+
+                    birthday = assignBirthday(separaciones);
+
+                    employee = new Employee(separaciones[0],separaciones[1],separaciones[2],separaciones[3],birthday,EnumPosition.valueOf(separaciones[5]),EnumCategory.valueOf(separaciones[6]),separaciones[7],separaciones[8]);
+
+
+                    for(int cont = 0; cont < schedule.length; cont++) {
+
+                        newSchedule[cont] = new Schedule(schedule[cont].getWeekDay(), schedule[cont].getStartDate(), schedule[cont].getEndDate(), employee);
+
+                        //Una vez hecho esto, metemos nuestro objeto schedule en el archivo temporal
+                        //En este caso, como hay que recorrer el array, lo insertamos directamente desde este método
+                        insertObjectModifiedInFile(newSchedule[cont], tempPath);
+
+                    }
+
+                    salir = true;
+
+                }
+
+                line = br.readLine();
+            }
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+    }
+
+/////////// SHOW FILE DATA //////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Muestra el contenido de un archivo
+     *
+     * @param path
+     */
+
+    public void showFileData(String path){
+
+        String line;
+
+        FileReader fr;
+        BufferedReader br;
+
+        try{
+
+            fr = new FileReader(path);
+            br = new BufferedReader(fr);
+
+            line = br.readLine();
+
+            while (line != null) {
+                System.out.println(line);
+                line = br.readLine();
+            }
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+    }
+
+
+/////////// ASSIGN BIRTHDAY //////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Convertimos una fecha String a enteros y se la asignamos a una variable de tipo GregorianCalendar
+     *
+     * @param separaciones
+     * @return
+     */
+
+    public GregorianCalendar assignBirthday(String[] separaciones){
+
+        String[] fechaString;
+        GregorianCalendar birthday = new GregorianCalendar();
+        int[] fecha = new int[3];
+
+        //Separamos el String de la fecha en sus distintos numeros
+        fechaString = separaciones[4].split("/");
+
+        //Recorremos el array y hacemos un parseInt para obtener los enteros
+        for(int cont = 0; cont < fechaString.length; cont++){
+            fecha[cont] = Integer.parseInt(fechaString[cont]);
+        }
+
+        //Metemos la fecha de cumpleaños en nuestra variable tipo fecha y ya la podemos usar en nuestro constructor
+        birthday.set(Calendar.DAY_OF_MONTH, fecha[0]);
+        birthday.set(Calendar.MONTH, fecha[1]);
+        birthday.set(Calendar.YEAR, fecha[2]);
+
+        return birthday;
+
+    }
+
+
+
+/////////// GET SCHEDULE FROM FILE /////////////////////////////////////////////////////////////////////////////////////
+
+
+    public void printScheduleFromFile(String path, String dNI){
+
+        String line;
+        String contenido;
+        String[] separaciones;
+        boolean impreso = false;
+
+        FileReader fr;
+        BufferedReader br;
+
+
+        try{
+
+            fr = new FileReader(path);
+            br = new BufferedReader(fr);
+
+            line = br.readLine();
+
+            while (line != null) {
+                separaciones = line.split("#");
+                contenido = separaciones[0];  //DNI se encuentra en la posición 0
+
+                //Si contenido es igual a nuestro DNI
+                if( contenido.equals(dNI)){
+
+                    System.out.println("Employee DNI: "+separaciones[0]);
+                    System.out.println("WeekDay: "+separaciones[1]);
+                    System.out.println("Start date: "+separaciones[2]);
+                    System.out.println("SD Time: "+separaciones[3]);
+                    System.out.println("End date "+separaciones[4]);
+                    System.out.println("ED Time: "+separaciones[5]);
+                    System.out.println();
+
+                    impreso = true;
+
+                }
+
+                line = br.readLine();
+
+            }
+
+            if (!impreso){
+                System.out.println("Employee was not found");
+            }
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+    }
 
 
 }

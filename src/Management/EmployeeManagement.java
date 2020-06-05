@@ -1,21 +1,20 @@
 package Management;
 
 import BasicsClasses.Employee.Employee;
+
 import BasicsClasses.Employee.Enums.EnumCategory;
 import BasicsClasses.Employee.Enums.EnumPosition;
-import BasicsClasses.Employee.Payslip;
-import BasicsClasses.Employee.Schedule;
 
-import javax.sound.midi.Soundbank;
+
 import java.io.*;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.SQLOutput;
-import java.util.Calendar;
+
 import java.util.GregorianCalendar;
 import java.util.Scanner;
+
 
 public class EmployeeManagement {
 
@@ -59,7 +58,8 @@ public class EmployeeManagement {
         return category;
     }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+///////// ENCRIPT PASSWORD /////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      * @param password
@@ -84,12 +84,14 @@ public class EmployeeManagement {
     }
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////// COLLECT EMPLOYEE DATA ///////////////////////////////////////////////////////////////////////////////////////
 
 
     public Employee collectEmployeeData(){
 
         Scanner sc = new Scanner(System.in);
+        Validations VA = new Validations();
+
 
         String name, surname, dNI, nAF, bankAccountN, password, position, category;
         GregorianCalendar birthday = new GregorianCalendar();
@@ -102,7 +104,7 @@ public class EmployeeManagement {
         surname = sc.nextLine();
 
         System.out.println("Employee DNI");
-        dNI = sc.nextLine();
+        dNI = VA.readAndValidateUsername();
 
         System.out.println("Employee NAF");
         nAF = sc.nextLine();
@@ -131,7 +133,6 @@ public class EmployeeManagement {
         //TODO Create enum with all months?
         birthday.set(day, month,year);
 
-        //TODO EnumPosition is correct?
         System.out.println("Employee position");
         position = sc.nextLine();
         EnumPosition.valueOf(position);
@@ -144,12 +145,19 @@ public class EmployeeManagement {
         bankAccountN = sc.nextLine();
 
         System.out.println("Employee password");
-        password = sc.nextLine();
+        password = VA.readAndValidatePassword(); //Validamos la contraseña
 
 
         return new Employee(name, surname,dNI,nAF,birthday, EnumPosition.valueOf(position), EnumCategory.valueOf(category),bankAccountN,password);
 
     }
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 
 }
