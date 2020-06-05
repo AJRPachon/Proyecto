@@ -44,7 +44,7 @@ import BasicsClasses.Employee.Enums.EnumWeekDays;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-
+import java.util.Scanner;
 
 public class Schedule {
 
@@ -187,9 +187,6 @@ public class Schedule {
         this.endDate.set(Calendar.YEAR, year);
     }
 
-    public Employee getEmployee() {
-        return this.employee;
-    }
 
 
 /////// ADDED METHODS ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

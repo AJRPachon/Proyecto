@@ -1,16 +1,20 @@
 package Management;
 
 import BasicsClasses.Employee.Employee;
+
 import BasicsClasses.Employee.Enums.EnumCategory;
 import BasicsClasses.Employee.Enums.EnumPosition;
+
 
 import java.io.*;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
 import java.util.GregorianCalendar;
 import java.util.Scanner;
+
 
 public class EmployeeManagement {
 

@@ -86,10 +86,12 @@ public class Main {
                                     System.out.println("Closed session.");
                                     break;
 
+
                                 case 1: //Dar de alta a un empleado
                                     String path = ".\\src\\files\\EmployeesTemp";
                                     employee = EM.collectEmployeeData(); //Pedimos datos del nuevo empleado
                                     FM.insertObjectInFile(employee, path); //Registramos nuevo empleado en el fichero
+
 
                                     break;
 
