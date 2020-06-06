@@ -103,6 +103,7 @@ public class FilesManagement {
 
                 bw = new BufferedWriter(new FileWriter(file));
                 bw.write(new Employee("Administrator","Administrator","00000000T","281234567840",new GregorianCalendar(),EnumPosition.Manager,EnumCategory.Administrator,"ES3231906288456991923866","e807f1fcf82d132f9bb018ca6738a19f").toString());
+                bw.flush();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -174,17 +175,27 @@ public class FilesManagement {
     public <T> boolean insertObjectDeletedInFile(T object, String path){
         boolean objectInserted = false;
         FileWriter fw = null;
+        BufferedWriter bw = null;
+
         try {
             fw = new FileWriter(path,true);
-            fw.write(object.toString()+"#D"+"\n");
-            fw.flush();
+            bw = new BufferedWriter(fw);
+            bw.write(object.toString()+"#D");
+            bw.newLine();
+            bw.flush();
             objectInserted = true;
         } catch (IOException e) {
             e.printStackTrace();
         }
         finally {
             try {
-                fw.close();
+                if ( fw != null ) {
+                    fw.close();
+                }
+                if ( bw != null ){
+                    bw.close();
+                }
+
             }catch (IOException|NullPointerException error){
                 error.printStackTrace();
             }
@@ -205,9 +216,12 @@ public class FilesManagement {
     public <T> boolean insertObjectModifiedInFile(T object, String path){
         boolean objectInserted = false;
         FileWriter fw = null;
+        BufferedWriter bw = null;
         try {
             fw = new FileWriter(path,true);
+            bw = new BufferedWriter(fw);
             fw.write(object.toString()+"#M"+"\n");
+            bw.newLine();
             fw.flush();
             objectInserted = true;
         } catch (IOException e) {
@@ -215,7 +229,12 @@ public class FilesManagement {
         }
         finally {
             try {
-                fw.close();
+                if ( fw != null ) {
+                    fw.close();
+                }
+                if ( bw != null ){
+                    bw.close();
+                }
             }catch (IOException|NullPointerException error){
                 error.printStackTrace();
             }
