@@ -12,7 +12,6 @@ import BasicsClasses.Orders.Order;
 import utils.Utils;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
@@ -132,11 +131,14 @@ public class FilesManagement {
 
         boolean objectInserted = false;
         FileWriter FW = null;
+        BufferedWriter BW = null;
 
         try {
             FW = new FileWriter(path,true);
-            FW.write(object.toString()+"\n");
-            FW.flush();
+            BW = new BufferedWriter(FW);
+            BW.write(object.toString());
+            BW.newLine();
+            BW.flush();
             objectInserted = true;
 
         } catch (IOException e) {
@@ -144,7 +146,12 @@ public class FilesManagement {
         }
         finally {
             try {
-                FW.close();
+                if( FW != null ) {
+                    FW.close();
+                }
+                if( BW != null ) {
+                    BW.close();
+                }
             }catch (IOException|NullPointerException error){
                 error.printStackTrace();
             }
@@ -322,7 +329,7 @@ public class FilesManagement {
      */
 
 
-    public void printPersonalData(String DNIEmployee, String path) {
+    public void printEmployeePersonalData(String DNIEmployee, String path) {
         BufferedReader BR;
         String[] lineParted = null;
         String line;

@@ -326,4 +326,28 @@ public class Validations {
         return quantityToDecrease;
     }
 
+
+    /**
+     * Lee y valida un salario leido por teclado
+     * @return
+     */
+
+    public double readAndValidateSalary(){
+
+        Scanner sc =  new Scanner(System.in);
+
+        double salary;
+
+        System.out.println("Inserte salario para el empleado seleccionado");
+        salary = sc.nextDouble();
+
+        while(salary <= 0){
+            System.out.println("El salario tiene que ser mayor que 0");
+            salary = sc.nextDouble();
+        }
+
+        return salary;
+
+    }
+
 }
