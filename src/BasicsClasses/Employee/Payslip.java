@@ -53,14 +53,6 @@ public class Payslip {
     }
 
 
-    public Employee getEmployee() {
-        return this.employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
 
 /////// ADDED METHODS /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -70,7 +62,7 @@ public class Payslip {
     @Override
     public String toString() {
   
-        return employee.getDNI()+"#"+this.salary+"#";
+        return this.salary+"#";
 
 
     }
