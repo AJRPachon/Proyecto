@@ -283,33 +283,6 @@ public class FilesManagement {
     }
 
 
-/////////// READ AND SEARCH PRODUCT //////////////////////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * @return
-     */
-
-    public Product readAndSearchProduct(){
-        Scanner sc = new Scanner(System.in);
-
-        int ID;
-        String pathProductFile = ".\\src\\Files\\Products";
-        Product productGet;
-
-        //Validate Product
-        do {
-            System.out.print("Insert IDProduct: ");
-            ID = sc.nextInt();
-            productGet = getProductFromFile(ID,pathProductFile);
-            if (productGet == null){
-                System.out.println("This product don't exist. Please insert a product existing");
-            }
-        }while (productGet == null);
-
-        return productGet;
-
-    }
-
 
 /////////// GET PRODUCT FROM FILE //////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -322,23 +295,32 @@ public class FilesManagement {
 
     public Product getProductFromFile(int ID, String path){
         Product newProduct = null;
-        BufferedReader BR;
+        BufferedReader br = null;
         String[] lineParted;
         String line;
 
         try {
-            BR = new BufferedReader(new FileReader(path));
-            line = BR.readLine();
+            br = new BufferedReader(new FileReader(path));
+            line = br.readLine();
             while (line != null && newProduct == null){
                 lineParted = line.split("#");
                 if (Integer.parseInt(lineParted[0]) == ID){
                     newProduct = new Product(Integer.parseInt(lineParted[0]),lineParted[1],lineParted[2],Double.parseDouble(lineParted[3]));
                 }
-                line = BR.readLine();
+                line = br.readLine();
             }
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        finally {
+            try {
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         return newProduct;
