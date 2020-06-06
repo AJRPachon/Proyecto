@@ -15,6 +15,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
+import java.sql.*;
+
 
 public class EmployeeManagement {
 
@@ -55,6 +57,43 @@ public class EmployeeManagement {
                 e.printStackTrace();
             }
         }
+        return category;
+    }
+
+
+    public String getPermisons(String username, String password, Connection connection){
+
+        String category = null;
+        Statement sentencia = null;
+        ResultSet nombresProductos = null;
+
+        String select = "SELECT Category " +
+                        "FROM Employees " +
+                        "WHERE DNI = '"+username+"' " +
+                        "AND Password = '"+password+"'";
+
+        try {
+            sentencia = connection.createStatement();
+            nombresProductos = sentencia.executeQuery(select);
+
+            category = nombresProductos.getNString("Category");
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
+
+        try {
+            nombresProductos.close();
+            sentencia.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
+
         return category;
     }
 
@@ -151,6 +190,9 @@ public class EmployeeManagement {
         return new Employee(name, surname,dNI,nAF,birthday, EnumPosition.valueOf(position), EnumCategory.valueOf(category),bankAccountN,password);
 
     }
+
+
+
 
 
 
