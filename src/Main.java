@@ -34,6 +34,7 @@ import BasicsClasses.Orders.Order;
 import Management.*;
 import utils.Utils;
 
+
 import java.util.ArrayList;
 
 
@@ -45,9 +46,7 @@ public class Main {
         EmployeeManagement EM = new EmployeeManagement();
         Validations VD = new Validations();
         OrderManagement OM = new OrderManagement();
-        PaySlipManagement PM = new PaySlipManagement();
         ScheduleManagement SM = new ScheduleManagement();
-        Utils U = new Utils();
 
         FM.checkFiles();
         String username, password, permisons, DNIToConsultData;
@@ -90,9 +89,10 @@ public class Main {
 
 
                                 case 1: //Dar de alta a un empleado
-                                    String path = ".\\src\\files\\EmployeesTemp";
+                                    System.out.println("Dar de alta a un empleado");
                                     employee = EM.collectEmployeeData(); //Pedimos datos del nuevo empleado
-                                    FM.insertObjectInFile(employee, path); //Registramos nuevo empleado en el fichero
+                                    FM.insertObjectInFile(employee, pathFileEmployee); //Registramos nuevo empleado en el fichero
+
 
 
                                     break;
@@ -134,7 +134,7 @@ public class Main {
                                 case 5: //Modificar sueldo a empleado
                                     FM.showFileData(pathPaySlips);
                                     employeeDNI = VD.readAndValidateUsername(); //Lee el dni del empleado
-                                    salary = PM.assignSalary();  //Asignamos el nuevo salario
+                                    salary = VD.readAndValidateSalary();  //Asignamos el nuevo salario
                                     payslip = FM.insertSalary(pathPaySlips, employeeDNI, salary); //Creamos un objeto payslip con el nuevo salario
                                     FM.insertObjectModifiedInFile(payslip, pathPaySlipsTemp ); //Añadimos al fichero temporal el nuevo objeto modificado para luego añadirlo al fichero maestro
 
@@ -144,7 +144,7 @@ public class Main {
                                 case 6:
                                     System.out.println();
                                     DNIToConsultData = VD.readAndValidateUsername();
-                                    FM.printPersonalData(DNIToConsultData,pathFileEmployee);
+                                    FM.printEmployeePersonalData(DNIToConsultData,pathFileEmployee);
                                     System.out.println();
                                     break;
 
@@ -228,7 +228,7 @@ public class Main {
 
                                 case 9:
                                     System.out.println("Ver datos personales administrador");
-                                    FM.printPersonalData(username,pathFileEmployee);
+                                    FM.printEmployeePersonalData(username,pathFileEmployee);
 
                                     break;
 
@@ -281,7 +281,7 @@ public class Main {
 
                             case 4:
                                 System.out.println("Ver datos personales floor manager");
-                                FM.printPersonalData(username, pathFileEmployee);
+                                FM.printEmployeePersonalData(username, pathFileEmployee);
                             break;
 
 
@@ -304,7 +304,7 @@ public class Main {
 
                             case 1:
                                 System.out.println("Ver datos personales del empleado");
-                                FM.printPersonalData(username,pathFileEmployee);
+                                FM.printEmployeePersonalData(username,pathFileEmployee);
 
                             break;
 

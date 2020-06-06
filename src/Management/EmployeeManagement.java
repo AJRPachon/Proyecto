@@ -7,10 +7,6 @@ import BasicsClasses.Employee.Enums.EnumPosition;
 
 
 import java.io.*;
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import java.util.GregorianCalendar;
 import java.util.Scanner;
@@ -31,19 +27,19 @@ public class EmployeeManagement {
     public String getPermisons(String username, String password, String path){
 
         String category = null;
-        BufferedReader BR = null;
+        BufferedReader br = null;
         String line;
         String[] lineDivide;
 
         try {
-            BR = new BufferedReader(new FileReader(path));
-            line = BR.readLine();
+            br = new BufferedReader(new FileReader(path));
+            line = br.readLine();
             while (line != null && category == null){
                 lineDivide = line.split("#");
                 if (lineDivide[2].equals(username) && lineDivide[8].equals(password)){
                     category = lineDivide[6];
                 }
-                line = BR.readLine();
+                line = br.readLine();
             }
         }catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -52,74 +48,14 @@ public class EmployeeManagement {
         }
         finally {
             try {
-                BR.close();
+                if (br != null) {
+                    br.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         return category;
-    }
-
-
-    public String getPermisons(String username, String password, Connection connection){
-
-        String category = null;
-        Statement sentencia = null;
-        ResultSet nombresProductos = null;
-
-        String select = "SELECT Category " +
-                        "FROM Employees " +
-                        "WHERE DNI = '"+username+"' " +
-                        "AND Password = '"+password+"'";
-
-        try {
-            sentencia = connection.createStatement();
-            nombresProductos = sentencia.executeQuery(select);
-
-            category = nombresProductos.getNString("Category");
-
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-
-
-        try {
-            nombresProductos.close();
-            sentencia.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-
-
-        return category;
-    }
-
-
-///////// ENCRIPT PASSWORD /////////////////////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * @param password
-     * @return
-     */
-
-
-    public String encriptPassword(String password){
-        String passEncripted = null;
-
-        try {
-            byte[] bytesOfMessage = password.getBytes(StandardCharsets.UTF_8);
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] thedigest = md.digest(bytesOfMessage);
-            BigInteger bigInt = new BigInteger(1,thedigest);
-            passEncripted = bigInt.toString(16);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-
-        return passEncripted;
     }
 
 
@@ -169,7 +105,6 @@ public class EmployeeManagement {
             year = sc.nextInt();
         }
 
-        //TODO Create enum with all months?
         birthday.set(day, month,year);
 
         System.out.println("Employee position");

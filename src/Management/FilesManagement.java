@@ -12,9 +12,7 @@ import BasicsClasses.Orders.Order;
 import utils.Utils;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Scanner;
 
 
 
@@ -98,18 +96,21 @@ public class FilesManagement {
     private void checkFileEmployee(File file){
         if (!(file.length() > 0)){
 
-            BufferedWriter BW = null;
+            BufferedWriter bw = null;
             try {
                 file.createNewFile();
 
-                BW = new BufferedWriter(new FileWriter(file));
-                BW.write(new Employee("Administrator","Administrator","00000000T","281234567840",new GregorianCalendar(),EnumPosition.Manager,EnumCategory.Administrator,"ES3231906288456991923866","e807f1fcf82d132f9bb018ca6738a19f").toString());
+                bw = new BufferedWriter(new FileWriter(file));
+                bw.write(new Employee("Administrator","Administrator","00000000T","281234567840",new GregorianCalendar(),EnumPosition.Manager,EnumCategory.Administrator,"ES3231906288456991923866","e807f1fcf82d132f9bb018ca6738a19f").toString());
+                bw.flush();
             } catch (IOException e) {
                 e.printStackTrace();
             }
             finally {
                 try {
-                    BW.close();
+                    if (bw != null) {
+                        bw.close();
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -131,12 +132,15 @@ public class FilesManagement {
     public <T> boolean insertObjectInFile(T object, String path){
 
         boolean objectInserted = false;
-        FileWriter FW = null;
+        FileWriter fw = null;
+        BufferedWriter bw = null;
 
         try {
-            FW = new FileWriter(path,true);
-            FW.write(object.toString()+"\n");
-            FW.flush();
+            fw = new FileWriter(path,true);
+            bw = new BufferedWriter(fw);
+            bw.write(object.toString());
+            bw.newLine();
+            bw.flush();
             objectInserted = true;
 
         } catch (IOException e) {
@@ -144,7 +148,12 @@ public class FilesManagement {
         }
         finally {
             try {
-                FW.close();
+                if( fw != null ) {
+                    fw.close();
+                }
+                if( bw != null ) {
+                    bw.close();
+                }
             }catch (IOException|NullPointerException error){
                 error.printStackTrace();
             }
@@ -164,18 +173,28 @@ public class FilesManagement {
 
     public <T> boolean insertObjectDeletedInFile(T object, String path){
         boolean objectInserted = false;
-        FileWriter FW = null;
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+
         try {
-            FW = new FileWriter(path,true);
-            FW.write(object.toString()+"#D"+"\n");
-            FW.flush();
+            fw = new FileWriter(path,true);
+            bw = new BufferedWriter(fw);
+            bw.write(object.toString()+"#D");
+            bw.newLine();
+            bw.flush();
             objectInserted = true;
         } catch (IOException e) {
             e.printStackTrace();
         }
         finally {
             try {
-                FW.close();
+                if ( fw != null ) {
+                    fw.close();
+                }
+                if ( bw != null ){
+                    bw.close();
+                }
+
             }catch (IOException|NullPointerException error){
                 error.printStackTrace();
             }
@@ -195,18 +214,26 @@ public class FilesManagement {
 
     public <T> boolean insertObjectModifiedInFile(T object, String path){
         boolean objectInserted = false;
-        FileWriter FW = null;
+        FileWriter fw = null;
+        BufferedWriter bw = null;
         try {
-            FW = new FileWriter(path,true);
-            FW.write(object.toString()+"#M"+"\n");
-            FW.flush();
+            fw = new FileWriter(path,true);
+            bw = new BufferedWriter(fw);
+            fw.write(object.toString()+"#M"+"\n");
+            bw.newLine();
+            fw.flush();
             objectInserted = true;
         } catch (IOException e) {
             e.printStackTrace();
         }
         finally {
             try {
-                FW.close();
+                if ( fw != null ) {
+                    fw.close();
+                }
+                if ( bw != null ){
+                    bw.close();
+                }
             }catch (IOException|NullPointerException error){
                 error.printStackTrace();
             }
@@ -224,18 +251,18 @@ public class FilesManagement {
 
     public ArrayList<Order> getOrdersNotShipped(String path){
         ArrayList<Order> ordersNotShipped = new ArrayList<>();
-        BufferedReader BR = null;
+        BufferedReader br = null;
         String line;
         Order orderRead;
         try {
-            BR = new BufferedReader(new FileReader(path));
-            line = BR.readLine();
+            br = new BufferedReader(new FileReader(path));
+            line = br.readLine();
             while (line != null){
                 orderRead = Order.stringToOrder(line);
                 if (!orderRead.getSent() && !orderRead.getCancel()){
                     ordersNotShipped.add(Order.stringToOrder(line));
                 }
-                line = BR.readLine();
+                line = br.readLine();
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -244,7 +271,9 @@ public class FilesManagement {
         }
         finally {
             try {
-                BR.close();
+                if (br != null) {
+                    br.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -252,33 +281,6 @@ public class FilesManagement {
         return ordersNotShipped;
     }
 
-
-/////////// READ AND SEARCH PRODUCT //////////////////////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * @return
-     */
-
-    public Product readAndSearchProduct(){
-        Scanner sc = new Scanner(System.in);
-
-        int ID;
-        String pathProductFile = ".\\src\\Files\\Products";
-        Product productGet;
-
-        //Validate Product
-        do {
-            System.out.print("Insert IDProduct: ");
-            ID = sc.nextInt();
-            productGet = getProductFromFile(ID,pathProductFile);
-            if (productGet == null){
-                System.out.println("This product don't exist. Please insert a product existing");
-            }
-        }while (productGet == null);
-
-        return productGet;
-
-    }
 
 
 /////////// GET PRODUCT FROM FILE //////////////////////////////////////////////////////////////////////////////////////////////
@@ -292,23 +294,32 @@ public class FilesManagement {
 
     public Product getProductFromFile(int ID, String path){
         Product newProduct = null;
-        BufferedReader BR;
+        BufferedReader br = null;
         String[] lineParted;
         String line;
 
         try {
-            BR = new BufferedReader(new FileReader(path));
-            line = BR.readLine();
+            br = new BufferedReader(new FileReader(path));
+            line = br.readLine();
             while (line != null && newProduct == null){
                 lineParted = line.split("#");
                 if (Integer.parseInt(lineParted[0]) == ID){
                     newProduct = new Product(Integer.parseInt(lineParted[0]),lineParted[1],lineParted[2],Double.parseDouble(lineParted[3]));
                 }
-                line = BR.readLine();
+                line = br.readLine();
             }
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        finally {
+            try {
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         return newProduct;
@@ -322,23 +333,32 @@ public class FilesManagement {
      */
 
 
-    public void printPersonalData(String DNIEmployee, String path) {
-        BufferedReader BR;
+    public void printEmployeePersonalData(String DNIEmployee, String path) {
+        BufferedReader br = null;
         String[] lineParted = null;
         String line;
         boolean employeeFind = false;
 
         try {
-            BR = new BufferedReader(new FileReader(path));
-            line = BR.readLine();
+            br = new BufferedReader(new FileReader(path));
+            line = br.readLine();
             while (line != null && !employeeFind) {
                 lineParted = line.split("#");
                 employeeFind = (lineParted[2].equals(DNIEmployee));
-                line = BR.readLine();
+                line = br.readLine();
             }
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        finally {
+            try {
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         if (employeeFind) {
@@ -378,8 +398,8 @@ public class FilesManagement {
         GregorianCalendar birthday;
         boolean salir = false;
 
-        FileReader fr;
-        BufferedReader br;
+        FileReader fr = null;
+        BufferedReader br = null;
 
 
         try{
@@ -396,7 +416,7 @@ public class FilesManagement {
                 //Si contenido es igual a nuestro DNI, creamos un objeto empleado con los valores recogidos
                 if( contenido.equals(dNI) ){
 
-                    birthday = u.assignBirthday(separaciones);
+                    birthday = u.createVariableGregorianCalendar(separaciones);
 
                     employee = new Employee(separaciones[0],separaciones[1],separaciones[2],separaciones[3],birthday,EnumPosition.valueOf(separaciones[5]),EnumCategory.valueOf(separaciones[6]),separaciones[7],separaciones[8]);
 
@@ -414,6 +434,19 @@ public class FilesManagement {
 
         }catch (IOException e){
             e.printStackTrace();
+        }
+        finally {
+            try {
+                if (fr != null){
+                    fr.close();
+                }
+
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         return payslip;
@@ -443,8 +476,8 @@ public class FilesManagement {
         GregorianCalendar birthday;
         boolean salir = false;
 
-        FileReader fr;
-        BufferedReader br;
+        FileReader fr = null;
+        BufferedReader br = null;
 
         try{
 
@@ -463,7 +496,7 @@ public class FilesManagement {
                 if( contenido.equals(dNI) ){
 
                     //Separamos el String de la fecha en sus distintos numeros
-                    birthday = u.assignBirthday(separaciones);
+                    birthday = u.createVariableGregorianCalendar(separaciones);
 
                     employee = new Employee(separaciones[0],separaciones[1],separaciones[2],separaciones[3],birthday,EnumPosition.valueOf(separaciones[5]),EnumCategory.valueOf(separaciones[6]),separaciones[7],separaciones[8]);
 
@@ -478,6 +511,19 @@ public class FilesManagement {
             e.printStackTrace();
         }
 
+        finally {
+            try {
+                if (fr != null){
+                    fr.close();
+                }
+
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         return employee;
 
     }
@@ -507,8 +553,8 @@ public class FilesManagement {
         GregorianCalendar birthday;
         boolean salir = false;
 
-        FileReader fr;
-        BufferedReader br;
+        FileReader fr = null;
+        BufferedReader br = null;
 
 
         try{
@@ -525,7 +571,7 @@ public class FilesManagement {
                 //Si contenido es igual a nuestro DNI, creamos un objeto empleado con los valores recogidos
                 if( contenido.equals(dNI) && !salir ){
 
-                    birthday = u.assignBirthday(separaciones);
+                    birthday = u.createVariableGregorianCalendar(separaciones);
 
                     employee = new Employee(separaciones[0],separaciones[1],separaciones[2],separaciones[3],birthday,EnumPosition.valueOf(separaciones[5]),EnumCategory.valueOf(separaciones[6]),separaciones[7],separaciones[8]);
 
@@ -550,6 +596,19 @@ public class FilesManagement {
         }catch (IOException e){
             e.printStackTrace();
         }
+        finally {
+            try {
+                if (fr != null){
+                    fr.close();
+                }
+
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
@@ -565,8 +624,8 @@ public class FilesManagement {
 
         String line;
 
-        FileReader fr;
-        BufferedReader br;
+        FileReader fr = null;
+        BufferedReader br = null;
 
         try{
 
@@ -583,6 +642,19 @@ public class FilesManagement {
         }catch (IOException e){
             e.printStackTrace();
         }
+        finally {
+            try {
+                if (fr != null){
+                    fr.close();
+                }
+
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
@@ -598,8 +670,8 @@ public class FilesManagement {
         String[] separaciones;
         boolean impreso = false;
 
-        FileReader fr;
-        BufferedReader br;
+        FileReader fr = null;
+        BufferedReader br = null;
 
 
         try{
@@ -638,6 +710,19 @@ public class FilesManagement {
 
         }catch (IOException e){
             e.printStackTrace();
+        }
+        finally {
+            try {
+                if (fr != null){
+                    fr.close();
+                }
+
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
     }

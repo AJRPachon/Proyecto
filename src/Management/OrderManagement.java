@@ -3,6 +3,7 @@ package Management;
 import BasicsClasses.FoodstuffDrinks.Product;
 import BasicsClasses.Orders.Order;
 import BasicsClasses.Orders.OrderLine;
+import utils.Utils;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -19,6 +20,7 @@ public class OrderManagement {
     public Order readAndValidateNewOrder(){
         Scanner sc = new Scanner(System.in);
         FilesManagement FM = new FilesManagement();
+        Utils u = new Utils();
         Validations Val = new Validations();
 
         int quantity;
@@ -29,7 +31,7 @@ public class OrderManagement {
 
         do {
 
-            productGet = FM.readAndSearchProduct();
+            productGet = u.readAndSearchProduct();
             quantity = Val.readAndValidateQuantityOfProduct();
             newOrder.addOrderLine(new OrderLine(productGet,quantity));
 
