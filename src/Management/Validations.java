@@ -272,8 +272,8 @@ public class Validations {
      */
 
     public OrderLine readAndValidateNewOrderLine(){
-        FilesManagement FM = new FilesManagement();
-        return new OrderLine(FM.readAndSearchProduct(),readAndValidateQuantityOfProduct());
+        Utils u = new Utils();
+        return new OrderLine(u.readAndSearchProduct(),readAndValidateQuantityOfProduct());
     }
 
     /**
@@ -282,12 +282,12 @@ public class Validations {
      */
 
     public int readAndValidateIDProductOfOrder(ArrayList<Integer> validIDs){
-        int IDChoosed = 0;
+        int IDChoosed;
         boolean chooseCorrect = false;
-        Scanner SC = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         do {
             System.out.print("Insert ID of the product: ");
-            IDChoosed = SC.nextInt();
+            IDChoosed = sc.nextInt();
             for (int i = 0; i < validIDs.size() && !chooseCorrect; i++){
                 chooseCorrect = (validIDs.get(i).equals(IDChoosed));
             }
@@ -302,12 +302,12 @@ public class Validations {
      */
 
     public int readAndValidateQuantityToDecrease(int maxDecrease){
-        Scanner SC = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         int quantityToDecrease;
         do {
             System.out.println("Max quantity is "+maxDecrease);
             System.out.print("Insert total quantity to decrease: ");
-            quantityToDecrease = SC.nextInt();
+            quantityToDecrease = sc.nextInt();
         }while (quantityToDecrease < 0 || quantityToDecrease > maxDecrease);
         return quantityToDecrease;
     }
