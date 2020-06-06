@@ -45,7 +45,9 @@ package BasicsClasses.Interfaces;
  */
 
 import BasicsClasses.FoodstuffDrinks.Consumable;
+import BasicsClasses.FoodstuffDrinks.Drink;
 import BasicsClasses.FoodstuffDrinks.Enums.EnumAllergies;
+import BasicsClasses.FoodstuffDrinks.Food;
 import BasicsClasses.ReceiptLine.ReceiptLine;
 
 import java.util.ArrayList;
@@ -74,8 +76,11 @@ public interface IReceipt {
         public ArrayList<EnumAllergies> getAllergiesConsumable(int IDConsumable);
     public int getQuantityConsumable(int index);
 
-    public void addConsumable(Consumable consumable);
-    public void addConsumable(Consumable consumable, int quantity);
+    public void addConsumable(Food food);
+    public void addConsumable(Drink drink);
+
+    public void addConsumable(Food food, int quantity);
+    public void addConsumable(Drink drink, int quantity);
 
     public boolean getPaidFor();
     public void setPaidFor(boolean paidFor);
