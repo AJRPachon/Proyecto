@@ -7,10 +7,6 @@ import BasicsClasses.Employee.Enums.EnumPosition;
 
 
 import java.io.*;
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import java.util.GregorianCalendar;
 import java.util.Scanner;
@@ -29,19 +25,19 @@ public class EmployeeManagement {
     public String getPermisons(String username, String password, String path){
 
         String category = null;
-        BufferedReader BR = null;
+        BufferedReader br = null;
         String line;
         String[] lineDivide;
 
         try {
-            BR = new BufferedReader(new FileReader(path));
-            line = BR.readLine();
+            br = new BufferedReader(new FileReader(path));
+            line = br.readLine();
             while (line != null && category == null){
                 lineDivide = line.split("#");
                 if (lineDivide[2].equals(username) && lineDivide[8].equals(password)){
                     category = lineDivide[6];
                 }
-                line = BR.readLine();
+                line = br.readLine();
             }
         }catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -50,8 +46,8 @@ public class EmployeeManagement {
         }
         finally {
             try {
-                if (BR != null) {
-                    BR.close();
+                if (br != null) {
+                    br.close();
                 }
             } catch (IOException e) {
                 e.printStackTrace();

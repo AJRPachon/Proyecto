@@ -2,6 +2,7 @@ package Management;
 
 import BasicsClasses.Orders.Order;
 import BasicsClasses.Orders.OrderLine;
+import utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -111,7 +112,7 @@ public class Validations {
 
     public String readAndValidatePassword(){
         Scanner sc = new Scanner(System.in);
-        EmployeeManagement EM = new EmployeeManagement();
+        Utils u = new Utils();
         String password;
 
         do {
@@ -121,7 +122,7 @@ public class Validations {
             }
         }while (password.length() < 8);
 
-        password = EM.encriptPassword(password);
+        password = u.encriptPassword(password);
         return password;
     }
 
@@ -349,5 +350,102 @@ public class Validations {
         return salary;
 
     }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * This method reads and validates the time
+     *
+     * @return Hour
+     */
+
+    public int readHour() {
+
+        Scanner sc = new Scanner(System.in);
+
+        int hour;
+
+        hour = sc.nextInt();
+
+        //Validation
+        while (hour < 0 || hour > 24) {
+            System.out.println("The time must be between 0 and 24");
+            hour = sc.nextInt();
+        }
+
+        return hour;
+
+    }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * This method reads and validates the minutes
+     *
+     * @return Minute
+     */
+
+    public int readMinute(){
+
+        Scanner sc = new Scanner(System.in);
+
+        int minute;
+
+        minute = sc.nextInt();
+
+        //Validation
+        while (minute < 0 || minute > 59) {
+            System.out.println("The minutes must be between 0 and 59");
+            minute = sc.nextInt();
+        }
+
+        return minute;
+
+    }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public int readDay(){
+
+        Scanner sc = new Scanner(System.in);
+
+        int day;
+
+        day = sc.nextInt();
+
+        //Validation
+        while (day < 1 || day > 31) {
+            System.out.println("The day must be between 1 and 31");
+            day = sc.nextInt();
+        }
+
+        return day;
+
+    }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public int readMonth(){
+
+        Scanner sc = new Scanner(System.in);
+
+        int month;
+
+        month = sc.nextInt();
+
+        //Validation
+        while (month < 1 || month > 12) {
+            System.out.println("The month must be between 1 and 12");
+            month = sc.nextInt();
+        }
+
+        return month;
+
+    }
+
+
+
 
 }
