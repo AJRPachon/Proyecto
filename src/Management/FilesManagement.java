@@ -403,7 +403,7 @@ public class FilesManagement {
                 //Si contenido es igual a nuestro DNI, creamos un objeto empleado con los valores recogidos
                 if( contenido.equals(dNI) ){
 
-                    birthday = u.assignBirthday(separaciones);
+                    birthday = u.createVariableGregorianCalendar(separaciones);
 
                     employee = new Employee(separaciones[0],separaciones[1],separaciones[2],separaciones[3],birthday,EnumPosition.valueOf(separaciones[5]),EnumCategory.valueOf(separaciones[6]),separaciones[7],separaciones[8]);
 
@@ -470,7 +470,7 @@ public class FilesManagement {
                 if( contenido.equals(dNI) ){
 
                     //Separamos el String de la fecha en sus distintos numeros
-                    birthday = u.assignBirthday(separaciones);
+                    birthday = u.createVariableGregorianCalendar(separaciones);
 
                     employee = new Employee(separaciones[0],separaciones[1],separaciones[2],separaciones[3],birthday,EnumPosition.valueOf(separaciones[5]),EnumCategory.valueOf(separaciones[6]),separaciones[7],separaciones[8]);
 
@@ -532,7 +532,7 @@ public class FilesManagement {
                 //Si contenido es igual a nuestro DNI, creamos un objeto empleado con los valores recogidos
                 if( contenido.equals(dNI) && !salir ){
 
-                    birthday = u.assignBirthday(separaciones);
+                    birthday = u.createVariableGregorianCalendar(separaciones);
 
                     employee = new Employee(separaciones[0],separaciones[1],separaciones[2],separaciones[3],birthday,EnumPosition.valueOf(separaciones[5]),EnumCategory.valueOf(separaciones[6]),separaciones[7],separaciones[8]);
 
