@@ -97,18 +97,20 @@ public class FilesManagement {
     private void checkFileEmployee(File file){
         if (!(file.length() > 0)){
 
-            BufferedWriter BW = null;
+            BufferedWriter bw = null;
             try {
                 file.createNewFile();
 
-                BW = new BufferedWriter(new FileWriter(file));
-                BW.write(new Employee("Administrator","Administrator","00000000T","281234567840",new GregorianCalendar(),EnumPosition.Manager,EnumCategory.Administrator,"ES3231906288456991923866","e807f1fcf82d132f9bb018ca6738a19f").toString());
+                bw = new BufferedWriter(new FileWriter(file));
+                bw.write(new Employee("Administrator","Administrator","00000000T","281234567840",new GregorianCalendar(),EnumPosition.Manager,EnumCategory.Administrator,"ES3231906288456991923866","e807f1fcf82d132f9bb018ca6738a19f").toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }
             finally {
                 try {
-                    BW.close();
+                    if (bw != null) {
+                        bw.close();
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -130,15 +132,15 @@ public class FilesManagement {
     public <T> boolean insertObjectInFile(T object, String path){
 
         boolean objectInserted = false;
-        FileWriter FW = null;
-        BufferedWriter BW = null;
+        FileWriter fw = null;
+        BufferedWriter bw = null;
 
         try {
-            FW = new FileWriter(path,true);
-            BW = new BufferedWriter(FW);
-            BW.write(object.toString());
-            BW.newLine();
-            BW.flush();
+            fw = new FileWriter(path,true);
+            bw = new BufferedWriter(fw);
+            bw.write(object.toString());
+            bw.newLine();
+            bw.flush();
             objectInserted = true;
 
         } catch (IOException e) {
@@ -146,11 +148,11 @@ public class FilesManagement {
         }
         finally {
             try {
-                if( FW != null ) {
-                    FW.close();
+                if( fw != null ) {
+                    fw.close();
                 }
-                if( BW != null ) {
-                    BW.close();
+                if( bw != null ) {
+                    bw.close();
                 }
             }catch (IOException|NullPointerException error){
                 error.printStackTrace();
@@ -171,18 +173,18 @@ public class FilesManagement {
 
     public <T> boolean insertObjectDeletedInFile(T object, String path){
         boolean objectInserted = false;
-        FileWriter FW = null;
+        FileWriter fw = null;
         try {
-            FW = new FileWriter(path,true);
-            FW.write(object.toString()+"#D"+"\n");
-            FW.flush();
+            fw = new FileWriter(path,true);
+            fw.write(object.toString()+"#D"+"\n");
+            fw.flush();
             objectInserted = true;
         } catch (IOException e) {
             e.printStackTrace();
         }
         finally {
             try {
-                FW.close();
+                fw.close();
             }catch (IOException|NullPointerException error){
                 error.printStackTrace();
             }
@@ -202,18 +204,18 @@ public class FilesManagement {
 
     public <T> boolean insertObjectModifiedInFile(T object, String path){
         boolean objectInserted = false;
-        FileWriter FW = null;
+        FileWriter fw = null;
         try {
-            FW = new FileWriter(path,true);
-            FW.write(object.toString()+"#M"+"\n");
-            FW.flush();
+            fw = new FileWriter(path,true);
+            fw.write(object.toString()+"#M"+"\n");
+            fw.flush();
             objectInserted = true;
         } catch (IOException e) {
             e.printStackTrace();
         }
         finally {
             try {
-                FW.close();
+                fw.close();
             }catch (IOException|NullPointerException error){
                 error.printStackTrace();
             }
@@ -231,18 +233,18 @@ public class FilesManagement {
 
     public ArrayList<Order> getOrdersNotShipped(String path){
         ArrayList<Order> ordersNotShipped = new ArrayList<>();
-        BufferedReader BR = null;
+        BufferedReader br = null;
         String line;
         Order orderRead;
         try {
-            BR = new BufferedReader(new FileReader(path));
-            line = BR.readLine();
+            br = new BufferedReader(new FileReader(path));
+            line = br.readLine();
             while (line != null){
                 orderRead = Order.stringToOrder(line);
                 if (!orderRead.getSent() && !orderRead.getCancel()){
                     ordersNotShipped.add(Order.stringToOrder(line));
                 }
-                line = BR.readLine();
+                line = br.readLine();
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -251,7 +253,9 @@ public class FilesManagement {
         }
         finally {
             try {
-                BR.close();
+                if (br != null) {
+                    br.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -330,22 +334,31 @@ public class FilesManagement {
 
 
     public void printEmployeePersonalData(String DNIEmployee, String path) {
-        BufferedReader BR;
+        BufferedReader br = null;
         String[] lineParted = null;
         String line;
         boolean employeeFind = false;
 
         try {
-            BR = new BufferedReader(new FileReader(path));
-            line = BR.readLine();
+            br = new BufferedReader(new FileReader(path));
+            line = br.readLine();
             while (line != null && !employeeFind) {
                 lineParted = line.split("#");
                 employeeFind = (lineParted[2].equals(DNIEmployee));
-                line = BR.readLine();
+                line = br.readLine();
             }
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        finally {
+            try {
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         if (employeeFind) {
@@ -385,8 +398,8 @@ public class FilesManagement {
         GregorianCalendar birthday;
         boolean salir = false;
 
-        FileReader fr;
-        BufferedReader br;
+        FileReader fr = null;
+        BufferedReader br = null;
 
 
         try{
@@ -422,6 +435,19 @@ public class FilesManagement {
         }catch (IOException e){
             e.printStackTrace();
         }
+        finally {
+            try {
+                if (fr != null){
+                    fr.close();
+                }
+
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         return payslip;
 
@@ -450,8 +476,8 @@ public class FilesManagement {
         GregorianCalendar birthday;
         boolean salir = false;
 
-        FileReader fr;
-        BufferedReader br;
+        FileReader fr = null;
+        BufferedReader br = null;
 
         try{
 
@@ -485,6 +511,19 @@ public class FilesManagement {
             e.printStackTrace();
         }
 
+        finally {
+            try {
+                if (fr != null){
+                    fr.close();
+                }
+
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         return employee;
 
     }
@@ -514,8 +553,8 @@ public class FilesManagement {
         GregorianCalendar birthday;
         boolean salir = false;
 
-        FileReader fr;
-        BufferedReader br;
+        FileReader fr = null;
+        BufferedReader br = null;
 
 
         try{
@@ -557,6 +596,19 @@ public class FilesManagement {
         }catch (IOException e){
             e.printStackTrace();
         }
+        finally {
+            try {
+                if (fr != null){
+                    fr.close();
+                }
+
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
@@ -572,8 +624,8 @@ public class FilesManagement {
 
         String line;
 
-        FileReader fr;
-        BufferedReader br;
+        FileReader fr = null;
+        BufferedReader br = null;
 
         try{
 
@@ -590,6 +642,19 @@ public class FilesManagement {
         }catch (IOException e){
             e.printStackTrace();
         }
+        finally {
+            try {
+                if (fr != null){
+                    fr.close();
+                }
+
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
@@ -605,8 +670,8 @@ public class FilesManagement {
         String[] separaciones;
         boolean impreso = false;
 
-        FileReader fr;
-        BufferedReader br;
+        FileReader fr = null;
+        BufferedReader br = null;
 
 
         try{
@@ -645,6 +710,19 @@ public class FilesManagement {
 
         }catch (IOException e){
             e.printStackTrace();
+        }
+        finally {
+            try {
+                if (fr != null){
+                    fr.close();
+                }
+
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
     }
