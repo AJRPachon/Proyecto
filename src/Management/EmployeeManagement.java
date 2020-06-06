@@ -50,7 +50,9 @@ public class EmployeeManagement {
         }
         finally {
             try {
-                BR.close();
+                if (BR != null) {
+                    BR.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -129,8 +131,7 @@ public class EmployeeManagement {
             System.out.println("Employee birthday-year wasn´t correct, insert it again");
             year = sc.nextInt();
         }
-
-        //TODO Create enum with all months?
+        
         birthday.set(day, month,year);
 
         System.out.println("Employee position");
