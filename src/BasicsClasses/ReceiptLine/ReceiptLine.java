@@ -31,7 +31,9 @@ package BasicsClasses.ReceiptLine;
  */
 
 import BasicsClasses.FoodstuffDrinks.Consumable;
+import BasicsClasses.FoodstuffDrinks.Drink;
 import BasicsClasses.FoodstuffDrinks.Enums.EnumAllergies;
+import BasicsClasses.FoodstuffDrinks.Food;
 import BasicsClasses.Interfaces.IReceiptLine;
 
 import java.util.ArrayList;
@@ -46,13 +48,23 @@ public class ReceiptLine implements IReceiptLine, Comparable, Cloneable {
         consumableQuantity = 0;
     }
 
-    public ReceiptLine(Consumable consumable, int consumableQuantity) {
-        this.consumable = consumable.clone();
+    public ReceiptLine(Food food, int consumableQuantity) {
+        this.consumable = food.clone();
         this.consumableQuantity = consumableQuantity;
     }
 
-    public ReceiptLine(Consumable consumable) {
-        this.consumable = consumable.clone();
+    public ReceiptLine(Drink drink, int consumableQuantity) {
+        this.consumable = drink.clone();
+        this.consumableQuantity = consumableQuantity;
+    }
+
+    public ReceiptLine(Food food) {
+        this.consumable = food.clone();
+        this.consumableQuantity = 1;
+    }
+
+    public ReceiptLine(Drink drink) {
+        this.consumable = drink.clone();
         this.consumableQuantity = 1;
     }
 

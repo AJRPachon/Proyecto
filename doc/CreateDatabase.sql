@@ -5,6 +5,7 @@ GO
 USE Restaurant
 GO
 
+
 CREATE TABLE Employees(
 	DNI CHAR(9) NOT NULL,
 	[Password] VARCHAR(30) NOT NULL,
