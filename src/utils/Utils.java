@@ -1,11 +1,15 @@
 package utils;
 
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Utils {
 
-    /////////// ASSIGN BIRTHDAY //////////////////////////////////////////////////////////////////////////////////////////////
+/////////// ASSIGN BIRTHDAY //////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      * Convertimos una fecha String a enteros y se la asignamos a una variable de tipo GregorianCalendar
@@ -36,5 +40,30 @@ public class Utils {
         return birthday;
 
     }
+
+///////// ENCRIPT PASSWORD /////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * @param password
+     * @return
+     */
+
+
+    public String encriptPassword(String password){
+        String passEncripted = null;
+
+        try {
+            byte[] bytesOfMessage = password.getBytes(StandardCharsets.UTF_8);
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] thedigest = md.digest(bytesOfMessage);
+            BigInteger bigInt = new BigInteger(1,thedigest);
+            passEncripted = bigInt.toString(16);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        return passEncripted;
+    }
+
 
 }
