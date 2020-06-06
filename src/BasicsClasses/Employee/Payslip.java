@@ -29,16 +29,19 @@ package BasicsClasses.Employee;
 public class Payslip {
 
     private double salary;
+    private Employee employee;
 
     public Payslip(){ //Constructor without parameters
 
         this.salary = 0;
+        this.employee = new Employee();
 
     }
 
-    public Payslip(double salary){ //Constructor with parameters
+    public Payslip(double salary, Employee employee){ //Constructor with parameters
 
         this.salary = salary;
+        this.employee = employee;
 
     }
 
