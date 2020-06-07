@@ -4,6 +4,10 @@ import BasicsClasses.Orders.Order;
 import BasicsClasses.Orders.OrderLine;
 import utils.Utils;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -102,6 +106,52 @@ public class Validations {
                 System.out.println("The username aren`t correct. The syntax is: 00000000T");
             }
         }while (!userNotValid);
+
+        return username;
+    }
+
+    /**
+     * @return
+     */
+
+    public String readAndValidateUsername(Connection connection){
+        Scanner sc = new Scanner(System.in);
+        boolean userNotValid, exist = false;
+        String username;
+
+        Statement sentence = null;
+        ResultSet employees = null;
+
+        do {
+            System.out.print("Insert the username: ");
+            if (!(userNotValid = checkUsername(username = sc.next()))){
+                System.out.println("The username aren`t correct. The syntax is: 00000000T");
+            }
+
+            String select = "SELECT DNI " +
+                            "FROM Employees " +
+                            "WHERE DNI = '"+username+"'";
+
+            try {
+                sentence = connection.createStatement();
+                employees = sentence.executeQuery(select);
+                if (!(exist = employees.next())){
+                    System.out.println("The username don`t exist.");
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+
+            finally {
+                try {
+                    employees.close();
+                    sentence.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+
+        }while (!userNotValid || !exist);
 
         return username;
     }
@@ -271,9 +321,14 @@ public class Validations {
      * @return
      */
 
-    public OrderLine readAndValidateNewOrderLine(){
+    public OrderLine readAndValidateNewOrderLine(Connection connection){
         Utils u = new Utils();
-        return new OrderLine(u.readAndSearchProduct(),readAndValidateQuantityOfProduct());
+        return new OrderLine(u.readAndSearchProduct(connection),readAndValidateQuantityOfProduct());
+    }
+
+    public OrderLine readAndValidateNewOrderLine(String path){
+        Utils u = new Utils();
+        return new OrderLine(u.readAndSearchProduct(path),readAndValidateQuantityOfProduct());
     }
 
     /**
