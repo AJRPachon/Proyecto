@@ -55,7 +55,6 @@ public class Main {
         String pathPaySlips = ".\\src\\files\\Payslips", pathPaySlipsTemp = ".\\src\\files\\temp\\PayslipsTemp";
         String pathSchedule = ".\\src\\files\\Schedule", parthScheduleTemp = ".\\src\\files\\temp\\ScheduleTemp";
         Order newOrder, orderChoosed;
-        ArrayList<Order> ordersNotShipped;
         int optionPermisons, optionModifyOrder, IDProductToDelete, IDProductToDecrease, amountToDecrease, IDProductToIncrease, amountToIncrease;
         String employeeDNI;
         double salary;

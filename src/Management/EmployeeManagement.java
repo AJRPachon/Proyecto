@@ -73,16 +73,16 @@ public class EmployeeManagement {
         int day, month, year;
 
         System.out.println("Employee Name");
-        name = sc.nextLine();
+        name = sc.next();
 
         System.out.println("Employee Surname");
-        surname = sc.nextLine();
+        surname = sc.next();
 
         System.out.println("Employee DNI");
         dNI = VA.readAndValidateUsername();
 
         System.out.println("Employee NAF");
-        nAF = sc.nextLine();
+        nAF = sc.next();
 
         System.out.println("Employee birthday-day");
         day = sc.nextInt();
@@ -108,15 +108,15 @@ public class EmployeeManagement {
         birthday.set(day, month,year);
 
         System.out.println("Employee position");
-        position = sc.nextLine();
+        position = sc.next();
         EnumPosition.valueOf(position);
 
         System.out.println("Employee category");
-        category = sc.nextLine();
+        category = sc.next();
         EnumCategory.valueOf(category);
 
         System.out.println("Employee bankAccoutN");
-        bankAccountN = sc.nextLine();
+        bankAccountN = sc.next();
 
         System.out.println("Employee password");
         password = VA.readAndValidatePassword(); //Validamos la contraseña

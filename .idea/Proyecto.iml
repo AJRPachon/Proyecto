@@ -34,5 +34,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" exported="" name="mssql-jdbc-8.2.2.jre11" level="project" />
+    <orderEntry type="library" name="sqljdbc42" level="project" />
   </component>
 </module>

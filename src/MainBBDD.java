@@ -44,8 +44,8 @@ public class MainBBDD {
     public static void main(String[] args) {
 
         String sourceURL = "jdbc:sqlserver://localhost";
-        String usernameBBDD = "NewAdminName";
-        String passwordBBDD = "ABCD";
+        String usernameBBDD = "AntonioSQL";
+        String passwordBBDD = "123";
         Connection connexionBaseDatos = null;
 
         try {

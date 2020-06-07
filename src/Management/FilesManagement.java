@@ -728,4 +728,66 @@ public class FilesManagement {
     }
 
 
+
+////////// CONTAR OBJETOS TOTALES //////////////////////////////////////////////////////////////////////////////////////
+
+    /*
+     *  Cuenta los objetos totales que se han creado
+     *
+     * ENTRADA:
+     *      String ruta
+     *
+     * SALIDA:
+     *      int contadorObjetos
+     *
+     *  PRECONDICIONES:
+     *      Ninguna
+     *
+     * POSTCONDICIONES:
+     *      Los objetos deben de haberse contado, en caso de no haber, el contador será 0
+     *
+     */
+
+    public int contarObjetosTotales(String ruta){
+
+
+        int contadorObjetos = 0;
+
+        FileReader fr = null;
+        BufferedReader br = null;
+
+        String linea;
+
+
+        try{
+
+            fr = new FileReader(ruta);
+            br =  new BufferedReader(fr);
+            linea = br.readLine();
+
+            while( linea != null ){
+
+                contadorObjetos++;
+
+                linea = br.readLine();
+
+            }
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }finally {
+            try{
+                if(fr != null ) {
+                    fr.close();
+                }
+                if(br != null) {
+                    br.close();
+                }
+            }catch (IOException f){
+                f.printStackTrace();
+            }
+        }
+
+        return contadorObjetos;
+    }
 }
