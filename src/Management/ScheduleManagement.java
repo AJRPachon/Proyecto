@@ -27,6 +27,8 @@ public class ScheduleManagement {
 
         for(int cont = 0; cont < schedule.length; cont++) {
 
+            schedule[cont] = new Schedule();
+
             System.out.println("Introduzca día de entrada");
             sDDay = va.readDay();
             schedule[cont].setSDDayOfSchedule(sDDay);
