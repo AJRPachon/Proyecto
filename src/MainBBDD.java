@@ -70,7 +70,6 @@ public class MainBBDD {
         EmployeeManagement EM = new EmployeeManagement();
         Validations VD = new Validations();
         OrderManagement OM = new OrderManagement();
-        PaySlipManagement PM = new PaySlipManagement();
         ScheduleManagement SM = new ScheduleManagement();
         Utils U = new Utils();
 
