@@ -38,6 +38,13 @@ public class Payslip {
 
     }
 
+    public Payslip(double salary){
+
+        this.salary = salary;
+        this.employee = new Employee();
+
+    }
+
     public Payslip(double salary, Employee employee){ //Constructor with parameters
 
         this.salary = salary;

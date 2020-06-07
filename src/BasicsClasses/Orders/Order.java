@@ -90,6 +90,14 @@ public class Order implements IOrder,Cloneable,Comparable {
         this.dateOrder = (GregorianCalendar)dateOrder.clone();
     }
 
+    public Order(int IDOrder, GregorianCalendar dateOrder, boolean sent, boolean cancel) {
+        this.orderID = IDOrder;
+        this.ordersLines = new ArrayList<>();
+        this.dateOrder = (GregorianCalendar)dateOrder.clone();
+        this.sent = sent;
+        this.cancel = cancel;
+    }
+
     public Order(GregorianCalendar dateOrder) {
         this.orderID = ++totalIDOrders;
         ordersLines = new ArrayList<>();
