@@ -83,8 +83,6 @@ public class MainBBDD {
 
 
 
-
-
         do {
 
             //username = VD.readAndValidateUsername();
@@ -93,7 +91,7 @@ public class MainBBDD {
             username = "00000000T";
             password = "e807f1fcf82d132f9bb018ca6738a19f";
 
-            permisons = em.getPermisons(username, password, connexionBaseDatos);
+            permisons = EM.getPermisons(username, password, pathFileEmployee);
 
             if (permisons != null){
                 switch (permisons) {
@@ -110,9 +108,10 @@ public class MainBBDD {
 
 
                                 case 1: //Dar de alta a un empleado
-                                    String path = ".\\src\\files\\EmployeesTemp";
+                                    System.out.println("Dar de alta a un empleado");
                                     employee = EM.collectEmployeeData(); //Pedimos datos del nuevo empleado
-                                    FM.insertObjectInFile(employee, path); //Registramos nuevo empleado en el fichero
+                                    FM.insertObjectInFile(employee, pathFileEmployee); //Registramos nuevo empleado en el fichero
+
 
 
                                     break;
@@ -154,7 +153,7 @@ public class MainBBDD {
                                 case 5: //Modificar sueldo a empleado
                                     FM.showFileData(pathPaySlips);
                                     employeeDNI = VD.readAndValidateUsername(); //Lee el dni del empleado
-                                    salary = PM.assignSalary();  //Asignamos el nuevo salario
+                                    salary = VD.readAndValidateSalary();  //Asignamos el nuevo salario
                                     payslip = FM.insertSalary(pathPaySlips, employeeDNI, salary); //Creamos un objeto payslip con el nuevo salario
                                     FM.insertObjectModifiedInFile(payslip, pathPaySlipsTemp ); //Añadimos al fichero temporal el nuevo objeto modificado para luego añadirlo al fichero maestro
 
@@ -164,7 +163,7 @@ public class MainBBDD {
                                 case 6:
                                     System.out.println();
                                     DNIToConsultData = VD.readAndValidateUsername();
-                                    FM.printPersonalData(DNIToConsultData,pathFileEmployee);
+                                    FM.printEmployeePersonalData(DNIToConsultData,pathFileEmployee);
                                     System.out.println();
                                     break;
 
@@ -248,7 +247,7 @@ public class MainBBDD {
 
                                 case 9:
                                     System.out.println("Ver datos personales administrador");
-                                    FM.printPersonalData(username,pathFileEmployee);
+                                    FM.printEmployeePersonalData(username,pathFileEmployee);
 
                                     break;
 
@@ -301,7 +300,7 @@ public class MainBBDD {
 
                             case 4:
                                 System.out.println("Ver datos personales floor manager");
-                                FM.printPersonalData(username, pathFileEmployee);
+                                FM.printEmployeePersonalData(username, pathFileEmployee);
                                 break;
 
 
@@ -324,7 +323,7 @@ public class MainBBDD {
 
                             case 1:
                                 System.out.println("Ver datos personales del empleado");
-                                FM.printPersonalData(username,pathFileEmployee);
+                                FM.printEmployeePersonalData(username,pathFileEmployee);
 
                                 break;
 
