@@ -17,7 +17,7 @@ public class OrderManagement {
      * @return Return object Order valided
      */
 
-    public Order readAndValidateNewOrder(){
+    public Order readAndValidateNewOrder(String path){
         Scanner sc = new Scanner(System.in);
         FilesManagement FM = new FilesManagement();
         Utils u = new Utils();
@@ -31,7 +31,7 @@ public class OrderManagement {
 
         do {
 
-            productGet = u.readAndSearchProduct();
+            productGet = u.readAndSearchProduct(path);
             quantity = Val.readAndValidateQuantityOfProduct();
             newOrder.addOrderLine(new OrderLine(productGet,quantity));
 
