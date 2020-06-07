@@ -6,6 +6,9 @@ USE Restaurant
 GO
 
 
+CREATE LOGIN UserJava with password='newPassUser', DEFAULT_DATABASE = Restaurant USE Restaurant CREATE USER UserJava FOR LOGIN UserJava GRANT EXECUTE, INSERT, UPDATE, DELETE, SELECT TO UserJava 
+
+
 CREATE TABLE Employees(
 	DNI CHAR(9) NOT NULL,
 	[Password] VARCHAR(30) NOT NULL,
