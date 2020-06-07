@@ -107,25 +107,42 @@ public class EmployeeManagement {
 
         birthday.set(day, month,year);
 
+        /*
         System.out.println("Employee position");
         position = sc.nextLine();
         EnumPosition.valueOf(position);
+
 
         System.out.println("Employee category");
         category = sc.nextLine();
         EnumCategory.valueOf(category);
 
+        */
+
+
         System.out.println("Employee bankAccoutN");
-        bankAccountN = sc.nextLine();
+        bankAccountN = sc.next();
 
         System.out.println("Employee password");
         password = VA.readAndValidatePassword(); //Validamos la contraseña
 
 
-        return new Employee(name, surname,dNI,nAF,birthday, EnumPosition.valueOf(position), EnumCategory.valueOf(category),bankAccountN,password);
+        //return new Employee(name, surname,dNI,nAF,birthday, EnumPosition.valueOf(position), EnumCategory.valueOf(category),bankAccountN,password);
+        return new Employee(name, surname,dNI,nAF,birthday, EnumPosition.Manager, EnumCategory.Administrator,bankAccountN,password);
 
     }
 
+
+    public void printEmployeePersonalData(Employee employee) {
+        System.out.println("Name of employee: " + employee.getName());
+        System.out.println("Suname of employee: " + employee.getSurname());
+        System.out.println("DNI of employee: " + employee.getDNI());
+        System.out.println("Number of SS of employee: " + employee.getnAF());
+        System.out.println("Birthday of employee: " + employee.getBirthday());
+        System.out.println("Position of employee: " + employee.getPosition());
+        System.out.println("Category of employee: " + employee.getCategory());
+        System.out.println("Number of bank account of employee: " + employee.getBankAccountN());
+    }
 
 
 
