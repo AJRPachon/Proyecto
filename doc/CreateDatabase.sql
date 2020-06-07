@@ -8,7 +8,7 @@ GO
 
 CREATE TABLE Employees(
 	DNI CHAR(9) NOT NULL,
-	[Password] VARCHAR(30) NOT NULL,
+	[Password] VARCHAR(32) NOT NULL,
 	[Name] VARCHAR(30) NOT NULL,
 	[Surname] VARCHAR(30) NOT NULL,
 	NAF VARCHAR(12) NOT NULL,
@@ -16,6 +16,7 @@ CREATE TABLE Employees(
 	Position VARCHAR(13) NULL,
 	Category VARCHAR(13) NULL,
 	BankAccount CHAR(40) NULL,
+	Active BIT NOT NULL DEFAULT 1,
 	CONSTRAINT PK_Employees PRIMARY KEY (DNI)
 )
 
@@ -35,7 +36,6 @@ CREATE TABLE Schedules(
 	[WeekDay] VARCHAR(10) NOT NULL,
 	StartDate SMALLDATETIME NOT NULL,
 	EndDate SMALLDATETIME NOT NULL,
-	Salary MONEY NOT NULL,
 	CONSTRAINT PK_Schedules PRIMARY KEY (ID),
 	CONSTRAINT FK_Schedules_DNIEmployee FOREIGN KEY (DNIEmployee) REFERENCES Employees(DNI) ON DELETE NO ACTION ON UPDATE NO ACTION
 )
@@ -148,3 +148,7 @@ CREATE TABLE ReceiptsLinesConsumablesFoods(
 	CONSTRAINT FK_ReceiptsLinesConsumablesFoods_IDReceipt FOREIGN KEY (IDReceipt) REFERENCES Receipts(ID) ON DELETE NO ACTION ON UPDATE NO ACTION,
 	CONSTRAINT FK_ReceiptsLinesConsumablesFoods_IDConsumableFood FOREIGN KEY (IDConsumableFood) REFERENCES ConsumablesFoods(ID) ON DELETE NO ACTION ON UPDATE NO ACTION
 )
+
+CREATE LOGIN UserJava with password='newPassUser', DEFAULT_DATABASE=Restaurant USE Restaurant CREATE USER UserJava FOR LOGIN UserJava GRANT EXECUTE, INSERT, UPDATE, DELETE, SELECT TO UserJava 
+
+INSERT INTO Employees (DNI, Password, Name, Surname, NAF, Birthday, Position, Category, BankAccount) values ('00000000T', 'e807f1fcf82d132f9bb018ca6738a19f', 'Bord', 'Tremayle', 'NOSE', '12/31/1999', 'Manager', 'Administrator', 'IE22 ZWIA 4503 0038 9347 20');

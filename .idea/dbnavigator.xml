@@ -27,9 +27,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="05772c5e-cf67-4b03-9ace-a78e2d9d4a63">
-      <console name="SQLServer" type="STANDARD" schema="" session="Main" />
-      <console name="SQLServer 1" type="STANDARD" schema="" session="Main"><![CDATA[SELECT *
-FROM GOla]]></console>
+      <console name="SQLServer" type="STANDARD" schema="INFORMATION_SCHEMA" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
@@ -67,11 +65,11 @@ FROM GOla]]></console>
           <description value="" />
           <database-type value="GENERIC" />
           <config-type value="CUSTOM" />
-          <database-version value="9999.0" />
+          <database-version value="15.0" />
           <driver-source value="EXTERNAL" />
           <driver-library value="C:\Users\Francisco Javier\Documents\Github\Proyecto\lib\sqljdbc_8.2.2.0_enu\sqljdbc_8.2\enu\mssql-jdbc-8.2.2.jre11.jar" />
           <driver value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
-          <url value="jdbc:sqlserver://localhost" />
+          <url value="jdbc:sqlserver://localhost:1433;database=Restaurant" />
           <type value="USER_PASSWORD" />
           <user value="UserJava" />
           <deprecated-pwd value="bmV3UGFzc1VzZXI=" />
