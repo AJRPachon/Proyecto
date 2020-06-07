@@ -32,10 +32,6 @@ import BasicsClasses.Employee.Payslip;
 import BasicsClasses.Employee.Schedule;
 import BasicsClasses.Orders.Order;
 import Management.*;
-import utils.Utils;
-
-
-import java.util.ArrayList;
 
 
 public class Main {
@@ -113,7 +109,7 @@ public class Main {
                                     System.out.println("Introduzca el DNI del empleado al que desea asignar un horario");
                                     employeeDNI = VD.readAndValidateUsername(); //Seleccionamos el dni del empleado al cual queremos cambiarle el horario
                                     schedule = SM.setScheduleData(); //Creamos un nuevo horario
-                                    FM.insertEmployeeOnSchedule(pathSchedule, employeeDNI, parthScheduleTemp, schedule); //Insertamos los nuevos datos modificados en el fichero temporal
+                                    FM.insertScheduleOnFile(pathSchedule, employeeDNI, parthScheduleTemp, schedule); //Insertamos los nuevos datos modificados en el fichero temporal
                                     
                                     break;
 
@@ -125,7 +121,7 @@ public class Main {
                                     System.out.println("Introduzca el DNI del empleado al que desea asignar un horario");
                                     employeeDNI = VD.readAndValidateUsername(); //Seleccionamos el dni del empleado al cual queremos cambiarle el horario
                                     schedule = SM.setScheduleData(); //Creamos un nuevo horario
-                                    FM.insertEmployeeOnSchedule(pathSchedule, employeeDNI, parthScheduleTemp, schedule); //Insertamos los nuevos datos modificados en el fichero temporal
+                                    FM.insertScheduleOnFile(pathSchedule, employeeDNI, parthScheduleTemp, schedule); //Insertamos los nuevos datos modificados en el fichero temporal
 
                                     break;
 
@@ -261,7 +257,7 @@ public class Main {
                                 System.out.println("Introduzca el DNI del empleado al que desea asignar un horario");
                                 employeeDNI = VD.readAndValidateUsername(); //Seleccionamos el dni del empleado al cual queremos cambiarle el horario
                                 schedule = SM.setScheduleData(); //Creamos un nuevo horario
-                                FM.insertEmployeeOnSchedule(pathSchedule, employeeDNI, parthScheduleTemp, schedule); //Insertamos los nuevos datos modificados en el fichero temporal
+                                FM.insertScheduleOnFile(pathSchedule, employeeDNI, parthScheduleTemp, schedule); //Insertamos los nuevos datos modificados en el fichero temporal
                             break;
 
 
@@ -272,7 +268,7 @@ public class Main {
                                 System.out.println("Introduzca el DNI del empleado al que desea asignar un horario");
                                 employeeDNI = VD.readAndValidateUsername(); //Seleccionamos el dni del empleado al cual queremos cambiarle el horario
                                 schedule = SM.setScheduleData(); //Creamos un nuevo horario
-                                FM.insertEmployeeOnSchedule(pathSchedule, employeeDNI, parthScheduleTemp, schedule); //Insertamos los nuevos datos modificados en el fichero temporal
+                                FM.insertScheduleOnFile(pathSchedule, employeeDNI, parthScheduleTemp, schedule); //Insertamos los nuevos datos modificados en el fichero temporal
 
 
                             break;

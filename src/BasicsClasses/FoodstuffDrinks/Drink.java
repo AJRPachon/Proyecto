@@ -21,6 +21,7 @@ package BasicsClasses.FoodstuffDrinks;
 
     ADDED METHODS:
         toString()
+        close()
 
 
  */

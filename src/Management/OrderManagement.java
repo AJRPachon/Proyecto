@@ -19,7 +19,6 @@ public class OrderManagement {
 
     public Order readAndValidateNewOrder(){
         Scanner sc = new Scanner(System.in);
-        FilesManagement FM = new FilesManagement();
         Utils u = new Utils();
         Validations Val = new Validations();
 
@@ -46,6 +45,10 @@ public class OrderManagement {
         return newOrder;
     }
 
+    /**
+     * Shows a list of orders
+     * @param orders object list orders
+     */
 
     public void printArrayListOrders(ArrayList<Order> orders){
         for (Order o : orders){

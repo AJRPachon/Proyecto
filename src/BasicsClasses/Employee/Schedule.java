@@ -19,22 +19,35 @@ package BasicsClasses.Employee;
  *       - none setWeekDay(enum);
  *
  *       - date getDate();
- *           * integer getHour()
- *           * integer getMinute()
- *           * integer getDayOfSchedule()
- *           * integer getMonthOfSchedule()
- *           * integer getYearOfSchedule()
- *       - none setDate(dateType date);
- *           * none setDayOfSchedule(integer day)
- *           * none setMonthOfSchedule(integer month)
- *           * none setYearOfSchedule(integer year)
- *           * none setHour(integer hour)
- *           * none setMinute(integer minute)
+ *           * integer getSDHour()
+ *           * integer getSDMinute()
+ *           * integer getSDDayOfSchedule()
+ *           * integer getSDMonthOfSchedule()
+ *           * integer getSDYearOfSchedule()
  *
- *       - getShift(); TODO
+ *           * integer getEDHour()
+ *           * integer getEDMinute()
+ *           * integer getEDDayOfSchedule()
+ *           * integer getEDMonthOfSchedule()
+ *           * integer getEDYearOfSchedule()
+ *
+ *       - none setDate(dateType date);
+ *           * none setSDDayOfSchedule(integer day)
+ *           * none setSDMonthOfSchedule(integer month)
+ *           * none setSDYearOfSchedule(integer year)
+ *           * none setSDHour(integer hour)
+ *           * none setSDMinute(integer minute)
+ *
+ *           * none setEDDayOfSchedule(integer day)
+ *           * none setEDMonthOfSchedule(integer month)
+ *           * none setEDYearOfSchedule(integer year)
+ *           * none setEDHour(integer hour)
+ *           * none setEDMinute(integer minute)
+ *
  *
  *
  *   ADDED METHODS:
+ *      toString()
  *
  *
  */

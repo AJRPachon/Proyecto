@@ -60,12 +60,12 @@ package BasicsClasses.Employee;
                getTimeSchedule()
                setTimeSchedule(dateType hour)
 
-               getShiftSchedule()
-
 
 
     ADDED METHODS:
         toString()
+        clone()
+        equals(Object obj)
 
 
 

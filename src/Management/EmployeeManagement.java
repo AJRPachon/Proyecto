@@ -61,6 +61,10 @@ public class EmployeeManagement {
 
 ////////// COLLECT EMPLOYEE DATA ///////////////////////////////////////////////////////////////////////////////////////
 
+    /**
+     *  Read and validate the necessary data to create a new employee
+     * @return object employee
+     */
 
     public Employee collectEmployeeData(){
 
@@ -119,7 +123,7 @@ public class EmployeeManagement {
         bankAccountN = sc.next();
 
         System.out.println("Employee password");
-        password = VA.readAndValidatePassword(); //Validamos la contraseña
+        password = VA.readAndValidatePassword();
 
 
         return new Employee(name, surname,dNI,nAF,birthday, EnumPosition.valueOf(position), EnumCategory.valueOf(category),bankAccountN,password);
