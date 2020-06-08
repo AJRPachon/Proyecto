@@ -32,7 +32,7 @@ public class ScheduleManagement {
             schedule[cont] = new Schedule();
 
             System.out.println("Introduzca día de entrada");
-            sDDay = va.readDay();
+            sDDay = va.readAndValidateDay();
             schedule[cont].setSDDayOfSchedule(sDDay);
 
             System.out.println("Enter check in month");
