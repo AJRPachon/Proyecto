@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="sqljdbc42">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Desktop/sql/sqljdbc_6.0/esn/jre8/sqljdbc42.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/sql/jTDS/jtds-1.3.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

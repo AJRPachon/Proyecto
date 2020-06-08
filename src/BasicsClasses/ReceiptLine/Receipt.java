@@ -45,7 +45,9 @@ package BasicsClasses.ReceiptLine;
  */
 
 import BasicsClasses.FoodstuffDrinks.Consumable;
+import BasicsClasses.FoodstuffDrinks.Drink;
 import BasicsClasses.FoodstuffDrinks.Enums.EnumAllergies;
+import BasicsClasses.FoodstuffDrinks.Food;
 import BasicsClasses.Interfaces.IReceipt;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -154,12 +156,20 @@ public class Receipt implements IReceipt,Cloneable,Comparable {
         return receiptLines.get(index).getConsumableQuantity();
     }
 
-    public void addConsumable(Consumable consumable) {
-        receiptLines.add(new ReceiptLine(consumable.clone()));
+    public void addConsumable(Food food) {
+        receiptLines.add(new ReceiptLine(food.clone()));
     }
 
-    public void addConsumable(Consumable consumable, int quantity) {
-        receiptLines.add(new ReceiptLine(consumable.clone(),quantity));
+    public void addConsumable(Drink drink) {
+        receiptLines.add(new ReceiptLine(drink.clone()));
+    }
+
+    public void addConsumable(Food food, int quantity) {
+        receiptLines.add(new ReceiptLine(food.clone(),quantity));
+    }
+
+    public void addConsumable(Drink drink, int quantity) {
+        receiptLines.add(new ReceiptLine(drink.clone(),quantity));
     }
 
     public boolean getPaidFor() {

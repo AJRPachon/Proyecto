@@ -7,13 +7,11 @@ import BasicsClasses.Employee.Enums.EnumPosition;
 
 
 import java.io.*;
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import java.util.GregorianCalendar;
 import java.util.Scanner;
+
+import java.sql.*;
 
 
 public class EmployeeManagement {
@@ -29,19 +27,19 @@ public class EmployeeManagement {
     public String getPermisons(String username, String password, String path){
 
         String category = null;
-        BufferedReader BR = null;
+        BufferedReader br = null;
         String line;
         String[] lineDivide;
 
         try {
-            BR = new BufferedReader(new FileReader(path));
-            line = BR.readLine();
+            br = new BufferedReader(new FileReader(path));
+            line = br.readLine();
             while (line != null && category == null){
                 lineDivide = line.split("#");
                 if (lineDivide[2].equals(username) && lineDivide[8].equals(password)){
                     category = lineDivide[6];
                 }
-                line = BR.readLine();
+                line = br.readLine();
             }
         }catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -50,7 +48,9 @@ public class EmployeeManagement {
         }
         finally {
             try {
-                BR.close();
+                if (br != null) {
+                    br.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -59,33 +59,12 @@ public class EmployeeManagement {
     }
 
 
-///////// ENCRIPT PASSWORD /////////////////////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * @param password
-     * @return
-     */
-
-
-    public String encriptPassword(String password){
-        String passEncripted = null;
-
-        try {
-            byte[] bytesOfMessage = password.getBytes(StandardCharsets.UTF_8);
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] thedigest = md.digest(bytesOfMessage);
-            BigInteger bigInt = new BigInteger(1,thedigest);
-            passEncripted = bigInt.toString(16);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-
-        return passEncripted;
-    }
-
-
 ////////// COLLECT EMPLOYEE DATA ///////////////////////////////////////////////////////////////////////////////////////
 
+    /**
+     *  Read and validate the necessary data to create a new employee
+     * @return object employee
+     */
 
     public Employee collectEmployeeData(){
 
@@ -98,16 +77,16 @@ public class EmployeeManagement {
         int day, month, year;
 
         System.out.println("Employee Name");
-        name = sc.nextLine();
+        name = sc.next();
 
         System.out.println("Employee Surname");
-        surname = sc.nextLine();
+        surname = sc.next();
 
         System.out.println("Employee DNI");
         dNI = VA.readAndValidateUsername();
 
         System.out.println("Employee NAF");
-        nAF = sc.nextLine();
+        nAF = sc.next();
 
         System.out.println("Employee birthday-day");
         day = sc.nextInt();
@@ -130,27 +109,29 @@ public class EmployeeManagement {
             year = sc.nextInt();
         }
 
-        //TODO Create enum with all months?
         birthday.set(day, month,year);
 
         System.out.println("Employee position");
-        position = sc.nextLine();
+        position = sc.next();
         EnumPosition.valueOf(position);
 
         System.out.println("Employee category");
-        category = sc.nextLine();
+        category = sc.next();
         EnumCategory.valueOf(category);
 
         System.out.println("Employee bankAccoutN");
-        bankAccountN = sc.nextLine();
+        bankAccountN = sc.next();
 
         System.out.println("Employee password");
-        password = VA.readAndValidatePassword(); //Validamos la contraseña
+        password = VA.readAndValidatePassword();
 
 
         return new Employee(name, surname,dNI,nAF,birthday, EnumPosition.valueOf(position), EnumCategory.valueOf(category),bankAccountN,password);
 
     }
+
+
+
 
 
 

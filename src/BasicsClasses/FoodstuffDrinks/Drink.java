@@ -21,6 +21,7 @@ package BasicsClasses.FoodstuffDrinks;
 
     ADDED METHODS:
         toString()
+        close()
 
 
  */
@@ -69,6 +70,14 @@ public class Drink extends Consumable {
 
         return proof+"#"+sparkling+"#"+super.toString();
    
+    }
+
+
+    @Override
+    public Drink clone() {
+        Drink newDrink = null;
+        newDrink = (Drink) super.clone();
+        return newDrink;
     }
 
 

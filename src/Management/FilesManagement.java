@@ -9,11 +9,10 @@ import BasicsClasses.Employee.Payslip;
 import BasicsClasses.Employee.Schedule;
 import BasicsClasses.FoodstuffDrinks.Product;
 import BasicsClasses.Orders.Order;
+import utils.Utils;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Scanner;
 
 
 
@@ -97,18 +96,21 @@ public class FilesManagement {
     private void checkFileEmployee(File file){
         if (!(file.length() > 0)){
 
-            BufferedWriter BW = null;
+            BufferedWriter bw = null;
             try {
                 file.createNewFile();
 
-                BW = new BufferedWriter(new FileWriter(file));
-                BW.write(new Employee("Administrator","Administrator","00000000T","281234567840",new GregorianCalendar(),EnumPosition.Manager,EnumCategory.Administrator,"ES3231906288456991923866","e807f1fcf82d132f9bb018ca6738a19f").toString());
+                bw = new BufferedWriter(new FileWriter(file));
+                bw.write(new Employee("Administrator","Administrator","00000000T","281234567840",new GregorianCalendar(),EnumPosition.Manager,EnumCategory.Administrator,"ES3231906288456991923866","e807f1fcf82d132f9bb018ca6738a19f").toString());
+                bw.flush();
             } catch (IOException e) {
                 e.printStackTrace();
             }
             finally {
                 try {
-                    BW.close();
+                    if (bw != null) {
+                        bw.close();
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -121,21 +123,25 @@ public class FilesManagement {
 /////////// INSERT OBJETCT IN FILE //////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
-     * @param object
-     * @param path
-     * @param <T>
-     * @return
+     *
+     * @param object Object received by parameters
+     * @param path fFle path
+     * @param <T> Object data type
+     * @return If the object has been successfully inserted, it returns "true", otherwise it returns "false"
      */
 
     public <T> boolean insertObjectInFile(T object, String path){
 
         boolean objectInserted = false;
-        FileWriter FW = null;
+        FileWriter fw = null;
+        BufferedWriter bw = null;
 
         try {
-            FW = new FileWriter(path,true);
-            FW.write(object.toString()+"\n");
-            FW.flush();
+            fw = new FileWriter(path,true);
+            bw = new BufferedWriter(fw);
+            bw.write(object.toString());
+            bw.newLine();
+            bw.flush();
             objectInserted = true;
 
         } catch (IOException e) {
@@ -143,7 +149,12 @@ public class FilesManagement {
         }
         finally {
             try {
-                FW.close();
+                if( fw != null ) {
+                    fw.close();
+                }
+                if( bw != null ) {
+                    bw.close();
+                }
             }catch (IOException|NullPointerException error){
                 error.printStackTrace();
             }
@@ -155,26 +166,36 @@ public class FilesManagement {
 /////////// INSERT OBJECT DELETED IN FILE //////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
-     * @param object
-     * @param path
-     * @param <T>
-     * @return
+     * @param object Object received by parameters
+     * @param path fFle path
+     * @param <T> Object data type
+     * @return If the object has been successfully deleted, it returns "true", otherwise it returns "false"
      */
 
     public <T> boolean insertObjectDeletedInFile(T object, String path){
         boolean objectInserted = false;
-        FileWriter FW = null;
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+
         try {
-            FW = new FileWriter(path,true);
-            FW.write(object.toString()+"#D"+"\n");
-            FW.flush();
+            fw = new FileWriter(path,true);
+            bw = new BufferedWriter(fw);
+            bw.write(object.toString()+"#D");
+            bw.newLine();
+            bw.flush();
             objectInserted = true;
         } catch (IOException e) {
             e.printStackTrace();
         }
         finally {
             try {
-                FW.close();
+                if ( fw != null ) {
+                    fw.close();
+                }
+                if ( bw != null ){
+                    bw.close();
+                }
+
             }catch (IOException|NullPointerException error){
                 error.printStackTrace();
             }
@@ -186,26 +207,35 @@ public class FilesManagement {
 /////////// INSERT OBJECT MODIFIED IN FILE //////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
-     * @param object
-     * @param path
-     * @param <T>
-     * @return
+     * Insert a modified object into the temporary file
+     * @param object Object we want to add
+     * @param path temp file path
+     * @param <T> object type
+     * @return boolean true/flase (added successfully / could not add)
      */
 
     public <T> boolean insertObjectModifiedInFile(T object, String path){
         boolean objectInserted = false;
-        FileWriter FW = null;
+        FileWriter fw = null;
+        BufferedWriter bw = null;
         try {
-            FW = new FileWriter(path,true);
-            FW.write(object.toString()+"#M"+"\n");
-            FW.flush();
+            fw = new FileWriter(path,true);
+            bw = new BufferedWriter(fw);
+            bw.write(object.toString()+"#M"+"\n");
+            bw.newLine();
+            bw.flush();
             objectInserted = true;
         } catch (IOException e) {
             e.printStackTrace();
         }
         finally {
             try {
-                FW.close();
+                if ( fw != null ) {
+                    fw.close();
+                }
+                if ( bw != null ){
+                    bw.close();
+                }
             }catch (IOException|NullPointerException error){
                 error.printStackTrace();
             }
@@ -217,24 +247,25 @@ public class FilesManagement {
 /////////// GET ORDERS NOT SHIPPED //////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
-     * @param path
-     * @return
+     * Returns orders that have not been shipped
+     * @param path file path
+     * @return ArrayList<Order> orders not shipped
      */
 
     public ArrayList<Order> getOrdersNotShipped(String path){
         ArrayList<Order> ordersNotShipped = new ArrayList<>();
-        BufferedReader BR = null;
+        BufferedReader br = null;
         String line;
         Order orderRead;
         try {
-            BR = new BufferedReader(new FileReader(path));
-            line = BR.readLine();
+            br = new BufferedReader(new FileReader(path));
+            line = br.readLine();
             while (line != null){
                 orderRead = Order.stringToOrder(line);
                 if (!orderRead.getSent() && !orderRead.getCancel()){
                     ordersNotShipped.add(Order.stringToOrder(line));
                 }
-                line = BR.readLine();
+                line = br.readLine();
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -243,7 +274,9 @@ public class FilesManagement {
         }
         finally {
             try {
-                BR.close();
+                if (br != null) {
+                    br.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -252,92 +285,85 @@ public class FilesManagement {
     }
 
 
-/////////// READ AND SEARCH PRODUCT //////////////////////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * @return
-     */
-
-    public Product readAndSearchProduct(){
-        Scanner sc = new Scanner(System.in);
-
-        int ID;
-        String pathProductFile = ".\\src\\Files\\Products";
-        Product productGet;
-
-        //Validate Product
-        do {
-            System.out.print("Insert IDProduct: ");
-            ID = sc.nextInt();
-            productGet = getProductFromFile(ID,pathProductFile);
-            if (productGet == null){
-                System.out.println("This product don't exist. Please insert a product existing");
-            }
-        }while (productGet == null);
-
-        return productGet;
-
-    }
-
 
 /////////// GET PRODUCT FROM FILE //////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
-     * @param ID
-     * @param path
-     * @return
+     * Returns the information of the file converted to object
+     * @param ID Product ID
+     * @param path file path
+     * @return object product obtained from the file
      */
 
 
     public Product getProductFromFile(int ID, String path){
         Product newProduct = null;
-        BufferedReader BR;
+        BufferedReader br = null;
         String[] lineParted;
         String line;
 
         try {
-            BR = new BufferedReader(new FileReader(path));
-            line = BR.readLine();
+            br = new BufferedReader(new FileReader(path));
+            line = br.readLine();
             while (line != null && newProduct == null){
                 lineParted = line.split("#");
                 if (Integer.parseInt(lineParted[0]) == ID){
                     newProduct = new Product(Integer.parseInt(lineParted[0]),lineParted[1],lineParted[2],Double.parseDouble(lineParted[3]));
                 }
-                line = BR.readLine();
+                line = br.readLine();
             }
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        finally {
+            try {
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         return newProduct;
     }
 
 
-/////////// PRINT PERSONAL DATA //////////////////////////////////////////////////////////////////////////////////////////////
+/////////// PRINT EMPLOYEE PERSONAL DATA //////////////////////////////////////////////////////////////////////////////////////////////
     /**
-     * @param DNIEmployee
-     * @param path
+     * Prints the data of a selected employee per screen
+     * @param DNIEmployee ID of the employee we want to select
+     * @param path file path
      */
 
 
-    public void printPersonalData(String DNIEmployee, String path) {
-        BufferedReader BR;
+    public void printEmployeePersonalData(String DNIEmployee, String path) {
+        BufferedReader br = null;
         String[] lineParted = null;
         String line;
         boolean employeeFind = false;
 
         try {
-            BR = new BufferedReader(new FileReader(path));
-            line = BR.readLine();
+            br = new BufferedReader(new FileReader(path));
+            line = br.readLine();
             while (line != null && !employeeFind) {
                 lineParted = line.split("#");
                 employeeFind = (lineParted[2].equals(DNIEmployee));
-                line = BR.readLine();
+                line = br.readLine();
             }
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        finally {
+            try {
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         if (employeeFind) {
@@ -355,17 +381,19 @@ public class FilesManagement {
     }
 
 
-/////////// MODIFY SALARY //////////////////////////////////////////////////////////////////////////////////////////////
+/////////// INSERT SALARY //////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
-     * Este metodo crea el nuevo objeto modificado y lo inserta en el archivo temporal
+     * This method creates the new modified object and inserts it into the temporary file
      *
-     * @param path
-     * @param dNI
-     * @param salary
+     * @param path file path
+     * @param dNI ID of the employee that we want to modify the salary
+     * @param salary salary to assign
      */
 
     public Payslip insertSalary(String path, String dNI, double salary){
+
+        Utils u = new Utils();
 
         String line;
         String contenido;
@@ -375,8 +403,8 @@ public class FilesManagement {
         GregorianCalendar birthday;
         boolean salir = false;
 
-        FileReader fr;
-        BufferedReader br;
+        FileReader fr = null;
+        BufferedReader br = null;
 
 
         try{
@@ -388,16 +416,16 @@ public class FilesManagement {
 
             while (line != null && !salir) {
                 separaciones = line.split("#");
-                contenido = separaciones[2];  //DNI se encuentra en la posición 2
+                contenido = separaciones[2];  //DNI is in position 2
 
-                //Si contenido es igual a nuestro DNI, creamos un objeto empleado con los valores recogidos
+                //If content is equal to our DNI, we create an object used with the collected values
                 if( contenido.equals(dNI) ){
 
-                    birthday = assignBirthday(separaciones);
+                    birthday = u.createVariableGregorianCalendar(separaciones);
 
                     employee = new Employee(separaciones[0],separaciones[1],separaciones[2],separaciones[3],birthday,EnumPosition.valueOf(separaciones[5]),EnumCategory.valueOf(separaciones[6]),separaciones[7],separaciones[8]);
 
-                    //Creamos un objeto payslip y hacemos setters para el salario y para nuestro empleado
+                    //We create a payslip object and make setters for the salary and for our employee
                     payslip = new Payslip();
                     payslip.setSalary(salary);
                     payslip.setEmployee(employee);
@@ -412,6 +440,19 @@ public class FilesManagement {
         }catch (IOException e){
             e.printStackTrace();
         }
+        finally {
+            try {
+                if (fr != null){
+                    fr.close();
+                }
+
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         return payslip;
 
@@ -420,16 +461,18 @@ public class FilesManagement {
 
 
 
-////////// TERMINATE AN EMPLOYEE ///////////////////////////////////////////////////////////////////////////////////////
+////////// GET SELECTED EMPLOYEE ///////////////////////////////////////////////////////////////////////////////////////
 
     /**
-     * Introduce en nuestro archivo temporal el empleado pasado por parametros que será dado de baja
+     * Put in the temporary file the employee passed by parameters that will be removed
      *
-     * @param path
-     * @param dNI
+     * @param path file path
+     * @param dNI Employee DNI that we selected
      */
 
     public Employee getSelectedEmployee(String path, String dNI){
+
+        Utils u = new Utils();
 
         String line;
         String contenido;
@@ -438,8 +481,8 @@ public class FilesManagement {
         GregorianCalendar birthday;
         boolean salir = false;
 
-        FileReader fr;
-        BufferedReader br;
+        FileReader fr = null;
+        BufferedReader br = null;
 
         try{
 
@@ -454,11 +497,11 @@ public class FilesManagement {
                 separaciones = line.split("#");
                 contenido = separaciones[2];  //DNI se encuentra en la posición 2
 
-                //Si contenido es igual a nuestro DNI, creamos un objeto empleado con los valores recogidos
+                //If content is equal to our DNI, we create an object used with the collected values
                 if( contenido.equals(dNI) ){
 
-                    //Separamos el String de la fecha en sus distintos numeros
-                    birthday = assignBirthday(separaciones);
+                    //We separate the String from the date in its different numbers
+                    birthday = u.createVariableGregorianCalendar(separaciones);
 
                     employee = new Employee(separaciones[0],separaciones[1],separaciones[2],separaciones[3],birthday,EnumPosition.valueOf(separaciones[5]),EnumCategory.valueOf(separaciones[6]),separaciones[7],separaciones[8]);
 
@@ -473,22 +516,38 @@ public class FilesManagement {
             e.printStackTrace();
         }
 
+        finally {
+            try {
+                if (fr != null){
+                    fr.close();
+                }
+
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         return employee;
 
     }
 
 
-/////////// INSERT NEW SCHEDULE ////////////////////////////////////////////////////////////////////////////////////////
+/////////// INSERT SCHEDULE ON FILE ////////////////////////////////////////////////////////////////////////////////////////
+
 
     /**
-     * Este metodo crea el nuevo objeto modificado y lo inserta en el archivo temporal
+     * This method creates the new modified object and inserts it into the temporary file
      *
-     * @param path
-     * @param dNI
-     * @param tempPath
+     * @param path file path
+     * @param dNI Employee DNI that we selected
+     * @param tempPath temp file path
      */
 
-    public void insertEmployeeOnSchedule(String path, String dNI, String tempPath, Schedule[] schedule){
+    public void insertScheduleOnFile(String path, String dNI, String tempPath, Schedule[] schedule){
+
+        Utils u = new Utils();
 
         String line;
         String contenido;
@@ -498,8 +557,8 @@ public class FilesManagement {
         GregorianCalendar birthday;
         boolean salir = false;
 
-        FileReader fr;
-        BufferedReader br;
+        FileReader fr = null;
+        BufferedReader br = null;
 
 
         try{
@@ -511,12 +570,12 @@ public class FilesManagement {
 
             while (line != null) {
                 separaciones = line.split("#");
-                contenido = separaciones[3];  //DNI se encuentra en la posición 3
+                contenido = separaciones[2];  //DNI is in position 2
 
-                //Si contenido es igual a nuestro DNI, creamos un objeto empleado con los valores recogidos
+                //If content is equal to our DNI, we create an object used with the collected values
                 if( contenido.equals(dNI) && !salir ){
 
-                    birthday = assignBirthday(separaciones);
+                    birthday = u.createVariableGregorianCalendar(separaciones);
 
                     employee = new Employee(separaciones[0],separaciones[1],separaciones[2],separaciones[3],birthday,EnumPosition.valueOf(separaciones[5]),EnumCategory.valueOf(separaciones[6]),separaciones[7],separaciones[8]);
 
@@ -525,8 +584,8 @@ public class FilesManagement {
 
                         newSchedule[cont] = new Schedule(schedule[cont].getWeekDay(), schedule[cont].getStartDate(), schedule[cont].getEndDate(), employee);
 
-                        //Una vez hecho esto, metemos nuestro objeto schedule en el archivo temporal
-                        //En este caso, como hay que recorrer el array, lo insertamos directamente desde este método
+                        //Once this is done, we put our schedule object in the temporary file
+                        //In this case, since the array has to be traversed, we insert it directly from this method
                         insertObjectModifiedInFile(newSchedule[cont], tempPath);
 
                     }
@@ -541,23 +600,36 @@ public class FilesManagement {
         }catch (IOException e){
             e.printStackTrace();
         }
+        finally {
+            try {
+                if (fr != null){
+                    fr.close();
+                }
+
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
 /////////// SHOW FILE DATA //////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
-     * Muestra el contenido de un archivo
+     * Show the content of a file
      *
-     * @param path
+     * @param path Path of the file we want to show
      */
 
     public void showFileData(String path){
 
         String line;
 
-        FileReader fr;
-        BufferedReader br;
+        FileReader fr = null;
+        BufferedReader br = null;
 
         try{
 
@@ -574,46 +646,32 @@ public class FilesManagement {
         }catch (IOException e){
             e.printStackTrace();
         }
+        finally {
+            try {
+                if (fr != null){
+                    fr.close();
+                }
 
-    }
-
-
-/////////// ASSIGN BIRTHDAY //////////////////////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * Convertimos una fecha String a enteros y se la asignamos a una variable de tipo GregorianCalendar
-     *
-     * @param separaciones
-     * @return
-     */
-
-    public GregorianCalendar assignBirthday(String[] separaciones){
-
-        String[] fechaString;
-        GregorianCalendar birthday = new GregorianCalendar();
-        int[] fecha = new int[3];
-
-        //Separamos el String de la fecha en sus distintos numeros
-        fechaString = separaciones[4].split("/");
-
-        //Recorremos el array y hacemos un parseInt para obtener los enteros
-        for(int cont = 0; cont < fechaString.length; cont++){
-            fecha[cont] = Integer.parseInt(fechaString[cont]);
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
-        //Metemos la fecha de cumpleaños en nuestra variable tipo fecha y ya la podemos usar en nuestro constructor
-        birthday.set(Calendar.DAY_OF_MONTH, fecha[0]);
-        birthday.set(Calendar.MONTH, fecha[1]);
-        birthday.set(Calendar.YEAR, fecha[2]);
-
-        return birthday;
-
     }
 
 
 
-/////////// GET SCHEDULE FROM FILE /////////////////////////////////////////////////////////////////////////////////////
+/////////// PRINT SCHEDULE FROM FILE /////////////////////////////////////////////////////////////////////////////////////
 
+
+    /**
+     * Print selected employee´s Schedule
+     * @param path file path
+     * @param dNI Employee DNI that we selected
+     */
 
     public void printScheduleFromFile(String path, String dNI){
 
@@ -622,8 +680,8 @@ public class FilesManagement {
         String[] separaciones;
         boolean impreso = false;
 
-        FileReader fr;
-        BufferedReader br;
+        FileReader fr = null;
+        BufferedReader br = null;
 
 
         try{
@@ -635,9 +693,9 @@ public class FilesManagement {
 
             while (line != null) {
                 separaciones = line.split("#");
-                contenido = separaciones[0];  //DNI se encuentra en la posición 0
+                contenido = separaciones[0];  //DNI is in position 0
 
-                //Si contenido es igual a nuestro DNI
+                //If content is equal to our DNI
                 if( contenido.equals(dNI)){
 
                     System.out.println("Employee DNI: "+separaciones[0]);
@@ -663,8 +721,22 @@ public class FilesManagement {
         }catch (IOException e){
             e.printStackTrace();
         }
+        finally {
+            try {
+                if (fr != null){
+                    fr.close();
+                }
+
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
+
 
 
 }

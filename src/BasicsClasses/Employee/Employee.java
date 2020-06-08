@@ -60,12 +60,12 @@ package BasicsClasses.Employee;
                getTimeSchedule()
                setTimeSchedule(dateType hour)
 
-               getShiftSchedule()
-
 
 
     ADDED METHODS:
         toString()
+        clone()
+        equals(Object obj)
 
 
 
@@ -79,7 +79,6 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Employee {
-
 
     private String name;
     private String surname;

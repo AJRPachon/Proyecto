@@ -30,12 +30,12 @@ package BasicsClasses.FoodstuffDrinks;
 
     ADDED METHODS:
         toString()
+        clone()
+        equals(Object obj)
 
 
 
  */
-
-import BasicsClasses.Orders.Order;
 
 public class Product implements Cloneable{
 

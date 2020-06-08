@@ -4,177 +4,63 @@ import BasicsClasses.Employee.Enums.EnumWeekDays;
 import BasicsClasses.Employee.Schedule;
 
 import java.util.GregorianCalendar;
-import java.util.Scanner;
-
 
 public class ScheduleManagement {
 
 
-    /**
-     * This method reads and validates the time
-     *
-     * @return Hour
-     */
+///////// SET SCHEDULE DATA //////////////////////////////////////////////////////////////////////////////////////////////
 
-    public int readHour() {
-
-        Scanner sc = new Scanner(System.in);
-
-        int hour;
-
-        hour = sc.nextInt();
-
-        //Validation
-        while (hour < 0 || hour > 24) {
-            System.out.println("The time must be between 0 and 24");
-            hour = sc.nextInt();
-        }
-
-        return hour;
-
-    }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * This method reads and validates the minutes
-     *
-     * @return Minute
-     */
-
-    public int readMinute(){
-
-        Scanner sc = new Scanner(System.in);
-
-        int minute;
-
-        minute = sc.nextInt();
-
-        //Validation
-        while (minute < 0 || minute > 59) {
-            System.out.println("The minutes must be between 0 and 59");
-            minute = sc.nextInt();
-        }
-
-        return minute;
-
-    }
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    public int readDay(){
-
-        Scanner sc = new Scanner(System.in);
-
-        int day;
-
-        day = sc.nextInt();
-
-        //Validation
-        while (day < 1 || day > 31) {
-            System.out.println("The day must be between 1 and 31");
-            day = sc.nextInt();
-        }
-
-        return day;
-
-    }
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    public int readMonth(){
-
-        Scanner sc = new Scanner(System.in);
-
-        int month;
-
-        month = sc.nextInt();
-
-        //Validation
-        while (month < 1 || month > 12) {
-            System.out.println("The month must be between 1 and 12");
-            month = sc.nextInt();
-        }
-
-        return month;
-
-    }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      *
-     * @param SDHour
-     * @param SDMinute
-     * @param EDHour
-     * @param EDMinute
-     */
-
-    public void assignSchedule(int SDHour, int SDMinute, int EDHour, int EDMinute){
-
-        Schedule schedule = new Schedule();
-
-        schedule.setSDHour(SDHour);
-        schedule.setSDMinutes(SDMinute);
-        schedule.setEDHour(EDHour);
-        schedule.setEDMinutes(EDMinute);
-
-    }
-
-///////// ASSIGN SCHEDULE //////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    //TODO Verificar esto
-    /**
-     * Este metodo asigna a un empleado un horario
+     * This method assigns an employee a schedule
      *
      */
 
-    public Schedule[] getScheduleData(){
+    public Schedule[] setScheduleData(){
 
         Schedule[] schedule = new Schedule[7];
+        Validations va = new Validations();
 
         int sDHour, sDMinute, eDHour, eDMinute;
         int sDDay, sDMonth, eDDay, eDMonth;
 
         for(int cont = 0; cont < schedule.length; cont++) {
 
-            System.out.println("Introduzca día de entrada");
-            sDDay = readDay();
+            System.out.println("Enter check in day");
+            sDDay = va.readAndValidateDay();
             schedule[cont].setSDDayOfSchedule(sDDay);
 
-            System.out.println("Introduzca mes de entrada");
-            sDMonth = readMonth();
+            System.out.println("Enter check in month");
+            sDMonth = va.readAndValidateMonth();
             schedule[cont].setSDMonthOfSchedule(sDMonth);
 
-            System.out.println("Introduzca hora de entrada");
-            sDHour = readHour();
+            System.out.println("Enter check in time");
+            sDHour = va.readAndValidateHour();
             schedule[cont].setSDHour(sDHour);
 
-            System.out.println("Introduzca minutos de entrada");
-            sDMinute = readMinute();
+            System.out.println("Enter check in minutes");
+            sDMinute = va.readAndValidateMinute();
             schedule[cont].setSDMinutes(sDMinute);
 
-            System.out.println("Introduzca día de salida");
-            eDDay = readDay();
+            System.out.println("Enter check out day");
+            eDDay = va.readAndValidateDay();
             schedule[cont].setEDDayOfSchedule(eDDay);
 
-            System.out.println("Introduzca mes de salida");
-            eDMonth = readMonth();
+            System.out.println("Enter check out month");
+            eDMonth = va.readAndValidateMonth();
             schedule[cont].setEDMonthOfSchedule(eDMonth);
 
-            System.out.println("Introduzca hora de salida");
-            eDHour = readHour();
+            System.out.println("Enter check out time");
+            eDHour = va.readAndValidateHour();
             schedule[cont].setEDHour(eDHour);
 
-            System.out.println("Introduzca minutos de salida");
-            eDMinute = readMinute();
+            System.out.println("Enter check out minutes");
+            eDMinute = va.readAndValidateMinute();
             schedule[cont].setEDMinutes(eDMinute);
 
 
-            schedule[cont].setWeekDay(EnumWeekDays.values()[cont]); //Introduce Lunes, Martes... en la posicion del contador
+            schedule[cont].setWeekDay(EnumWeekDays.values()[cont]);
             schedule[cont].setSDYearOfSchedule(GregorianCalendar.YEAR);
             schedule[cont].setEDYearOfSchedule(GregorianCalendar.YEAR);
 

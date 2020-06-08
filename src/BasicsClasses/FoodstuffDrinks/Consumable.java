@@ -29,6 +29,8 @@ package BasicsClasses.FoodstuffDrinks;
 
     ADDED METHODS:
         toString()
+        clone()
+        equals(Object obj)
 
 
  */
@@ -56,7 +58,7 @@ public class Consumable {
 
     }
 
-    public Consumable(String name, String description, double price, ArrayList<EnumAllergies> allergies){
+    public Consumable(String name, String description, double price, ArrayList<EnumAllergies> allergies){  //Constructor with parameters
 
         this.IDConsumable = ++increaseID;
         this.name = name;
