@@ -10,12 +10,12 @@ import java.util.GregorianCalendar;
 public class ScheduleManagement {
 
 
-///////// ASSIGN SCHEDULE //////////////////////////////////////////////////////////////////////////////////////////////
+///////// SET SCHEDULE DATA //////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    //TODO Verificar esto
     /**
-     * Este metodo asigna a un empleado un horario
+     *
+     * This method assigns an employee a schedule
      *
      */
 
@@ -35,36 +35,36 @@ public class ScheduleManagement {
             sDDay = va.readDay();
             schedule[cont].setSDDayOfSchedule(sDDay);
 
-            System.out.println("Introduzca mes de entrada");
-            sDMonth = va.readMonth();
+            System.out.println("Enter check in month");
+            sDMonth = va.readAndValidateMonth();
             schedule[cont].setSDMonthOfSchedule(sDMonth);
 
-            System.out.println("Introduzca hora de entrada");
-            sDHour = va.readHour();
+            System.out.println("Enter check in time");
+            sDHour = va.readAndValidateHour();
             schedule[cont].setSDHour(sDHour);
 
-            System.out.println("Introduzca minutos de entrada");
-            sDMinute = va.readMinute();
+            System.out.println("Enter check in minutes");
+            sDMinute = va.readAndValidateMinute();
             schedule[cont].setSDMinutes(sDMinute);
 
-            System.out.println("Introduzca día de salida");
-            eDDay = va.readDay();
+            System.out.println("Enter check out day");
+            eDDay = va.readAndValidateDay();
             schedule[cont].setEDDayOfSchedule(eDDay);
 
-            System.out.println("Introduzca mes de salida");
-            eDMonth = va.readMonth();
+            System.out.println("Enter check out month");
+            eDMonth = va.readAndValidateMonth();
             schedule[cont].setEDMonthOfSchedule(eDMonth);
 
-            System.out.println("Introduzca hora de salida");
-            eDHour = va.readHour();
+            System.out.println("Enter check out time");
+            eDHour = va.readAndValidateHour();
             schedule[cont].setEDHour(eDHour);
 
-            System.out.println("Introduzca minutos de salida");
-            eDMinute = va.readMinute();
+            System.out.println("Enter check out minutes");
+            eDMinute = va.readAndValidateMinute();
             schedule[cont].setEDMinutes(eDMinute);
 
 
-            schedule[cont].setWeekDay(EnumWeekDays.values()[cont]); //Introduce Lunes, Martes... en la posicion del contador
+            schedule[cont].setWeekDay(EnumWeekDays.values()[cont]);
             schedule[cont].setSDYearOfSchedule(GregorianCalendar.YEAR);
             schedule[cont].setEDYearOfSchedule(GregorianCalendar.YEAR);
 

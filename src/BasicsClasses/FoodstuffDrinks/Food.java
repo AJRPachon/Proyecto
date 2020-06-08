@@ -22,6 +22,7 @@ package BasicsClasses.FoodstuffDrinks;
 
     ADDED METHODS:
         toString()
+        clone()
 
 
 
@@ -45,7 +46,7 @@ public class Food extends Consumable {
     }
 
 
-    public Food(String name, String description, double price, ArrayList<EnumAllergies> allergies, double proof, EnumType type){
+    public Food(String name, String description, double price, ArrayList<EnumAllergies> allergies, double proof, EnumType type){ //Constructor with parameters
 
         super(name,description,price,allergies);
         this.type = type;

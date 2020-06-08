@@ -2,12 +2,21 @@
 <project version="4">
   <component name="dataSourceStorageLocal">
     <data-source name="Restaurant@localhost" uuid="b353e714-ef6c-40cd-8bdf-2d973b3e71cc">
+<<<<<<< HEAD
       <database-info product="Microsoft SQL Server" version="15.00.2000" jdbc-version="4.2" driver-name="Microsoft JDBC Driver 8.2 for SQL Server" driver-version="8.2.2.0" dbms="MSSQL" exact-version="15.0.2000" exact-driver-version="8.2">
+=======
+      <database-info product="Microsoft SQL Server" version="15.00.2070" jdbc-version="4.2" driver-name="Microsoft JDBC Driver 8.2 for SQL Server" driver-version="8.2.2.0" dbms="MSSQL" exact-version="15.0.2070" exact-driver-version="8.2">
+>>>>>>> WWFAntonio
         <extra-name-characters>$#@</extra-name-characters>
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
+<<<<<<< HEAD
       <user-name>UserJava</user-name>
+=======
+      <secret-storage>master_key</secret-storage>
+      <user-name>AntonioSQL</user-name>
+>>>>>>> WWFAntonio
       <schema-mapping>
         <introspection-scope>
           <node kind="database" qname="Restaurant">

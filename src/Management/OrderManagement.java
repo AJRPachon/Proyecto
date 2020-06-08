@@ -75,6 +75,10 @@ public class OrderManagement {
         return newOrder;
     }
 
+    /**
+     * Shows a list of orders
+     * @param orders object list orders
+     */
 
     public void printArrayListOrders(ArrayList<Order> orders){
         for (Order o : orders){

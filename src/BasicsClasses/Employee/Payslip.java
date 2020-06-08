@@ -19,8 +19,12 @@ package BasicsClasses.Employee;
         getSalary()
         setSalary(real salary)
 
+        getEmployee()
+        setEmployee(Employee employee)
+
 
     ADDED METHODS:
+        toString()
 
 
  */

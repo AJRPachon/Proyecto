@@ -30,6 +30,8 @@ package BasicsClasses.FoodstuffDrinks;
 
     ADDED METHODS:
         toString()
+        clone()
+        equals(Object obj)
 
 
 

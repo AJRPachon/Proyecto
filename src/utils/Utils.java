@@ -20,27 +20,27 @@ public class Utils {
 /////////// CREATE VARIABLE GREGORIAN CALENDAR //////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
-     * Convertimos una fecha String a enteros y se la asignamos a una variable de tipo GregorianCalendar
+     * Convert a String date to integer and assign it to a variable of type GregorianCalendar
      *
-     * @param separaciones
-     * @return
+     * @param separations String date separated by "/"
+     * @return birthdate (GregorianCalendar)
      */
 
-    public GregorianCalendar createVariableGregorianCalendar(String[] separaciones){
+    public GregorianCalendar createVariableGregorianCalendar(String[] separations){
 
-        String[] fechaString;
+        String[] dateString;
         GregorianCalendar birthdate = new GregorianCalendar();
         int[] fecha = new int[3];
 
-        //Separamos el String de la fecha en sus distintos numeros
-        fechaString = separaciones[4].split("/");
+        //We separate the String from the date in its different numbers
+        dateString = separations[4].split("/");
 
-        //Recorremos el array y hacemos un parseInt para obtener los enteros
-        for(int cont = 0; cont < fechaString.length; cont++){
-            fecha[cont] = Integer.parseInt(fechaString[cont]);
+        //We go through the array and do a parseInt to get the integers
+        for(int cont = 0; cont < dateString.length; cont++){
+            fecha[cont] = Integer.parseInt(dateString[cont]);
         }
 
-        //Metemos la fecha de cumpleaños en nuestra variable tipo fecha y ya la podemos usar en nuestro constructor
+        //We put the birthday date in our date type variable and we can already use it in our constructor
         birthdate.set(Calendar.DAY_OF_MONTH, fecha[0]);
         birthdate.set(Calendar.MONTH, fecha[1]);
         birthdate.set(Calendar.YEAR, fecha[2]);
@@ -52,8 +52,9 @@ public class Utils {
 ///////// ENCRIPT PASSWORD /////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
-     * @param password
-     * @return
+     * A password passed by parameters is encrypted
+     * @param password password to encrypt
+     * @return password encypted
      */
 
 
@@ -76,7 +77,8 @@ public class Utils {
 /////////// READ AND SEARCH PRODUCT //////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
-     * @return
+     * Read and shearch a product
+     * @return product that we want to get
      */
 
     public Product readAndSearchProduct(String pathProductFile){

@@ -14,27 +14,28 @@ import java.util.Scanner;
 public class Validations {
 
     /**
-     * @return
+     * @return true / false if you want to continue
      */
 
     public boolean wantContinue(){
         char wantContinue;
-        Scanner SC = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         do {
             System.out.print("Insert S if want continue or N if wantn't continue: ");
-            wantContinue = Character.toUpperCase(SC.next().charAt(0));
+            wantContinue = Character.toUpperCase(sc.next().charAt(0));
         }while(wantContinue != 'S' && wantContinue != 'N');
 
         return wantContinue == 'S';
     }
 
     /**
-     * @param username
-     * @return
+     * Validates if a DNI / Username is correct
+     * @param username DNI / Username that we want to check
+     * @return true / false if the username is valid or not
      */
 
     public boolean checkUsername(String username){
-        boolean userValid = false, checkIntPart = true;
+        boolean userValid = false;
 
         if (username.length() == 9){
             String[] numbersToEvaluate = username.substring(0,8).split("");
@@ -56,11 +57,18 @@ public class Validations {
         return userValid;
     }
 
-    private char calculateCharUser(int cadena){
+
+    /**
+     * Calculate the DNI letter
+     * @param string DNI
+     * @return caracter of the DNI
+     */
+
+    private char calculateCharUser(int string){
         char character = ' ';
         int resultado;
 
-        resultado = cadena % 23;
+        resultado = string % 23;
 
         switch (resultado) {
             case 0 -> character = 'T';
@@ -91,8 +99,10 @@ public class Validations {
         return character;
     }
 
+
     /**
-     * @return
+     * Read and Validate a Username
+     * @return validate Username
      */
 
     public String readAndValidateUsername(){
@@ -110,8 +120,10 @@ public class Validations {
         return username;
     }
 
-    /**
-     * @return
+
+
+    /** Read and Validate a Password
+     * @return Validate password
      */
 
     public String readAndValidateUsername(Connection connection){
@@ -176,8 +188,10 @@ public class Validations {
         return password;
     }
 
+
     /**
-     * @return
+     * Read and validate the options that administrator can choose
+     * @return Option
      */
 
     public int readAndValidateOptionsAdministrator(){
@@ -203,8 +217,11 @@ public class Validations {
         return option;
     }
 
+
+
     /**
-     * @return
+     * Read and validate the options that Floor Manager can choose
+     * @return Option
      */
 
     public int readAndValidateOptionsFloorManager(){
@@ -225,8 +242,11 @@ public class Validations {
         return option;
     }
 
+
+
     /**
-     * @return
+     * Read and validate the options that Staff can choose
+     * @return Option
      */
 
     public int readAndValidateOptionsStaff(){
@@ -247,7 +267,8 @@ public class Validations {
 
 
     /**
-     * @return
+     * Read and validate product quantity
+     * @return quantity
      */
 
     public int readAndValidateQuantityOfProduct(){
@@ -264,9 +285,11 @@ public class Validations {
         return quantity;
     }
 
+
     /**
-     * @param ordersNotShipped
-     * @return
+     * Select an order by ID
+     * @param ordersNotShipped orders not shipped
+     * @return Order choosed
      */
 
     public Order chooseOrderByID(ArrayList<Order> ordersNotShipped){
@@ -293,8 +316,10 @@ public class Validations {
         return orderChoosed;
     }
 
+
     /**
-     * @return
+     * Read and validate options (menu order)
+     * @return option choosed
      */
 
     public int readAndValidateOptionsOrder(){
@@ -315,8 +340,10 @@ public class Validations {
         return option;
     }
 
+
     /**
-     * @return
+     * Read and validate new Order Line
+     * @return New Order Line
      */
 
     public OrderLine readAndValidateNewOrderLine(Connection connection){
@@ -329,9 +356,11 @@ public class Validations {
         return new OrderLine(u.readAndSearchProduct(path),readAndValidateQuantityOfProduct());
     }
 
+    
     /**
-     * @param validIDs
-     * @return
+     * Read and validate IDProduct from Order
+     * @param validIDs ID valids
+     * @return ID Choosed
      */
 
     public int readAndValidateIDProductOfOrder(ArrayList<Integer> validIDs){
@@ -350,8 +379,9 @@ public class Validations {
 
 
     /**
-     * @param maxDecrease
-     * @return
+     * Read and validate the amount of product we want to decrease
+     * @param maxDecrease .
+     * @return Amount to decrease
      */
 
     public int readAndValidateQuantityToDecrease(int maxDecrease){
@@ -367,7 +397,8 @@ public class Validations {
 
 
     /**
-     * @return
+     * Read and validate the amount of product we want to increase
+     * @return Amount to increase
      */
 
     public int readAndValidateQuantityToIncrease(){
@@ -382,8 +413,8 @@ public class Validations {
 
 
     /**
-     * Lee y valida un salario leido por teclado
-     * @return
+     * Reads and validate a keyboard read salary
+     * @return validate salary
      */
 
     public double readAndValidateSalary(){
@@ -412,7 +443,7 @@ public class Validations {
      * @return Hour
      */
 
-    public int readHour() {
+    public int readAndValidateHour() {
 
         Scanner sc = new Scanner(System.in);
 
@@ -438,7 +469,7 @@ public class Validations {
      * @return Minute
      */
 
-    public int readMinute(){
+    public int readAndValidateMinute(){
 
         Scanner sc = new Scanner(System.in);
 
@@ -459,7 +490,12 @@ public class Validations {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public int readDay(){
+    /**
+     * Read and validate day of the week
+     * @return day
+     */
+
+    public int readAndValidateDay(){
 
         Scanner sc = new Scanner(System.in);
 
@@ -480,7 +516,12 @@ public class Validations {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public int readMonth(){
+    /**
+     * Read and validate month
+     * @return validate month
+     */
+
+    public int readAndValidateMonth(){
 
         Scanner sc = new Scanner(System.in);
 
