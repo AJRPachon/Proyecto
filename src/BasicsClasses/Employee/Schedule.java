@@ -69,6 +69,15 @@ public class Schedule {
 
     }
 
+    public Schedule(EnumWeekDays weekDay, GregorianCalendar startDate, GregorianCalendar endDate){  //Constructor with parameters
+
+        this.weekDay = weekDay;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.employee = new Employee();
+
+    }
+
 
 /////// BASIC METHODS ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
