@@ -188,19 +188,18 @@ public class Validations {
             System.out.println("1.- Register employee");
             System.out.println("2.- Dismiss an employee");
             System.out.println("3.- Assign schedule to employee");
-            System.out.println("4.- Modify employee schedule");
-            System.out.println("5.- Modify employee salary");
-            System.out.println("6.- See personal data of the one employee");
-            System.out.println("7.- Add new order");
-            System.out.println("8.- Modify order");
-            System.out.println("9.- See my personal data");
-            System.out.println("10.- Check your schedule");
+            System.out.println("4.- Modify employee salary");
+            System.out.println("5.- See personal data of the one employee");
+            System.out.println("6.- Add new order");
+            System.out.println("7.- Modify order");
+            System.out.println("8.- See my personal data");
+            System.out.println("9.- Check your schedule");
             System.out.print("Insert option: ");
             option = sc.nextInt();
-            if (option < 0 || option > 10){
+            if (option < 0 || option > 9){
                 System.out.println("Insert a valid option");
             }
-        }while (option < 0 || option > 10);
+        }while (option < 0 || option > 9);
         return option;
     }
 
@@ -215,15 +214,14 @@ public class Validations {
             System.out.println("0.- Sign off");
             System.out.println("1.- See personal data of the one employee");
             System.out.println("2.- Assign schedule to employee");
-            System.out.println("3.- Modify employee schedule");
-            System.out.println("4.- See my personal data");
-            System.out.println("5.- Check your schedule");
+            System.out.println("3.- See my personal data");
+            System.out.println("4.- Check your schedule");
             System.out.print("Insert option: ");
             option = sc.nextInt();
-            if (option < 0 || option > 5){
+            if (option < 0 || option > 4){
                 System.out.println("Insert a valid option");
             }
-        }while (option < 0 || option > 5);
+        }while (option < 0 || option > 4);
         return option;
     }
 
@@ -313,7 +311,7 @@ public class Validations {
                 System.out.println("6.- Cancel order");
                 System.out.print("Insert the option want execute: ");
                 option = SC.nextInt();
-            }while (option < 0 || option > 5);
+            }while (option < 0 || option > 6);
         return option;
     }
 
