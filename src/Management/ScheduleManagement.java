@@ -28,35 +28,35 @@ public class ScheduleManagement {
         for(int cont = 0; cont < schedule.length; cont++) {
 
             System.out.println("Enter check in day");
-            sDDay = va.readDay();
+            sDDay = va.readAndValidateDay();
             schedule[cont].setSDDayOfSchedule(sDDay);
 
             System.out.println("Enter check in month");
-            sDMonth = va.readMonth();
+            sDMonth = va.readAndValidateMonth();
             schedule[cont].setSDMonthOfSchedule(sDMonth);
 
             System.out.println("Enter check in time");
-            sDHour = va.readHour();
+            sDHour = va.readAndValidateHour();
             schedule[cont].setSDHour(sDHour);
 
             System.out.println("Enter check in minutes");
-            sDMinute = va.readMinute();
+            sDMinute = va.readAndValidateMinute();
             schedule[cont].setSDMinutes(sDMinute);
 
             System.out.println("Enter check out day");
-            eDDay = va.readDay();
+            eDDay = va.readAndValidateDay();
             schedule[cont].setEDDayOfSchedule(eDDay);
 
             System.out.println("Enter check out month");
-            eDMonth = va.readMonth();
+            eDMonth = va.readAndValidateMonth();
             schedule[cont].setEDMonthOfSchedule(eDMonth);
 
             System.out.println("Enter check out time");
-            eDHour = va.readHour();
+            eDHour = va.readAndValidateHour();
             schedule[cont].setEDHour(eDHour);
 
             System.out.println("Enter check out minutes");
-            eDMinute = va.readMinute();
+            eDMinute = va.readAndValidateMinute();
             schedule[cont].setEDMinutes(eDMinute);
 
 

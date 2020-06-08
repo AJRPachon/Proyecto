@@ -294,7 +294,7 @@ public class Validations {
 
 
     /**
-     * Read and validates new Order Line
+     * Read and validate new Order Line
      * @return New Order Line
      */
 
@@ -305,8 +305,9 @@ public class Validations {
 
     
     /**
-     * @param validIDs
-     * @return
+     * Read and validate IDProduct from Order
+     * @param validIDs ID valids
+     * @return ID Choosed
      */
 
     public int readAndValidateIDProductOfOrder(ArrayList<Integer> validIDs){
@@ -325,8 +326,9 @@ public class Validations {
 
 
     /**
-     * @param maxDecrease
-     * @return
+     * Read and validate the amount of product we want to decrease
+     * @param maxDecrease .
+     * @return Amount to decrease
      */
 
     public int readAndValidateQuantityToDecrease(int maxDecrease){
@@ -342,7 +344,8 @@ public class Validations {
 
 
     /**
-     * @return
+     * Read and validate the amount of product we want to increase
+     * @return Amount to increase
      */
 
     public int readAndValidateQuantityToIncrease(){
@@ -357,8 +360,8 @@ public class Validations {
 
 
     /**
-     * Lee y valida un salario leido por teclado
-     * @return
+     * Reads and validate a keyboard read salary
+     * @return validate salary
      */
 
     public double readAndValidateSalary(){
@@ -387,7 +390,7 @@ public class Validations {
      * @return Hour
      */
 
-    public int readHour() {
+    public int readAndValidateHour() {
 
         Scanner sc = new Scanner(System.in);
 
@@ -413,7 +416,7 @@ public class Validations {
      * @return Minute
      */
 
-    public int readMinute(){
+    public int readAndValidateMinute(){
 
         Scanner sc = new Scanner(System.in);
 
@@ -434,7 +437,12 @@ public class Validations {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public int readDay(){
+    /**
+     * Read and validate day of the week
+     * @return day
+     */
+
+    public int readAndValidateDay(){
 
         Scanner sc = new Scanner(System.in);
 
@@ -455,7 +463,12 @@ public class Validations {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public int readMonth(){
+    /**
+     * Read and validate month
+     * @return validate month
+     */
+
+    public int readAndValidateMonth(){
 
         Scanner sc = new Scanner(System.in);
 
