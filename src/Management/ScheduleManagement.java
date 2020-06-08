@@ -1,8 +1,10 @@
 package Management;
 
+import BasicsClasses.Employee.Employee;
 import BasicsClasses.Employee.Enums.EnumWeekDays;
 import BasicsClasses.Employee.Schedule;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class ScheduleManagement {
@@ -72,5 +74,12 @@ public class ScheduleManagement {
     }
 
 
+    public void printSchedules(ArrayList<Schedule> schedules){
+
+        for (Schedule schedule:schedules) {
+            System.out.println(schedule.toString());
+        }
+
+    }
 
 }
