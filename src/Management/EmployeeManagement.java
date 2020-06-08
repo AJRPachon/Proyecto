@@ -72,7 +72,9 @@ public class EmployeeManagement {
         Validations VA = new Validations();
 
 
-        String name, surname, dNI, nAF, bankAccountN, password, position, category;
+        String name, surname, dNI, nAF, bankAccountN, password;
+        EnumPosition position;
+        EnumCategory category;
         GregorianCalendar birthday = new GregorianCalendar();
         int day, month, year;
 
@@ -111,18 +113,12 @@ public class EmployeeManagement {
 
         birthday.set(day, month,year);
 
-        /*
-        System.out.println("Employee position");
-        position = sc.next();
-        EnumPosition.valueOf(position);
 
+        System.out.println("Employee position");
+        position = EnumPosition.valueOf(sc.next());
 
         System.out.println("Employee category");
-        category = sc.next();
-        EnumCategory.valueOf(category);
-
-        */
-
+        category = EnumCategory.valueOf(sc.next());
 
         System.out.println("Employee bankAccoutN");
         bankAccountN = sc.next();
@@ -130,9 +126,7 @@ public class EmployeeManagement {
         System.out.println("Employee password");
         password = VA.readAndValidatePassword();
 
-
-        //return new Employee(name, surname,dNI,nAF,birthday, EnumPosition.valueOf(position), EnumCategory.valueOf(category),bankAccountN,password);
-        return new Employee(name, surname,dNI,nAF,birthday, EnumPosition.Manager, EnumCategory.Administrator,bankAccountN,password);
+        return new Employee(name, surname,dNI,nAF,birthday, position, category,bankAccountN,password);
 
     }
 

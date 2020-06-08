@@ -276,70 +276,79 @@ public class MainBBDD {
                     case "FloorManager":
                         //optionOfFloorManager
 
-                        optionPermisons = valid.readAndValidateOptionsFloorManager();
-                        switch (optionPermisons){
-                            case 0:
-                                System.out.println("Session closed.");
-                                break;
-                            case 1:
-                                System.out.println();
-                                DNIToConsultData = valid.readAndValidateUsername(connectionDataBase);
-                                emplManag.printEmployeePersonalData(dbManag.getEmployeeByDNI(DNIToConsultData,connectionDataBase));
-                                System.out.println();
-                                break;
+                        do {
+
+                            optionPermisons = valid.readAndValidateOptionsFloorManager();
+                            switch (optionPermisons){
+                                case 0:
+                                    System.out.println("Session closed.");
+                                    break;
+                                case 1:
+                                    System.out.println();
+                                    DNIToConsultData = valid.readAndValidateUsername(connectionDataBase);
+                                    emplManag.printEmployeePersonalData(dbManag.getEmployeeByDNI(DNIToConsultData,connectionDataBase));
+                                    System.out.println();
+                                    break;
 
 
-                            case 2:
-                                System.out.println("Asignar horario a empleado");
-                                System.out.println("Enter the DNI of the employee to whom you want to assign a schedule");
-                                employeeDNI = valid.readAndValidateUsername(connectionDataBase); //Seleccionamos el dni del empleado al cual queremos cambiarle el horario
-                                schedule = scheManag.setScheduleData(); //Creamos un nuevo horario
-                                if (!dbManag.insertSchedules(schedule,employeeDNI,connectionDataBase)){
-                                    System.out.println("Could not assign schedule");
-                                }else{
-                                    System.out.println("Schedule assigned");
-                                }
-                                break;
+                                case 2:
+                                    System.out.println("Asignar horario a empleado");
+                                    System.out.println("Enter the DNI of the employee to whom you want to assign a schedule");
+                                    employeeDNI = valid.readAndValidateUsername(connectionDataBase); //Seleccionamos el dni del empleado al cual queremos cambiarle el horario
+                                    schedule = scheManag.setScheduleData(); //Creamos un nuevo horario
+                                    if (!dbManag.insertSchedules(schedule,employeeDNI,connectionDataBase)){
+                                        System.out.println("Could not assign schedule");
+                                    }else{
+                                        System.out.println("Schedule assigned");
+                                    }
+                                    break;
 
 
-                            case 3:
-                                System.out.println();
-                                emplManag.printEmployeePersonalData(dbManag.getEmployeeByDNI(username,connectionDataBase));
-                                System.out.println();
-                                break;
+                                case 3:
+                                    System.out.println();
+                                    emplManag.printEmployeePersonalData(dbManag.getEmployeeByDNI(username,connectionDataBase));
+                                    System.out.println();
+                                    break;
 
 
-                            case 4:
-                                System.out.println("Consultar sus horarios");
-                                scheManag.printSchedules(dbManag.getEmployeeSchedules(username,connectionDataBase));
-                                break;
-                        }
+                                case 4:
+                                    System.out.println("Consultar sus horarios");
+                                    scheManag.printSchedules(dbManag.getEmployeeSchedules(username,connectionDataBase));
+                                    break;
+                            }
 
-                        break;
+                        }while (optionPermisons != 0) ;
+
+                    break;
 
                     case "Staff":
                         //optionOfStaff
 
-                        optionPermisons = valid.readAndValidateOptionsStaff();
-                        switch (optionPermisons){
-                            case 0:
-                                System.out.println("Session closed.");
-                                break;
+                        do {
 
-                            case 1:
-                                System.out.println();
-                                emplManag.printEmployeePersonalData(dbManag.getEmployeeByDNI(username,connectionDataBase));
-                                System.out.println();
-                                break;
+                            optionPermisons = valid.readAndValidateOptionsStaff();
+                            switch (optionPermisons){
+                                case 0:
+                                    System.out.println("Session closed.");
+                                    break;
+
+                                case 1:
+                                    System.out.println();
+                                    emplManag.printEmployeePersonalData(dbManag.getEmployeeByDNI(username,connectionDataBase));
+                                    System.out.println();
+                                    break;
 
 
-                            case 2:
-                                System.out.println("Consultar sus horarios");
-                                scheManag.printSchedules(dbManag.getEmployeeSchedules(username,connectionDataBase));
-                                break;
-                        }
+                                case 2:
+                                    System.out.println("Consultar sus horarios");
+                                    scheManag.printSchedules(dbManag.getEmployeeSchedules(username,connectionDataBase));
+                                    break;
+                            }
 
-                        break;
+                        }while (optionPermisons != 0) ;
+
+                    break;
+
                 }
             }else{
                 System.out.println("Error to LogIn, please retry");
