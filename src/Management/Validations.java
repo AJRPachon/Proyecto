@@ -540,6 +540,51 @@ public class Validations {
     }
 
 
+/////////// READ AND VALIDATE POSITION /////////////////////////////////////////////////////////////////////////////
 
+    /**
+     * Read and validate an employee position
+     * @return position validate
+     */
+
+    public String readAndValidatePosition(){
+
+        Scanner sc = new Scanner(System.in);
+
+        String position;
+
+        position = sc.next();
+
+        while (!position.equals("CommisChef") && !position.equals("HeadChef") && !position.equals("ChefThePartie") && !position.equals("SousChef") && !position.equals("Cook") && !position.equals("Waiter") && !position.equals("Waitress") && !position.equals("Busser") && !position.equals("Manager") && !position.equals("Host") && !position.equals("Bartender") && !position.equals("Spaguetti")){
+            System.out.println("Position must be: CommisChef, HeadChef, ChefThePartie, SousChef, Cook, Waiter, Waitress, Busser, Manager, Host, Bartender, Spaguetti");
+            position = sc.next();
+        }
+
+        return position;
+    }
+
+
+/////////// READ AND VALIDATE CATEGORY /////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Read and validate an employee category
+     * @return category validate
+     */
+
+    public String readAndValidateCategory(){
+
+        Scanner sc = new Scanner(System.in);
+
+        String category;
+
+        category = sc.next();
+
+        while (!category.equals("Administrator") && !category.equals("FloorManager") && !category.equals("Staff") && !category.equals("Spaguetti")){
+            System.out.println("Position must be: Administrator, FloorManager, Staff, Spaguetti");
+            category = sc.next();
+        }
+
+        return category;
+    }
 
 }
