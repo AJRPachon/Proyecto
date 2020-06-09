@@ -6,11 +6,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class OrderManagementTest {
 
-    @Test
-    void readAndValidateNewOrder() {
-    }
+    public static void main(String [] args) {
 
-    @Test
-    void printArrayListOrders() {
+        System.out.println("");
+
     }
 }

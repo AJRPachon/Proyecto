@@ -47,33 +47,6 @@ public class OrderManagement {
     }
 
 
-    public Order readAndValidateNewOrder(Connection connection){
-        Scanner sc = new Scanner(System.in);
-        Utils u = new Utils();
-        Validations Val = new Validations();
-
-        int quantity;
-        char character;
-        Order newOrder = new Order(new GregorianCalendar());
-
-        Product productGet;
-
-        do {
-
-            productGet = u.readAndSearchProduct(connection);
-            quantity = Val.readAndValidateQuantityOfProduct();
-            newOrder.addOrderLine(new OrderLine(productGet,quantity));
-
-            //Read to want insert more line product
-            do {
-                System.out.print("Insert more products S or N: ");
-                character = Character.toUpperCase(sc.next().charAt(0));
-            }while (character != 'N' && character != 'S');
-
-        }while (character == 'S');
-
-        return newOrder;
-    }
 
     /**
      * Shows a list of orders

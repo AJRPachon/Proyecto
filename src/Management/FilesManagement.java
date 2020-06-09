@@ -221,7 +221,7 @@ public class FilesManagement {
         try {
             fw = new FileWriter(path,true);
             bw = new BufferedWriter(fw);
-            bw.write(object.toString()+"#M"+"\n");
+            bw.write(object.toString()+"#M");
             bw.newLine();
             bw.flush();
             objectInserted = true;
@@ -415,23 +415,27 @@ public class FilesManagement {
             line = br.readLine();
 
             while (line != null && !salir) {
+
                 separaciones = line.split("#");
-                contenido = separaciones[2];  //DNI is in position 2
 
                 //If content is equal to our DNI, we create an object used with the collected values
-                if( contenido.equals(dNI) ){
+                for (int cont = 0; cont < separaciones.length; cont++) {
 
-                    birthday = u.createVariableGregorianCalendar(separaciones);
+                    contenido = separaciones[cont];
 
-                    employee = new Employee(separaciones[0],separaciones[1],separaciones[2],separaciones[3],birthday,EnumPosition.valueOf(separaciones[5]),EnumCategory.valueOf(separaciones[6]),separaciones[7],separaciones[8]);
+                    if (contenido.equals(dNI)) {
 
-                    //We create a payslip object and make setters for the salary and for our employee
-                    payslip = new Payslip();
-                    payslip.setSalary(salary);
-                    payslip.setEmployee(employee);
+                        birthday = u.createVariableGregorianCalendar(separaciones[4]);
 
-                    salir = true;
+                        employee = new Employee(separaciones[0], separaciones[1], separaciones[2], separaciones[3], birthday, EnumPosition.valueOf(separaciones[5]), EnumCategory.valueOf(separaciones[6]), separaciones[7], separaciones[8]);
 
+                        //Create a payslip object and make setters for the salary and for our employee
+                        payslip = new Payslip();
+                        payslip.setSalary(salary);
+                        payslip.setEmployee(employee);
+
+                        salir = true;
+                    }
                 }
 
                 line = br.readLine();
@@ -495,17 +499,21 @@ public class FilesManagement {
             while (line != null && !salir) {
 
                 separaciones = line.split("#");
-                contenido = separaciones[2];  //DNI se encuentra en la posición 2
 
                 //If content is equal to our DNI, we create an object used with the collected values
-                if( contenido.equals(dNI) ){
+                for (int cont = 0; cont < separaciones.length; cont++) {
 
-                    //We separate the String from the date in its different numbers
-                    birthday = u.createVariableGregorianCalendar(separaciones);
+                    contenido = separaciones[cont];
 
-                    employee = new Employee(separaciones[0],separaciones[1],separaciones[2],separaciones[3],birthday,EnumPosition.valueOf(separaciones[5]),EnumCategory.valueOf(separaciones[6]),separaciones[7],separaciones[8]);
+                    if (contenido.equals(dNI)) {
 
-                    salir = true;
+                        //We separate the String from the date in its different numbers
+                        birthday = u.createVariableGregorianCalendar(separaciones[4]);
+
+                        employee = new Employee(separaciones[0], separaciones[1], separaciones[2], separaciones[3], birthday, EnumPosition.valueOf(separaciones[5]), EnumCategory.valueOf(separaciones[6]), separaciones[7], separaciones[8]);
+
+                        salir = true;
+                    }
                 }
 
                 line = br.readLine();
@@ -570,30 +578,34 @@ public class FilesManagement {
 
             line = br.readLine();
 
-            while (line != null) {
+            while (line != null  && !salir) {
                 separaciones = line.split("#");
-                contenido = separaciones[2];  //DNI is in position 2
+
 
                 //If content is equal to our DNI, we create an object used with the collected values
-                if( contenido.equals(dNI) && !salir ){
+                for (int cont = 0; cont < separaciones.length; cont++) {
 
-                    birthday = u.createVariableGregorianCalendar(separaciones);
+                    contenido = separaciones[cont];
 
-                    employee = new Employee(separaciones[0],separaciones[1],separaciones[2],separaciones[3],birthday,EnumPosition.valueOf(separaciones[5]),EnumCategory.valueOf(separaciones[6]),separaciones[7],separaciones[8]);
+                    if( contenido.equals(dNI) ) {
+
+                        birthday = u.createVariableGregorianCalendar(separaciones[4]);
+
+                        employee = new Employee(separaciones[0], separaciones[1], separaciones[2], separaciones[3], birthday, EnumPosition.valueOf(separaciones[5]), EnumCategory.valueOf(separaciones[6]), separaciones[7], separaciones[8]);
 
 
-                    for(int cont = 0; cont < schedule.length; cont++) {
+                        for (int cont2 = 0; cont2 < schedule.length; cont2++) {
 
-                        newSchedule[cont] = new Schedule(schedule[cont].getWeekDay(), schedule[cont].getStartDate(), schedule[cont].getEndDate(), employee);
+                            newSchedule[cont2] = new Schedule(schedule[cont2].getWeekDay(), schedule[cont2].getStartDate(), schedule[cont2].getEndDate(), employee);
 
-                        //Once this is done, we put our schedule object in the temporary file
-                        //In this case, since the array has to be traversed, we insert it directly from this method
-                        insertObjectModifiedInFile(newSchedule[cont], tempPath);
+                            //Once this is done, we put our schedule object in the temporary file
+                            //In this case, since the array has to be traversed, we insert it directly from this method
+                            insertObjectModifiedInFile(newSchedule[cont2], tempPath);
 
+                        }
+
+                        salir = true;
                     }
-
-                    salir = true;
-
                 }
 
                 line = br.readLine();
@@ -694,22 +706,27 @@ public class FilesManagement {
             line = br.readLine();
 
             while (line != null) {
+
                 separaciones = line.split("#");
-                contenido = separaciones[0];  //DNI is in position 0
 
-                //If content is equal to our DNI
-                if( contenido.equals(dNI)){
+                for (int cont = 0; cont < separaciones.length; cont++) {
 
-                    System.out.println("Employee DNI: "+separaciones[0]);
-                    System.out.println("WeekDay: "+separaciones[1]);
-                    System.out.println("Start date: "+separaciones[2]);
-                    System.out.println("SD Time: "+separaciones[3]);
-                    System.out.println("End date "+separaciones[4]);
-                    System.out.println("ED Time: "+separaciones[5]);
-                    System.out.println();
+                    contenido = separaciones[cont];
 
-                    impreso = true;
+                    //If content is equal to our DNI
+                    if (contenido.equals(dNI)) {
 
+                        System.out.println("Employee DNI: " + separaciones[0]);
+                        System.out.println("WeekDay: " + separaciones[1]);
+                        System.out.println("Start date: " + separaciones[2]);
+                        System.out.println("SD Time: " + separaciones[3]);
+                        System.out.println("End date " + separaciones[4]);
+                        System.out.println("ED Time: " + separaciones[5]);
+                        System.out.println();
+
+                        impreso = true;
+
+                    }
                 }
 
                 line = br.readLine();

@@ -84,7 +84,7 @@ public class Payslip {
     @Override
     public String toString() {
   
-        return employee.getDNI()+"#"+this.salary+"#";
+        return employee.getDNI()+"#"+this.salary;
 
 
     }
