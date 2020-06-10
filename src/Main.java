@@ -32,19 +32,21 @@ import BasicsClasses.Employee.Payslip;
 import BasicsClasses.Employee.Schedule;
 import BasicsClasses.Orders.Order;
 import Management.*;
+import utils.Utils;
 
 
 public class Main {
 
     public static void main(String[] args) {
 
-        FilesManagement FM = new FilesManagement();
-        EmployeeManagement EM = new EmployeeManagement();
-        Validations VD = new Validations();
-        OrderManagement OM = new OrderManagement();
-        ScheduleManagement SM = new ScheduleManagement();
+        FilesManagement fm = new FilesManagement();
+        EmployeeManagement em = new EmployeeManagement();
+        Validations vd = new Validations();
+        OrderManagement om = new OrderManagement();
+        ScheduleManagement sm = new ScheduleManagement();
+        Utils u = new Utils();
 
-        FM.checkFiles();
+        fm.checkFiles();
         String username, password, permisons, DNIToConsultData;
         String pathFileEmployee = ".\\src\\Files\\Employees", pathFileEmployeeTemp = ".\\src\\files\\temp\\EmployeesTemp";
         String pathFileOrdersTemp = ".\\src\\Files\\tmp\\OrdersTemp", pathFileOrders = ".\\src\\Files\\Orders";
@@ -59,15 +61,17 @@ public class Main {
         Employee employee;
         Schedule[] schedule;
 
+        u.
+
         do {
 
-            //username = VD.readAndValidateUsername();
-            //password = VD.readAndValidatePassword();
+            //username = vd.readAndValidateUsername();
+            //password = vd.readAndValidatePassword();
 
             username = "00000000T";
             password = "e807f1fcf82d132f9bb018ca6738a19f";
 
-            permisons = EM.getPermisons(username, password, pathFileEmployee);
+            permisons = em.getPermisons(username, password, pathFileEmployee);
 
             if (permisons != null){
                 switch (permisons) {
@@ -75,7 +79,7 @@ public class Main {
                         //optionOfAdministrator
 
                         do {
-                            optionPermisons = VD.readAndValidateOptionsAdministrator();
+                            optionPermisons = vd.readAndValidateOptionsAdministrator();
 
                             switch (optionPermisons) {
                                 case 0:
@@ -85,8 +89,8 @@ public class Main {
 
                                 case 1: //Hire an employee
                                     System.out.println("Hire an employee");
-                                    employee = EM.collectEmployeeData(); //We collect details of the new employee
-                                    FM.insertObjectInFile(employee, pathFileEmployee); //We register a new employee in the file
+                                    employee = em.collectEmployeeData(); //We collect details of the new employee
+                                    fm.insertObjectInFile(employee, pathFileEmployee); //We register a new employee in the file
 
 
 
@@ -95,70 +99,70 @@ public class Main {
 
                                 case 2:
                                     System.out.println("Dismiss an employee");
-                                    FM.showFileData(pathFileEmployee);
-                                    employeeDNI = VD.readAndValidateUsername(); //We select the id of the employee that we want to unsubscribe
-                                    employee = FM.getSelectedEmployee(pathFileEmployee, employeeDNI); //We get the object used
-                                    FM.insertObjectDeletedInFile(employee, pathFileEmployeeTemp); //We mark the object as deleted and insert it in the temporary file
+                                    fm.showFileData(pathFileEmployee);
+                                    employeeDNI = vd.readAndValidateUsername(); //We select the id of the employee that we want to unsubscribe
+                                    employee = fm.getSelectedEmployee(pathFileEmployee, employeeDNI); //We get the object used
+                                    fm.insertObjectDeletedInFile(employee, pathFileEmployeeTemp); //We mark the object as deleted and insert it in the temporary file
                                     break;
 
 
                                 case 3:
                                     System.out.println("Assign schedule to an employee");
-                                    FM.showFileData(pathFileEmployee); //Show file data
+                                    fm.showFileData(pathFileEmployee); //Show file data
                                     System.out.println("Enter the DNI of the employee to whom you want to assign a schedule");
-                                    employeeDNI = VD.readAndValidateUsername(); //Select the ID of the employee to whom we want to change the schedule
-                                    schedule = SM.setScheduleData(); //Create a new employee
-                                    FM.insertScheduleOnFile(pathSchedule, employeeDNI, parthScheduleTemp, schedule); //Insert the new modified data in the temporary file
+                                    employeeDNI = vd.readAndValidateUsername(); //Select the ID of the employee to whom we want to change the schedule
+                                    schedule = sm.setScheduleData(); //Create a new employee
+                                    fm.insertScheduleOnFile(pathSchedule, employeeDNI, parthScheduleTemp, schedule); //Insert the new modified data in the temporary file
                                     
                                     break;
 
 
                                 case 4:
                                     System.out.println("Modify employee schedule");
-                                    FM.showFileData(pathFileEmployee); //Show all employees
+                                    fm.showFileData(pathFileEmployee); //Show all employees
                                     System.out.println("Enter the DNI of the employee to whom you want to assign a schedule");
-                                    employeeDNI = VD.readAndValidateUsername(); //Select the ID of the employee to whom we want to change the schedule
-                                    schedule = SM.setScheduleData(); //Create a new schedule
-                                    FM.insertScheduleOnFile(pathSchedule, employeeDNI, parthScheduleTemp, schedule); //Insert the new modified data in the temporary file
+                                    employeeDNI = vd.readAndValidateUsername(); //Select the ID of the employee to whom we want to change the schedule
+                                    schedule = sm.setScheduleData(); //Create a new schedule
+                                    fm.insertScheduleOnFile(pathSchedule, employeeDNI, parthScheduleTemp, schedule); //Insert the new modified data in the temporary file
 
                                     break;
 
 
                                 case 5: //Modify salary
-                                    FM.showFileData(pathPaySlips);
-                                    employeeDNI = VD.readAndValidateUsername(); //Read employee DNI
-                                    salary = VD.readAndValidateSalary();  //Assign new salary
-                                    payslip = FM.insertSalary(pathPaySlips, employeeDNI, salary); //Create a payslip object with the new salary
-                                    FM.insertObjectModifiedInFile(payslip, pathPaySlipsTemp ); //Add the new modified object to the temporary file and then add it to the master file
+                                    fm.showFileData(pathPaySlips);
+                                    employeeDNI = vd.readAndValidateUsername(); //Read employee DNI
+                                    salary = vd.readAndValidateSalary();  //Assign new salary
+                                    payslip = fm.insertSalary(pathPaySlips, employeeDNI, salary); //Create a payslip object with the new salary
+                                    fm.insertObjectModifiedInFile(payslip, pathPaySlipsTemp ); //Add the new modified object to the temporary file and then add it to the master file
 
                                     break;
 
 
                                 case 6:
                                     System.out.println();
-                                    DNIToConsultData = VD.readAndValidateUsername();
-                                    FM.printEmployeePersonalData(DNIToConsultData,pathFileEmployee);
+                                    DNIToConsultData = vd.readAndValidateUsername();
+                                    fm.printEmployeePersonalData(DNIToConsultData,pathFileEmployee);
                                     System.out.println();
                                     break;
 
                                 case 7:
-                                    newOrder = OM.readAndValidateNewOrder(pathFileOrders);
-                                    if (!FM.insertObjectInFile(newOrder,pathFileOrdersTemp)) {
+                                    newOrder = om.readAndValidateNewOrder(pathFileOrders);
+                                    if (!fm.insertObjectInFile(newOrder,pathFileOrdersTemp)) {
                                         System.out.println("The new order wasn't added");
                                     }
                                     break;
                                 case 8:
                                     //Show and chooshe order ID
-                                    orderChoosed = VD.chooseOrderByID(FM.getOrdersNotShipped(pathFileOrders));
+                                    orderChoosed = vd.chooseOrderByID(fm.getOrdersNotShipped(pathFileOrders));
                                     //Repeat
                                     do {
                                         //Read and show options: modify order
-                                        optionModifyOrder = VD.readAndValidateOptionsOrder();
+                                        optionModifyOrder = vd.readAndValidateOptionsOrder();
 
                                         switch (optionModifyOrder){
                                             //case 1 (Add product)
                                             case 1:
-                                                orderChoosed.addOrderLine(VD.readAndValidateNewOrderLine(pathFileOrders));
+                                                orderChoosed.addOrderLine(vd.readAndValidateNewOrderLine(pathFileOrders));
                                                 break;
 
                                             //case 2 (Delete product)
@@ -166,7 +170,7 @@ public class Main {
                                                 //Show product from list
                                                 orderChoosed.printOrdersLines();
                                                 //Select Product ID to delete
-                                                IDProductToDelete = VD.readAndValidateIDProductOfOrder(orderChoosed.getIDProducts());
+                                                IDProductToDelete = vd.readAndValidateIDProductOfOrder(orderChoosed.getIDProducts());
                                                 //Delete OrderLine
                                                 orderChoosed.removeOrderLine(IDProductToDelete);
                                                 break;
@@ -176,9 +180,9 @@ public class Main {
                                                 //Show products in the list
                                                 orderChoosed.printOrdersLines();
                                                 //Choose ID
-                                                IDProductToDecrease = VD.readAndValidateIDProductOfOrder(orderChoosed.getIDProducts());
+                                                IDProductToDecrease = vd.readAndValidateIDProductOfOrder(orderChoosed.getIDProducts());
                                                 //Read and validate quantity
-                                                amountToDecrease = VD.readAndValidateQuantityToDecrease(orderChoosed.quantityOfAProduct(IDProductToDecrease));
+                                                amountToDecrease = vd.readAndValidateQuantityToDecrease(orderChoosed.quantityOfAProduct(IDProductToDecrease));
                                                 //drecrease amount
                                                 orderChoosed.decreaseAmountProduct(IDProductToDecrease,amountToDecrease);
                                                 //Show final result
@@ -190,9 +194,9 @@ public class Main {
                                                 //Show products in the list
                                                 orderChoosed.printOrdersLines();
                                                 //Choose ID
-                                                IDProductToIncrease = VD.readAndValidateIDProductOfOrder(orderChoosed.getIDProducts());
+                                                IDProductToIncrease = vd.readAndValidateIDProductOfOrder(orderChoosed.getIDProducts());
                                                 //Read and validate quantity
-                                                amountToIncrease = VD.readAndValidateQuantityToIncrease();
+                                                amountToIncrease = vd.readAndValidateQuantityToIncrease();
                                                 //Increase amount
                                                 orderChoosed.increaseAmountProduct(IDProductToIncrease,amountToIncrease);
                                                 //Show final result
@@ -214,21 +218,21 @@ public class Main {
                                             //finSegun
                                         }
                                     }while (optionModifyOrder != 0 && !orderChoosed.getCancel());
-                                    FM.insertObjectModifiedInFile(orderChoosed,pathFileOrdersTemp);
+                                    fm.insertObjectModifiedInFile(orderChoosed,pathFileOrdersTemp);
                                     //Añadir al fichero las modificaciones del pedido
                                     break;
 
 
                                 case 9:
                                     System.out.println("Show administrator personal data");
-                                    FM.printEmployeePersonalData(username,pathFileEmployee);
+                                    fm.printEmployeePersonalData(username,pathFileEmployee);
 
                                     break;
 
 
                                 case 10:
                                     System.out.println("Check schedule");
-                                    FM.printScheduleFromFile(pathSchedule,username);
+                                    fm.printScheduleFromFile(pathSchedule,username);
                                     break;
                             }
 
@@ -239,7 +243,7 @@ public class Main {
                     case "FloorManager":
                         //optionOfFloorManager
 
-                        optionPermisons = VD.readAndValidateOptionsFloorManager();
+                        optionPermisons = vd.readAndValidateOptionsFloorManager();
 
                         switch (optionPermisons){
                             case 0:
@@ -253,21 +257,21 @@ public class Main {
 
                             case 2:
                                 System.out.println("Assign schedule to an employee");
-                                FM.showFileData(pathFileEmployee);
+                                fm.showFileData(pathFileEmployee);
                                 System.out.println("Enter the DNI of the employee to whom you want to assign a schedule");
-                                employeeDNI = VD.readAndValidateUsername();
-                                schedule = SM.setScheduleData();
-                                FM.insertScheduleOnFile(pathSchedule, employeeDNI, parthScheduleTemp, schedule);
+                                employeeDNI = vd.readAndValidateUsername();
+                                schedule = sm.setScheduleData();
+                                fm.insertScheduleOnFile(pathSchedule, employeeDNI, parthScheduleTemp, schedule);
                             break;
 
 
                             case 3:
                                 System.out.println("Modificar horario de empleado");
-                                FM.showFileData(pathFileEmployee);
+                                fm.showFileData(pathFileEmployee);
                                 System.out.println("Introduzca el DNI del empleado al que desea asignar un horario");
-                                employeeDNI = VD.readAndValidateUsername();
-                                schedule = SM.setScheduleData();
-                                FM.insertScheduleOnFile(pathSchedule, employeeDNI, parthScheduleTemp, schedule);
+                                employeeDNI = vd.readAndValidateUsername();
+                                schedule = sm.setScheduleData();
+                                fm.insertScheduleOnFile(pathSchedule, employeeDNI, parthScheduleTemp, schedule);
 
 
                             break;
@@ -275,13 +279,13 @@ public class Main {
 
                             case 4:
                                 System.out.println("Ver datos personales floor manager");
-                                FM.printEmployeePersonalData(username, pathFileEmployee);
+                                fm.printEmployeePersonalData(username, pathFileEmployee);
                             break;
 
 
                             case 5:
                                 System.out.println("Consultar sus horarios");
-                                FM.printScheduleFromFile(pathSchedule,username);
+                                fm.printScheduleFromFile(pathSchedule,username);
                             break;
                         }
 
@@ -290,7 +294,7 @@ public class Main {
                     case "Staff":
                         //optionOfStaff
 
-                        optionPermisons = VD.readAndValidateOptionsStaff();
+                        optionPermisons = vd.readAndValidateOptionsStaff();
                         switch (optionPermisons){
                             case 0:
                                 System.out.println("Session closed.");
@@ -298,14 +302,14 @@ public class Main {
 
                             case 1:
                                 System.out.println("Ver datos personales del empleado");
-                                FM.printEmployeePersonalData(username,pathFileEmployee);
+                                fm.printEmployeePersonalData(username,pathFileEmployee);
 
                             break;
 
 
                             case 2:
                                 System.out.println("Consultar sus horarios");
-                                FM.printScheduleFromFile(pathSchedule,username);
+                                fm.printScheduleFromFile(pathSchedule,username);
                             break;
                         }
 
@@ -315,7 +319,7 @@ public class Main {
                 System.out.println("Error to LogIn, please retry");
             }
 
-        }while (permisons == null || VD.wantContinue());
+        }while (permisons == null || vd.wantContinue());
 
     }
 
