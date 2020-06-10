@@ -61,7 +61,6 @@ public class Main {
         Employee employee;
         Schedule[] schedule;
 
-        u.
 
         do {
 
