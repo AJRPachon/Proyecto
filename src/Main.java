@@ -68,7 +68,7 @@ public class Main {
         //u.insertDrinks();
         //u.insertOrders();
         //u.insertProducts();
-        
+
 
         do {
 
@@ -273,9 +273,9 @@ public class Main {
 
 
                             case 3:
-                                System.out.println("Modificar horario de empleado");
+                                System.out.println("Modify employee schedule");
                                 fm.showFileData(pathFileEmployee);
-                                System.out.println("Introduzca el DNI del empleado al que desea asignar un horario");
+                                System.out.println("Enter the DNI of the employee to whom you want to assign a schedule");
                                 employeeDNI = vd.readAndValidateUsername();
                                 schedule = sm.setScheduleData();
                                 fm.insertScheduleOnFile(pathSchedule, employeeDNI, parthScheduleTemp, schedule);
@@ -285,13 +285,13 @@ public class Main {
 
 
                             case 4:
-                                System.out.println("Ver datos personales floor manager");
+                                System.out.println("Show floor manager personal data");
                                 fm.printEmployeePersonalData(username, pathFileEmployee);
                             break;
 
 
                             case 5:
-                                System.out.println("Consultar sus horarios");
+                                System.out.println("Check schedule");
                                 fm.printScheduleFromFile(pathSchedule,username);
                             break;
                         }
@@ -308,14 +308,14 @@ public class Main {
                             break;
 
                             case 1:
-                                System.out.println("Ver datos personales del empleado");
+                                System.out.println("Show employee personal data");
                                 fm.printEmployeePersonalData(username,pathFileEmployee);
 
                             break;
 
 
                             case 2:
-                                System.out.println("Consultar sus horarios");
+                                System.out.println("Check schedule");
                                 fm.printScheduleFromFile(pathSchedule,username);
                             break;
                         }
