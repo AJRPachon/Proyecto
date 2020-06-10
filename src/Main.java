@@ -59,6 +59,8 @@ public class Main {
         Employee employee;
         Schedule[] schedule;
 
+
+
         do {
 
             //username = VD.readAndValidateUsername();
