@@ -1,13 +1,21 @@
 package JUnitTest.orders;
 
+import BasicsClasses.Orders.Order;
+import BasicsClasses.Orders.OrderLine;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class OrderTest {
 
+    Order o = new Order();
+
     @Test
     void getID() {
+        int id = o.getID();
+        assertNotEquals(id, 0);
     }
 
     @Test
@@ -16,6 +24,8 @@ class OrderTest {
 
     @Test
     void getOrderLine() {
+        OrderLine ol = o.getOrderLine(0);
+        assertNotNull(ol);
     }
 
     @Test
@@ -32,14 +42,20 @@ class OrderTest {
 
     @Test
     void removeOrderLine() {
+        boolean r = o.removeOrderLine(0);
+        assertTrue(r);
     }
 
     @Test
     void increaseAmountProduct() {
+        boolean r = o.increaseAmountProduct(0, 2);
+        assertTrue(r);
     }
 
     @Test
     void decreaseAmountProduct() {
+        boolean r = o.decreaseAmountProduct(0, 2);
+        assertTrue(r);
     }
 
     @Test
@@ -48,6 +64,8 @@ class OrderTest {
 
     @Test
     void quantityOfAProduct() {
+        int quan = o.quantityOfAProduct(0);
+        assertNotEquals(quan, -1);
     }
 
     @Test

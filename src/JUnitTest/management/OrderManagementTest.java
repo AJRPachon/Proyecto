@@ -1,16 +1,18 @@
 package JUnitTest.management;
 
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import Management.OrderManagement;
 
 class OrderManagementTest {
 
-    @Test
-    void readAndValidateNewOrder() {
-    }
+    public static void main(String [] args) {
 
-    @Test
-    void printArrayListOrders() {
+        OrderManagement or = new OrderManagement();
+        String pathOrder = ".\\src\\files\\Products";
+
+        System.out.println("or.readAndValidateNewOrder: "+or.readAndValidateNewOrder(pathOrder));
+
+        System.out.println("\n-----------------------------------------------------------------------\n");
+
+
     }
 }

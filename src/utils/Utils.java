@@ -26,14 +26,14 @@ public class Utils {
      * @return birthdate (GregorianCalendar)
      */
 
-    public GregorianCalendar createVariableGregorianCalendar(String[] separations){
+    public GregorianCalendar createVariableGregorianCalendar(String separations){
 
         String[] dateString;
         GregorianCalendar birthdate = new GregorianCalendar();
         int[] fecha = new int[3];
 
         //We separate the String from the date in its different numbers
-        dateString = separations[4].split("/");
+        dateString = separations.split("/");
 
         //We go through the array and do a parseInt to get the integers
         for(int cont = 0; cont < dateString.length; cont++){

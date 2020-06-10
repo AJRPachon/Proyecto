@@ -1,84 +1,90 @@
 package JUnitTest.management;
 
+import Management.Validations;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ValidationsTest {
 
-    @Test
-    void wantContinue() {
-    }
+    public static void main(String [] args){
 
-    @Test
-    void checkUsername() {
-    }
+        Validations va = new Validations();
 
-    @Test
-    void readAndValidateUsername() {
-    }
+        String pathOrders = ".\\src\\files\\Orders";
 
-    @Test
-    void readAndValidatePassword() {
-    }
+        System.out.println("va.wantContinue: "+va.wantContinue());
 
-    @Test
-    void readAndValidateOptionsAdministrator() {
-    }
+        System.out.println("\n-----------------------------------------------------------------------\n");
 
-    @Test
-    void readAndValidateOptionsFloorManager() {
-    }
+        System.out.println("va.checkUsername: "+va.checkUsername("53350963W"));
 
-    @Test
-    void readAndValidateOptionsStaff() {
-    }
+        System.out.println("\n-----------------------------------------------------------------------\n");
 
-    @Test
-    void readAndValidateQuantityOfProduct() {
-    }
+        System.out.println("va.readAndValidateUsername");
 
-    @Test
-    void chooseOrderByID() {
-    }
+        System.out.println("\n-----------------------------------------------------------------------\n");
 
-    @Test
-    void readAndValidateOptionsOrder() {
-    }
+        System.out.println("va.readAndValidatePassword: "+va.readAndValidatePassword());
 
-    @Test
-    void readAndValidateNewOrderLine() {
-    }
+        System.out.println("\n-----------------------------------------------------------------------\n");
 
-    @Test
-    void readAndValidateIDProductOfOrder() {
-    }
+        System.out.println("va.va.readAndValidateOptionsStaff: "+va.readAndValidateOptionsStaff());
 
-    @Test
-    void readAndValidateQuantityToDecrease() {
-    }
+        System.out.println("\n-----------------------------------------------------------------------\n");
 
-    @Test
-    void readAndValidateQuantityToIncrease() {
-    }
+        System.out.println("va.readAndValidateQuantityOfProduct: "+va.readAndValidateQuantityOfProduct());
 
-    @Test
-    void readAndValidateSalary() {
-    }
+        System.out.println("\n-----------------------------------------------------------------------\n");
 
-    @Test
-    void readAndValidateHour() {
-    }
+        //System.out.println("va.chooseOrderByID: "+va.chooseOrderByID());
 
-    @Test
-    void readAndValidateMinute() {
-    }
+        //System.out.println("\n-----------------------------------------------------------------------\n");
 
-    @Test
-    void readAndValidateDay() {
-    }
+        System.out.println("va.readAndValidateNewOrderLine(): "+va.readAndValidateNewOrderLine(pathOrders));
 
-    @Test
-    void readAndValidateMonth() {
+        System.out.println("\n-----------------------------------------------------------------------\n");
+
+        //System.out.println("va.readAndValidateIDProductOfOrder(): "+va.readAndValidateIDProductOfOrder());
+
+        //System.out.println("\n-----------------------------------------------------------------------\n");
+
+        System.out.println("va.readAndValidateQuantityToDecrease: "+va.readAndValidateQuantityToDecrease(2));
+
+        System.out.println("\n-----------------------------------------------------------------------\n");
+
+        System.out.println("va.readAndValidateQuantityToIncrease: "+va.readAndValidateQuantityToIncrease());
+
+        System.out.println("\n-----------------------------------------------------------------------\n");
+
+        System.out.println("va.readAndValidateSalary: "+va.readAndValidateSalary());
+
+        System.out.println("\n-----------------------------------------------------------------------\n");
+
+        System.out.println("va.readAndValidateHour: "+va.readAndValidateHour());
+
+        System.out.println("\n-----------------------------------------------------------------------\n");
+
+        System.out.println("va.readAndValidateMinute: "+va.readAndValidateMinute());
+
+        System.out.println("\n-----------------------------------------------------------------------\n");
+
+        System.out.println("va.readAndValidateDay: "+va.readAndValidateDay());
+
+        System.out.println("\n-----------------------------------------------------------------------\n");
+
+        System.out.println("va.readAndValidateMonth: "+va.readAndValidateMonth());
+
+        System.out.println("\n-----------------------------------------------------------------------\n");
+
+        System.out.println("va.readAndValidatePosition: "+va.readAndValidatePosition());
+
+        System.out.println("\n-----------------------------------------------------------------------\n");
+
+        System.out.println("va.readAndValidateCategory: "+va.readAndValidateCategory());
+
+        System.out.println("\n-----------------------------------------------------------------------\n");
+
+
     }
 }

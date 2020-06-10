@@ -69,12 +69,10 @@ public class EmployeeManagement {
     public Employee collectEmployeeData(){
 
         Scanner sc = new Scanner(System.in);
-        Validations VA = new Validations();
+        Validations va = new Validations();
 
 
-        String name, surname, dNI, nAF, bankAccountN, password;
-        EnumPosition position;
-        EnumCategory category;
+        String name, surname, dNI, nAF, bankAccountN, password, position, category;
         GregorianCalendar birthday = new GregorianCalendar();
         int day, month, year;
 
@@ -85,7 +83,7 @@ public class EmployeeManagement {
         surname = sc.next();
 
         System.out.println("Employee DNI");
-        dNI = VA.readAndValidateUsername();
+        dNI = va.readAndValidateUsername();
 
         System.out.println("Employee NAF");
         nAF = sc.next();
@@ -114,19 +112,19 @@ public class EmployeeManagement {
         birthday.set(day, month,year);
 
 
-        System.out.println("Employee position");
-        position = EnumPosition.valueOf(sc.next());
+        System.out.println("Employee position: CommisChef, HeadChef, ChefThePartie, SousChef, Cook, Waiter, Waitress, Busser, Manager, Host, Bartender, Spaguetti");
+        position = va.readAndValidatePosition();;
 
         System.out.println("Employee category");
-        category = EnumCategory.valueOf(sc.next());
+        category = va.readAndValidateCategory();
 
         System.out.println("Employee bankAccoutN");
         bankAccountN = sc.next();
 
         System.out.println("Employee password");
-        password = VA.readAndValidatePassword();
+        password = va.readAndValidatePassword();
 
-        return new Employee(name, surname,dNI,nAF,birthday, position, category,bankAccountN,password);
+        return new Employee(name, surname,dNI,nAF,birthday, EnumPosition.valueOf(position), EnumCategory.valueOf(category), bankAccountN,password);
 
     }
 
