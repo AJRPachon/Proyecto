@@ -27,11 +27,11 @@
  *
  */
 
-import BasicsClasses.Employee.Employee;
-import BasicsClasses.Employee.Payslip;
-import BasicsClasses.Employee.Schedule;
-import BasicsClasses.Orders.Order;
-import Management.*;
+import basicsClasses.employee.Employee;
+import basicsClasses.employee.Payslip;
+import basicsClasses.employee.Schedule;
+import basicsClasses.orders.Order;
+import management.*;
 import utils.Utils;
 
 
@@ -61,6 +61,14 @@ public class Main {
         Employee employee;
         Schedule[] schedule;
 
+        //u.insertEmployees();
+        //u.insertPaySlips();
+        //u.insertSchedules();
+        //u.insertFoods();
+        //u.insertDrinks();
+        //u.insertOrders();
+        //u.insertProducts();
+        
 
         do {
 

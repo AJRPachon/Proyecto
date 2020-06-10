@@ -1,0 +1,17 @@
+unnamed package
+basicsClasses.employee
+basicsClasses.employee.Enums
+basicsClasses.foodstuffDrinks
+basicsClasses.foodstuffDrinks.enums
+basicsClasses.interfaces
+basicsClasses.orders
+basicsClasses.receiptLine
+jUnitTest.employee
+jUnitTest.employee.Enums
+jUnitTest.foodStuffDrinks
+jUnitTest.foodStuffDrinks.enums
+jUnitTest.management
+jUnitTest.orders
+jUnitTest.receiptLine
+management
+utils

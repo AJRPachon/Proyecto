@@ -27,12 +27,12 @@
  *
  */
 
-import BasicsClasses.Employee.Employee;
-import BasicsClasses.Employee.Payslip;
-import BasicsClasses.Employee.Schedule;
-import BasicsClasses.Orders.Order;
-import BasicsClasses.Orders.OrderLine;
-import Management.*;
+import basicsClasses.employee.Employee;
+import basicsClasses.employee.Payslip;
+import basicsClasses.employee.Schedule;
+import basicsClasses.orders.Order;
+import basicsClasses.orders.OrderLine;
+import management.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
