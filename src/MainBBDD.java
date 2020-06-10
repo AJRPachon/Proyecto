@@ -31,67 +31,57 @@ import BasicsClasses.Employee.Employee;
 import BasicsClasses.Employee.Payslip;
 import BasicsClasses.Employee.Schedule;
 import BasicsClasses.Orders.Order;
+import BasicsClasses.Orders.OrderLine;
 import Management.*;
-import utils.Utils;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
+import java.util.ArrayList;
+/*
 
 public class MainBBDD {
 
     public static void main(String[] args) {
 
-        String sourceURL = "jdbc:sqlserver://localhost";
-        String usernameBBDD = "AntonioSQL";
-        String passwordBBDD = "123";
-        Connection connexionBaseDatos = null;
+        String sourceURL = "jdbc:sqlserver://localhost:1433;database=Restaurant";
+        String usernameBBDD = "UserJava";
+        String passwordBBDD = "newPassUser";
+        Connection connectionDataBase = null;
 
         try {
-            connexionBaseDatos = DriverManager.getConnection(sourceURL, usernameBBDD, passwordBBDD);
+            connectionDataBase = DriverManager.getConnection(sourceURL, usernameBBDD, passwordBBDD);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-        String username, password, permisons, DNIToConsultData;
+        ArrayList<Order> ordersNotShipped;
+
+        String username = "", password = "", permisons = null, DNIToConsultData;
         Order newOrder, orderChoosed;
         int optionPermisons, optionModifyOrder, IDProductToDelete, IDProductToDecrease, amountToDecrease, IDProductToIncrease, amountToIncrease;
         String employeeDNI;
         double salary;
+        OrderLine newOrderLine;
 
-        EmployeeManagement em = new EmployeeManagement();
+        DatabaseManagement dbManag = new DatabaseManagement();
 
-        Payslip payslip;
         Employee employee;
         Schedule[] schedule;
 
-        FilesManagement FM = new FilesManagement();
-        EmployeeManagement EM = new EmployeeManagement();
-        Validations VD = new Validations();
-        OrderManagement OM = new OrderManagement();
-        ScheduleManagement SM = new ScheduleManagement();
-        Utils U = new Utils();
-
-        FM.checkFiles();
-
-        String pathFileEmployee = ".\\src\\Files\\Employees", pathFileEmployeeTemp = ".\\src\\files\\temp\\EmployeesTemp";
-        String pathFileOrdersTemp = ".\\src\\Files\\tmp\\OrdersTemp", pathFileOrders = ".\\src\\Files\\Orders";
-        String pathPaySlips = ".\\src\\files\\Payslips", pathPaySlipsTemp = ".\\src\\files\\temp\\PayslipsTemp";
-        String pathSchedule = ".\\src\\files\\Schedule", parthScheduleTemp = ".\\src\\files\\temp\\ScheduleTemp";
-
-
-
+        EmployeeManagement emplManag = new EmployeeManagement();
+        Validations valid = new Validations();
+        OrderManagement orderManag = new OrderManagement();
+        ScheduleManagement scheManag = new ScheduleManagement();
 
         do {
 
-            //username = VD.readAndValidateUsername();
-            //password = VD.readAndValidatePassword();
-
-            username = "00000000T";
-            password = "e807f1fcf82d132f9bb018ca6738a19f";
-
-            permisons = EM.getPermisons(username, password, pathFileEmployee);
+            if (connectionDataBase != null){
+                username = valid.readAndValidateUsername();
+                password = valid.readAndValidatePassword();
+                permisons = dbManag.getPermisons(username, password, connectionDataBase);
+            }else{
+                System.out.println("Error in connection");
+            }
 
             if (permisons != null){
                 switch (permisons) {
@@ -99,162 +89,183 @@ public class MainBBDD {
                         //optionOfAdministrator
 
                         do {
-                            optionPermisons = VD.readAndValidateOptionsAdministrator();
+                            optionPermisons = valid.readAndValidateOptionsAdministrator();
 
                             switch (optionPermisons) {
                                 case 0:
                                     System.out.println("Closed session.");
                                     break;
 
-
                                 case 1: //Dar de alta a un empleado
                                     System.out.println("Dar de alta a un empleado");
-                                    employee = EM.collectEmployeeData(); //Pedimos datos del nuevo empleado
-                                    FM.insertObjectInFile(employee, pathFileEmployee); //Registramos nuevo empleado en el fichero
-
-
-
+                                    employee = emplManag.collectEmployeeData();
+                                    if (!dbManag.insertEmployee(employee, connectionDataBase)){
+                                        System.out.println("Could not insert employee");
+                                    }else{
+                                        System.out.println("Employee inserted");
+                                    }
                                     break;
-
 
                                 case 2:
                                     System.out.println("Dar de baja a empleado");
-                                    FM.showFileData(pathFileEmployee);
-                                    employeeDNI = VD.readAndValidateUsername(); //Seleccionamos el dni del empleado que deseamos dar de baja
-                                    employee = FM.getSelectedEmployee(pathFileEmployee, employeeDNI); //Obtenemos el objeto empleado
-                                    FM.insertObjectDeletedInFile(employee, pathFileEmployeeTemp); //Marcamos el objeto como borrado y lo insertamos en el fichero temporal
-
+                                    employeeDNI = valid.readAndValidateUsername(connectionDataBase);
+                                    employee = dbManag.getEmployeeByDNI(employeeDNI, connectionDataBase);
+                                    if (employee != null){
+                                        if (!dbManag.deleteEmployee(employee, connectionDataBase)){
+                                            System.out.println("Could not delete employee");
+                                        }else{
+                                            System.out.println("Employee deleted");
+                                        }
+                                    }
                                     break;
 
 
                                 case 3:
                                     System.out.println("Asignar horario a empleado");
-                                    FM.showFileData(pathFileEmployee); //Mostramos todos los empleados
-                                    System.out.println("Introduzca el DNI del empleado al que desea asignar un horario");
-                                    employeeDNI = VD.readAndValidateUsername(); //Seleccionamos el dni del empleado al cual queremos cambiarle el horario
-                                    schedule = SM.setScheduleData(); //Creamos un nuevo horario
-                                    FM.insertScheduleOnFile(pathSchedule, employeeDNI, parthScheduleTemp, schedule); //Insertamos los nuevos datos modificados en el fichero temporal
-
-                                    break;
-
-
-                                case 4:
-                                    System.out.println("Modificar horario de empleado");
-                                    //TODO Se hace igual que asignar horario a empleado pero tendría que poderse cambiar sólo X días seleccionados
-                                    FM.showFileData(pathFileEmployee); //Mostramos todos los empleados
-                                    System.out.println("Introduzca el DNI del empleado al que desea asignar un horario");
-                                    employeeDNI = VD.readAndValidateUsername(); //Seleccionamos el dni del empleado al cual queremos cambiarle el horario
-                                    schedule = SM.setScheduleData(); //Creamos un nuevo horario
-                                    FM.insertScheduleOnFile(pathSchedule, employeeDNI, parthScheduleTemp, schedule); //Insertamos los nuevos datos modificados en el fichero temporal
-
-                                    break;
-
-
-                                case 5: //Modificar sueldo a empleado
-                                    FM.showFileData(pathPaySlips);
-                                    employeeDNI = VD.readAndValidateUsername(); //Lee el dni del empleado
-                                    salary = VD.readAndValidateSalary();  //Asignamos el nuevo salario
-                                    payslip = FM.insertSalary(pathPaySlips, employeeDNI, salary); //Creamos un objeto payslip con el nuevo salario
-                                    FM.insertObjectModifiedInFile(payslip, pathPaySlipsTemp ); //Añadimos al fichero temporal el nuevo objeto modificado para luego añadirlo al fichero maestro
-
-                                    break;
-
-
-                                case 6:
-                                    System.out.println();
-                                    DNIToConsultData = VD.readAndValidateUsername();
-                                    FM.printEmployeePersonalData(DNIToConsultData,pathFileEmployee);
-                                    System.out.println();
-                                    break;
-
-                                case 7:
-                                    newOrder = OM.readAndValidateNewOrder();
-                                    if (!FM.insertObjectInFile(newOrder,pathFileOrdersTemp)) {
-                                        System.out.println("The new order wasn't added");
+                                    System.out.println("Enter the DNI of the employee to whom you want to assign a schedule");
+                                    employeeDNI = valid.readAndValidateUsername(connectionDataBase); //Seleccionamos el dni del empleado al cual queremos cambiarle el horario
+                                    schedule = scheManag.setScheduleData(); //Creamos un nuevo horario
+                                    if (!dbManag.insertSchedules(schedule,employeeDNI,connectionDataBase)){
+                                        System.out.println("Could not assign schedule");
+                                    }else{
+                                        System.out.println("Schedule assigned");
                                     }
                                     break;
-                                case 8:
-                                    //mostrar y elegir order por ID
-                                    orderChoosed = VD.chooseOrderByID(FM.getOrdersNotShipped(pathFileOrders));
-                                    //Repetir
-                                    do {
-                                        //leer y mostrar opciones modificar pedido
-                                        optionModifyOrder = VD.readAndValidateOptionsOrder();
-                                        //segun (opcion del pedido)
-                                        switch (optionModifyOrder){
-                                            //caso 1 (añadir producto)
-                                            case 1:
-                                                orderChoosed.addOrderLine(VD.readAndValidateNewOrderLine());
-                                                break;
 
-                                            //caso 2 (eliminar producto)
-                                            case 2:
-                                                //mostrar productos en la lista
-                                                orderChoosed.printOrdersLines();
-                                                //elegir ID del pedido a eliminar
-                                                IDProductToDelete = VD.readAndValidateIDProductOfOrder(orderChoosed.getIDProducts());
-                                                //eliminar linea de pedido
-                                                orderChoosed.removeOrderLine(IDProductToDelete);
-                                                break;
 
-                                            //caso 3 (disminuir cantidad producto)
-                                            case 3:
-                                                //mostrar productos en la lista
-                                                orderChoosed.printOrdersLines();
-                                                //elegir ID del pedido a disminuir cantidas
-                                                IDProductToDecrease = VD.readAndValidateIDProductOfOrder(orderChoosed.getIDProducts());
-                                                //leer y validar cantidad a disminuir
-                                                amountToDecrease = VD.readAndValidateQuantityToDecrease(orderChoosed.quantityOfAProduct(IDProductToDecrease));
-                                                //dismiuir cantidad
-                                                orderChoosed.decreaseAmountProduct(IDProductToDecrease,amountToDecrease);
-                                                //mostrar resultado final
-                                                orderChoosed.printOrderLine(IDProductToDecrease);
-                                                break;
-
-                                            //caso 4 (disminuir cantidad producto)
-                                            case 4:
-                                                //mostrar productos en la lista
-                                                orderChoosed.printOrdersLines();
-                                                //elegir ID del pedido a aumentar cantidad
-                                                IDProductToIncrease = VD.readAndValidateIDProductOfOrder(orderChoosed.getIDProducts());
-                                                //leer y validar cantidad a aumentar
-                                                amountToIncrease = VD.readAndValidateQuantityToIncrease();
-                                                //aumentar cantidad
-                                                orderChoosed.increaseAmountProduct(IDProductToIncrease,amountToIncrease);
-                                                //mostrar resultado final
-                                                orderChoosed.printOrderLine(IDProductToIncrease);
-                                                break;
-
-                                            //caso 5 (mostrar todas las orders lines)
-                                            case 5:
-                                                orderChoosed.printOrdersLines();
-                                                break;
-                                            //finSegun
-
-                                            //caso 6 (cancelar pedido)
-                                            case 6:
-                                                orderChoosed.markCancel();
-                                                System.out.println("El pedido con ID: "+orderChoosed.getID()+" fue cancelado.");
-                                                //cancelar pedido
-                                                break;
-                                            //finSegun
-                                        }
-                                    }while (optionModifyOrder != 0 && !orderChoosed.getCancel());
-                                    FM.insertObjectModifiedInFile(orderChoosed,pathFileOrdersTemp);
-                                    //Añadir al fichero las modificaciones del pedido
+                                case 4: //Modificar sueldo a empleado
+                                    employeeDNI = valid.readAndValidateUsername(connectionDataBase); //Lee el dni del empleado
+                                    salary = valid.readAndValidateSalary();  //Asignamos el nuevo salario
+                                    if (!dbManag.modifySalary(new Payslip(salary, new Employee(employeeDNI)), connectionDataBase)){
+                                        System.out.println("Could not modify the salary");
+                                    }else{
+                                        System.out.println("Salary modified");
+                                    }
                                     break;
 
+
+                                case 5:
+                                    System.out.println();
+                                    DNIToConsultData = valid.readAndValidateUsername(connectionDataBase);
+                                    emplManag.printEmployeePersonalData(dbManag.getEmployeeByDNI(DNIToConsultData,connectionDataBase));
+                                    System.out.println();
+                                    break;
+
+                                case 6:
+                                    newOrder = orderManag.readAndValidateNewOrder(connectionDataBase);
+                                    if (!dbManag.insertNewOrder(username, newOrder, connectionDataBase)) {
+                                        System.out.println("The new order wasn't added");
+                                    }else{
+                                        System.out.println("Order added");
+                                    }
+                                    break;
+                                case 7:
+                                    ordersNotShipped = dbManag.getOrdersNotShipped(connectionDataBase);
+                                    if (ordersNotShipped.size() > 0){
+                                        orderChoosed = valid.chooseOrderByID(ordersNotShipped);
+                                        //Repetir
+                                        do {
+                                            //leer y mostrar opciones modificar pedido
+                                            optionModifyOrder = valid.readAndValidateOptionsOrder();
+                                            //segun (opcion del pedido)
+                                            switch (optionModifyOrder){
+                                                //caso 1 (añadir producto)
+                                                case 1:
+                                                    newOrderLine = valid.readAndValidateNewOrderLine(connectionDataBase);
+                                                    orderChoosed.addOrderLine(newOrderLine);
+                                                    if (!dbManag.insertNewOrderLine(orderChoosed ,newOrderLine ,connectionDataBase)) {
+                                                        System.out.println("The new order line wasn't added");
+                                                    }else{
+                                                        System.out.println("New order line added");
+                                                    }
+                                                    break;
+
+                                                //caso 2 (eliminar producto)
+                                                case 2:
+                                                    //mostrar productos en la lista
+                                                    orderChoosed.printOrdersLines();
+                                                    //elegir ID del pedido a eliminar
+                                                    IDProductToDelete = valid.readAndValidateIDProductOfOrder(orderChoosed.getIDProducts());
+                                                    //eliminar linea de pedido
+                                                    orderChoosed.removeOrderLine(IDProductToDelete);
+                                                    if (!(dbManag.deleteOrderLine(orderChoosed, IDProductToDelete, connectionDataBase))) {
+                                                        System.out.println("The order line wasn't deleted");
+                                                    }else{
+                                                        System.out.println("The order line was deleted");
+                                                    }
+                                                    break;
+
+                                                //caso 3 (disminuir cantidad producto)
+                                                case 3:
+                                                    //mostrar productos en la lista
+                                                    orderChoosed.printOrdersLines();
+                                                    //elegir ID del pedido a disminuir cantidas
+                                                    IDProductToDecrease = valid.readAndValidateIDProductOfOrder(orderChoosed.getIDProducts());
+                                                    //leer y validar cantidad a disminuir
+                                                    amountToDecrease = valid.readAndValidateQuantityToDecrease(orderChoosed.quantityOfAProduct(IDProductToDecrease));
+                                                    //dismiuir cantidad
+                                                    orderChoosed.decreaseAmountProduct(IDProductToDecrease,amountToDecrease);
+                                                    if (!dbManag.decreaseAmountProductOrderLine(orderChoosed,IDProductToDecrease,amountToDecrease,connectionDataBase)){
+                                                        System.out.println("Quantity of order line wasn't decrease");
+                                                    }else{
+                                                        System.out.println("Quantity of order line was decrease");
+                                                    }
+                                                    //mostrar resultado final
+                                                    orderChoosed.printOrderLine(IDProductToDecrease);
+                                                    break;
+
+                                                //caso 4 (aumentar cantidad producto)
+                                                case 4:
+                                                    //mostrar productos en la lista
+                                                    orderChoosed.printOrdersLines();
+                                                    //elegir ID del pedido a aumentar cantidad
+                                                    IDProductToIncrease = valid.readAndValidateIDProductOfOrder(orderChoosed.getIDProducts());
+                                                    //leer y validar cantidad a aumentar
+                                                    amountToIncrease = valid.readAndValidateQuantityToIncrease();
+                                                    //aumentar cantidad
+                                                    orderChoosed.increaseAmountProduct(IDProductToIncrease,amountToIncrease);
+                                                    if (!dbManag.increaseAmountProductOrderLine(orderChoosed,IDProductToIncrease,amountToIncrease,connectionDataBase)){
+                                                        System.out.println("Quantity of order line wasn't increase");
+                                                    }else{
+                                                        System.out.println("Quantity of order line was increase");
+                                                    }
+                                                    //mostrar resultado final
+                                                    orderChoosed.printOrderLine(IDProductToIncrease);
+                                                    break;
+
+                                                //caso 5 (mostrar todas las orders lines)
+                                                case 5:
+                                                    orderChoosed.printOrdersLines();
+                                                    break;
+                                                //finSegun
+
+                                                //caso 6 (cancelar pedido)
+                                                case 6:
+                                                    orderChoosed.markCancel();
+                                                    if (!dbManag.markCancelProduct(orderChoosed,connectionDataBase)){
+                                                        System.out.println("Order wasn't marked cancel");
+                                                    }else{
+                                                        System.out.println("Order was marked cancel");
+                                                    }
+                                                    //cancelar pedido
+                                                    break;
+                                                //finSegun
+                                            }
+                                        }while (optionModifyOrder != 0 && !orderChoosed.getCancel());
+                                    }else{
+                                        System.out.println("Not exist orders without sent or not cancel");
+                                    }
+                                    break;
+
+                                case 8:
+                                    System.out.println();
+                                    emplManag.printEmployeePersonalData(dbManag.getEmployeeByDNI(username,connectionDataBase));
+                                    System.out.println();
+                                    break;
 
                                 case 9:
-                                    System.out.println("Ver datos personales administrador");
-                                    FM.printEmployeePersonalData(username,pathFileEmployee);
-
-                                    break;
-
-
-                                case 10:
                                     System.out.println("Consultar sus horarios");
-                                    FM.printScheduleFromFile(pathSchedule,username);
+                                    scheManag.printSchedules(dbManag.getEmployeeSchedules(username,connectionDataBase));
                                     break;
                             }
 
@@ -265,48 +276,42 @@ public class MainBBDD {
                     case "FloorManager":
                         //optionOfFloorManager
 
-                        optionPermisons = VD.readAndValidateOptionsFloorManager();
+                        optionPermisons = valid.readAndValidateOptionsFloorManager();
                         switch (optionPermisons){
                             case 0:
                                 System.out.println("Session closed.");
                                 break;
                             case 1:
-                                System.out.println("Ver datos personales del empleado");
+                                System.out.println();
+                                DNIToConsultData = valid.readAndValidateUsername(connectionDataBase);
+                                emplManag.printEmployeePersonalData(dbManag.getEmployeeByDNI(DNIToConsultData,connectionDataBase));
+                                System.out.println();
                                 break;
 
 
                             case 2:
                                 System.out.println("Asignar horario a empleado");
-                                FM.showFileData(pathFileEmployee); //Mostramos todos los empleados
-                                System.out.println("Introduzca el DNI del empleado al que desea asignar un horario");
-                                employeeDNI = VD.readAndValidateUsername(); //Seleccionamos el dni del empleado al cual queremos cambiarle el horario
-                                schedule = SM.setScheduleData(); //Creamos un nuevo horario
-                                FM.insertScheduleOnFile(pathSchedule, employeeDNI, parthScheduleTemp, schedule); //Insertamos los nuevos datos modificados en el fichero temporal
+                                System.out.println("Enter the DNI of the employee to whom you want to assign a schedule");
+                                employeeDNI = valid.readAndValidateUsername(connectionDataBase); //Seleccionamos el dni del empleado al cual queremos cambiarle el horario
+                                schedule = scheManag.setScheduleData(); //Creamos un nuevo horario
+                                if (!dbManag.insertSchedules(schedule,employeeDNI,connectionDataBase)){
+                                    System.out.println("Could not assign schedule");
+                                }else{
+                                    System.out.println("Schedule assigned");
+                                }
                                 break;
 
 
                             case 3:
-                                System.out.println("Modificar horario de empleado");
-                                //TODO Se hace igual que asignar horario a empleado pero tendría que poderse cambiar sólo X días seleccionados
-                                FM.showFileData(pathFileEmployee); //Mostramos todos los empleados
-                                System.out.println("Introduzca el DNI del empleado al que desea asignar un horario");
-                                employeeDNI = VD.readAndValidateUsername(); //Seleccionamos el dni del empleado al cual queremos cambiarle el horario
-                                schedule = SM.setScheduleData(); //Creamos un nuevo horario
-                                FM.insertScheduleOnFile(pathSchedule, employeeDNI, parthScheduleTemp, schedule); //Insertamos los nuevos datos modificados en el fichero temporal
-
-
+                                System.out.println();
+                                emplManag.printEmployeePersonalData(dbManag.getEmployeeByDNI(username,connectionDataBase));
+                                System.out.println();
                                 break;
 
 
                             case 4:
-                                System.out.println("Ver datos personales floor manager");
-                                FM.printEmployeePersonalData(username, pathFileEmployee);
-                                break;
-
-
-                            case 5:
                                 System.out.println("Consultar sus horarios");
-                                FM.printScheduleFromFile(pathSchedule,username);
+                                scheManag.printSchedules(dbManag.getEmployeeSchedules(username,connectionDataBase));
                                 break;
                         }
 
@@ -315,22 +320,22 @@ public class MainBBDD {
                     case "Staff":
                         //optionOfStaff
 
-                        optionPermisons = VD.readAndValidateOptionsStaff();
+                        optionPermisons = valid.readAndValidateOptionsStaff();
                         switch (optionPermisons){
                             case 0:
                                 System.out.println("Session closed.");
                                 break;
 
                             case 1:
-                                System.out.println("Ver datos personales del empleado");
-                                FM.printEmployeePersonalData(username,pathFileEmployee);
-
+                                System.out.println();
+                                emplManag.printEmployeePersonalData(dbManag.getEmployeeByDNI(username,connectionDataBase));
+                                System.out.println();
                                 break;
 
 
                             case 2:
                                 System.out.println("Consultar sus horarios");
-                                FM.printScheduleFromFile(pathSchedule,username);
+                                scheManag.printSchedules(dbManag.getEmployeeSchedules(username,connectionDataBase));
                                 break;
                         }
 
@@ -340,8 +345,9 @@ public class MainBBDD {
                 System.out.println("Error to LogIn, please retry");
             }
 
-        }while (permisons == null || VD.wantContinue());
+        }while (permisons == null || valid.wantContinue());
 
     }
 
 }
+*/

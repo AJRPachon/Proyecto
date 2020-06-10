@@ -142,7 +142,7 @@ public class Main {
                                     break;
 
                                 case 7:
-                                    newOrder = OM.readAndValidateNewOrder();
+                                    newOrder = OM.readAndValidateNewOrder(pathFileOrders);
                                     if (!FM.insertObjectInFile(newOrder,pathFileOrdersTemp)) {
                                         System.out.println("The new order wasn't added");
                                     }
@@ -158,7 +158,7 @@ public class Main {
                                         switch (optionModifyOrder){
                                             //case 1 (Add product)
                                             case 1:
-                                                orderChoosed.addOrderLine(VD.readAndValidateNewOrderLine());
+                                                orderChoosed.addOrderLine(VD.readAndValidateNewOrderLine(pathFileOrders));
                                                 break;
 
                                             //case 2 (Delete product)

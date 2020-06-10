@@ -4,6 +4,10 @@ import BasicsClasses.Orders.Order;
 import BasicsClasses.Orders.OrderLine;
 import utils.Utils;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -122,6 +126,52 @@ public class Validations {
      * @return Validate password
      */
 
+    public String readAndValidateUsername(Connection connection){
+        Scanner sc = new Scanner(System.in);
+        boolean userNotValid, exist = false;
+        String username;
+
+        Statement sentence = null;
+        ResultSet employees = null;
+
+        do {
+            System.out.print("Insert the username: ");
+            if (!(userNotValid = checkUsername(username = sc.next()))){
+                System.out.println("The username aren`t correct. The syntax is: 00000000T");
+            }
+
+            String select = "SELECT DNI " +
+                            "FROM Employees " +
+                            "WHERE DNI = '"+username+"'";
+
+            try {
+                sentence = connection.createStatement();
+                employees = sentence.executeQuery(select);
+                if (!(exist = employees.next())){
+                    System.out.println("The username don`t exist.");
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+
+            finally {
+                try {
+                    employees.close();
+                    sentence.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+
+        }while (!userNotValid || !exist);
+
+        return username;
+    }
+
+    /**
+     * @return
+     */
+
     public String readAndValidatePassword(){
         Scanner sc = new Scanner(System.in);
         Utils u = new Utils();
@@ -152,19 +202,18 @@ public class Validations {
             System.out.println("1.- Register employee");
             System.out.println("2.- Dismiss an employee");
             System.out.println("3.- Assign schedule to employee");
-            System.out.println("4.- Modify employee schedule");
-            System.out.println("5.- Modify employee salary");
-            System.out.println("6.- See personal data of the one employee");
-            System.out.println("7.- Add new order");
-            System.out.println("8.- Modify order");
-            System.out.println("9.- See my personal data");
-            System.out.println("10.- Check your schedule");
+            System.out.println("4.- Modify employee salary");
+            System.out.println("5.- See personal data of the one employee");
+            System.out.println("6.- Add new order");
+            System.out.println("7.- Modify order");
+            System.out.println("8.- See my personal data");
+            System.out.println("9.- Check your schedule");
             System.out.print("Insert option: ");
             option = sc.nextInt();
-            if (option < 0 || option > 10){
+            if (option < 0 || option > 9){
                 System.out.println("Insert a valid option");
             }
-        }while (option < 0 || option > 10);
+        }while (option < 0 || option > 9);
         return option;
     }
 
@@ -182,15 +231,14 @@ public class Validations {
             System.out.println("0.- Sign off");
             System.out.println("1.- See personal data of the one employee");
             System.out.println("2.- Assign schedule to employee");
-            System.out.println("3.- Modify employee schedule");
-            System.out.println("4.- See my personal data");
-            System.out.println("5.- Check your schedule");
+            System.out.println("3.- See my personal data");
+            System.out.println("4.- Check your schedule");
             System.out.print("Insert option: ");
             option = sc.nextInt();
-            if (option < 0 || option > 5){
+            if (option < 0 || option > 4){
                 System.out.println("Insert a valid option");
             }
-        }while (option < 0 || option > 5);
+        }while (option < 0 || option > 4);
         return option;
     }
 
@@ -288,7 +336,7 @@ public class Validations {
                 System.out.println("6.- Cancel order");
                 System.out.print("Insert the option want execute: ");
                 option = SC.nextInt();
-            }while (option < 0 || option > 5);
+            }while (option < 0 || option > 6);
         return option;
     }
 
@@ -298,9 +346,14 @@ public class Validations {
      * @return New Order Line
      */
 
-    public OrderLine readAndValidateNewOrderLine(){
+    public OrderLine readAndValidateNewOrderLine(Connection connection){
         Utils u = new Utils();
-        return new OrderLine(u.readAndSearchProduct(),readAndValidateQuantityOfProduct());
+        return new OrderLine(u.readAndSearchProduct(connection),readAndValidateQuantityOfProduct());
+    }
+
+    public OrderLine readAndValidateNewOrderLine(String path){
+        Utils u = new Utils();
+        return new OrderLine(u.readAndSearchProduct(path),readAndValidateQuantityOfProduct());
     }
 
     
@@ -487,6 +540,51 @@ public class Validations {
     }
 
 
+/////////// READ AND VALIDATE POSITION /////////////////////////////////////////////////////////////////////////////
 
+    /**
+     * Read and validate an employee position
+     * @return position validate
+     */
+
+    public String readAndValidatePosition(){
+
+        Scanner sc = new Scanner(System.in);
+
+        String position;
+
+        position = sc.next();
+
+        while (!position.equals("CommisChef") && !position.equals("HeadChef") && !position.equals("ChefThePartie") && !position.equals("SousChef") && !position.equals("Cook") && !position.equals("Waiter") && !position.equals("Waitress") && !position.equals("Busser") && !position.equals("Manager") && !position.equals("Host") && !position.equals("Bartender") && !position.equals("Spaguetti")){
+            System.out.println("Position must be: CommisChef, HeadChef, ChefThePartie, SousChef, Cook, Waiter, Waitress, Busser, Manager, Host, Bartender, Spaguetti");
+            position = sc.next();
+        }
+
+        return position;
+    }
+
+
+/////////// READ AND VALIDATE CATEGORY /////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Read and validate an employee category
+     * @return category validate
+     */
+
+    public String readAndValidateCategory(){
+
+        Scanner sc = new Scanner(System.in);
+
+        String category;
+
+        category = sc.next();
+
+        while (!category.equals("Administrator") && !category.equals("FloorManager") && !category.equals("Staff") && !category.equals("Spaguetti")){
+            System.out.println("Position must be: Administrator, FloorManager, Staff, Spaguetti");
+            category = sc.next();
+        }
+
+        return category;
+    }
 
 }

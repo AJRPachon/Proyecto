@@ -1,8 +1,10 @@
 package Management;
 
+import BasicsClasses.Employee.Employee;
 import BasicsClasses.Employee.Enums.EnumWeekDays;
 import BasicsClasses.Employee.Schedule;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class ScheduleManagement {
@@ -27,7 +29,9 @@ public class ScheduleManagement {
 
         for(int cont = 0; cont < schedule.length; cont++) {
 
-            System.out.println("Enter check in day");
+            schedule[cont] = new Schedule();
+
+            System.out.println("Introduzca día de entrada");
             sDDay = va.readAndValidateDay();
             schedule[cont].setSDDayOfSchedule(sDDay);
 
@@ -70,5 +74,12 @@ public class ScheduleManagement {
     }
 
 
+    public void printSchedules(ArrayList<Schedule> schedules){
+
+        for (Schedule schedule:schedules) {
+            System.out.println(schedule.toString());
+        }
+
+    }
 
 }

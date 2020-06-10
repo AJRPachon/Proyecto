@@ -42,6 +42,13 @@ public class Payslip {
 
     }
 
+    public Payslip(double salary){
+
+        this.salary = salary;
+        this.employee = new Employee();
+
+    }
+
     public Payslip(double salary, Employee employee){ //Constructor with parameters
 
         this.salary = salary;
@@ -77,7 +84,7 @@ public class Payslip {
     @Override
     public String toString() {
   
-        return employee.getDNI()+"#"+this.salary+"#";
+        return employee.getDNI()+"#"+this.salary;
 
 
     }

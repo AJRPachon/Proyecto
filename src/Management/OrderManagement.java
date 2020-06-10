@@ -5,6 +5,7 @@ import BasicsClasses.Orders.Order;
 import BasicsClasses.Orders.OrderLine;
 import utils.Utils;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
@@ -17,7 +18,7 @@ public class OrderManagement {
      * @return Return object Order valided
      */
 
-    public Order readAndValidateNewOrder(){
+    public Order readAndValidateNewOrder(String path){
         Scanner sc = new Scanner(System.in);
         Utils u = new Utils();
         Validations Val = new Validations();
@@ -30,7 +31,7 @@ public class OrderManagement {
 
         do {
 
-            productGet = u.readAndSearchProduct();
+            productGet = u.readAndSearchProduct(path);
             quantity = Val.readAndValidateQuantityOfProduct();
             newOrder.addOrderLine(new OrderLine(productGet,quantity));
 
@@ -44,6 +45,8 @@ public class OrderManagement {
 
         return newOrder;
     }
+
+
 
     /**
      * Shows a list of orders

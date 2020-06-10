@@ -96,7 +96,22 @@ public class Employee {
 
         this.name = "default";
         this.surname = "default";
-        this.dNI = "00000000-X";
+        this.dNI = "00000000T";
+        this.nAF = "default";
+        this.birthday = new GregorianCalendar();
+        this.position = EnumPosition.Spaguetti;
+        this.category = EnumCategory.Spaguetti;
+        this.bankAccountN = "default";
+        this.password = "default";
+        this.schedule = new Schedule[7];
+
+    }
+
+    public Employee(String DNI){ //Constructor without parameters
+
+        this.name = "default";
+        this.surname = "default";
+        this.dNI = DNI;
         this.nAF = "default";
         this.birthday = new GregorianCalendar();
         this.position = EnumPosition.Spaguetti;

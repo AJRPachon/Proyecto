@@ -7,6 +7,10 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
@@ -22,14 +26,14 @@ public class Utils {
      * @return birthdate (GregorianCalendar)
      */
 
-    public GregorianCalendar createVariableGregorianCalendar(String[] separations){
+    public GregorianCalendar createVariableGregorianCalendar(String separations){
 
         String[] dateString;
         GregorianCalendar birthdate = new GregorianCalendar();
         int[] fecha = new int[3];
 
         //We separate the String from the date in its different numbers
-        dateString = separations[4].split("/");
+        dateString = separations.split("/");
 
         //We go through the array and do a parseInt to get the integers
         for(int cont = 0; cont < dateString.length; cont++){
@@ -77,12 +81,11 @@ public class Utils {
      * @return product that we want to get
      */
 
-    public Product readAndSearchProduct(){
+    public Product readAndSearchProduct(String pathProductFile){
         FilesManagement fm = new FilesManagement();
         Scanner sc = new Scanner(System.in);
 
         int ID;
-        String pathProductFile = ".\\src\\Files\\Products";
         Product productGet;
 
         //Validate Product
@@ -90,6 +93,53 @@ public class Utils {
             System.out.print("Insert IDProduct: ");
             ID = sc.nextInt();
             productGet = fm.getProductFromFile(ID,pathProductFile);
+            if (productGet == null){
+                System.out.println("This product don't exist. Please insert a product existing");
+            }
+        }while (productGet == null);
+
+        return productGet;
+
+    }
+
+    public Product readAndSearchProduct(Connection connection){
+
+        Scanner sc = new Scanner(System.in);
+        Statement sentence = null;
+        ResultSet product = null;
+        String select;
+
+        int ID;
+        Product productGet = null;
+
+        //Validate Product
+        do {
+            System.out.print("Insert IDProduct: ");
+            ID = sc.nextInt();
+
+            select = "SELECT ID, [Name],[Characteristics],Price " +
+                    "FROM Products " +
+                    "WHERE ID = "+ID;
+
+            try {
+                sentence = connection.createStatement();
+                product = sentence.executeQuery(select);
+                while (product.next()){
+                    productGet = new Product(product.getInt(ID), product.getString("Name"), product.getString("Characteristics"),product.getDouble("Price"));
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+
+            finally {
+                try {
+                    sentence.close();
+                    product.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+
             if (productGet == null){
                 System.out.println("This product don't exist. Please insert a product existing");
             }
